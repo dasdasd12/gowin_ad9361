@@ -50,17 +50,21 @@ module top (
     output               [   5: 0]      tx_data_out_p              ,
     output               [   5: 0]      tx_data_out_n              ,
 
-    //input                [   7: 0]      ctrl_out                   ,//out of 9361
+    input                [   7: 0]      ctrl_out                   ,//out of 9361
     output               [   3: 0]      ctrl_in                    ,//in of 9361
     output                              txnrx                      ,
     output                              enable                     ,
     //output                              ldo_on                     ,
     output                              en_agc                     ,
     output                              sync_in                    ,
-    output                              resetb                      
+    output                              resetb                     ,
+
+    output               [   7: 0]      ctrl_out_led                
 );
 
     wire                                rst_n                       ;
+
+    assign                              ctrl_out_led                = ~ctrl_out            ;
 
     assign                              rst_n                       = ~rst                 ;
 
