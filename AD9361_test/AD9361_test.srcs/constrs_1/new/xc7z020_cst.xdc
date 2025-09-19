@@ -55,4 +55,22 @@ set_property -dict {PACKAGE_PIN D21     IOSTANDARD LVCMOS25} [get_ports spi_do] 
 set_property -dict {PACKAGE_PIN W8      IOSTANDARD LVCMOS33} [get_ports uart_tx]                          ; ##    UART_TX
 set_property -dict {PACKAGE_PIN V10     IOSTANDARD LVCMOS33} [get_ports uart_rx]                          ; ##    UART_RX
 
+set_property -dict {PACKAGE_PIN G20     IOSTANDARD LVCMOS25} [get_ports ctrl_out[0]]                          ; ## G21
+set_property -dict {PACKAGE_PIN G21     IOSTANDARD LVCMOS25} [get_ports ctrl_out[1]]                          ; ## G22
+set_property -dict {PACKAGE_PIN E19     IOSTANDARD LVCMOS25} [get_ports ctrl_out[2]]                          ; ## H25
+set_property -dict {PACKAGE_PIN E20     IOSTANDARD LVCMOS25} [get_ports ctrl_out[3]]                          ; ## H26
+set_property -dict {PACKAGE_PIN G19     IOSTANDARD LVCMOS25} [get_ports ctrl_out[4]]                          ; ## G24
+set_property -dict {PACKAGE_PIN F19     IOSTANDARD LVCMOS25} [get_ports ctrl_out[5]]                          ; ## G25
+set_property -dict {PACKAGE_PIN E15     IOSTANDARD LVCMOS25} [get_ports ctrl_out[6]]                          ; ## D23
+set_property -dict {PACKAGE_PIN D15     IOSTANDARD LVCMOS25} [get_ports ctrl_out[7]]                          ; ## D24
+
+set_property -dict {PACKAGE_PIN Y11     IOSTANDARD LVCMOS33} [get_ports ctrl_out_led[0]]                          ; ##PMOD1 LED1
+set_property -dict {PACKAGE_PIN AA11    IOSTANDARD LVCMOS33} [get_ports ctrl_out_led[2]]                          ; ##PMOD2 LED3
+set_property -dict {PACKAGE_PIN Y10     IOSTANDARD LVCMOS33} [get_ports ctrl_out_led[4]]                          ; ##PMOD3 LED5
+set_property -dict {PACKAGE_PIN AA9     IOSTANDARD LVCMOS33} [get_ports ctrl_out_led[6]]                          ; ##PMOD4 LED7
+set_property -dict {PACKAGE_PIN AB11    IOSTANDARD LVCMOS33} [get_ports ctrl_out_led[1]]                          ; ##PMOD5 LED2
+set_property -dict {PACKAGE_PIN AB10    IOSTANDARD LVCMOS33} [get_ports ctrl_out_led[3]]                          ; ##PMOD6 LED4
+set_property -dict {PACKAGE_PIN AB9     IOSTANDARD LVCMOS33} [get_ports ctrl_out_led[5]]                          ; ##PMOD7 LED6
+set_property -dict {PACKAGE_PIN AA8     IOSTANDARD LVCMOS33} [get_ports ctrl_out_led[7]]                          ; ##PMOD8 LED8
+
 create_clock -name rx_clk -period 4.069 [get_ports rx_clk_in_p]
