@@ -298,9 +298,19 @@ module top (
     .dac_data_q2                        (                          ),
 
     .idelay_en                          (6'b111_111                ),
-    .idelay_tap                         (4'b0011                   ),
+    .idelay_tap                         (probe_out0                ),
     .phy_mode                           (1'b1                      ) 
   );
+
+  // output declaration of module vio_0
+    wire               [   3: 0]        probe_out0                  ;
+  
+  vio_0 u_vio_0(
+    .clk                                (ref_clk200m               ),
+    .probe_in0                          (                          ),
+    .probe_out0                         (probe_out0                ) 
+  );
+  
 
   ila_1 u_ila_1 (
     .clk                                (ref_clk200m               ),
