@@ -23,6 +23,7 @@ def cyan(text):
 
 serial_obj = None
 Registers = [1]*0x3ff
+Registers_length = len(Registers)
 
 encoding = 'ascii'
 
@@ -215,7 +216,7 @@ class RegisterDisplayWindow(QWidget):
         
         # 创建寄存器显示标签
         self.register_labels = []
-        for i in range(len(Registers)):
+        for i in range(Registers_length):
             # address_label = QLabel(f"0x{i:03X}")
             # value_label = QLabel("None")
             # hex_label = QLabel("None")
@@ -242,8 +243,20 @@ class RegisterDisplayWindow(QWidget):
 
         self.refresh_button = QPushButton("Refresh")
         main_layout.addWidget(self.refresh_button)
-        self.refresh_button.clicked.connect(self.update_display)   
+        self.refresh_button.clicked.connect(self.update_all_regs)
 
+
+        # save load layout
+        # 添加保存和加载功能
+        save_load_layout = QHBoxLayout()
+        self.save_button = QPushButton("Save")
+        self.load_button = QPushButton("Load")
+        save_load_layout.addWidget(self.save_button)
+        save_load_layout.addWidget(self.load_button)
+        main_layout.addLayout(save_load_layout)
+
+        self.save_button.clicked.connect(self.save_registers)
+        self.load_button.clicked.connect(self.load_registers)
 
     
         # 添加跳转功能
@@ -252,7 +265,7 @@ class RegisterDisplayWindow(QWidget):
         
         self.jump_input = QLineEdit()
         self.jump_input.setPlaceholderText("Hex Address")
-        self.jump_input.setMaximumWidth(150)
+        # self.jump_input.setMaximumWidth(150)
         jump_layout.addWidget(self.jump_input)
         
         self.jump_button = QPushButton("Jump")
@@ -268,6 +281,30 @@ class RegisterDisplayWindow(QWidget):
 
         self.setLayout(main_layout)
 
+    def save_registers(self):
+        """保存寄存器状态"""
+        # 弹出文件对话框选择保存位置
+
+        file_path, _ = QFileDialog.getSaveFileName(self, "Save Registers", "", "Text Files (*.txt)")
+
+        if file_path:
+            with open(file_path, "w") as f:
+                for i, value in enumerate(Registers):
+                    f.write(f"{i:03X}:{value:02X}\n")
+
+    def load_registers(self):
+        """加载寄存器状态"""
+        file_path, _ = QFileDialog.getOpenFileName(self, "Load Registers", "", "Text Files (*.txt)")
+
+        if file_path:
+            with open(file_path, "r") as f:
+                for line in f:
+                    address, value = line.strip().split(":")
+                    address = int(address, 16)
+                    value = int(value, 16)
+                    # self.update_reg_value(value, address)
+                    self.main_window.send_data(f"{address:03X}{value:02X}")
+
     def jump_to_register(self):
         """跳转到指定寄存器"""
         text = self.jump_input.text().strip()
@@ -279,7 +316,7 @@ class RegisterDisplayWindow(QWidget):
             register_index = int(text, 16)
             
             # 检查索引是否有效
-            if 0 <= register_index < len(self.register_labels):
+            if 0 <= register_index < Registers_length:
                 # 获取对应的地址标签widget
                 address_label = self.grid_layout.itemAtPosition(register_index, 0).widget()
                 
@@ -310,11 +347,11 @@ class RegisterDisplayWindow(QWidget):
 
     def update_reg_value(self, value, index):
         Registers[index] = value
-        self.update_reg(index)
+        self.update_reg_display(index)
 
-    def update_reg(self, index):
+    def update_reg_display(self, index):
         """更新单个寄存器显示"""
-        if 0 <= index < len(Registers):
+        if 0 <= index < Registers_length:
             value = Registers[index]
             value_label, hex_label, bin_label = self.register_labels[index]
             if value is None:
@@ -326,10 +363,15 @@ class RegisterDisplayWindow(QWidget):
                 hex_label.setText(f"0x{value:02X}")
                 bin_label.setText(f"{value:08b}")
 
+    def update_all_regs(self):
+        """同步更新所有寄存器显示"""
+        self.main_window.send_data("fffff")
+
     def update_display(self):
         """更新寄存器显示"""
-        for i, value in enumerate(Registers):
-            self.update_reg(i)
+        # for i, value in enumerate(Registers):
+        for i in range(Registers_length):
+            self.update_reg_display(i)
 
     def showEvent(self, event):
         """窗口显示时更新内容"""
