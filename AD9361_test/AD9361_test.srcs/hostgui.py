@@ -5,7 +5,7 @@ from time import sleep
 
 from PySide6.QtCore import QObject, Signal, Slot, QThread, QTimer, QTime, QCoreApplication
 from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QComboBox, QTextEdit, QVBoxLayout, QHBoxLayout, QWidget, QLabel, QFileDialog, QSizePolicy, QGridLayout, QScrollArea, QLineEdit
-from PySide6.QtCore import Qt, QThread, Signal
+from PySide6.QtCore import Qt, QThread, Signal, QPropertyAnimation, QEasingCurve, Property
 from PySide6.QtGui import QIcon, QShortcut, QKeySequence
 
 def red(text):
@@ -22,9 +22,58 @@ def cyan(text):
     return f'<p><span style="color: #00ffff">{text}</span></p>'
 
 serial_obj = None
-Registers = [None]*0x3ff
+Registers = [1]*0x3ff
 
 encoding = 'ascii'
+
+class BlinkingLabel(QLabel):
+    def __init__(self, text="", parent=None):
+        super().__init__(text, parent)
+        self._opacity = 1.0
+        self.animation = QPropertyAnimation(self, b"opacity")
+        self.animation.setDuration(500)  # 动画持续时间500ms
+        self.animation.setEasingCurve(QEasingCurve.OutQuad)
+        
+    def get_opacity(self):
+        return self._opacity
+        
+    def set_opacity(self, opacity):
+        self._opacity = opacity
+        # 更新样式表以应用透明度变化
+        self.setStyleSheet(f"background-color: rgba(255, 255, 0, {opacity*0.7});")
+        
+    opacity = Property(float, get_opacity, set_opacity)
+    
+    def blink(self):
+        """使标签闪烁一次"""
+        # 停止任何正在进行的动画
+        self.animation.stop()
+        
+        # 设置动画从当前透明度到0再到1
+        self.animation.setStartValue(0)
+        self.animation.setKeyValueAt(0.5, 1.0)
+        self.animation.setEndValue(0)
+        
+        self.setStyleSheet("background-color: rgba(255, 255, 0, 0.7);")
+        
+        # 启动动画
+        self.animation.start()
+        
+    def blink_with_times(self, times=1, interval=300):
+        """使标签闪烁多次"""
+        self.blink_count = 0
+        self.max_blinks = times
+        
+        self.timer = QTimer()
+        self.timer.timeout.connect(self._single_blink)
+        self.timer.start(interval)
+        
+    def _single_blink(self):
+        if self.blink_count < self.max_blinks:
+            self.blink()
+            self.blink_count += 1
+        else:
+            self.timer.stop()
 
 class EditableLabel(QLabel):
     """支持双击编辑的QLabel组件"""
@@ -132,22 +181,37 @@ class RegisterDisplayWindow(QWidget):
         """初始化用户界面"""
         main_layout = QVBoxLayout()
 
+        # --- 标题行 ---
+        header_layout = QGridLayout()
+        header_layout.setColumnMinimumWidth(0, 55)
+        header_layout.setColumnMinimumWidth(1, 35)
+        header_layout.setColumnMinimumWidth(2, 35)
+        header_layout.setColumnMinimumWidth(3, 75)
+        # 整体左对齐
+        header_layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
+
+        header_layout.addWidget(QLabel("  Address"), 0, 0, Qt.AlignLeft)
+        header_layout.addWidget(QLabel("Dec"), 0, 1, Qt.AlignLeft)
+        header_layout.addWidget(QLabel("Hex"), 0, 2, Qt.AlignLeft)
+        header_layout.addWidget(QLabel("Bin"), 0, 3, Qt.AlignLeft)
+        main_layout.addLayout(header_layout)
+
         # 创建滚动区域
         scroll_area = QScrollArea()
         scroll_widget = QWidget()
         self.grid_layout = QGridLayout(scroll_widget)
 
         # 调整列宽(定值)
-        self.grid_layout.setColumnMinimumWidth(0, 50)  # 地址列
-        self.grid_layout.setColumnMinimumWidth(1, 35)  # 值列
+        self.grid_layout.setColumnMinimumWidth(0, 52)  # 地址列
+        self.grid_layout.setColumnMinimumWidth(1, 33)  # 值列
         self.grid_layout.setColumnMinimumWidth(2, 35)  # 十六进制列
         self.grid_layout.setColumnMinimumWidth(3, 75)  # 二进制列
         
         # 设置标题行
-        self.grid_layout.addWidget(QLabel("Address"), 0, 0, Qt.AlignLeft)
-        self.grid_layout.addWidget(QLabel("Value"), 0, 1, Qt.AlignLeft)
-        self.grid_layout.addWidget(QLabel("Hex"), 0, 2, Qt.AlignLeft)
-        self.grid_layout.addWidget(QLabel("Bin"), 0, 3, Qt.AlignLeft)
+        # self.grid_layout.addWidget(QLabel("Address"), 0, 0, Qt.AlignLeft)
+        # self.grid_layout.addWidget(QLabel("Value"), 0, 1, Qt.AlignLeft)
+        # self.grid_layout.addWidget(QLabel("Hex"), 0, 2, Qt.AlignLeft)
+        # self.grid_layout.addWidget(QLabel("Bin"), 0, 3, Qt.AlignLeft)
         
         # 创建寄存器显示标签
         self.register_labels = []
@@ -157,7 +221,8 @@ class RegisterDisplayWindow(QWidget):
             # hex_label = QLabel("None")
             # bin_label = QLabel("None")
             
-            address_label = QLabel(f"0x{i:03X}")
+            address_label = BlinkingLabel(f"0x{i:03X}")
+            address_label.setAlignment(Qt.AlignLeft)
             value_label = EditableLabel("None", register_index=i, base=10)
             hex_label = EditableLabel("None", register_index=i, base=16)
             bin_label = EditableLabel("None", register_index=i, base=2)
@@ -165,25 +230,76 @@ class RegisterDisplayWindow(QWidget):
             for lbl in (value_label, hex_label, bin_label):
                 lbl.editingFinished.connect(self.finish_label_update)
 
-            self.grid_layout.addWidget(address_label, i+1, 0)
-            self.grid_layout.addWidget(value_label, i+1, 1)
-            self.grid_layout.addWidget(hex_label, i+1, 2)
-            self.grid_layout.addWidget(bin_label, i+1, 3)
+            self.grid_layout.addWidget(address_label, i, 0)
+            self.grid_layout.addWidget(value_label, i, 1)
+            self.grid_layout.addWidget(hex_label, i, 2)
+            self.grid_layout.addWidget(bin_label, i, 3)
             
             self.register_labels.append((value_label, hex_label, bin_label))
         
         scroll_area.setWidget(scroll_widget)
         main_layout.addWidget(scroll_area)
-        
-        # 添加控制按钮
-        button_layout = QHBoxLayout()
 
         self.refresh_button = QPushButton("Refresh")
-        button_layout.addWidget(self.refresh_button)
-        main_layout.addLayout(button_layout)
+        main_layout.addWidget(self.refresh_button)
         self.refresh_button.clicked.connect(self.update_display)   
 
+
+    
+        # 添加跳转功能
+        jump_layout = QHBoxLayout()
+        jump_layout.addWidget(QLabel("To:"))
+        
+        self.jump_input = QLineEdit()
+        self.jump_input.setPlaceholderText("Hex Address")
+        self.jump_input.setMaximumWidth(150)
+        jump_layout.addWidget(self.jump_input)
+        
+        self.jump_button = QPushButton("Jump")
+        self.jump_button.setMaximumWidth(80)
+        jump_layout.addWidget(self.jump_button)
+        self.jump_button.clicked.connect(self.jump_to_register)
+        
+        # 支持回车键跳转
+        self.jump_input.returnPressed.connect(self.jump_button.click)
+        
+        main_layout.addLayout(jump_layout)
+
+
         self.setLayout(main_layout)
+
+    def jump_to_register(self):
+        """跳转到指定寄存器"""
+        text = self.jump_input.text().strip()
+        
+        if not text:
+            return
+        
+        try:
+            register_index = int(text, 16)
+            
+            # 检查索引是否有效
+            if 0 <= register_index < len(self.register_labels):
+                # 获取对应的地址标签widget
+                address_label = self.grid_layout.itemAtPosition(register_index, 0).widget()
+                
+                if address_label:
+                    # 确保widget可见
+                    address_label.setFocus()
+                    
+                    # 滚动到该widget位置
+                    scroll_area = self.findChild(QScrollArea)
+                    if scroll_area:
+                        scroll_area.ensureWidgetVisible(address_label)
+                        
+                        # 可选：高亮显示目标行
+                        self.grid_layout.itemAtPosition(register_index, 0).widget().blink()
+
+            else:
+                pass
+                
+        except ValueError:
+            pass
 
     def finish_label_update(self, value, index):
         """处理编辑完成信号"""
@@ -443,14 +559,15 @@ class HostGUI:
         self.log_text_edit.append(f"Received: {data}")
 
         # 判断格式，是否为5个字符一行，且每个内容为5个十六进制小写数字
-        parts = data.split()
+        parts = data.split("\n")
         for part in parts:
-            if len(part) != 5:
+            # print(part)
+            if len(part) != 6:
                 continue
             else:
                 try:
                     idx = int(part[:3], 16)
-                    value = int(part[3:], 16)
+                    value = int(part[4:], 16)
                     self.register_window.update_reg_value(value, idx)
                 except ValueError:
                     continue
