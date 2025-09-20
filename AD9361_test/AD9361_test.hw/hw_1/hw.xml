@@ -29,7 +29,7 @@
       <Properties Property="CORE_REFRESH_RATE_MS" value="500"/>
     </Object>
     <Object name="u_ila_1" gui_info="">
-      <Properties Property="CONTROL.CAPTURE_MODE" value="BASIC"/>
+      <Properties Property="CONTROL.CAPTURE_MODE" value="ALWAYS"/>
       <Properties Property="CONTROL.TRIGGER_CONDITION" value="AND"/>
       <Properties Property="CONTROL.TRIGGER_MODE" value="BASIC_ONLY"/>
       <Properties Property="CORE_REFRESH_RATE_MS" value="500"/>
@@ -38,11 +38,15 @@
   <ObjectList object_type="hw_probe" gui_info="">
     <Object name="adc_d1q1_valid" gui_info="Trigger Setup=0,Capture Setup=0"/>
     <Object name="init_done" gui_info=""/>
+    <Object name="probe_out0[3:0]" gui_info="hw_ila_1/hw_vio_1=0"/>
     <Object name="rx_clk_in_IBUF" gui_info=""/>
     <Object name="spi_di_OBUF" gui_info="Trigger Setup=2"/>
     <Object name="spi_wr_trg" gui_info="Trigger Setup=1"/>
     <Object name="uart_rx_IBUF" gui_info="Trigger Setup=0"/>
     <Object name="wr_flag" gui_info="Trigger Setup=0"/>
+  </ObjectList>
+  <ObjectList object_type="hw_sysmon" gui_info="">
+    <Object name="XADC" gui_info="hw_ila_1=[TEMPERATURE=-65281;SCAN_RATE=1000;TRACK_TIME=1;]"/>
   </ObjectList>
   <probeset name="hw project" active="false">
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
@@ -757,6 +761,39 @@
       </probeOptions>
       <nets>
         <net name="wr_flag"/>
+      </nets>
+    </probe>
+    <probe type="vio_input" busType="bus" source="netlist" spec="VIO_INPUT_V2_RT">
+      <probeOptions Id="DebugProbeParams">
+        <Option Id="ACTIVITY_PERSISTENCE" value="SHORT"/>
+        <Option Id="DISPLAY_HINT" value=""/>
+        <Option Id="DISPLAY_VISIBILITY" value=""/>
+        <Option Id="HW_VIO" value="hw_vio_1"/>
+        <Option Id="INPUT_VALUE_RADIX" value="BINARY"/>
+        <Option Id="NAME.CUSTOM" value=""/>
+        <Option Id="NAME.SELECT" value="Long"/>
+        <Option Id="SOURCE" value="netlist"/>
+      </probeOptions>
+      <nets>
+        <net name="u_vio_0/probe_in0[0]"/>
+      </nets>
+    </probe>
+    <probe type="vio_output" busType="bus" source="netlist" spec="VIO_OUTPUT_V2_RT">
+      <probeOptions Id="DebugProbeParams">
+        <Option Id="DISPLAY_HINT" value=""/>
+        <Option Id="DISPLAY_VISIBILITY" value=""/>
+        <Option Id="HW_VIO" value="hw_vio_1"/>
+        <Option Id="NAME.CUSTOM" value=""/>
+        <Option Id="NAME.SELECT" value="Long"/>
+        <Option Id="OUTPUT_VALUE" value="0"/>
+        <Option Id="OUTPUT_VALUE_RADIX" value="HEX"/>
+        <Option Id="SOURCE" value="netlist"/>
+      </probeOptions>
+      <nets>
+        <net name="probe_out0[3]"/>
+        <net name="probe_out0[2]"/>
+        <net name="probe_out0[1]"/>
+        <net name="probe_out0[0]"/>
       </nets>
     </probe>
   </probeset>
