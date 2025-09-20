@@ -93,6 +93,16 @@ module tx_sim(
     .sync_in                            (sync_in                   ),
     .resetb                             (resetb                    ) 
     );
+
+    uart_rx uart_tt(
+        .clk                                (clk                       ),
+        .rst_n                              (~rst                      ),
+        .rx_data                            (rx_data                   ),
+        .rx_data_valid                      (rx_data_valid             ),
+        .rx_data_ready                      (rx_data_ready             ),
+        .rx_pin                             (uart_rx                   )
+    );
+    
     
     
 endmodule

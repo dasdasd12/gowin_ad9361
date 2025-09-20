@@ -4,7 +4,7 @@
 <!-- Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.        -->
 
 <hwsession version="1" minor="2">
-  <device name="xc7z020_1" gui_info="dashboard1=hw_ila_1[xc7z020_1/hw_ila_1/Waveform=ILA_WAVE_1;xc7z020_1/hw_ila_1/Capture Setup=ILA_CAPTURE_1;xc7z020_1/hw_ila_1/Status=ILA_STATUS_1;xc7z020_1/hw_ila_1/Trigger Setup=ILA_TRIGGER_1;xc7z020_1/hw_ila_1/Settings=ILA_SETTINGS_1;]"/>
+  <device name="xc7z020_1" gui_info="dashboard1=hw_ila_1[xc7z020_1/hw_ila_1/Waveform=ILA_WAVE_1;xc7z020_1/hw_vio_1=VIO_PROBES_1;xc7z020_1/hw_ila_1/Capture Setup=ILA_CAPTURE_1;xc7z020_1/hw_ila_1/Status=ILA_STATUS_1;xc7z020_1/hw_ila_1/Trigger Setup=ILA_TRIGGER_1;xc7z020_1/hw_ila_1/Settings=ILA_SETTINGS_1;]"/>
   <ObjectList object_type="hw_device" gui_info="">
     <Object name="xc7z020_1" gui_info="">
       <Properties Property="FULL_PROBES.FILE" value="$_project_name_.runs/impl_2/top.ltx"/>
@@ -38,10 +38,11 @@
   <ObjectList object_type="hw_probe" gui_info="">
     <Object name="adc_d1q1_valid" gui_info="Trigger Setup=0,Capture Setup=0"/>
     <Object name="init_done" gui_info=""/>
-    <Object name="probe_out0[3:0]" gui_info="hw_ila_1/hw_vio_1=0"/>
+    <Object name="probe_out0[3:0]" gui_info="hw_ila_1/hw_vio_1=1"/>
     <Object name="rx_clk_in_IBUF" gui_info=""/>
     <Object name="spi_di_OBUF" gui_info="Trigger Setup=2"/>
     <Object name="spi_wr_trg" gui_info="Trigger Setup=1"/>
+    <Object name="u_vio_0/probe_in0[0:0]" gui_info="hw_ila_1/hw_vio_1=0"/>
     <Object name="uart_rx_IBUF" gui_info="Trigger Setup=0"/>
     <Object name="wr_flag" gui_info="Trigger Setup=0"/>
   </ObjectList>

@@ -5,7 +5,8 @@ module uart_rx_cfg (
     input                               uart_rx                    ,
     input                               rx_en                      ,
     output reg                          wr_flag                    ,
-    output reg           [  19: 0]      wr_data                     
+    output reg           [  19: 0]      wr_data                    ,
+    output                              rd_start                    
 );
 
     wire               [   7: 0]        rx_data                     ;
@@ -13,6 +14,8 @@ module uart_rx_cfg (
     wire                                rx_data_ready               ;
 
     reg                [  19: 0]        data_out                    ;
+
+    assign                              rd_start =wr_data==20'hFFFFF;
 
 
     uart_rx #(
@@ -43,11 +46,11 @@ module uart_rx_cfg (
         if (!rst_n) begin
             bit_cnt <= 3'b0;
         end
-        else if (rx_data_valid) begin
-            bit_cnt <= bit_cnt + 1'b1;
-        end
         else if (bit_cnt == 3'd5) begin
             bit_cnt <= 3'b0;
+        end
+        else if (rx_data_valid) begin
+            bit_cnt <= bit_cnt + 1'b1;
         end
     end
 
@@ -76,7 +79,7 @@ module uart_rx_cfg (
         if (!rst_n) begin
             wr_flag <= 1'b0;
         end
-        else if (bit_cnt == 3'd5) begin
+        else if (bit_cnt == 3'd5 && !rd_start) begin
             wr_flag <= 1'b1;
         end
         else begin

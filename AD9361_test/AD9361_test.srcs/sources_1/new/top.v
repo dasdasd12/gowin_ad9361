@@ -109,6 +109,7 @@ module top (
     wire               [  11: 0]        addr                        ;
     wire               [  19: 0]        wr_data                     ;
     wire                                wr_flag                     ;
+    wire                                rd_start                    ;
 
   spi_reg_cfg u_spi_reg_cfg (
     .clk                                (clk                       ),
@@ -127,7 +128,8 @@ module top (
     .spi_rd_data_reg                    (spi_rd_data_reg           ),
 
     .wr_flag                            (wr_flag                   ),
-    .wr_data                            (wr_data                   ) 
+    .wr_data                            (wr_data                   ),
+    .rd_start                           (rd_start                  )
   );
 
   uart_tx_cfg u_uart_tx_cfg (
@@ -138,7 +140,7 @@ module top (
     .rd_done                            (rd_done                   ),
     .spi_rd_data_reg                    (spi_rd_data_reg           ),
     .addr                               (addr                      ),
-    .tx_done                            (tx_done                   ) 
+    .tx_done                            (tx_done                   )
   );
 
   uart_rx_cfg u_uart_rx_cfg (
@@ -147,7 +149,8 @@ module top (
     .rx_en                              (tx_done                   ),
     .uart_rx                            (uart_rx                   ),
     .wr_data                            (wr_data                   ),
-    .wr_flag                            (wr_flag                   ) 
+    .wr_flag                            (wr_flag                   ),
+    .rd_start                           (rd_start                  )
   );
 
   // ad9361_FDD_DDR u_ad9361_FDD_DDR(

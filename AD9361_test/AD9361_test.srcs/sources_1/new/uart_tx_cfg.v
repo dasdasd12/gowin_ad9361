@@ -31,31 +31,57 @@ module uart_tx_cfg(
     );
 
     localparam                          IDLE                        = 2'b00                ,
-                                        SEND                        = 2'b01                 ;
+                                        SEND                        = 2'b01                ;
 
     localparam                          BIT_NUM                     = 4'd7                 ;
 
     wire               [  15: 0]        data_ascii                  ;
-    wire               [BIT_NUM*8-1: 0]        data_per_frame              ;
+    wire               [BIT_NUM*8-1: 0] data_per_frame              ;
     wire                                tx_data_ready               ;
     wire               [   7: 0]        tx_data                     ;
     wire               [  23: 0]        addr_ascii                  ;
     wire                                tx_data_valid               ;
-
+    wire                                rd_posedge                  ;
+    reg                                 tx_data_valid_reg           ;
     reg                [   3: 0]        tx_cnt                      ;
     reg                [   2: 0]        state                       ;
+    reg                                 rd_done_d1                  ;
 
-    assign                              tx_done                     = addr == 12'd1023     ;
+    assign                              tx_done                     = addr == 12'h1022     ;
     assign                              data_per_frame              = {addr_ascii,8'h20,data_ascii,8'h0A};
     assign                              tx_data                     = data_per_frame[(BIT_NUM-tx_cnt)*8-1 -: 8];
     assign                              tx_data_valid               = rd_done && ~tx_done  ;
+    assign                              rd_posedge                  = rd_done & ~rd_done_d1;
+
+    always @(posedge clk or negedge rst_n) begin
+        if(!rst_n) begin
+            rd_done_d1 <= 1'b0;
+        end
+        else begin
+            rd_done_d1 <= rd_done;
+        end
+    end
+
+    always @(posedge clk or negedge rst_n) begin
+        if(!rst_n) begin
+            tx_data_valid_reg <= 1'b0;
+        end
+        else begin
+            tx_data_valid_reg <= tx_data_valid;
+        end
+    end
     
     always @(posedge clk or negedge rst_n) begin
         if(!rst_n) begin
             addr <= 12'd0;
         end
-        else if(rd_done && tx_data_ready && tx_cnt == BIT_NUM-1) begin
-            addr <= addr + 12'd1;
+        else if(state == IDLE) begin
+            addr <= 12'd0;
+        end
+        else if(state == SEND) begin
+            if(rd_done && tx_data_ready && tx_cnt == BIT_NUM-1) begin
+                addr <= addr + 12'd1;
+            end
         end
     end
 
@@ -83,7 +109,7 @@ module uart_tx_cfg(
         else begin
             case(state)
                 IDLE: begin
-                    if(rd_done && ~tx_done) begin
+                    if(rd_posedge && ~tx_done) begin
                         state <= SEND;
                     end
                     else begin
@@ -106,8 +132,8 @@ module uart_tx_cfg(
         genvar i;
         for(i=1; i<=3; i=i+1) begin: addr_num2ascii
             ASCII_rom u_ascii_rom (
-                .hex_data_in                            (addr[(i*4)-1 -: 4]        ),
-                .ascii_data_out                         (addr_ascii[(i*8)-1 -: 8]  ) 
+    .hex_data_in                        (addr[(i*4)-1 -: 4]        ),
+    .ascii_data_out                     (addr_ascii[(i*8)-1 -: 8]  ) 
             );
         end
     endgenerate
@@ -117,8 +143,8 @@ module uart_tx_cfg(
         genvar j;
         for(j=1; j<=2; j=j+1) begin: data_num2ascii
             ASCII_rom u_ascii_rom (
-                .hex_data_in                            (spi_rd_data_reg[(j*4)-1 -: 4]),
-                .ascii_data_out                         (data_ascii[(j*8)-1 -: 8]     ) 
+    .hex_data_in                        (spi_rd_data_reg[(j*4)-1 -: 4]),
+    .ascii_data_out                     (data_ascii[(j*8)-1 -: 8]  ) 
             );
         end
     endgenerate
@@ -130,7 +156,7 @@ module uart_tx_cfg(
     .clk                                (clk                       ),
     .rst_n                              (rst_n                     ),
     .tx_data                            (tx_data                   ),
-    .tx_data_valid                      (tx_data_valid             ),
+    .tx_data_valid                      (tx_data_valid & tx_data_valid_reg),
     .tx_data_ready                      (tx_data_ready             ),
     .tx_pin                             (uart_tx                   ) 
     );

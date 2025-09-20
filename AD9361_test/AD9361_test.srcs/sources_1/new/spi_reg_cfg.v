@@ -18,7 +18,8 @@ module spi_reg_cfg (
 
     //after init port
     input                               wr_flag                    ,
-    input                [  19: 0]      wr_data                     
+    input                [  19: 0]      wr_data                    ,
+    input                               rd_start                    
     );
 
     //AD9361 initial configuration
@@ -50,7 +51,8 @@ module spi_reg_cfg (
     .rd_done                            (rd_done                   ),
 
     .wr_flag                            (wr_flag                   ),
-    .wr_data                            (wr_data                   ) 
+    .wr_data                            (wr_data                   ),
+    .rd_start                           (rd_start                  ) 
     );
 
     spi u_spi (

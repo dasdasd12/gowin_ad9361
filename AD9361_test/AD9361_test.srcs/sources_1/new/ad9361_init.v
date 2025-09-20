@@ -17,7 +17,8 @@ module ad9361_init (
     output reg                          rd_done                    ,
     
     input                               wr_flag                    ,
-    input                [  19: 0]      wr_data                     
+    input                [  19: 0]      wr_data                    ,
+    input                               rd_start                    
     );
     
     reg                [   1: 0]        state                       ;
@@ -28,7 +29,9 @@ module ad9361_init (
     reg                [   9: 0]        rd_addr                     ;
     wire               [  19: 0]        rom_data                    ;
 
-    wire                                spi_wr_trg                =state==2'b00&&(rom_data[19:18]==2'b00|| wr_en);
+    reg                                 wr_en                       ;
+
+    wire                                spi_wr_trg                =state==2'b00&&(rom_data[19:18]==2'b00||wr_en);
     wire                                wait_trg                  =state==2'b00&&rom_data[19:18]==2'b01;
     wire                                spi_rd_trg                =state==2'b00&&init_done&&~rd_done;
     wire                                init_end                  =state==2'b00&&rom_data[19:18]==2'b10;
@@ -37,9 +40,10 @@ module ad9361_init (
     wire                                wait_end                  =wait_vld&&wait_cnt==24'd15_000_000;
 
     //for debug set wait = 0;
-    //wire                                wait_end                  =wait_vld&&wait_cnt==24'd2;
+    // wire                                wait_end                  =wait_vld&&wait_cnt==24'd2;
+    // wire                                rd_end                    =state==2'b00&&rd_addr==10'd100;
 
-    reg                                 wr_en                       ;
+    
 
     always @(posedge clk or negedge rst_n) begin
         if(!rst_n) begin
@@ -110,8 +114,21 @@ module ad9361_init (
         end
     end
 
+    //debug 
+    // always @(posedge clk or negedge rst_n) begin
+    //     if(!rst_n) begin
+    //         addr <=  12'd1020;
+    //     end
+    //     else if(spi_wr_trg || wait_trg && ~init_done) begin
+    //         addr <=  addr + 1'b1;
+    //     end
+    // end
+
     always @(posedge clk or negedge rst_n) begin
         if(!rst_n) begin
+            rd_addr <= 10'b0;
+        end
+        else if (rd_start) begin
             rd_addr <= 10'b0;
         end
         else if(spi_rd_trg) begin
@@ -191,6 +208,9 @@ module ad9361_init (
         end
         else if(rd_end) begin
             rd_done <= 1'b1;
+        end
+        else if(rd_start) begin
+            rd_done <= 1'b0;
         end
     end
 
