@@ -1,11 +1,11 @@
 import serial
 from serial.tools import list_ports
 
+import time
 from time import sleep
 
-from PySide6.QtCore import QObject, Signal, Slot, QThread, QTimer, QTime, QCoreApplication
 from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QComboBox, QTextEdit, QVBoxLayout, QHBoxLayout, QWidget, QLabel, QFileDialog, QSizePolicy, QGridLayout, QScrollArea, QLineEdit, QFrame
-from PySide6.QtCore import Qt, QThread, Signal, QPropertyAnimation, QEasingCurve, Property
+from PySide6.QtCore import QTimer,QObject, Qt, QThread, Signal, QPropertyAnimation, QEasingCurve, Property
 from PySide6.QtGui import QIcon, QShortcut, QKeySequence
 
 def red(text):
@@ -22,7 +22,8 @@ def cyan(text):
     return f'<p><span style="color: #00ffff">{text}</span></p>'
 
 serial_obj = None
-Registers = [1]*0x3ff
+# Registers = [None]*0x3ff
+Registers = [None]+[1]*0x3fe
 Registers_length = len(Registers)
 
 encoding = 'ascii'
@@ -153,18 +154,20 @@ class EditableLabel(QLabel):
 
 
 
-class RegisterDisplayWindow(QWidget):
+class RegisterDisplayWindow(QFrame):
     """用于显示寄存器值的子窗口"""
 
     def __init__(self, main_window, parent=None):
         super().__init__(parent)
         self.main_window = main_window
-        self.setWindowTitle("Register Monitor")
-        self.setGeometry(600, 100, 280, 600)
+        # self.setWindowTitle("Register Monitor")
+        # self.setGeometry(600, 100, 280, 600)
 
-        min_width = 280
-        self.setMinimumWidth(min_width)
-        
+        fixed_width = 260
+        # fixed_width = 450
+        # self.setMinimumWidth(min_width)
+        self.setFixedWidth(fixed_width)
+
         # 创建界面
         self.init_ui()
         
@@ -172,27 +175,37 @@ class RegisterDisplayWindow(QWidget):
         self.update_display()
     
         # 按下ctrl + w 或者 escape关闭窗口
-        self.shortcut = QShortcut(QKeySequence("Ctrl+W"), self)
-        self.shortcut.activated.connect(self.main_window.window.close)
+        # self.shortcut = QShortcut(QKeySequence("Ctrl+W"), self)
+        # self.shortcut.activated.connect(self.main_window.window.close)
 
-        self.shortcut = QShortcut(QKeySequence("Escape"), self)
-        self.shortcut.activated.connect(self.main_window.window.close)
+        # self.shortcut = QShortcut(QKeySequence("Escape"), self)
+        # self.shortcut.activated.connect(self.main_window.window.close)
 
 
     def init_ui(self):
         """初始化用户界面"""
         main_layout = QVBoxLayout()
+        main_layout.setContentsMargins(0, 0, 0, 0)
 
         # --- 标题行 ---
+        addr_width = 55
+        dec_width = 37
+        hex_width = 37
+        bin_width = 75
+        # addr_width =100
+        # dec_width =100
+        # hex_width =100
+        # bin_width =100
         header_layout = QGridLayout()
-        header_layout.setColumnMinimumWidth(0, 55)
-        header_layout.setColumnMinimumWidth(1, 35)
-        header_layout.setColumnMinimumWidth(2, 35)
-        header_layout.setColumnMinimumWidth(3, 75)
+        header_layout.setContentsMargins(11,5,0,0)
+        header_layout.setColumnMinimumWidth(0, addr_width)
+        header_layout.setColumnMinimumWidth(1, dec_width)
+        header_layout.setColumnMinimumWidth(2, hex_width)
+        header_layout.setColumnMinimumWidth(3, bin_width)
         # 整体左对齐
         header_layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
 
-        header_layout.addWidget(QLabel("  Address"), 0, 0, Qt.AlignLeft)
+        header_layout.addWidget(QLabel("Address"), 0, 0, Qt.AlignLeft)
         header_layout.addWidget(QLabel("Dec"), 0, 1, Qt.AlignLeft)
         header_layout.addWidget(QLabel("Hex"), 0, 2, Qt.AlignLeft)
         header_layout.addWidget(QLabel("Bin"), 0, 3, Qt.AlignLeft)
@@ -200,15 +213,21 @@ class RegisterDisplayWindow(QWidget):
 
         # 创建滚动区域
         scroll_area = QScrollArea()
+        # 无边框
+        scroll_area.setFrameShape(QFrame.NoFrame)
         scroll_widget = QWidget()
         self.grid_layout = QGridLayout(scroll_widget)
 
         # 调整列宽(定值)
-        self.grid_layout.setColumnMinimumWidth(0, 52)  # 地址列
-        self.grid_layout.setColumnMinimumWidth(1, 33)  # 值列
-        self.grid_layout.setColumnMinimumWidth(2, 35)  # 十六进制列
-        self.grid_layout.setColumnMinimumWidth(3, 75)  # 二进制列
-        
+        self.grid_layout.setColumnMinimumWidth(0, addr_width)  # 地址列
+        self.grid_layout.setColumnMinimumWidth(1, dec_width)  # 值列
+        self.grid_layout.setColumnMinimumWidth(2, hex_width)  # 十六进制列
+        self.grid_layout.setColumnMinimumWidth(3, bin_width)  # 二进制列
+
+        self.grid_layout.setContentsMargins(11,5,11,11)
+        # print("hello")
+        # print(self.grid_layout.contentsMargins())
+
         # 设置标题行
         # self.grid_layout.addWidget(QLabel("Address"), 0, 0, Qt.AlignLeft)
         # self.grid_layout.addWidget(QLabel("Value"), 0, 1, Qt.AlignLeft)
@@ -266,6 +285,8 @@ class RegisterDisplayWindow(QWidget):
         
         self.jump_input = QLineEdit()
         self.jump_input.setPlaceholderText("Hex Address")
+        # self.jump_input回车后保留在文本框内
+        # self.jump_input.setFocusPolicy(Qt.StrongFocus)
         # self.jump_input.setMaximumWidth(150)
         jump_layout.addWidget(self.jump_input)
         
@@ -323,7 +344,7 @@ class RegisterDisplayWindow(QWidget):
                 
                 if address_label:
                     # 确保widget可见
-                    address_label.setFocus()
+                    # address_label.setFocus()
                     
                     # 滚动到该widget位置
                     scroll_area = self.findChild(QScrollArea)
@@ -375,11 +396,46 @@ class RegisterDisplayWindow(QWidget):
         for i in range(Registers_length):
             self.update_reg_display(i)
 
-    def showEvent(self, event):
-        """窗口显示时更新内容"""
-        self.update_display()
-        super().showEvent(event)
+    # def showEvent(self, event):
+    #     """窗口显示时更新内容"""
+    #     self.update_display()
+    #     super().showEvent(event)
 
+
+# class ReceiveWorker(QObject):
+#     data_received = Signal(str)
+#     error_occurred = Signal()
+
+#     def __init__(self):
+#         super().__init__()
+#         self.shoud_work = False
+
+#     def run(self):
+#         self.shoud_work = True
+#         while self.shoud_work:
+#             # print("Debug: Waiting for data...")
+#             if serial_obj is not None and serial_obj.is_open:
+#                 try:
+#                     data = serial_obj.readline().decode(encoding=encoding).strip()
+#                     print(f"Debug: Received data: {data}")
+#                     if data:
+#                         # 尝试读取多行
+#                         # while serial_obj.in_waiting:
+#                         #     more_data = serial_obj.readline().decode(encoding=encoding).strip()
+#                         #     if more_data:
+#                         #         data += "\n" + more_data
+#                         #     else:
+#                         #         break
+#                         # continue
+#                         self.data_received.emit(data)
+#                 except Exception as e:
+#                     print(f"Error: {e}")
+#                     self.error_occurred.emit()
+#                     break
+#             # sleep(0.01)
+    
+#     def stop(self):
+#         self.shoud_work = False
 
 class ReceiveWorker(QObject):
     data_received = Signal(str)
@@ -388,31 +444,33 @@ class ReceiveWorker(QObject):
     def __init__(self):
         super().__init__()
         self.shoud_work = False
+        self.buffer = ""
+        self.last_rx_time = None
 
     def run(self):
         self.shoud_work = True
         while self.shoud_work:
-            # print("Debug: Waiting for data...")
             if serial_obj is not None and serial_obj.is_open:
                 try:
-                    data = serial_obj.readline().decode(encoding=encoding).strip()
-                    print(f"Debug: Received data: {data}")
-                    if data:
-                        # 尝试读取多行
-                        # while serial_obj.in_waiting:
-                        #     more_data = serial_obj.readline().decode(encoding=encoding).strip()
-                        #     if more_data:
-                        #         data += "\n" + more_data
-                        #     else:
-                        #         break
-                        # continue
-                        self.data_received.emit(data)
+                    if serial_obj.in_waiting:  # 串口缓冲区有数据
+                        data = serial_obj.read(serial_obj.in_waiting).decode(
+                            encoding=encoding, errors="ignore"
+                        )
+                        self.buffer += data
+                        self.last_rx_time = time.time()
+                    else:
+                        # 没有新数据，检查是否需要 flush
+                        if self.buffer and self.last_rx_time is not None:
+                            if time.time() - self.last_rx_time >= 0.01:  # 10ms 内无新数据
+                                self.data_received.emit(self.buffer.strip())
+                                self.buffer = ""
+                                self.last_rx_time = None
+                        time.sleep(0.001)  # 稍微休眠，避免空转占满CPU
                 except Exception as e:
                     print(f"Error: {e}")
                     self.error_occurred.emit()
                     break
-            # sleep(0.01)
-    
+
     def stop(self):
         self.shoud_work = False
 
@@ -427,7 +485,7 @@ class HostGUI:
         self.app.setStyleSheet("QTextEdit, QPushButton, QComboBox, QLabel { font-size: 14px; }")
 
         self.window.setWindowTitle("Host GUI")
-        self.window.setGeometry(100, 100, 500, 600)
+        self.window.setGeometry(100, 100, 700, 600)
 
         self.central_widget = QWidget()
         self.window.setCentralWidget(self.central_widget)
@@ -505,8 +563,10 @@ class HostGUI:
         self.window.closeEvent = self.closeEvent
 
         self.register_window = RegisterDisplayWindow(self)
-        # self.竖线
-        self.layout.addWidget(QFrame())
+        # register_window 总体的边框为白色
+        # self.register_window.setFrameShape(QFrame.Box)        # 方框边框
+        # 加上竖线
+        self.layout.addWidget(QFrame(frameShape=QFrame.VLine, frameShadow=QFrame.Sunken))
         self.layout.addWidget(self.register_window)
 
 
@@ -544,11 +604,11 @@ class HostGUI:
         self.closeWorkingThreads()
 
         # close window
-        try:
-            self.register_window.hide()
-        except Exception as e:
-            print(f"Error: {e}")
-            pass
+        # try:
+        #     self.register_window.hide()
+        # except Exception as e:
+        #     print(f"Error: {e}")
+        #     pass
 
         if serial_obj:
             if serial_obj.is_open:
@@ -573,7 +633,9 @@ class HostGUI:
         if serial_obj and serial_obj.is_open:
             try:
                 serial_obj.write(data.encode(encoding=encoding))
-                self.log_text_edit.append(f"Sent: {data}")
+                # self.log_text_edit.append(f"Sent: {data}")
+                self.log_text_edit.append(green(f"Sent:"))
+                self.log_text_edit.append(data)
             except Exception as e:
                 print(f"Error: {e}")
                 self.log_text_edit.append(red(f"ERROR: Failed to send data: {e}"))
@@ -623,33 +685,36 @@ class HostGUI:
 
     def receive_data(self, data):
         global Registers
-        self.log_text_edit.append(f"Received: {data}")
+        # self.log_text_edit.append(f"Received: {data}")
+        self.log_text_edit.append(green(f"Received:"))
+        self.log_text_edit.append(data)
 
         # 判断格式，是否为5个字符一行，且每个内容为5个十六进制小写数字
-        # parts = data.split("\n")
-        # for part in parts:
-        #     # print(part)
-        #     if len(part) != 6:
-        #         continue
-        #     else:
-        #         try:
-        #             idx = int(part[:3], 16)
-        #             value = int(part[4:], 16)
-        #             self.register_window.update_reg_value(value, idx)
-        #         except ValueError:
-        #             print(f"Invalid input: {part}")
-        #             continue
-        if len(data) == 6:
-            try:
-                idx = int(data[:3], 16)
-                value = int(data[4:], 16)
-                self.register_window.update_reg_value(value, idx)
-            except ValueError:
-                print(f"Invalid input: {data}")
+        parts = data.split("\n")
+        for part in parts:
+            # print(part)
+            if len(part) != 6:
+                continue
+            else:
+                try:
+                    idx = int(part[:3], 16)
+                    value = int(part[4:], 16)
+                    self.register_window.update_reg_value(value, idx)
+                except ValueError:
+                    print(f"Invalid input: {part}")
+                    continue
+        # if len(data) == 6:
+        #     try:
+        #         idx = int(data[:3], 16)
+        #         value = int(data[4:], 16)
+        #         self.register_window.update_reg_value(value, idx)
+        #     except ValueError:
+        #         print(f"Invalid input: {data}")
 
         # self.register_window.update_display()
 
 
 if __name__ == "__main__":
     gui = HostGUI()
+    gui.register_window.show()
     gui.run()
