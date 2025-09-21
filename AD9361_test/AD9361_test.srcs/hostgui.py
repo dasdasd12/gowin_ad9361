@@ -4,26 +4,42 @@ from serial.tools import list_ports
 import time
 from time import sleep
 
+import ctypes
+
+# Windows API 函数
+user32 = ctypes.windll.user32
+imm32 = ctypes.windll.imm32
+
+# IME 模式常量
+IME_CMODE_ALPHANUMERIC = 0x0000  # 英文模式
+# IME_CMODE_NATIVE = 0x0001  # 中文模式
+
+def set_ime_english(hwnd):
+    hImc = imm32.ImmGetContext(hwnd)
+    if hImc:
+        imm32.ImmSetConversionStatus(hImc, IME_CMODE_ALPHANUMERIC, 0)
+        imm32.ImmReleaseContext(hwnd, hImc)
+
 from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QComboBox, QTextEdit, QVBoxLayout, QHBoxLayout, QWidget, QLabel, QFileDialog, QSizePolicy, QGridLayout, QScrollArea, QLineEdit, QFrame
 from PySide6.QtCore import QTimer,QObject, Qt, QThread, Signal, QPropertyAnimation, QEasingCurve, Property
 from PySide6.QtGui import QIcon, QShortcut, QKeySequence
 
 def red(text):
-    return f'<p><span style="color: #ff0000">{text}</span></p>'
+    return f'<span style="color: #ff0000; margin-top: 60px; margin-bottom: 0px;">{text}</span>'
 def green(text):
-    return f'<p><span style="color: #00dd00">{text}</span></p>'
+    return f'<span style="color: #00dd00; margin-top: 60px; margin-bottom: 0px;">{text}</span>'
 def yellow(text):
-    return f'<p><span style="color: #ffff00">{text}</span></p>'
+    return f'<span style="color: #ffff00; margin-top: 60px; margin-bottom: 0px;">{text}</span>'
 def blue(text):
-    return f'<p><span style="color: #00aaff">{text}</span></p>'
+    return f'<span style="color: #00aaff; margin-top: 60px; margin-bottom: 0px;">{text}</span>'
 def purple(text):
-    return f'<p><span style="color: #ff00ff">{text}</span></p>'
+    return f'<span style="color: #ff00ff; margin-top: 60px; margin-bottom: 0px;">{text}</span>'
 def cyan(text):
-    return f'<p><span style="color: #00ffff">{text}</span></p>'
+    return f'<span style="color: #00ffff; margin-top: 60px; margin-bottom: 0px;">{text}</span>'
 
 serial_obj = None
-# Registers = [None]*0x3ff
-Registers = [None]+[1]*0x3fe
+Registers = [None]*0x3ff
+# Registers = [None]+[1]*0x3fe
 Registers_length = len(Registers)
 
 encoding = 'ascii'
@@ -312,7 +328,7 @@ class RegisterDisplayWindow(QFrame):
         if file_path:
             with open(file_path, "w") as f:
                 for i, value in enumerate(Registers):
-                    f.write(f"{i:03X}:{value:02X}\n")
+                    f.write(f"{i:03X}:{value:02X}")
 
     def load_registers(self):
         """加载寄存器状态"""
@@ -423,7 +439,7 @@ class RegisterDisplayWindow(QFrame):
 #                         # while serial_obj.in_waiting:
 #                         #     more_data = serial_obj.readline().decode(encoding=encoding).strip()
 #                         #     if more_data:
-#                         #         data += "\n" + more_data
+#                         #         data += "" + more_data
 #                         #     else:
 #                         #         break
 #                         # continue
@@ -473,6 +489,23 @@ class ReceiveWorker(QObject):
 
     def stop(self):
         self.shoud_work = False
+
+class ChatInput(QTextEdit):
+    def __init__(self, send_callback=None):
+        super().__init__()
+        self.send_callback = send_callback
+
+    def keyPressEvent(self, event):
+        if event.key() in (Qt.Key_Return, Qt.Key_Enter):  # Enter/Return 键
+            if event.modifiers() == Qt.ShiftModifier:
+                # Shift+Enter -> 换行
+                self.insertPlainText("\n")
+            else:
+                # 直接 Enter -> 发送
+                self.send_callback()
+                # self.clear()
+        else:
+            super().keyPressEvent(event)
 
 class HostGUI:
     def __init__(self):
@@ -525,22 +558,23 @@ class HostGUI:
         self.log_text_edit = QTextEdit()
         self.log_text_edit.setReadOnly(True)
         self.main_layout.addWidget(self.log_text_edit)
-        # 段间距
-        self.log_text_edit.setStyleSheet("QTextEdit { line-height: 0.5; }")
 
         # 添加发送按钮和文本框
-        self.send_text_edit = QTextEdit()
+        self.send_text_edit = ChatInput(self.keyboard_send_data)
         self.send_text_edit.setFixedHeight(100)
         self.main_layout.addWidget(self.send_text_edit)
-
 
         # 加上横向布局
         self.send_h_layout = QHBoxLayout()
         self.main_layout.addLayout(self.send_h_layout)
 
-        self.clear_button = QPushButton("Clear Log")
-        self.send_h_layout.addWidget(self.clear_button)
-        self.clear_button.clicked.connect(self.clear_log)
+        self.clear_log_button = QPushButton("Clear Log")
+        self.send_h_layout.addWidget(self.clear_log_button)
+        self.clear_log_button.clicked.connect(self.clear_log)
+
+        self.clear_send_button = QPushButton("Clear Send")
+        self.send_h_layout.addWidget(self.clear_send_button)
+        self.clear_send_button.clicked.connect(self.clear_send)
 
         self.send_button = QPushButton("Send")
         self.send_h_layout.addWidget(self.send_button)
@@ -569,6 +603,8 @@ class HostGUI:
         self.layout.addWidget(QFrame(frameShape=QFrame.VLine, frameShadow=QFrame.Sunken))
         self.layout.addWidget(self.register_window)
 
+        hwnd = int(self.window.winId())  # 获取窗口句柄
+        set_ime_english(hwnd)
 
     #     # 开启一个子窗口，用于显示寄存器的值
     #     self.register_window_button = QPushButton("Show Register Monitor")
@@ -585,6 +621,9 @@ class HostGUI:
 
     def clear_log(self):
         self.log_text_edit.clear()
+
+    def clear_send(self):
+        self.send_text_edit.clear()
 
     # def keyPressEvent(self, event):
     #     if event.key() == Qt.Key_W and event.modifiers() == Qt.ControlModifier:
@@ -617,6 +656,7 @@ class HostGUI:
 
     def populate_com_ports(self):
         self.log_text_edit.append(blue("Info: Refreshed COM port list."))
+        self.log_text_edit.append("")
         ports = list_ports.comports()
         self.com_port_combo.clear()
         for port in ports:
@@ -636,20 +676,24 @@ class HostGUI:
                 # self.log_text_edit.append(f"Sent: {data}")
                 self.log_text_edit.append(green(f"Sent:"))
                 self.log_text_edit.append(data)
+                self.log_text_edit.append("")
             except Exception as e:
                 print(f"Error: {e}")
                 self.log_text_edit.append(red(f"ERROR: Failed to send data: {e}"))
+                self.log_text_edit.append("")
                 self.connect_button.setText("Connect")
                 self.closeWorkingThreads()
                 serial_obj.close()
         else:
             self.log_text_edit.append(red("ERROR: Serial port is not open!"))
+            self.log_text_edit.append("")
 
     def disconnect(self):
         self.closeWorkingThreads()
         serial_obj.close()
         self.connect_button.setText("Connect")
         self.log_text_edit.append(blue(f"Info: Disconnected from {serial_obj.port}"))
+        self.log_text_edit.append("")
 
     def connect_to_com_port(self):
         global serial_obj
@@ -671,11 +715,14 @@ class HostGUI:
                         self.receive_thread.start()
 
                         self.log_text_edit.append(green(f"Info: Connected to {selected_port}"))
+                        self.log_text_edit.append("")
                 except Exception as e:
                     print(f"Error: {e}")
                     self.log_text_edit.append(red(f"ERROR: Failed to connect to {selected_port}: {e}"))
+                    self.log_text_edit.append("")
             else:
                 self.log_text_edit.append(red("ERROR: No COM port selected!"))
+                self.log_text_edit.append("")
         else:
             self.disconnect()
 
@@ -688,9 +735,10 @@ class HostGUI:
         # self.log_text_edit.append(f"Received: {data}")
         self.log_text_edit.append(green(f"Received:"))
         self.log_text_edit.append(data)
+        self.log_text_edit.append("")
 
         # 判断格式，是否为5个字符一行，且每个内容为5个十六进制小写数字
-        parts = data.split("\n")
+        parts = data.split("")
         for part in parts:
             # print(part)
             if len(part) != 6:
