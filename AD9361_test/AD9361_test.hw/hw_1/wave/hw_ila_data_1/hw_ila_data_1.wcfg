@@ -10,11 +10,11 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="917470fs"></ZoomEndTime>
+      <ZoomEndTime time="12101fs"></ZoomEndTime>
       <Cursor1Time time="2635000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="259"></NameColumnWidth>
+      <NameColumnWidth column_width="247"></NameColumnWidth>
       <ValueColumnWidth column_width="90"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="3" />
@@ -24,20 +24,6 @@
       <obj_property name="ObjectShortName">adc_d1q1_valid</obj_property>
       <obj_property name="LABELRADIX">true</obj_property>
       <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
-   </wvobject>
-   <wvobject fp_name="adc_data_d1" type="array">
-      <obj_property name="DisplayName">FullPathName</obj_property>
-      <obj_property name="ElementShortName">adc_data_d1[11:0]</obj_property>
-      <obj_property name="ObjectShortName">adc_data_d1[11:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-      <obj_property name="WaveformStyle">STYLE_ANALOG</obj_property>
-      <obj_property name="CellHeight">100</obj_property>
-      <obj_property name="AnalogYRangeMin">1393</obj_property>
-      <obj_property name="AnalogYRRangeMax">1785</obj_property>
-      <obj_property name="AnalogInterpolation">ANALOG_INTERPOLATION_HOLD</obj_property>
-      <obj_property name="AnalogOffscale">ANALOG_OFFSCALE_HIDE</obj_property>
-      <obj_property name="AnalogHorizLine">0.000000</obj_property>
-      <obj_property name="LABELRADIX">true</obj_property>
    </wvobject>
    <wvobject fp_name="adc_data_q1" type="array">
       <obj_property name="DisplayName">FullPathName</obj_property>
@@ -53,5 +39,19 @@
       <obj_property name="AnalogInterpolation">ANALOG_INTERPOLATION_HOLD</obj_property>
       <obj_property name="AnalogOffscale">ANALOG_OFFSCALE_HIDE</obj_property>
       <obj_property name="AnalogHorizLine">0.000000</obj_property>
+   </wvobject>
+   <wvobject fp_name="adc_data_d1" type="array">
+      <obj_property name="DisplayName">FullPathName</obj_property>
+      <obj_property name="ElementShortName">adc_data_d1[11:0]</obj_property>
+      <obj_property name="ObjectShortName">adc_data_d1[11:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+      <obj_property name="WaveformStyle">STYLE_ANALOG</obj_property>
+      <obj_property name="CellHeight">100</obj_property>
+      <obj_property name="AnalogYRangeMin">1393</obj_property>
+      <obj_property name="AnalogYRRangeMax">1785</obj_property>
+      <obj_property name="AnalogInterpolation">ANALOG_INTERPOLATION_HOLD</obj_property>
+      <obj_property name="AnalogOffscale">ANALOG_OFFSCALE_HIDE</obj_property>
+      <obj_property name="AnalogHorizLine">0.000000</obj_property>
+      <obj_property name="LABELRADIX">true</obj_property>
    </wvobject>
 </wave_config>

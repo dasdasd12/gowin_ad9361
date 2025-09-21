@@ -19,7 +19,6 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-
 module top (
     // input                               clk_p                      ,
     // input                               clk_n                      ,
@@ -146,7 +145,7 @@ module top (
   uart_rx_cfg u_uart_rx_cfg (
     .clk                                (clk                       ),
     .rst_n                              (rst_n                     ),
-    .rx_en                              (tx_done                   ),
+    .rx_en                              (1'b1                   ),
     .uart_rx                            (uart_rx                   ),
     .wr_data                            (wr_data                   ),
     .wr_flag                            (wr_flag                   ),

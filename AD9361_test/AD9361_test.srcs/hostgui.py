@@ -142,6 +142,7 @@ class EditableLabel(QLabel):
             # 发射编辑完成信号
             self.editingFinished.emit(new_value, self.register_index)
         except ValueError:
+            print(f"Invalid input: {new_text}")
             return
         
     def finishEditing(self):
@@ -336,6 +337,7 @@ class RegisterDisplayWindow(QWidget):
                 pass
                 
         except ValueError:
+            print(f"Invalid input: {text}")
             pass
 
     def finish_label_update(self, value, index):
@@ -390,12 +392,23 @@ class ReceiveWorker(QObject):
     def run(self):
         self.shoud_work = True
         while self.shoud_work:
+            # print("Debug: Waiting for data...")
             if serial_obj is not None and serial_obj.is_open:
                 try:
                     data = serial_obj.readline().decode(encoding=encoding).strip()
+                    print(f"Debug: Received data: {data}")
                     if data:
+                        # 尝试读取多行
+                        # while serial_obj.in_waiting:
+                        #     more_data = serial_obj.readline().decode(encoding=encoding).strip()
+                        #     if more_data:
+                        #         data += "\n" + more_data
+                        #     else:
+                        #         break
+                        # continue
                         self.data_received.emit(data)
                 except Exception as e:
+                    print(f"Error: {e}")
                     self.error_occurred.emit()
                     break
             # sleep(0.01)
@@ -524,7 +537,8 @@ class HostGUI:
         # close window
         try:
             self.register_window.hide()
-        except:
+        except Exception as e:
+            print(f"Error: {e}")
             pass
 
         if serial_obj:
@@ -552,6 +566,7 @@ class HostGUI:
                 serial_obj.write(data.encode(encoding=encoding))
                 self.log_text_edit.append(f"Sent: {data}")
             except Exception as e:
+                print(f"Error: {e}")
                 self.log_text_edit.append(red(f"ERROR: Failed to send data: {e}"))
                 self.connect_button.setText("Connect")
                 self.closeWorkingThreads()
@@ -586,6 +601,7 @@ class HostGUI:
 
                         self.log_text_edit.append(green(f"Info: Connected to {selected_port}"))
                 except Exception as e:
+                    print(f"Error: {e}")
                     self.log_text_edit.append(red(f"ERROR: Failed to connect to {selected_port}: {e}"))
             else:
                 self.log_text_edit.append(red("ERROR: No COM port selected!"))
@@ -601,18 +617,26 @@ class HostGUI:
         self.log_text_edit.append(f"Received: {data}")
 
         # 判断格式，是否为5个字符一行，且每个内容为5个十六进制小写数字
-        parts = data.split("\n")
-        for part in parts:
-            # print(part)
-            if len(part) != 6:
-                continue
-            else:
-                try:
-                    idx = int(part[:3], 16)
-                    value = int(part[4:], 16)
-                    self.register_window.update_reg_value(value, idx)
-                except ValueError:
-                    continue
+        # parts = data.split("\n")
+        # for part in parts:
+        #     # print(part)
+        #     if len(part) != 6:
+        #         continue
+        #     else:
+        #         try:
+        #             idx = int(part[:3], 16)
+        #             value = int(part[4:], 16)
+        #             self.register_window.update_reg_value(value, idx)
+        #         except ValueError:
+        #             print(f"Invalid input: {part}")
+        #             continue
+        if len(data) == 6:
+            try:
+                idx = int(data[:3], 16)
+                value = int(data[4:], 16)
+                self.register_window.update_reg_value(value, idx)
+            except ValueError:
+                print(f"Invalid input: {data}")
 
         # self.register_window.update_display()
 

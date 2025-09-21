@@ -47,10 +47,15 @@ module uart_tx_cfg(
     reg                [   2: 0]        state                       ;
     reg                                 rd_done_d1                  ;
 
-    assign                              tx_done                     = addr == 12'h1022     ;
+    `ifdef DEBUG
+        assign                              tx_done                     = addr == 12'd3      ;
+    `else
+        assign                              tx_done                     = addr == 12'd1023     ;
+    `endif
+
     assign                              data_per_frame              = {addr_ascii,8'h20,data_ascii,8'h0A};
     assign                              tx_data                     = data_per_frame[(BIT_NUM-tx_cnt)*8-1 -: 8];
-    assign                              tx_data_valid               = rd_done && ~tx_done  ;
+    assign                              tx_data_valid               = state == SEND        ;
     assign                              rd_posedge                  = rd_done & ~rd_done_d1;
 
     always @(posedge clk or negedge rst_n) begin
@@ -79,7 +84,7 @@ module uart_tx_cfg(
             addr <= 12'd0;
         end
         else if(state == SEND) begin
-            if(rd_done && tx_data_ready && tx_cnt == BIT_NUM-1) begin
+            if(tx_data_ready && tx_cnt == BIT_NUM-1) begin
                 addr <= addr + 12'd1;
             end
         end
@@ -156,7 +161,7 @@ module uart_tx_cfg(
     .clk                                (clk                       ),
     .rst_n                              (rst_n                     ),
     .tx_data                            (tx_data                   ),
-    .tx_data_valid                      (tx_data_valid & tx_data_valid_reg),
+    .tx_data_valid                      (tx_data_valid),
     .tx_data_ready                      (tx_data_ready             ),
     .tx_pin                             (uart_tx                   ) 
     );

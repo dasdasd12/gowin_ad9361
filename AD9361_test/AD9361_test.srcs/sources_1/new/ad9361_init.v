@@ -1,4 +1,7 @@
 `timescale 1ns/100ps
+
+
+
 module ad9361_init (
     input                               clk                        ,
     input                               rst_n                      ,
@@ -35,15 +38,18 @@ module ad9361_init (
     wire                                wait_trg                  =state==2'b00&&rom_data[19:18]==2'b01;
     wire                                spi_rd_trg                =state==2'b00&&init_done&&~rd_done;
     wire                                init_end                  =state==2'b00&&rom_data[19:18]==2'b10;
-    wire                                rd_end                    =state==2'b00&&rd_addr==10'd1022;
 
-    wire                                wait_end                  =wait_vld&&wait_cnt==24'd15_000_000;
+    `ifdef DEBUG    
+        //for debug set wait = 0;
+        wire                                wait_end                  =wait_vld&&wait_cnt==24'd2;
+        wire                                rd_end                    =state==2'b00&&rd_addr==10'd50;
 
-    //for debug set wait = 0;
-    // wire                                wait_end                  =wait_vld&&wait_cnt==24'd2;
-    // wire                                rd_end                    =state==2'b00&&rd_addr==10'd100;
+    `else
 
-    
+        wire                                rd_end                    =state==2'b00&&rd_addr==10'd1022;
+        wire                                wait_end                  =wait_vld&&wait_cnt==24'd15_000_000;
+
+    `endif
 
     always @(posedge clk or negedge rst_n) begin
         if(!rst_n) begin
@@ -104,25 +110,26 @@ module ad9361_init (
         endcase
     end
 
-
-    always @(posedge clk or negedge rst_n) begin
-        if(!rst_n) begin
-            addr <=  12'd0;
+    `ifdef DEBUG
+        //debug 
+        always @(posedge clk or negedge rst_n) begin
+            if(!rst_n) begin
+                addr <=  12'd1020;
+            end
+            else if((spi_wr_trg || wait_trg )&& ~init_done) begin
+                addr <=  addr + 1'b1;
+            end
         end
-        else if(spi_wr_trg || wait_trg && ~init_done) begin
-            addr <=  addr + 1'b1;
+    `else 
+        always @(posedge clk or negedge rst_n) begin
+            if(!rst_n) begin
+                addr <=  12'd0;
+            end
+            else if((spi_wr_trg || wait_trg )&& ~init_done) begin
+                addr <=  addr + 1'b1;
+            end
         end
-    end
-
-    //debug 
-    // always @(posedge clk or negedge rst_n) begin
-    //     if(!rst_n) begin
-    //         addr <=  12'd1020;
-    //     end
-    //     else if(spi_wr_trg || wait_trg && ~init_done) begin
-    //         addr <=  addr + 1'b1;
-    //     end
-    // end
+    `endif
 
     always @(posedge clk or negedge rst_n) begin
         if(!rst_n) begin
