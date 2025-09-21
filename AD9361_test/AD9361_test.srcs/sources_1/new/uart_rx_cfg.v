@@ -15,6 +15,8 @@ module uart_rx_cfg (
 
     wire               [  19: 0]        data_out                    ;
 
+    reg                [   2: 0]        bit_cnt                     ;
+    
     assign                              data_out                    = bit_cnt == 3'd5 ? wr_data : 20'b0;
     assign                              rd_start                    = data_out==20'hFFFFF   ;
 
@@ -41,7 +43,6 @@ module uart_rx_cfg (
 
     assign                              rx_data_ready               = rx_en                ;
 
-    reg                [   2: 0]        bit_cnt                     ;
 
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
