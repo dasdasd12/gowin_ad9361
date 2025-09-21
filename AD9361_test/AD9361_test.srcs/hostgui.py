@@ -4,21 +4,7 @@ from serial.tools import list_ports
 import time
 from time import sleep
 
-import ctypes
-
-# Windows API 函数
-user32 = ctypes.windll.user32
-imm32 = ctypes.windll.imm32
-
-# IME 模式常量
-IME_CMODE_ALPHANUMERIC = 0x0000  # 英文模式
-# IME_CMODE_NATIVE = 0x0001  # 中文模式
-
-def set_ime_english(hwnd):
-    hImc = imm32.ImmGetContext(hwnd)
-    if hImc:
-        imm32.ImmSetConversionStatus(hImc, IME_CMODE_ALPHANUMERIC, 0)
-        imm32.ImmReleaseContext(hwnd, hImc)
+import sys
 
 from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QComboBox, QTextEdit, QVBoxLayout, QHBoxLayout, QWidget, QLabel, QFileDialog, QSizePolicy, QGridLayout, QScrollArea, QLineEdit, QFrame
 from PySide6.QtCore import QTimer,QObject, Qt, QThread, Signal, QPropertyAnimation, QEasingCurve, Property
@@ -603,8 +589,27 @@ class HostGUI:
         self.layout.addWidget(QFrame(frameShape=QFrame.VLine, frameShadow=QFrame.Sunken))
         self.layout.addWidget(self.register_window)
 
-        hwnd = int(self.window.winId())  # 获取窗口句柄
-        set_ime_english(hwnd)
+
+        if sys.platform == "win32":
+            hwnd = int(self.window.winId())  # 获取窗口句柄
+            
+            import ctypes
+
+            # Windows API 函数
+            user32 = ctypes.windll.user32
+            imm32 = ctypes.windll.imm32
+
+            # IME 模式常量
+            IME_CMODE_ALPHANUMERIC = 0x0000  # 英文模式
+            # IME_CMODE_NATIVE = 0x0001  # 中文模式
+
+            def set_ime_english(hwnd):
+                hImc = imm32.ImmGetContext(hwnd)
+                if hImc:
+                    imm32.ImmSetConversionStatus(hImc, IME_CMODE_ALPHANUMERIC, 0)
+                    imm32.ImmReleaseContext(hwnd, hImc)
+                    
+            set_ime_english(hwnd)
 
     #     # 开启一个子窗口，用于显示寄存器的值
     #     self.register_window_button = QPushButton("Show Register Monitor")
