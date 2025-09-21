@@ -4,7 +4,7 @@ from serial.tools import list_ports
 from time import sleep
 
 from PySide6.QtCore import QObject, Signal, Slot, QThread, QTimer, QTime, QCoreApplication
-from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QComboBox, QTextEdit, QVBoxLayout, QHBoxLayout, QWidget, QLabel, QFileDialog, QSizePolicy, QGridLayout, QScrollArea, QLineEdit
+from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QComboBox, QTextEdit, QVBoxLayout, QHBoxLayout, QWidget, QLabel, QFileDialog, QSizePolicy, QGridLayout, QScrollArea, QLineEdit, QFrame
 from PySide6.QtCore import Qt, QThread, Signal, QPropertyAnimation, QEasingCurve, Property
 from PySide6.QtGui import QIcon, QShortcut, QKeySequence
 
@@ -419,12 +419,15 @@ class HostGUI:
         self.central_widget = QWidget()
         self.window.setCentralWidget(self.central_widget)
 
-        self.layout = QVBoxLayout()
+        self.layout = QHBoxLayout()
         self.central_widget.setLayout(self.layout)
+
+        self.main_layout = QVBoxLayout()
+        self.layout.addLayout(self.main_layout)
 
         # 加上横向布局
         self.select_h_layout = QHBoxLayout()
-        self.layout.addLayout(self.select_h_layout)
+        self.main_layout.addLayout(self.select_h_layout)
 
         self.label = QLabel("Select COM Port:")
         self.select_h_layout.addWidget(self.label)
@@ -437,7 +440,7 @@ class HostGUI:
 
         # 加上横向布局
         self.connect_h_layout = QHBoxLayout()
-        self.layout.addLayout(self.connect_h_layout)
+        self.main_layout.addLayout(self.connect_h_layout)
 
         self.refresh_button = QPushButton("Refresh")
         self.connect_h_layout.addWidget(self.refresh_button)
@@ -450,19 +453,19 @@ class HostGUI:
         # 显示过往的日志（包括接收和发送的，以及连接及断开连接的日志），不可编辑
         self.log_text_edit = QTextEdit()
         self.log_text_edit.setReadOnly(True)
-        self.layout.addWidget(self.log_text_edit)
+        self.main_layout.addWidget(self.log_text_edit)
         # 段间距
         self.log_text_edit.setStyleSheet("QTextEdit { line-height: 0.5; }")
 
         # 添加发送按钮和文本框
         self.send_text_edit = QTextEdit()
         self.send_text_edit.setFixedHeight(100)
-        self.layout.addWidget(self.send_text_edit)
+        self.main_layout.addWidget(self.send_text_edit)
 
 
         # 加上横向布局
         self.send_h_layout = QHBoxLayout()
-        self.layout.addLayout(self.send_h_layout)
+        self.main_layout.addLayout(self.send_h_layout)
 
         self.clear_button = QPushButton("Clear Log")
         self.send_h_layout.addWidget(self.clear_button)
@@ -488,18 +491,24 @@ class HostGUI:
 
         self.window.closeEvent = self.closeEvent
 
-        # 开启一个子窗口，用于显示寄存器的值
-        self.register_window_button = QPushButton("Show Register Monitor")
-        self.layout.addWidget(self.register_window_button)
-        self.register_window_button.clicked.connect(self.show_register_window)
+        self.register_window = RegisterDisplayWindow(self)
+        # self.竖线
+        self.layout.addWidget(QFrame())
+        self.layout.addWidget(self.register_window)
 
-        self.show_register_window()
+
+    #     # 开启一个子窗口，用于显示寄存器的值
+    #     self.register_window_button = QPushButton("Show Register Monitor")
+    #     self.layout.addWidget(self.register_window_button)
+    #     self.register_window_button.clicked.connect(self.show_register_window)
+
+    #     self.show_register_window()
         
 
 
-    def show_register_window(self):
-        self.register_window = RegisterDisplayWindow(self)
-        self.register_window.show()
+    # def show_register_window(self):
+    #     self.register_window = RegisterDisplayWindow(self)
+    #     self.register_window.show()
 
     def clear_log(self):
         self.log_text_edit.clear()
