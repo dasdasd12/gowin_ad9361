@@ -128,7 +128,7 @@ module top (
 
     .wr_flag                            (wr_flag                   ),
     .wr_data                            (wr_data                   ),
-    .rd_start                           (rd_start                  )
+    .rd_start                           (rd_start                  ) 
   );
 
   uart_tx_cfg u_uart_tx_cfg (
@@ -139,17 +139,17 @@ module top (
     .rd_done                            (rd_done                   ),
     .spi_rd_data_reg                    (spi_rd_data_reg           ),
     .addr                               (addr                      ),
-    .tx_done                            (tx_done                   )
+    .tx_done                            (tx_done                   ) 
   );
 
   uart_rx_cfg u_uart_rx_cfg (
     .clk                                (clk                       ),
     .rst_n                              (rst_n                     ),
-    .rx_en                              (1'b1                   ),
+    .rx_en                              (1'b1                      ),
     .uart_rx                            (uart_rx                   ),
     .wr_data                            (wr_data                   ),
     .wr_flag                            (wr_flag                   ),
-    .rd_start                           (rd_start                  )
+    .rd_start                           (rd_start                  ) 
   );
 
   // ad9361_FDD_DDR u_ad9361_FDD_DDR(
@@ -237,9 +237,11 @@ module top (
   // output declaration of module clk_wiz_1
     wire                                ref_clk200m                 ;
     wire                                locked                      ;
+    wire                                clk_12288                   ;
 
   clk_wiz_1 u_clk_wiz_0 (
     .clk_out1                           (ref_clk200m               ),
+    .clk_out2                           (clk_12288                 ),
     .resetn                             (rst_n                     ),
     .locked                             (locked                    ),
     .clk_in1                            (clk                       ) 
@@ -315,7 +317,7 @@ module top (
   
 
   ila_1 u_ila_1 (
-    .clk                                (ref_clk200m               ),
+    .clk                                (clk_12288                 ),
     .probe0                             (adc_d1q1_valid            ),
     .probe1                             (adc_data_d1               ),
     .probe2                             (adc_data_q1               ) 

@@ -10,11 +10,11 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="12101fs"></ZoomEndTime>
+      <ZoomEndTime time="12263fs"></ZoomEndTime>
       <Cursor1Time time="2635000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="247"></NameColumnWidth>
+      <NameColumnWidth column_width="241"></NameColumnWidth>
       <ValueColumnWidth column_width="90"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="3" />
