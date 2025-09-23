@@ -4,29 +4,87 @@ from serial.tools import list_ports
 import time
 from time import sleep
 
-from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QComboBox, QTextEdit, QVBoxLayout, QHBoxLayout, QWidget, QLabel, QFileDialog, QSizePolicy, QGridLayout, QScrollArea, QLineEdit, QFrame
+import sys
+import math
+
+from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QComboBox, QTextEdit, QVBoxLayout, QHBoxLayout, QWidget, QLabel, QFileDialog, QSizePolicy, QGridLayout, QScrollArea, QLineEdit, QFrame, QSplitter 
 from PySide6.QtCore import QTimer,QObject, Qt, QThread, Signal, QPropertyAnimation, QEasingCurve, Property
 from PySide6.QtGui import QIcon, QShortcut, QKeySequence
 
 def red(text):
-    return f'<p><span style="color: #ff0000">{text}</span></p>'
+    return f'<span style="color: #ff0000; margin-top: 60px; margin-bottom: 0px;">{text}</span>'
 def green(text):
-    return f'<p><span style="color: #00dd00">{text}</span></p>'
+    return f'<span style="color: #00dd00; margin-top: 60px; margin-bottom: 0px;">{text}</span>'
 def yellow(text):
-    return f'<p><span style="color: #ffff00">{text}</span></p>'
+    return f'<span style="color: #ffff00; margin-top: 60px; margin-bottom: 0px;">{text}</span>'
 def blue(text):
-    return f'<p><span style="color: #00aaff">{text}</span></p>'
+    return f'<span style="color: #00aaff; margin-top: 60px; margin-bottom: 0px;">{text}</span>'
 def purple(text):
-    return f'<p><span style="color: #ff00ff">{text}</span></p>'
+    return f'<span style="color: #ff00ff; margin-top: 60px; margin-bottom: 0px;">{text}</span>'
 def cyan(text):
-    return f'<p><span style="color: #00ffff">{text}</span></p>'
+    return f'<span style="color: #00ffff; margin-top: 60px; margin-bottom: 0px;">{text}</span>'
 
 serial_obj = None
-# Registers = [None]*0x3ff
-Registers = [None]+[1]*0x3fe
+Registers = [None]*0x3ff
+# Registers = [None]+[1]*0x3fe
 Registers_length = len(Registers)
 
 encoding = 'ascii'
+
+class FrequencyLineEdit(QLineEdit):
+    """自定义频率输入框，带有验证功能"""
+    
+    good_line_style = "QLineEdit { border: 1px solid #41ADFF; border-radius: 4px; padding: 2px; }"
+    bad_line_style = "QLineEdit { border: 1px solid red; border-radius: 4px; padding: 2px; }"
+    
+    def __init__(self, ori_value="", parent=None):
+        super().__init__(parent)
+        
+        self.is_valid = True  # 验证状态
+        self.setText(str(ori_value))  # 初始值
+        self.validate_frequency(self.text())  # 初始验证
+        
+        self.textChanged.connect(self.validate_frequency)
+
+
+    def validate_frequency(self, text):
+        """验证频率输入"""
+        try:
+            # 尝试转换为浮点数
+            freq = float(text)
+            
+            # 检查是否在三个允许的范围内
+            if ((389.5 <= freq <= 510.0) or 
+                (779 <= freq <= 1020) or 
+                (2400 <= freq <= 2483.5)):
+                self.is_valid = True
+                self.setStyleSheet(self.good_line_style)
+            else:
+                self.is_valid = False
+                self.setStyleSheet(self.bad_line_style)
+                
+        except ValueError:
+            # 如果不是有效的数字
+            self.is_valid = False
+            self.setStyleSheet(self.bad_line_style)
+
+        # print(f"状态: {self.is_valid}")
+
+# 横线
+def HLine():
+    # 上下间距
+    margin = 8
+    # 线宽
+    hline_layout = QVBoxLayout()
+    hline = QWidget()
+    hline.setFixedHeight(1)
+    hline.setStyleSheet("background-color: gray;")
+    hline_layout.setContentsMargins(0, margin, 0, margin)
+    hline_layout.addWidget(hline)
+    actual_hline = QWidget()
+    actual_hline.setLayout(hline_layout)
+    return actual_hline
+
 
 class BlinkingLabel(QLabel):
     def __init__(self, text="", parent=None):
@@ -163,10 +221,11 @@ class RegisterDisplayWindow(QFrame):
         # self.setWindowTitle("Register Monitor")
         # self.setGeometry(600, 100, 280, 600)
 
-        fixed_width = 260
+        fixed_width = 260 + 16
         # fixed_width = 450
         # self.setMinimumWidth(min_width)
-        self.setFixedWidth(fixed_width)
+        # self.setFixedWidth(fixed_width)
+        self.setMinimumWidth(fixed_width)
 
         # 创建界面
         self.init_ui()
@@ -185,7 +244,7 @@ class RegisterDisplayWindow(QFrame):
     def init_ui(self):
         """初始化用户界面"""
         main_layout = QVBoxLayout()
-        main_layout.setContentsMargins(0, 0, 0, 0)
+        # main_layout.setContentsMargins(0, 0, 0, 0)
 
         # --- 标题行 ---
         addr_width = 55
@@ -312,7 +371,7 @@ class RegisterDisplayWindow(QFrame):
         if file_path:
             with open(file_path, "w") as f:
                 for i, value in enumerate(Registers):
-                    f.write(f"{i:03X}:{value:02X}\n")
+                    f.write(f"{i:03X}:{value:02X}")
 
     def load_registers(self):
         """加载寄存器状态"""
@@ -423,7 +482,7 @@ class RegisterDisplayWindow(QFrame):
 #                         # while serial_obj.in_waiting:
 #                         #     more_data = serial_obj.readline().decode(encoding=encoding).strip()
 #                         #     if more_data:
-#                         #         data += "\n" + more_data
+#                         #         data += "" + more_data
 #                         #     else:
 #                         #         break
 #                         # continue
@@ -474,6 +533,23 @@ class ReceiveWorker(QObject):
     def stop(self):
         self.shoud_work = False
 
+class ChatInput(QTextEdit):
+    def __init__(self, send_callback=None):
+        super().__init__()
+        self.send_callback = send_callback
+
+    def keyPressEvent(self, event):
+        if event.key() in (Qt.Key_Return, Qt.Key_Enter):  # Enter/Return 键
+            if event.modifiers() == Qt.ShiftModifier:
+                # Shift+Enter -> 换行
+                self.insertPlainText("\n")
+            else:
+                # 直接 Enter -> 发送
+                self.send_callback()
+                # self.clear()
+        else:
+            super().keyPressEvent(event)
+
 class HostGUI:
     def __init__(self):
 
@@ -485,20 +561,75 @@ class HostGUI:
         self.app.setStyleSheet("QTextEdit, QPushButton, QComboBox, QLabel { font-size: 14px; }")
 
         self.window.setWindowTitle("Host GUI")
-        self.window.setGeometry(100, 100, 700, 600)
+        self.window.setGeometry(100, 100, 900, 600)
 
-        self.central_widget = QWidget()
+        self.central_widget = QSplitter(Qt.Horizontal)
         self.window.setCentralWidget(self.central_widget)
+        # 分隔栏样式：灰色背景
+        self.central_widget.setHandleWidth(1)
+        self.central_widget.setStyleSheet("QSplitter::handle { background-color: gray; }")
 
-        self.layout = QHBoxLayout()
-        self.central_widget.setLayout(self.layout)
+        self.log_widget = QWidget()
+        # self.main_widget.setMinimumWidth(200)
+        # self.main_widget width 可以拉伸
+        self.log_widget.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
+        self.central_widget.addWidget(self.log_widget)
 
-        self.main_layout = QVBoxLayout()
-        self.layout.addLayout(self.main_layout)
+        self.log_layout = QVBoxLayout()
+        self.log_widget.setLayout(self.log_layout)
+
+
+
+        # 显示过往的日志（包括接收和发送的，以及连接及断开连接的日志），不可编辑
+        self.log_layout.addWidget(QLabel("Log:"))
+
+        self.log_text_edit = QTextEdit()
+        self.log_text_edit.setReadOnly(True)
+        self.log_layout.addWidget(self.log_text_edit)
+
+        # 添加发送按钮和文本框
+        self.send_text_edit = ChatInput(self.keyboard_send_data)
+        self.send_text_edit.setFixedHeight(100)
+        self.log_layout.addWidget(self.send_text_edit)
+
+        # 加上横向布局
+        self.send_h_layout = QHBoxLayout()
+        self.log_layout.addLayout(self.send_h_layout)
+
+        self.clear_log_button = QPushButton("Clear Log")
+        self.send_h_layout.addWidget(self.clear_log_button)
+        self.clear_log_button.clicked.connect(self.clear_log)
+
+        self.clear_send_button = QPushButton("Clear Send")
+        self.send_h_layout.addWidget(self.clear_send_button)
+        self.clear_send_button.clicked.connect(self.clear_send)
+
+        self.send_button = QPushButton("Send")
+        self.send_h_layout.addWidget(self.send_button)
+        self.send_button.clicked.connect(self.keyboard_send_data)
+
+
+
+
+
+
+
+
+
+
+
+
+        self.ctrl_wedget = QWidget()
+        self.central_widget.addWidget(self.ctrl_wedget)
+
+        self.ctrl_layout = QVBoxLayout()
+        self.ctrl_wedget.setLayout(self.ctrl_layout)
+
+        self.ctrl_layout.addWidget(QLabel("UART Control:"))
 
         # 加上横向布局
         self.select_h_layout = QHBoxLayout()
-        self.main_layout.addLayout(self.select_h_layout)
+        self.ctrl_layout.addLayout(self.select_h_layout)
 
         self.label = QLabel("Select COM Port:")
         self.select_h_layout.addWidget(self.label)
@@ -511,7 +642,7 @@ class HostGUI:
 
         # 加上横向布局
         self.connect_h_layout = QHBoxLayout()
-        self.main_layout.addLayout(self.connect_h_layout)
+        self.ctrl_layout.addLayout(self.connect_h_layout)
 
         self.refresh_button = QPushButton("Refresh")
         self.connect_h_layout.addWidget(self.refresh_button)
@@ -519,38 +650,111 @@ class HostGUI:
 
         self.connect_button = QPushButton("Connect")
         self.connect_h_layout.addWidget(self.connect_button)
-        self.connect_button.clicked.connect(self.connect_to_com_port)
-
-        # 显示过往的日志（包括接收和发送的，以及连接及断开连接的日志），不可编辑
-        self.log_text_edit = QTextEdit()
-        self.log_text_edit.setReadOnly(True)
-        self.main_layout.addWidget(self.log_text_edit)
-        # 段间距
-        self.log_text_edit.setStyleSheet("QTextEdit { line-height: 0.5; }")
-
-        # 添加发送按钮和文本框
-        self.send_text_edit = QTextEdit()
-        self.send_text_edit.setFixedHeight(100)
-        self.main_layout.addWidget(self.send_text_edit)
+        self.connect_button.clicked.connect(self.swich_com_port_connect)
 
 
-        # 加上横向布局
-        self.send_h_layout = QHBoxLayout()
-        self.main_layout.addLayout(self.send_h_layout)
+        self.ctrl_layout.addWidget(HLine())
 
-        self.clear_button = QPushButton("Clear Log")
-        self.send_h_layout.addWidget(self.clear_button)
-        self.clear_button.clicked.connect(self.clear_log)
+        self.ctrl_layout.addWidget(QLabel("Set LO:"))
+        # 只接受数字和小数点
+        # 389.5~510.0MHz，779~1020MHz，2400~2483.5MHz     
+        self.ctrl_layout.addWidget(QLabel("Frequency Range: \n389.5~510 , 779~1020 , 2400~2483.5"))
+        self.ctrl_layout.addSpacing(5)
 
-        self.send_button = QPushButton("Send")
-        self.send_h_layout.addWidget(self.send_button)
-        self.send_button.clicked.connect(self.keyboard_send_data)
+        self.tx_lo_layout = QHBoxLayout()
+        self.ctrl_layout.addLayout(self.tx_lo_layout)
+        self.tx_lo_layout.addWidget(QLabel("TX:"))
+        self.tx_lo_edit = FrequencyLineEdit()
+        self.tx_lo_layout.addWidget(self.tx_lo_edit)
+        self.tx_lo_edit.setFixedWidth(80)
+        self.tx_lo_edit.setText("800")        
+        self.tx_lo_layout.addWidget(QLabel("MHz"))
+        self.tx_lo_layout.addStretch()
 
-        # self.text_edit = QTextEdit()
-        # self.layout.addWidget(self.text_edit)
+        self.rx_lo_layout = QHBoxLayout()
+        self.ctrl_layout.addLayout(self.rx_lo_layout)
+        self.rx_lo_layout.addWidget(QLabel("RX:"))
+        self.rx_lo_edit = FrequencyLineEdit()
+        self.rx_lo_layout.addWidget(self.rx_lo_edit)
+        self.rx_lo_edit.setFixedWidth(80)
+        self.rx_lo_edit.setText("800")        
+        self.rx_lo_layout.addWidget(QLabel("MHz"))
+        self.rx_lo_layout.addStretch()
 
-        self.populate_com_ports()
+
+        # 5px间距
+        self.ctrl_layout.addSpacing(5)
+
+        self.lo_set_button = QPushButton("Set")
+        self.ctrl_layout.addWidget(self.lo_set_button)
+        self.lo_set_button.clicked.connect(self.set_lo_frequency)
+
+        self.ctrl_layout.addWidget(HLine())
+
+        self.ctrl_layout.addStretch()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        self.register_window = RegisterDisplayWindow(self)
+        self.central_widget.addWidget(self.register_window)
+
+
+
+
+
+        # 只拉伸最左侧的log_widget
+        self.central_widget.setStretchFactor(0, 1)
+        self.central_widget.setStretchFactor(1, 0)
+        self.central_widget.setStretchFactor(2, 0)
+
+        # 不能压缩右侧窗口
+        self.central_widget.setCollapsible(1, False)
+        # self.central_widget.setCollapsible(2, False)
+
+
+        # register_window 总体的边框为白色
+        # self.register_window.setFrameShape(QFrame.Box)        # 方框边框
+        
+        # 加上灰色竖线 important
+        # line = QWidget()
+        # line.setFixedWidth(1)                          # 线的宽度
+        # line.setStyleSheet("background-color: gray;")  # 灰色背景填充
+        # self.layout.addWidget(line)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         self.log_text_edit.clear()
+        self.populate_com_ports()
+
 
         # 按下ctrl w 或者 escape关闭窗口
         # self.window.keyPressEvent = self.keyPressEvent
@@ -562,13 +766,28 @@ class HostGUI:
 
         self.window.closeEvent = self.closeEvent
 
-        self.register_window = RegisterDisplayWindow(self)
-        # register_window 总体的边框为白色
-        # self.register_window.setFrameShape(QFrame.Box)        # 方框边框
-        # 加上竖线
-        self.layout.addWidget(QFrame(frameShape=QFrame.VLine, frameShadow=QFrame.Sunken))
-        self.layout.addWidget(self.register_window)
 
+
+        if sys.platform == "win32":
+            hwnd = int(self.window.winId())  # 获取窗口句柄
+            
+            import ctypes
+
+            # Windows API 函数
+            user32 = ctypes.windll.user32
+            imm32 = ctypes.windll.imm32
+
+            # IME 模式常量
+            IME_CMODE_ALPHANUMERIC = 0x0000  # 英文模式
+            # IME_CMODE_NATIVE = 0x0001  # 中文模式
+
+            def set_ime_english(hwnd):
+                hImc = imm32.ImmGetContext(hwnd)
+                if hImc:
+                    imm32.ImmSetConversionStatus(hImc, IME_CMODE_ALPHANUMERIC, 0)
+                    imm32.ImmReleaseContext(hwnd, hImc)
+                    
+            set_ime_english(hwnd)
 
     #     # 开启一个子窗口，用于显示寄存器的值
     #     self.register_window_button = QPushButton("Show Register Monitor")
@@ -585,6 +804,9 @@ class HostGUI:
 
     def clear_log(self):
         self.log_text_edit.clear()
+
+    def clear_send(self):
+        self.send_text_edit.clear()
 
     # def keyPressEvent(self, event):
     #     if event.key() == Qt.Key_W and event.modifiers() == Qt.ControlModifier:
@@ -617,10 +839,15 @@ class HostGUI:
 
     def populate_com_ports(self):
         self.log_text_edit.append(blue("Info: Refreshed COM port list."))
+        self.log_text_edit.append("")
         ports = list_ports.comports()
         self.com_port_combo.clear()
         for port in ports:
             self.com_port_combo.addItem(port.device)
+
+        if self.com_port_combo.count() > 0:
+            if self.connect_button.text() == "Connect":
+                self.swich_com_port_connect()
 
     def keyboard_send_data(self):
         data = self.send_text_edit.toPlainText().strip()
@@ -632,26 +859,37 @@ class HostGUI:
     def send_data(self, data: str):
         if serial_obj and serial_obj.is_open:
             try:
-                serial_obj.write(data.encode(encoding=encoding))
+                try:
+                    encoded_data = data.encode(encoding=encoding)
+                except Exception as e:
+                    print(f"Error: {e}")
+                    self.log_text_edit.append(red(f"ERROR: Failed to encode data: {e}"))
+                    self.log_text_edit.append("")
+                    return
+                serial_obj.write(encoded_data)
                 # self.log_text_edit.append(f"Sent: {data}")
                 self.log_text_edit.append(green(f"Sent:"))
                 self.log_text_edit.append(data)
+                self.log_text_edit.append("")
             except Exception as e:
                 print(f"Error: {e}")
                 self.log_text_edit.append(red(f"ERROR: Failed to send data: {e}"))
+                self.log_text_edit.append("")
                 self.connect_button.setText("Connect")
                 self.closeWorkingThreads()
                 serial_obj.close()
         else:
             self.log_text_edit.append(red("ERROR: Serial port is not open!"))
+            self.log_text_edit.append("")
 
     def disconnect(self):
         self.closeWorkingThreads()
         serial_obj.close()
         self.connect_button.setText("Connect")
         self.log_text_edit.append(blue(f"Info: Disconnected from {serial_obj.port}"))
+        self.log_text_edit.append("")
 
-    def connect_to_com_port(self):
+    def swich_com_port_connect(self):
         global serial_obj
         # 如果未打开串口，则尝试连接
         if self.connect_button.text() == "Connect":
@@ -671,11 +909,14 @@ class HostGUI:
                         self.receive_thread.start()
 
                         self.log_text_edit.append(green(f"Info: Connected to {selected_port}"))
+                        self.log_text_edit.append("")
                 except Exception as e:
                     print(f"Error: {e}")
                     self.log_text_edit.append(red(f"ERROR: Failed to connect to {selected_port}: {e}"))
+                    self.log_text_edit.append("")
             else:
                 self.log_text_edit.append(red("ERROR: No COM port selected!"))
+                self.log_text_edit.append("")
         else:
             self.disconnect()
 
@@ -688,8 +929,9 @@ class HostGUI:
         # self.log_text_edit.append(f"Received: {data}")
         self.log_text_edit.append(green(f"Received:"))
         self.log_text_edit.append(data)
+        self.log_text_edit.append("")
 
-        # 判断格式，是否为5个字符一行，且每个内容为5个十六进制小写数字
+        # 判断格式，是否为6个字符一行，且每个内容为5个十六进制小写数字
         parts = data.split("\n")
         for part in parts:
             # print(part)
@@ -712,6 +954,71 @@ class HostGUI:
         #         print(f"Invalid input: {data}")
 
         # self.register_window.update_display()
+
+
+    def set_lo_frequency(self):
+        """设置接收本振频率"""
+        f_ref = 80
+
+        def get_vco_divider_settings(lo_freq_mhz):
+            if lo_freq_mhz > 4000:  # Up to 4GHz，使用外部 VCO
+                return ("Use External VCO. Tx LO = Ext VCO ÷2 See External LO Section", 7)
+            elif 3000 <= lo_freq_mhz <= 6000:
+                return (2, 0)
+            elif 1500 <= lo_freq_mhz < 3000:
+                return (4, 1)
+            elif 750 <= lo_freq_mhz < 1500:
+                return (8, 2)
+            elif 375 <= lo_freq_mhz < 750:
+                return (16, 3)
+            elif 187.5 <= lo_freq_mhz < 375:
+                return (32, 4)
+            elif 93.75 <= lo_freq_mhz < 187.5:
+                return (64, 5)
+            elif 46.875 <= lo_freq_mhz < 93.75:
+                return (128, 6)
+            else:
+                return ("Frequency out of range", 7)  # 可选：处理超出范围的情况
+            
+        def get_reg_values(frequency):
+            f_rfpll, VCO_divider = get_vco_divider_settings(frequency)
+            f_rfpll = f_rfpll * frequency
+            fractional, integer = math.modf(f_rfpll/f_ref)
+            fractional = round(fractional * 8388593)
+            integer = int(integer)
+            # return integer, fractional, VCO_divider
+            # print(type(integer), type(fractional), type(VCO_divider))
+            # print(integer, fractional, VCO_divider)
+            # print(f"{integer:04X}", f"{fractional:06X}", f"{VCO_divider:01X}")
+            return f"{integer:04X}", f"{fractional:06X}", f"{VCO_divider:01X}"
+        
+        if self.tx_lo_edit.is_valid and self.rx_lo_edit.is_valid:
+            tx_freq = float(self.tx_lo_edit.text())
+            rx_freq = float(self.rx_lo_edit.text())
+            # print(f"Setting TX LO to {tx_freq} MHz and RX LO to {rx_freq} MHz")
+            tx_int, tx_frac, tx_vco_divider = get_reg_values(tx_freq)
+            rx_int, rx_frac, rx_vco_divider = get_reg_values(rx_freq)
+            # 发送寄存器值
+   
+            self.send_data(f"273{tx_frac[4:1+5]}")
+            self.send_data(f"274{tx_frac[2:1+3]}")
+            self.send_data(f"275{tx_frac[0:1+1]}")
+            self.send_data(f"272{tx_int[0:1+1]}")
+            self.send_data(f"271{tx_int[2:1+3]}")
+
+
+            self.send_data(f"233{rx_frac[4:1+5]}")
+            self.send_data(f"234{rx_frac[2:1+3]}")
+            self.send_data(f"235{rx_frac[0:1+1]}")
+            self.send_data(f"232{rx_int[0:1+1]}")
+            self.send_data(f"231{rx_int[2:1+3]}")
+
+
+            self.send_data(f"005{tx_vco_divider}{rx_vco_divider}")
+
+        else:
+            self.log_text_edit.append(red("ERROR: Invalid frequency input!"))
+            self.log_text_edit.append("")
 
 
 if __name__ == "__main__":
