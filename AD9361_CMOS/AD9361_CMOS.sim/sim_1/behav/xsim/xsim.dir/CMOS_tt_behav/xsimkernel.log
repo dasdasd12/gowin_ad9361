@@ -1,0 +1,4 @@
+Running: xsim.dir/CMOS_tt_behav/xsimk.exe -simmode gui -wdb CMOS_tt_behav.wdb -simrunnum 0 -socket 51355
+Design successfully loaded
+Design Loading Memory Usage: 9472 KB (Peak: 9472 KB)
+Design Loading CPU Usage: 0 ms

@@ -143,7 +143,7 @@ module ad9361_init (
         end
     end
 
-    ad9361_cfg_rom_v2 u_rom(
+    ad9361_cfg_rom_v3 u_rom(
     .clk                                (clk                       ),
     .addr                               (addr                      ),
     .data                               (rom_data                  ) 

@@ -1,0 +1,8 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/sources_1/new/ad9361_cmos.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ad9361_cmos
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/sources_1/new/cmos_rx.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module cmos_rx
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/sources_1/new/cmos_tx.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module cmos_tx
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/sim_1/new/CMOS_tt.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module CMOS_tt
