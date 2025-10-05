@@ -1,0 +1,82 @@
+{
+  "extensionVersion": "1.4.1",
+  "fileName": "d:\\Projects\\gowin_ad9361\\demod\\wave.vcd",
+  "markerTime": 388960,
+  "altMarkerTime": null,
+  "selectedSignal": {
+    "name": "Cordic_tb.u_Cordic.u_PID.data_in_int",
+    "numberFormat": "hexadecimal",
+    "msb": 15,
+    "lsb": 0
+  },
+  "zoomRatio": 0.2,
+  "scrollLeft": 1413,
+  "displayedSignals": [
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 4,
+      "name": "Cordic_tb.clk",
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "renderType": "binary",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 5,
+      "name": "Cordic_tb.in_i",
+      "numberFormat": "signed",
+      "colorIndex": 0,
+      "rowHeight": 4,
+      "verticalScale": 2,
+      "renderType": "steppedSigned",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 6,
+      "name": "Cordic_tb.in_q",
+      "numberFormat": "signed",
+      "colorIndex": 0,
+      "rowHeight": 4,
+      "verticalScale": 2,
+      "renderType": "steppedSigned",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 15,
+      "name": "Cordic_tb.u_Cordic.out_q",
+      "numberFormat": "signed",
+      "colorIndex": 0,
+      "rowHeight": 4,
+      "verticalScale": 4,
+      "renderType": "steppedSigned",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 16,
+      "name": "Cordic_tb.u_Cordic.out_i",
+      "numberFormat": "signed",
+      "colorIndex": 0,
+      "rowHeight": 4,
+      "verticalScale": 4,
+      "renderType": "steppedSigned",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 104,
+      "name": "Cordic_tb.u_Cordic.u_PID.data_in_int",
+      "numberFormat": "signed",
+      "colorIndex": 0,
+      "rowHeight": 4,
+      "verticalScale": 4,
+      "renderType": "steppedSigned",
+      "valueLinkCommand": ""
+    }
+  ]
+}
