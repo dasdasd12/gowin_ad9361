@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Sun Oct  5 18:02:28 2025
+# Process ID: 36748
+# Current directory: C:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.runs/dds_compiler_0_synth_1
+# Command line: vivado.exe -log dds_compiler_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source dds_compiler_0.tcl
+# Log file: C:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.runs/dds_compiler_0_synth_1/dds_compiler_0.vds
+# Journal file: C:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.runs/dds_compiler_0_synth_1\vivado.jou
+#-----------------------------------------------------------
+source dds_compiler_0.tcl -notrace

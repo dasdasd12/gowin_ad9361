@@ -1,0 +1,59 @@
+Vivado Simulator 2019.1
+Copyright 1986-1999, 2001-2019 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2019.1/bin/unwrapped/win64.o/xelab.exe -wto 8cead887c4ed418e8e39c5b00b5d0774 --incr --debug typical --relax --mt 2 -L xbip_utils_v3_0_10 -L axi_utils_v2_0_6 -L xbip_pipe_v3_0_6 -L xbip_bram18k_v3_0_6 -L mult_gen_v12_0_15 -L xbip_dsp48_wrapper_v3_0_4 -L xbip_dsp48_addsub_v3_0_6 -L xbip_dsp48_multadd_v3_0_6 -L dds_compiler_v6_0_18 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot CMOS_tt_behav xil_defaultlib.CMOS_tt xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling package xbip_utils_v3_0_10.xbip_utils_v3_0_10_pkg
+Compiling package xbip_utils_v3_0_10.xcc_utils_v3_0
+Compiling package dds_compiler_v6_0_18.dds_compiler_v6_0_18_viv_comp
+Compiling package ieee.std_logic_arith
+Compiling package ieee.std_logic_signed
+Compiling package dds_compiler_v6_0_18.pkg_dds_compiler_v6_0_18
+Compiling package dds_compiler_v6_0_18.dds_compiler_v6_0_18_hdl_comps
+Compiling package xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv_comp
+Compiling package axi_utils_v2_0_6.axi_utils_v2_0_6_pkg
+Compiling package ieee.math_real
+Compiling package axi_utils_v2_0_6.global_util_pkg
+Compiling package axi_utils_v2_0_6.axi_utils_comps
+Compiling package unisim.vcomponents
+Compiling package ieee.std_logic_unsigned
+Compiling package dds_compiler_v6_0_18.pkg_betas
+Compiling package dds_compiler_v6_0_18.pkg_alphas
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_latency=...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_latency=...]
+Compiling architecture synth of entity dds_compiler_v6_0_18.dds_compiler_v6_0_18_rdy [\dds_compiler_v6_0_18_rdy(c_has_...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_latency=...]
+Compiling architecture synth of entity dds_compiler_v6_0_18.pipe_add [\pipe_add(c_width=24,c_seg_width...]
+Compiling architecture synth of entity dds_compiler_v6_0_18.accum [\accum(c_xdevicefamily="zynq",c_...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_latency=...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_latency=...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_latency=...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_latency=...]
+Compiling architecture synth of entity dds_compiler_v6_0_18.sin_cos [\sin_cos(c_xdevicefamily="zynq",...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture synth of entity dds_compiler_v6_0_18.dds_compiler_v6_0_18_core [\dds_compiler_v6_0_18_core(c_xde...]
+Compiling architecture synth of entity dds_compiler_v6_0_18.dds_compiler_v6_0_18_viv [\dds_compiler_v6_0_18_viv(c_xdev...]
+Compiling architecture xilinx of entity dds_compiler_v6_0_18.dds_compiler_v6_0_18 [\dds_compiler_v6_0_18(c_xdevicef...]
+Compiling architecture dds_compiler_0_arch of entity xil_defaultlib.dds_compiler_0 [dds_compiler_0_default]
+Compiling module unisims_ver.IDELAYCTRL_default
+Compiling module unisims_ver.IDELAYE2(IDELAY_TYPE="VAR_LOAD")
+Compiling module unisims_ver.IDDR(DDR_CLK_EDGE="SAME_EDGE_PIP...
+Compiling module xil_defaultlib.cmos_rx_default
+Compiling module unisims_ver.ODDR(DDR_CLK_EDGE="SAME_EDGE")
+Compiling module xil_defaultlib.cmos_tx_default
+Compiling module xil_defaultlib.ad9361_cmos
+Compiling module xil_defaultlib.CMOS_tt
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot CMOS_tt_behav

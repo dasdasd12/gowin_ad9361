@@ -18,7 +18,7 @@ module uart_rx_cfg (
     reg                [   2: 0]        bit_cnt                     ;
     
     assign                              data_out                    = bit_cnt == 3'd5 ? wr_data : 20'b0;
-    assign                              rd_start                    = data_out==20'hFFFFF   ;
+    assign                              rd_start                    = data_out==20'hFFFFF  ;
 
 
     uart_rx #(
@@ -29,7 +29,7 @@ module uart_rx_cfg (
     .rst_n                              (rst_n                     ),
     .rx_data                            (rx_data                   ),
     .rx_data_valid                      (rx_data_valid             ),
-    .rx_data_ready                      (rx_data_ready             ),
+    .rx_data_ready                      (rx_en                     ),
     .rx_pin                             (uart_rx                   ) 
     );
 
@@ -39,10 +39,6 @@ module uart_rx_cfg (
     .ascii_data_in                      (rx_data                   ),
     .hex_data_out                       (hex_data_out              ) 
     );
-    
-
-    assign                              rx_data_ready               = rx_en                ;
-
 
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
@@ -64,15 +60,6 @@ module uart_rx_cfg (
             wr_data[(5-bit_cnt)*4-1'b1 -: 4] <= hex_data_out;
         end
     end
-
-    // always @(posedge clk or negedge rst_n) begin
-    //     if (!rst_n) begin
-    //         wr_data <= 20'b0;
-    //     end
-    //     else if (bit_cnt == 3'd5) begin
-    //         wr_data <= data_out;
-    //     end
-    // end
 
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin

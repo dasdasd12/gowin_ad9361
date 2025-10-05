@@ -231,9 +231,7 @@ module top (
   // .probe2                             (init_done                 ),
   // .probe3                             (ctrl_out                  ) 
   // );
-
-
-
+  
   // output declaration of module clk_wiz_1
     wire                                ref_clk200m                 ;
     wire                                locked                      ;
@@ -246,6 +244,16 @@ module top (
     .locked                             (locked                    ),
     .clk_in1                            (clk                       ) 
   );
+
+  // output declaration of module vio_0
+    wire               [   3: 0]        probe_out0                  ;
+  
+  vio_0 u_vio_0(
+    .clk                                (ref_clk200m               ),
+    .probe_in0                          (                          ),
+    .probe_out0                         (probe_out0                ) 
+  );
+
 
     wire                                m_axis_data_tvalid          ;
     wire               [  31: 0]        m_axis_data_tdata           ;
@@ -305,16 +313,6 @@ module top (
     .idelay_tap                         (probe_out0                ),
     .phy_mode                           (1'b1                      ) 
   );
-
-  // output declaration of module vio_0
-    wire               [   3: 0]        probe_out0                  ;
-  
-  vio_0 u_vio_0(
-    .clk                                (ref_clk200m               ),
-    .probe_in0                          (                          ),
-    .probe_out0                         (probe_out0                ) 
-  );
-  
 
   ila_1 u_ila_1 (
     .clk                                (clk_12288                 ),
