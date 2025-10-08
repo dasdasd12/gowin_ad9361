@@ -1,5 +1,6 @@
 `timescale 1ns / 100ps
 
+
 module ad9361_interface_lvds (
     input                               clk                        ,
     input                               rst_n                      ,
@@ -63,18 +64,20 @@ module ad9361_interface_lvds (
     wire                                data_clk_out                ;
 
   //输入数据延迟控制时钟
-  clk_wiz_1 u_clk_wiz_0 (
+  clk_wiz_1 u_clk_wiz_1 (
     .clk_out1                           (ref_clk200m               ),
     .resetn                             (rst_n                     ),
     .locked                             (locked                    ),
     .clk_in1                            (clk                       ) 
   );
-
   //输出时钟相位控制
   clk_wiz_2 u_clk_wiz_2 (
     .clk_out1                           (data_clk_out              ),
     .clk_in1                            (data_clk                  ) 
   );
+
+
+
 
   spi_reg_cfg u_spi_reg_cfg (
     .clk                                (clk                       ),

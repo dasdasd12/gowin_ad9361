@@ -73,7 +73,7 @@ module ad9361_cfg_rom_v3(
             // ************************************************************
             12'd0032: data <= 20'h010C8; // SPIWrite [010]=C8, PPORT Config 1
             12'd0033: data <= 20'h01100; // SPIWrite [011]=00, PPORT Config 2
-            12'd0034: data <= 20'h01282; // SPIWrite [012]=82, PPORT Config 3
+            12'd0034: data <= 20'h01202; // SPIWrite [012]=02, PPORT Config 3
             12'd0035: data <= 20'h0060F; // SPIWrite [006]=0F, PPORT Rx Delay (adjusts Tco Dataclk->Data)
             12'd0036: data <= 20'h00700; // SPIWrite [007]=00, PPORT TX Delay (adjusts setup/hold FBCLK->Data)
             // ************************************************************

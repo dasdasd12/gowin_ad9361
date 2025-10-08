@@ -1,9 +1,3 @@
--makelib xcelium_lib/xil_defaultlib -sv \
-  "C:/Xilinx/Vivado/2019.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv" \
--endlib
--makelib xcelium_lib/xpm \
-  "C:/Xilinx/Vivado/2019.1/data/ip/xpm/xpm_VCOMP.vhd" \
--endlib
 -makelib xcelium_lib/xbip_utils_v3_0_10 \
   "../../../ipstatic/hdl/xbip_utils_v3_0_vh_rfs.vhd" \
 -endlib
@@ -33,8 +27,5 @@
 -endlib
 -makelib xcelium_lib/xil_defaultlib \
   "../../../../AD9361_test.srcs/sources_1/ip/dds_compiler_0/sim/dds_compiler_0.vhd" \
--endlib
--makelib xcelium_lib/xil_defaultlib \
-  glbl.v
 -endlib
 

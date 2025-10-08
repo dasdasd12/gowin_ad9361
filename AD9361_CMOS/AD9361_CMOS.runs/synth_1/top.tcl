@@ -36,7 +36,7 @@ set_property ip_output_repo c:/program1/Program/2019.1vivado_project/AD9361_CMOS
 set_property ip_cache_permissions {read write} [current_project]
 read_verilog -library xil_defaultlib {
   C:/program1/Program/2019.1vivado_project/AD9361_test/AD9361_test.srcs/sources_1/new/ASCII_rom.v
-  C:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/sources_1/new/ad9361_cfg_rom_v3.v
+  C:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/sources_1/new/ad9361_cfg_rom_v4.v
   C:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/sources_1/new/ad9361_cmos.v
   C:/program1/Program/2019.1vivado_project/AD9361_test/AD9361_test.srcs/sources_1/new/ad9361_init.v
   C:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/sources_1/new/ad9361_interface_cmos.v
@@ -51,24 +51,19 @@ read_verilog -library xil_defaultlib {
   C:/program1/Program/2019.1vivado_project/AD9361_test/AD9361_test.srcs/sources_1/new/uart_tx_cfg.v
   C:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/sources_1/new/top.v
 }
+read_ip -quiet C:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/sources_1/ip/dds_compiler_0/dds_compiler_0.xci
+set_property used_in_implementation false [get_files -all c:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/sources_1/ip/dds_compiler_0/dds_compiler_0_ooc.xdc]
+
 read_ip -quiet C:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/sources_1/ip/clk_wiz_2/clk_wiz_2.xci
 set_property used_in_implementation false [get_files -all c:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/sources_1/ip/clk_wiz_2/clk_wiz_2_board.xdc]
 set_property used_in_implementation false [get_files -all c:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/sources_1/ip/clk_wiz_2/clk_wiz_2.xdc]
 set_property used_in_implementation false [get_files -all c:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/sources_1/ip/clk_wiz_2/clk_wiz_2_ooc.xdc]
 
-read_ip -quiet c:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/sources_1/ip/dds_compiler_0/dds_compiler_0.xci
-set_property used_in_implementation false [get_files -all c:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/sources_1/ip/dds_compiler_0/dds_compiler_0_ooc.xdc]
-
-read_ip -quiet c:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/sources_1/ip/ila_0/ila_0.xci
+read_ip -quiet C:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/sources_1/ip/ila_0/ila_0.xci
 set_property used_in_synthesis false [get_files -all c:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/sources_1/ip/ila_0/ila_v6_2/constraints/ila_impl.xdc]
 set_property used_in_implementation false [get_files -all c:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/sources_1/ip/ila_0/ila_v6_2/constraints/ila_impl.xdc]
 set_property used_in_implementation false [get_files -all c:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/sources_1/ip/ila_0/ila_v6_2/constraints/ila.xdc]
 set_property used_in_implementation false [get_files -all c:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/sources_1/ip/ila_0/ila_0_ooc.xdc]
-
-read_ip -quiet c:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xci
-set_property used_in_implementation false [get_files -all c:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0_board.xdc]
-set_property used_in_implementation false [get_files -all c:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xdc]
-set_property used_in_implementation false [get_files -all c:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0_ooc.xdc]
 
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the
@@ -81,6 +76,8 @@ foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
 read_xdc C:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/constrs_1/new/cmos_cst.xdc
 set_property used_in_implementation false [get_files C:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/constrs_1/new/cmos_cst.xdc]
 
+read_xdc dont_touch.xdc
+set_property used_in_implementation false [get_files dont_touch.xdc]
 set_param ips.enableIPCacheLiteLoad 1
 close [open __synthesis_is_running__ w]
 

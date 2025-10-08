@@ -1,7 +1,7 @@
 // Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2019.1 (win64) Build 2552052 Fri May 24 14:49:42 MDT 2019
-// Date        : Mon Sep 22 16:56:50 2025
+// Date        : Tue Oct  7 11:09:24 2025
 // Host        : LAPTOP-BU1J38GH running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode synth_stub
 //               C:/program1/Program/2019.1vivado_project/AD9361_test/AD9361_test.srcs/sources_1/ip/clk_wiz_1/clk_wiz_1_stub.v
@@ -13,10 +13,9 @@
 // This empty module with port declaration file causes synthesis tools to infer a black box for IP.
 // The synthesis directives are for Synopsys Synplify support to prevent IO buffer insertion.
 // Please paste the declaration into a Verilog source file or add the file as an additional source.
-module clk_wiz_1(clk_out1, clk_out2, resetn, locked, clk_in1)
-/* synthesis syn_black_box black_box_pad_pin="clk_out1,clk_out2,resetn,locked,clk_in1" */;
+module clk_wiz_1(clk_out1, resetn, locked, clk_in1)
+/* synthesis syn_black_box black_box_pad_pin="clk_out1,resetn,locked,clk_in1" */;
   output clk_out1;
-  output clk_out2;
   input resetn;
   output locked;
   input clk_in1;

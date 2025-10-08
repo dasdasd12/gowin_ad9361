@@ -73,4 +73,4 @@ set_property -dict {PACKAGE_PIN AB10    IOSTANDARD LVCMOS33} [get_ports ctrl_out
 set_property -dict {PACKAGE_PIN AB9     IOSTANDARD LVCMOS33} [get_ports ctrl_out_led[5]]                          ; ##PMOD7 LED6
 set_property -dict {PACKAGE_PIN AA8     IOSTANDARD LVCMOS33} [get_ports ctrl_out_led[7]]                          ; ##PMOD8 LED8
 
-create_clock -name rx_clk -period 4.069 [get_ports rx_clk_in_p]
+create_clock -name rx_clk -period 16.276 [get_ports rx_clk_in_p]

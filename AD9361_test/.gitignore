@@ -1,5 +1,14 @@
 *.cache
 *.sim
 *.runs
+*.dcp
+*.xcl
+*.ila
+*.wdf
+*.wpc
+*.wcfg
+*.wdb
+*.sh
+*.do
 
 

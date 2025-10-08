@@ -162,7 +162,7 @@ module ad9361_cfg_rom_v2(
             12'd0120: data <= 20'h27400; // SPIWrite [274]=00, Write Tx Synth Fractional Freq Word[15:8]
             12'd0121: data <= 20'h27500; // SPIWrite [275]=00, Write Tx Synth Fractional Freq Word[22:16]
             12'd0122: data <= 20'h27200; // SPIWrite [272]=00, Write Tx Synth Integer Freq Word[10:8]
-            12'd0123: data <= 20'h27155; // SPIWrite [271]=55, Write Tx Synth Integer Freq Word[7:0] (starts VCO cal)
+            12'd0123: data <= 20'h27150; // SPIWrite [271]=50, Write Tx Synth Integer Freq Word[7:0] (starts VCO cal)
             12'd0124: data <= 20'h00522; // SPIWrite [005]=22, Set LO divider setting
             // ************************************************************
             // Program Mixer GM Sub-table
