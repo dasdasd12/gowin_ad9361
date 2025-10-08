@@ -1,8 +1,6 @@
 vlib work
 vlib riviera
 
-vlib riviera/xil_defaultlib
-vlib riviera/xpm
 vlib riviera/xbip_utils_v3_0_10
 vlib riviera/axi_utils_v2_0_6
 vlib riviera/xbip_pipe_v3_0_6
@@ -12,9 +10,8 @@ vlib riviera/xbip_dsp48_wrapper_v3_0_4
 vlib riviera/xbip_dsp48_addsub_v3_0_6
 vlib riviera/xbip_dsp48_multadd_v3_0_6
 vlib riviera/dds_compiler_v6_0_18
+vlib riviera/xil_defaultlib
 
-vmap xil_defaultlib riviera/xil_defaultlib
-vmap xpm riviera/xpm
 vmap xbip_utils_v3_0_10 riviera/xbip_utils_v3_0_10
 vmap axi_utils_v2_0_6 riviera/axi_utils_v2_0_6
 vmap xbip_pipe_v3_0_6 riviera/xbip_pipe_v3_0_6
@@ -24,12 +21,7 @@ vmap xbip_dsp48_wrapper_v3_0_4 riviera/xbip_dsp48_wrapper_v3_0_4
 vmap xbip_dsp48_addsub_v3_0_6 riviera/xbip_dsp48_addsub_v3_0_6
 vmap xbip_dsp48_multadd_v3_0_6 riviera/xbip_dsp48_multadd_v3_0_6
 vmap dds_compiler_v6_0_18 riviera/dds_compiler_v6_0_18
-
-vlog -work xil_defaultlib  -sv2k12 \
-"C:/Xilinx/Vivado/2019.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv" \
-
-vcom -work xpm -93 \
-"C:/Xilinx/Vivado/2019.1/data/ip/xpm/xpm_VCOMP.vhd" \
+vmap xil_defaultlib riviera/xil_defaultlib
 
 vcom -work xbip_utils_v3_0_10 -93 \
 "../../../ipstatic/hdl/xbip_utils_v3_0_vh_rfs.vhd" \
@@ -61,7 +53,4 @@ vcom -work dds_compiler_v6_0_18 -93 \
 vcom -work xil_defaultlib -93 \
 "../../../../AD9361_test.srcs/sources_1/ip/dds_compiler_0/sim/dds_compiler_0.vhd" \
 
-
-vlog -work xil_defaultlib \
-"glbl.v"
 

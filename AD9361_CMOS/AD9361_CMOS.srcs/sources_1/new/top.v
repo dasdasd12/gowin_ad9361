@@ -132,7 +132,7 @@ module top(
         .rx_frame_in                        (rx_frame_in               ),
         .rx_data_in                         (rx_data_in                ),
 
-        .tx_clk_out                         (tx_clk_out_0              ),       //phase is ajudstable
+        .tx_clk_out                         (tx_clk_out                ),       //phase is ajudstable
         .tx_frame_out                       (tx_frame_out              ),
         .tx_data_out                        (tx_data_out               ),
 
@@ -150,7 +150,7 @@ module top(
     wire               [  31: 0]        m_axis_data_tdata           ;
 
     dds_compiler_0 u_dds_compiler_0 (
-      .aclk                               (data_clk                  ),
+      .aclk                               (clk                       ),
       .aresetn                            (rst_n                     ),
       .m_axis_data_tvalid                 (m_axis_data_tvalid        ),
       .m_axis_data_tdata                  (m_axis_data_tdata         ),
@@ -162,16 +162,18 @@ module top(
     assign                              tx_data_I                   = m_axis_data_tdata[27:16];
     assign                              tx_data_Q                   = m_axis_data_tdata[11:0];
 
-    clk_wiz_0 u_clk_wiz_0 (
-        .clk_out1                           (tx_clk_out                ),
-        .clk_in1                            (data_clk                  ) // input wire clk_in1
-    );
+    // clk_wiz_0 u_clk_wiz_0 (
+    //     .clk_out1                           (tx_clk_out                ),
+    //     .clk_in1                            (data_clk                  ) // input wire clk_in1
+    // );
 
     ila_0 u_ila_0 (
-        .clk                                (data_clk                  ),// input wire clk
+        .clk                                (data_clk                       ),// input wire clk
 
-        .probe0                             (rx_data_I                 ),// input wire [0:0]  probe3 
-        .probe1                             (rx_data_Q                 ) // input wire [11:0]  probe4 
+        .probe0                             (u_ad9361_interface_cmos.u_ad9361_cmos.u_cmos_tx.tx_data_posedge_reg                 ),// input wire [0:0]  probe3 
+        .probe1                             (u_ad9361_interface_cmos.u_ad9361_cmos.u_cmos_tx.tx_data_negedge_reg                 ),// input wire [11:0]  probe4 
+        .probe2                             (u_ad9361_interface_cmos.init_done                                                   ),
+        .probe3                             (rd_done                                                                             )
     );
 
 

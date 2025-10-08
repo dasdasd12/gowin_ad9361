@@ -58,9 +58,9 @@ dds_compiler_0 your_instance_name (
   .aclk(aclk),                                // input wire aclk
   .aresetn(aresetn),                          // input wire aresetn
   .m_axis_data_tvalid(m_axis_data_tvalid),    // output wire m_axis_data_tvalid
-  .m_axis_data_tdata(m_axis_data_tdata),      // output wire [7 : 0] m_axis_data_tdata
+  .m_axis_data_tdata(m_axis_data_tdata),      // output wire [31 : 0] m_axis_data_tdata
   .m_axis_phase_tvalid(m_axis_phase_tvalid),  // output wire m_axis_phase_tvalid
-  .m_axis_phase_tdata(m_axis_phase_tdata)    // output wire [31 : 0] m_axis_phase_tdata
+  .m_axis_phase_tdata(m_axis_phase_tdata)    // output wire [23 : 0] m_axis_phase_tdata
 );
 // INST_TAG_END ------ End INSTANTIATION Template ---------
 

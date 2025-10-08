@@ -93,11 +93,11 @@ architecture tb of tb_dds_compiler_0 is
 
   -- Data master channel signals
   signal m_axis_data_tvalid              : std_logic := '0';  -- payload is valid
-  signal m_axis_data_tdata               : std_logic_vector(7 downto 0) := (others => '0');  -- data payload
+  signal m_axis_data_tdata               : std_logic_vector(31 downto 0) := (others => '0');  -- data payload
 
   -- Phase master channel signals
   signal m_axis_phase_tvalid             : std_logic := '0';  -- payload is valid
-  signal m_axis_phase_tdata              : std_logic_vector(31 downto 0) := (others => '0');  -- data payload
+  signal m_axis_phase_tdata              : std_logic_vector(23 downto 0) := (others => '0');  -- data payload
 
   -----------------------------------------------------------------------
   -- Aliases for AXI channel TDATA and TUSER fields
@@ -107,10 +107,11 @@ architecture tb of tb_dds_compiler_0 is
   -----------------------------------------------------------------------
 
   -- Data master channel alias signals
-  signal m_axis_data_tdata_sine        : std_logic_vector(7 downto 0) := (others => '0');
+  signal m_axis_data_tdata_cosine      : std_logic_vector(11 downto 0) := (others => '0');
+  signal m_axis_data_tdata_sine        : std_logic_vector(11 downto 0) := (others => '0');
 
   -- Phase master channel alias signals
-  signal m_axis_phase_tdata_phase      : std_logic_vector(27 downto 0) := (others => '0');
+  signal m_axis_phase_tdata_phase      : std_logic_vector(23 downto 0) := (others => '0');
 
 
   signal end_of_simulation : boolean := false;
@@ -163,14 +164,14 @@ begin
     wait for T_HOLD;
 
     -- Run for long enough to produce 5 periods of outputs
-    wait for CLOCK_PERIOD * 126;
+    wait for CLOCK_PERIOD * 161;
 
     -- Reset the core, then continue running
     aresetn <= '0';  -- Reset is active low
     wait for CLOCK_PERIOD * 2;  -- Hold reset for 2 clock cycles, as specified in the DDS Compiler datasheet
     aresetn <= '1';
     -- Run for long enough to produce 5 periods of outputs
-    wait for CLOCK_PERIOD * 126;
+    wait for CLOCK_PERIOD * 161;
 
     -- End of test
     end_of_simulation <= true;           
@@ -222,10 +223,11 @@ begin
   -----------------------------------------------------------------------
 
   -- Data master channel alias signals: update these only when they are valid
-  m_axis_data_tdata_sine        <= m_axis_data_tdata(7 downto 0) when m_axis_data_tvalid = '1';
+  m_axis_data_tdata_cosine      <= m_axis_data_tdata(11 downto 0) when m_axis_data_tvalid = '1';
+  m_axis_data_tdata_sine        <= m_axis_data_tdata(27 downto 16) when m_axis_data_tvalid = '1';
 
   -- Phase master channel alias signals: update these only when they are valid
-  m_axis_phase_tdata_phase      <= m_axis_phase_tdata(27 downto 0) when m_axis_phase_tvalid = '1';
+  m_axis_phase_tdata_phase      <= m_axis_phase_tdata(23 downto 0) when m_axis_phase_tvalid = '1';
 
 end tb;
 

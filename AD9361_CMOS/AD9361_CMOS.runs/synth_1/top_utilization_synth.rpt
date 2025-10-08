@@ -1,7 +1,7 @@
 Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2019.1 (win64) Build 2552052 Fri May 24 14:49:42 MDT 2019
-| Date         : Sun Oct  5 18:53:48 2025
+| Date         : Mon Oct  6 16:15:28 2025
 | Host         : LAPTOP-BU1J38GH running 64-bit major release  (build 9200)
 | Command      : report_utilization -file top_utilization_synth.rpt -pb top_utilization_synth.pb
 | Design       : top
@@ -30,8 +30,8 @@ Table of Contents
 +----------------------------+------+-------+-----------+-------+
 |          Site Type         | Used | Fixed | Available | Util% |
 +----------------------------+------+-------+-----------+-------+
-| Slice LUTs*                |  539 |     0 |     53200 |  1.01 |
-|   LUT as Logic             |  346 |     0 |     53200 |  0.65 |
+| Slice LUTs*                |  537 |     0 |     53200 |  1.01 |
+|   LUT as Logic             |  344 |     0 |     53200 |  0.65 |
 |   LUT as Memory            |  193 |     0 |     17400 |  1.11 |
 |     LUT as Distributed RAM |  192 |     0 |           |       |
 |     LUT as Shift Register  |    1 |     0 |           |       |
@@ -56,10 +56,10 @@ Table of Contents
 | 0     |            _ |         Set |            - |
 | 0     |            _ |       Reset |            - |
 | 0     |          Yes |           - |            - |
-| 2     |          Yes |           - |          Set |
-| 306   |          Yes |           - |        Reset |
+| 5     |          Yes |           - |          Set |
+| 420   |          Yes |           - |        Reset |
 | 0     |          Yes |         Set |            - |
-| 118   |          Yes |       Reset |            - |
+| 1     |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
 
 
@@ -120,7 +120,7 @@ Table of Contents
 +------------+------+-------+-----------+-------+
 |  Site Type | Used | Fixed | Available | Util% |
 +------------+------+-------+-----------+-------+
-| BUFGCTRL   |    0 |     0 |        32 |  0.00 |
+| BUFGCTRL   |    1 |     0 |        32 |  3.13 |
 | BUFIO      |    0 |     0 |        16 |  0.00 |
 | MMCME2_ADV |    0 |     0 |         4 |  0.00 |
 | PLLE2_ADV  |    0 |     0 |         4 |  0.00 |
@@ -153,14 +153,13 @@ Table of Contents
 +------------+------+---------------------+
 |  Ref Name  | Used | Functional Category |
 +------------+------+---------------------+
-| FDCE       |  302 |        Flop & Latch |
+| FDCE       |  416 |        Flop & Latch |
 | RAMD64E    |  192 |  Distributed Memory |
-| FDRE       |  118 |        Flop & Latch |
+| LUT6       |  127 |                 LUT |
 | LUT3       |  107 |                 LUT |
-| LUT6       |  104 |                 LUT |
-| LUT2       |   92 |                 LUT |
+| LUT2       |   89 |                 LUT |
 | LUT5       |   60 |                 LUT |
-| LUT4       |   37 |                 LUT |
+| LUT4       |   42 |                 LUT |
 | OBUF       |   31 |                  IO |
 | IBUF       |   25 |                  IO |
 | CARRY4     |   23 |          CarryLogic |
@@ -170,13 +169,15 @@ Table of Contents
 | IDELAYE2   |   13 |                  IO |
 | IDDR       |   13 |                  IO |
 | MUXF8      |    8 |               MuxFx |
+| FDPE       |    5 |        Flop & Latch |
 | OBUFT      |    4 |                  IO |
 | LDCE       |    4 |        Flop & Latch |
 | RAMB36E1   |    2 |        Block Memory |
-| FDPE       |    2 |        Flop & Latch |
 | SRL16E     |    1 |  Distributed Memory |
 | RAMB18E1   |    1 |        Block Memory |
 | IDELAYCTRL |    1 |                  IO |
+| FDRE       |    1 |        Flop & Latch |
+| BUFG       |    1 |               Clock |
 +------------+------+---------------------+
 
 
@@ -189,7 +190,6 @@ Table of Contents
 | ila_0          |    1 |
 | dds_compiler_0 |    1 |
 | clk_wiz_2      |    1 |
-| clk_wiz_0      |    1 |
 +----------------+------+
 
 

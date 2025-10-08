@@ -78,10 +78,9 @@ set rc [catch {
   set_property ip_cache_permissions {read write} [current_project]
   set_property XPM_LIBRARIES {XPM_CDC XPM_MEMORY} [current_project]
   add_files -quiet C:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.runs/synth_1/top.dcp
+  read_ip -quiet C:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/sources_1/ip/dds_compiler_0/dds_compiler_0.xci
   read_ip -quiet C:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/sources_1/ip/clk_wiz_2/clk_wiz_2.xci
-  read_ip -quiet c:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/sources_1/ip/dds_compiler_0/dds_compiler_0.xci
-  read_ip -quiet c:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/sources_1/ip/ila_0/ila_0.xci
-  read_ip -quiet c:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xci
+  read_ip -quiet C:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/sources_1/ip/ila_0/ila_0.xci
   read_xdc C:/program1/Program/2019.1vivado_project/AD9361_CMOS/AD9361_CMOS.srcs/constrs_1/new/cmos_cst.xdc
   link_design -top top -part xc7z020clg484-1
   close_msg_db -file init_design.pb
