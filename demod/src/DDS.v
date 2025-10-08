@@ -55,19 +55,24 @@ module DDS #(
     end
 
     reg [DATA_W-1-1:0] sin_ori, cos_ori;
-    always @(*) begin
-        if (quarter_d == 0) begin
-            sin = {1'b0, sin_ori};
-            cos = {1'b0, cos_ori};
-        end else if (quarter_d == 1) begin
-            sin = {1'b0, sin_ori};
-            cos = -{1'b0, cos_ori};
-        end else if (quarter_d == 2) begin
-            sin = -{1'b0, sin_ori};
-            cos = -{1'b0, cos_ori};
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            sin <= 0;
+            cos <= 0;
         end else begin
-            sin = -{1'b0, sin_ori};
-            cos = {1'b0, cos_ori};
+            if (quarter_d == 0) begin
+                sin = {1'b0, sin_ori};
+                cos = {1'b0, cos_ori};
+            end else if (quarter_d == 1) begin
+                sin = {1'b0, sin_ori};
+                cos = -{1'b0, cos_ori};
+            end else if (quarter_d == 2) begin
+                sin = -{1'b0, sin_ori};
+                cos = -{1'b0, cos_ori};
+            end else begin
+                sin = -{1'b0, sin_ori};
+                cos = {1'b0, cos_ori};
+            end
         end
     end
 

@@ -48,6 +48,9 @@ module Cordic #(
         .DATA_B_W  (DATA_DDS_W),
         .DATA_OUT_W(DATA_W)
     ) u_ComplexMul (
+        .clk  (clk),
+        .rst_n(rst_n),
+
         .a_i  (in_i),
         .a_q  (in_q),
         .b_i  (cos),
