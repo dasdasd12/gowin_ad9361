@@ -22,7 +22,7 @@ module Cordic_tb ();
     end
 
     initial begin
-        $dumpfile("cordic_wave.vcd");  // 指定生成的波形文件名为 "wave.vcd"
+        $dumpfile("./src/data/cordic_wave.vcd");  // 指定生成的波形文件名为 "wave.vcd"
         $dumpvars(0, Cordic_tb);  // 记录所有层次的信号
     end
 
@@ -49,7 +49,7 @@ module Cordic_tb ();
     Cordic #(
         .DATA_W    (DATA_W),
         .DATA_DDS_W(10),
-        .PHASE_W   (10),
+        .PHASE_W   (12),
         .ERROR_W   (8)
     ) u_Cordic (
         .clk  (clk),

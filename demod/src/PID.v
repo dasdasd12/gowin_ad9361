@@ -14,7 +14,8 @@ module PID #(
     parameter KP         = 1,
     parameter KP_W       = 8,
     parameter KI         = 1,
-    parameter KI_W       = 8
+    parameter KI_W       = 8,
+    parameter KI_W_WHOLE = 15
 ) (
     input clk,
     input rst_n,
@@ -24,7 +25,7 @@ module PID #(
     output reg signed [DATA_OUT_W-1:0] data_out
 );
 
-    reg signed  [KI_W+DATA_OUT_W-1:0] data_in_int;
+    reg signed  [     KI_W_WHOLE-1:0] data_in_int;
 
     wire signed [KP_W+DATA_OUT_W-1:0] kp_long = data_in * KP;
 
@@ -34,7 +35,7 @@ module PID #(
             data_out    <= 0;
         end else begin
             data_in_int <= data_in_int + data_in * KI;
-            data_out    <= kp_long[KP_W+DATA_OUT_W-1:KP_W] + data_in_int[KI_W+DATA_OUT_W-1:KI_W];
+            data_out    <= kp_long[KP_W+DATA_OUT_W-1:KP_W] + {{(DATA_OUT_W - (KI_W_WHOLE - KI_W)) {data_in_int[KI_W_WHOLE-1]}}, data_in_int[KI_W_WHOLE-1:KI_W]};
         end
     end
 
