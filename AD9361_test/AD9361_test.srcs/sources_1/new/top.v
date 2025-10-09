@@ -131,8 +131,8 @@ module top (
     .ctrl_out_led                       (ctrl_out_led              ),
 
     .tx_data_valid                      (tx_data_valid             ),
-    .tx_data_I                          (tx_data_I                 ),
-    .tx_data_Q                          (tx_data_Q                 ),
+    .tx_data_I                          (tx_data_Q                 ),
+    .tx_data_Q                          (tx_data_I                 ),
 
     .rx_data_valid                      (rx_data_valid             ),
     .rx_data_I                          (rx_data_I                 ),
@@ -215,17 +215,37 @@ module top (
     wire                                valid                       ;
     wire               [   2: 0]        bit_out                     ;
     wire               [11-1: 0]        phase_out                   ;
+
+    reg                                 sample_clk                  ;
+
+        always @(posedge data_clk or negedge rst_n) begin
+          if(!rst_n)
+            sample_clk <= 1'b0;
+          else 
+            sample_clk <= ~sample_clk;
+        end
     
     Demod #(
       .DATA_W                             (12                               )                     
     ) u_Demod(
-      .clk                                (data_clk                  ),
+      .clk                                (sample_clk                ),
       .rst_n                              (rst_n                     ),
       .in_i                               (rx_data_I                 ),
       .in_q                               (rx_data_Q                 ),
       .valid                              (valid                     ),
       .bit_out                            (bit_out                   ),
       .phase_out                          (phase_out                 ) 
+    );
+
+    // output declaration of module delta_decode
+    wire               [   2: 0]        delta_out                   ;
+    
+    delta_decode u_delta_decode(
+      .clk                                (sample_clk                ),
+      .rst_n                              (rst_n                     ),
+      .valid                              (valid                     ),
+      .bit_in                             (bit_out                   ),
+      .delta_out                          (delta_out                 ) 
     );
 
     ila_1 u_ila_1(
@@ -235,8 +255,20 @@ module top (
       .probe2                             (rx_data_Q                 ),
       .probe3                             (valid                     ),
       .probe4                             (bit_out                   ),
-      .probe5                             (phase_out                 )
+      .probe5                             (phase_out                 ),
+      .probe6                             (tx_data_I                 ),
+      .probe7                             (tx_data_Q                 ),
+      .probe8                             (delta_out                 ),
+      .probe9                             (u_Demod.out_i             ),
+      .probe10                            (u_Demod.out_q             ),
+      .probe11                            (u_delta_decode.bit_in     ),
+      .probe12                            (u_delta_decode.bit_in_d1  ),
+      .probe13                            (u_Demod.u_Cordic.u_PID.data_in_int)
     );
+
+
+
+    
     
     
 endmodule

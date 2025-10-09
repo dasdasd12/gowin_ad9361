@@ -54,7 +54,7 @@ module DDS #(
         end
     end
 
-    reg [DATA_W-1-1:0] sin_ori, cos_ori;
+    wire [DATA_W-1-1:0] sin_ori, cos_ori;
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
             sin <= 0;

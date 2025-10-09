@@ -71,15 +71,15 @@ module tx_sim(
         spi_do = 1'b0;
         #100
         rst = 1'b0;
-        #2000000
+        // #2000000
 
         // for(j=0;j<WORD_NUM;j=j+1) begin
         //     tx_data = tx_data_array[j];
         //     send1word(tx_data);
         // end
-        send_string(5,"00811");
-        wait(u_top.u_spi_reg_cfg.spi_wr_end);
-        send_string(5,"fffff");
+        // send_string(5,"00811");
+        // wait(u_top.u_spi_reg_cfg.spi_wr_end);
+        // send_string(5,"fffff");
 
     end
 
