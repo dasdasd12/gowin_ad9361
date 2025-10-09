@@ -11,7 +11,7 @@
 module Cordic #(
     parameter DATA_W     = 12,
     parameter DATA_DDS_W = 10,
-    parameter PHASE_W    = 10,
+    parameter PHASE_W    = 12,
     parameter ERROR_W    = 8
 ) (
     input clk,
@@ -27,13 +27,13 @@ module Cordic #(
 );
 
     wire [PHASE_W-1:0] phase_inc_delta;
-    wire [DATA_W-1:0] sin, cos;
+    wire [DATA_DDS_W-1:0] sin, cos;
 
     DDS #(
         .DATA_W        (DATA_DDS_W),
         .PHASE_W       (PHASE_W),
         .ROM_ADDR_W    (8),
-        .phase_inc_base(0)
+        .phase_inc_base(-15)
     ) u_DDS (
         .clk            (clk),
         .rst_n          (rst_n),
@@ -79,9 +79,10 @@ module Cordic #(
         .DATA_IN_W (ERROR_W),
         .DATA_OUT_W(PHASE_W),
         .KP        (1),
-        .KP_W      (6),
+        .KP_W      (6 - 4),
         .KI        (1),
-        .KI_W      (12)
+        .KI_W      (12 - 4),
+        .KI_W_WHOLE(14)
     ) u_PID (
         .clk     (clk),
         .rst_n   (rst_n),

@@ -30,7 +30,7 @@ module Demod #(
     Cordic #(
         .DATA_W    (DATA_W),
         .DATA_DDS_W(10),
-        .PHASE_W   (10),
+        .PHASE_W   (12),
         .ERROR_W   (8)
     ) u_Cordic (
         .clk  (clk),

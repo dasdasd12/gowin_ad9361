@@ -54,7 +54,7 @@ module DDS #(
         end
     end
 
-    reg [DATA_W-1-1:0] sin_ori, cos_ori;
+    wire [DATA_W-1-1:0] sin_ori, cos_ori;
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
             sin <= 0;
@@ -87,7 +87,7 @@ module DDS #(
     ROM_DULE #(
         .DATA_W   (DATA_W - 1),
         .ADDR_W   (ROM_ADDR_W),
-        .INIT_FILE("C:/program1/Program/2019.1vivado_project/demod/src/data/sine_rom.txt")
+        .INIT_FILE("./src/data/sine_rom.txt")
     ) sin_rom (
         .clk  (clk),
         .rst_n(rst_n),
