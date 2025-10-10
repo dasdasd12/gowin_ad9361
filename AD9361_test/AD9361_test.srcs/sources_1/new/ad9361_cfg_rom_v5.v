@@ -1,0 +1,2668 @@
+module ad9361_cfg_rom_v5(
+    input              clk,
+    input      [11:0]  addr,
+    output reg [19:0]  data
+);
+
+    always @(posedge clk) begin
+        case(addr)
+            // ************************************************************
+            // AD9361 R2 Auto Generated Initialization Script:  This script was
+            // generated using the AD9361 Customer software Version 2.1.1
+            // ************************************************************
+            // Profile: Custom
+            // REFCLK_IN: 40.000 MHz
+            12'd0000: data <= 20'h3DF01; // SPIWrite [3DF]=01
+            12'd0001: data <= 20'h29514; // SPIWrite [295]=14, Power up XO path (Default)
+            12'd0002: data <= 20'h2A60E; // SPIWrite [2A6]=0E, Enable Master Bias
+            12'd0003: data <= 20'h2A80E; // SPIWrite [2A8]=0E, Set Bandgap Trim
+            12'd0004: data <= 20'h29208; // SPIWrite [292]=08, Set DCXO Coarse Tune[5:0]
+            12'd0005: data <= 20'h29380; // SPIWrite [293]=80, Set DCXO Fine Tune [12:5]
+            12'd0006: data <= 20'h29400; // SPIWrite [294]=00, Set DCXO Fine Tune [4:0]
+            12'd0007: data <= 20'h2AB07; // SPIWrite [2AB]=07, Set RF PLL reflclk scale to REFCLK * 2
+            12'd0008: data <= 20'h2ACFF; // SPIWrite [2AC]=FF, Set RF PLL reflclk scale to REFCLK * 2
+            12'd0009: data <= 20'h00907; // SPIWrite [009]=07, Enable Clocks
+            12'd0010: data <= 20'h40000; // WAIT 20 ms, waits 20 ms
+            // ************************************************************
+            // Set BBPLL Frequency: 737.280000
+            // ************************************************************
+            12'd0011: data <= 20'h04500; // SPIWrite [045]=00, Set BBPLL reflclk scale to REFCLK /1
+            12'd0012: data <= 20'h04602; // SPIWrite [046]=02, Set BBPLL Loop Filter Charge Pump current
+            12'd0013: data <= 20'h048E8; // SPIWrite [048]=E8, Set BBPLL Loop Filter C1, R1
+            12'd0014: data <= 20'h0495B; // SPIWrite [049]=5B, Set BBPLL Loop Filter R2, C2, C1
+            12'd0015: data <= 20'h04A35; // SPIWrite [04A]=35, Set BBPLL Loop Filter C3,R2
+            12'd0016: data <= 20'h04BE0; // SPIWrite [04B]=E0, Allow calibration to occur and set cal count to 1024 for max accuracy
+            12'd0017: data <= 20'h04E10; // SPIWrite [04E]=10, Set calibration clock to REFCLK/4 for more accuracy
+            12'd0018: data <= 20'h0431F; // SPIWrite [043]=1F, BBPLL Freq Word (Fractional[7:0])
+            12'd0019: data <= 20'h042C5; // SPIWrite [042]=C5, BBPLL Freq Word (Fractional[15:8])
+            12'd0020: data <= 20'h0410D; // SPIWrite [041]=0D, BBPLL Freq Word (Fractional[23:16])
+            12'd0021: data <= 20'h04412; // SPIWrite [044]=12, BBPLL Freq Word (Integer[7:0])
+            12'd0022: data <= 20'h03F05; // SPIWrite [03F]=05, Start BBPLL Calibration
+            12'd0023: data <= 20'h03F01; // SPIWrite [03F]=01, Clear BBPLL start calibration bit
+            12'd0024: data <= 20'h04C86; // SPIWrite [04C]=86, Increase BBPLL KV and phase margin
+            12'd0025: data <= 20'h04D01; // SPIWrite [04D]=01, Increase BBPLL KV and phase margin
+            12'd0026: data <= 20'h04D05; // SPIWrite [04D]=05, Increase BBPLL KV and phase margin
+            12'd0027: data <= 20'h40000; // WAIT 20 ms, WAIT_CALDONE	BBPLL,2000	, Wait for BBPLL to lock, Timeout 2sec, Max BBPLL VCO Cal Time: 345.600 us (Done when 0x05E[7]==1)
+            12'd0028: data <= 20'h002E1; // SPIWrite [002]=E1, Setup Tx Digital Filters/ Channels
+            12'd0029: data <= 20'h003E2; // SPIWrite [003]=E2, Setup Rx Digital Filters/ Channels
+            12'd0030: data <= 20'h00403; // SPIWrite [004]=03, Select Rx input pin(A,B,C)/ Tx out pin (A,B)
+            12'd0031: data <= 20'h00A09; // SPIWrite [00A]=09, Set BBPLL post divide rate
+            // ************************************************************
+            // Program Tx FIR: C:\Users\DDDD\Desktop\AD9361_16M_FIR.ftr
+            // ************************************************************
+            12'd0032: data <= 20'h0655A; // SPIWrite [065]=5A, Enable clock to Tx FIR Filter and set Filter gain Setting
+            12'd0033: data <= 20'h40000; // WAIT 1 ms, waits 1 ms
+            12'd0034: data <= 20'h06000; // SPIWrite [060]=00, Write FIR coefficient address
+            12'd0035: data <= 20'h06109; // SPIWrite [061]=09, Write FIR coefficient data[7:0]
+            12'd0036: data <= 20'h06200; // SPIWrite [062]=00, Write FIR coefficient data[15:8]
+            12'd0037: data <= 20'h0655E; // SPIWrite [065]=5E, Set Write EN to push data into FIR filter register map
+            12'd0038: data <= 20'h06400; // SPIWrite [064]=00, Write to Read only register to delay ~1us
+            12'd0039: data <= 20'h06400; // SPIWrite [064]=00, Write to Read only register to delay ~1us
+            12'd0040: data <= 20'h06001; // SPIWrite [060]=01
+            12'd0041: data <= 20'h06175; // SPIWrite [061]=75
+            12'd0042: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0043: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0044: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0045: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0046: data <= 20'h06002; // SPIWrite [060]=02
+            12'd0047: data <= 20'h061ED; // SPIWrite [061]=ED
+            12'd0048: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0049: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0050: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0051: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0052: data <= 20'h06003; // SPIWrite [060]=03
+            12'd0053: data <= 20'h061BB; // SPIWrite [061]=BB
+            12'd0054: data <= 20'h062FF; // SPIWrite [062]=FF
+            12'd0055: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0056: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0057: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0058: data <= 20'h06004; // SPIWrite [060]=04
+            12'd0059: data <= 20'h061D1; // SPIWrite [061]=D1
+            12'd0060: data <= 20'h062FE; // SPIWrite [062]=FE
+            12'd0061: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0062: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0063: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0064: data <= 20'h06005; // SPIWrite [060]=05
+            12'd0065: data <= 20'h06124; // SPIWrite [061]=24
+            12'd0066: data <= 20'h06201; // SPIWrite [062]=01
+            12'd0067: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0068: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0069: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0070: data <= 20'h06006; // SPIWrite [060]=06
+            12'd0071: data <= 20'h06156; // SPIWrite [061]=56
+            12'd0072: data <= 20'h06201; // SPIWrite [062]=01
+            12'd0073: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0074: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0075: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0076: data <= 20'h06007; // SPIWrite [060]=07
+            12'd0077: data <= 20'h06139; // SPIWrite [061]=39
+            12'd0078: data <= 20'h062FD; // SPIWrite [062]=FD
+            12'd0079: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0080: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0081: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0082: data <= 20'h06008; // SPIWrite [060]=08
+            12'd0083: data <= 20'h06191; // SPIWrite [061]=91
+            12'd0084: data <= 20'h062FF; // SPIWrite [062]=FF
+            12'd0085: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0086: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0087: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0088: data <= 20'h06009; // SPIWrite [060]=09
+            12'd0089: data <= 20'h061DC; // SPIWrite [061]=DC
+            12'd0090: data <= 20'h06204; // SPIWrite [062]=04
+            12'd0091: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0092: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0093: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0094: data <= 20'h0600A; // SPIWrite [060]=0A
+            12'd0095: data <= 20'h06177; // SPIWrite [061]=77
+            12'd0096: data <= 20'h062FD; // SPIWrite [062]=FD
+            12'd0097: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0098: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0099: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0100: data <= 20'h0600B; // SPIWrite [060]=0B
+            12'd0101: data <= 20'h061BB; // SPIWrite [061]=BB
+            12'd0102: data <= 20'h062F9; // SPIWrite [062]=F9
+            12'd0103: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0104: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0105: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0106: data <= 20'h0600C; // SPIWrite [060]=0C
+            12'd0107: data <= 20'h06190; // SPIWrite [061]=90
+            12'd0108: data <= 20'h06208; // SPIWrite [062]=08
+            12'd0109: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0110: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0111: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0112: data <= 20'h0600D; // SPIWrite [060]=0D
+            12'd0113: data <= 20'h061ED; // SPIWrite [061]=ED
+            12'd0114: data <= 20'h06204; // SPIWrite [062]=04
+            12'd0115: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0116: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0117: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0118: data <= 20'h0600E; // SPIWrite [060]=0E
+            12'd0119: data <= 20'h06148; // SPIWrite [061]=48
+            12'd0120: data <= 20'h062EC; // SPIWrite [062]=EC
+            12'd0121: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0122: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0123: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0124: data <= 20'h0600F; // SPIWrite [060]=0F
+            12'd0125: data <= 20'h06130; // SPIWrite [061]=30
+            12'd0126: data <= 20'h06205; // SPIWrite [062]=05
+            12'd0127: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0128: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0129: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0130: data <= 20'h06010; // SPIWrite [060]=10
+            12'd0131: data <= 20'h061AE; // SPIWrite [061]=AE
+            12'd0132: data <= 20'h06246; // SPIWrite [062]=46
+            12'd0133: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0134: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0135: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0136: data <= 20'h06011; // SPIWrite [060]=11
+            12'd0137: data <= 20'h061AE; // SPIWrite [061]=AE
+            12'd0138: data <= 20'h06246; // SPIWrite [062]=46
+            12'd0139: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0140: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0141: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0142: data <= 20'h06012; // SPIWrite [060]=12
+            12'd0143: data <= 20'h06130; // SPIWrite [061]=30
+            12'd0144: data <= 20'h06205; // SPIWrite [062]=05
+            12'd0145: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0146: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0147: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0148: data <= 20'h06013; // SPIWrite [060]=13
+            12'd0149: data <= 20'h06148; // SPIWrite [061]=48
+            12'd0150: data <= 20'h062EC; // SPIWrite [062]=EC
+            12'd0151: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0152: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0153: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0154: data <= 20'h06014; // SPIWrite [060]=14
+            12'd0155: data <= 20'h061ED; // SPIWrite [061]=ED
+            12'd0156: data <= 20'h06204; // SPIWrite [062]=04
+            12'd0157: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0158: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0159: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0160: data <= 20'h06015; // SPIWrite [060]=15
+            12'd0161: data <= 20'h06190; // SPIWrite [061]=90
+            12'd0162: data <= 20'h06208; // SPIWrite [062]=08
+            12'd0163: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0164: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0165: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0166: data <= 20'h06016; // SPIWrite [060]=16
+            12'd0167: data <= 20'h061BB; // SPIWrite [061]=BB
+            12'd0168: data <= 20'h062F9; // SPIWrite [062]=F9
+            12'd0169: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0170: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0171: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0172: data <= 20'h06017; // SPIWrite [060]=17
+            12'd0173: data <= 20'h06177; // SPIWrite [061]=77
+            12'd0174: data <= 20'h062FD; // SPIWrite [062]=FD
+            12'd0175: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0176: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0177: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0178: data <= 20'h06018; // SPIWrite [060]=18
+            12'd0179: data <= 20'h061DC; // SPIWrite [061]=DC
+            12'd0180: data <= 20'h06204; // SPIWrite [062]=04
+            12'd0181: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0182: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0183: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0184: data <= 20'h06019; // SPIWrite [060]=19
+            12'd0185: data <= 20'h06191; // SPIWrite [061]=91
+            12'd0186: data <= 20'h062FF; // SPIWrite [062]=FF
+            12'd0187: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0188: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0189: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0190: data <= 20'h0601A; // SPIWrite [060]=1A
+            12'd0191: data <= 20'h06139; // SPIWrite [061]=39
+            12'd0192: data <= 20'h062FD; // SPIWrite [062]=FD
+            12'd0193: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0194: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0195: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0196: data <= 20'h0601B; // SPIWrite [060]=1B
+            12'd0197: data <= 20'h06156; // SPIWrite [061]=56
+            12'd0198: data <= 20'h06201; // SPIWrite [062]=01
+            12'd0199: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0200: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0201: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0202: data <= 20'h0601C; // SPIWrite [060]=1C
+            12'd0203: data <= 20'h06124; // SPIWrite [061]=24
+            12'd0204: data <= 20'h06201; // SPIWrite [062]=01
+            12'd0205: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0206: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0207: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0208: data <= 20'h0601D; // SPIWrite [060]=1D
+            12'd0209: data <= 20'h061D1; // SPIWrite [061]=D1
+            12'd0210: data <= 20'h062FE; // SPIWrite [062]=FE
+            12'd0211: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0212: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0213: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0214: data <= 20'h0601E; // SPIWrite [060]=1E
+            12'd0215: data <= 20'h061BB; // SPIWrite [061]=BB
+            12'd0216: data <= 20'h062FF; // SPIWrite [062]=FF
+            12'd0217: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0218: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0219: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0220: data <= 20'h0601F; // SPIWrite [060]=1F
+            12'd0221: data <= 20'h061ED; // SPIWrite [061]=ED
+            12'd0222: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0223: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0224: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0225: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0226: data <= 20'h06020; // SPIWrite [060]=20
+            12'd0227: data <= 20'h06175; // SPIWrite [061]=75
+            12'd0228: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0229: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0230: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0231: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0232: data <= 20'h06021; // SPIWrite [060]=21
+            12'd0233: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0234: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0235: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0236: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0237: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0238: data <= 20'h06022; // SPIWrite [060]=22
+            12'd0239: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0240: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0241: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0242: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0243: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0244: data <= 20'h06023; // SPIWrite [060]=23
+            12'd0245: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0246: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0247: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0248: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0249: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0250: data <= 20'h06024; // SPIWrite [060]=24
+            12'd0251: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0252: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0253: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0254: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0255: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0256: data <= 20'h06025; // SPIWrite [060]=25
+            12'd0257: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0258: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0259: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0260: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0261: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0262: data <= 20'h06026; // SPIWrite [060]=26
+            12'd0263: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0264: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0265: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0266: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0267: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0268: data <= 20'h06027; // SPIWrite [060]=27
+            12'd0269: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0270: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0271: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0272: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0273: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0274: data <= 20'h06028; // SPIWrite [060]=28
+            12'd0275: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0276: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0277: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0278: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0279: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0280: data <= 20'h06029; // SPIWrite [060]=29
+            12'd0281: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0282: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0283: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0284: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0285: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0286: data <= 20'h0602A; // SPIWrite [060]=2A
+            12'd0287: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0288: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0289: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0290: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0291: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0292: data <= 20'h0602B; // SPIWrite [060]=2B
+            12'd0293: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0294: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0295: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0296: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0297: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0298: data <= 20'h0602C; // SPIWrite [060]=2C
+            12'd0299: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0300: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0301: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0302: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0303: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0304: data <= 20'h0602D; // SPIWrite [060]=2D
+            12'd0305: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0306: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0307: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0308: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0309: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0310: data <= 20'h0602E; // SPIWrite [060]=2E
+            12'd0311: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0312: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0313: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0314: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0315: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0316: data <= 20'h0602F; // SPIWrite [060]=2F
+            12'd0317: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0318: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0319: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0320: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0321: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0322: data <= 20'h06030; // SPIWrite [060]=30
+            12'd0323: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0324: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0325: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0326: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0327: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0328: data <= 20'h06031; // SPIWrite [060]=31
+            12'd0329: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0330: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0331: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0332: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0333: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0334: data <= 20'h06032; // SPIWrite [060]=32
+            12'd0335: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0336: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0337: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0338: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0339: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0340: data <= 20'h06033; // SPIWrite [060]=33
+            12'd0341: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0342: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0343: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0344: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0345: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0346: data <= 20'h06034; // SPIWrite [060]=34
+            12'd0347: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0348: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0349: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0350: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0351: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0352: data <= 20'h06035; // SPIWrite [060]=35
+            12'd0353: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0354: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0355: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0356: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0357: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0358: data <= 20'h06036; // SPIWrite [060]=36
+            12'd0359: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0360: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0361: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0362: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0363: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0364: data <= 20'h06037; // SPIWrite [060]=37
+            12'd0365: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0366: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0367: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0368: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0369: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0370: data <= 20'h06038; // SPIWrite [060]=38
+            12'd0371: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0372: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0373: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0374: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0375: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0376: data <= 20'h06039; // SPIWrite [060]=39
+            12'd0377: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0378: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0379: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0380: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0381: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0382: data <= 20'h0603A; // SPIWrite [060]=3A
+            12'd0383: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0384: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0385: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0386: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0387: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0388: data <= 20'h0603B; // SPIWrite [060]=3B
+            12'd0389: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0390: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0391: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0392: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0393: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0394: data <= 20'h0603C; // SPIWrite [060]=3C
+            12'd0395: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0396: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0397: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0398: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0399: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0400: data <= 20'h0603D; // SPIWrite [060]=3D
+            12'd0401: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0402: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0403: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0404: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0405: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0406: data <= 20'h0603E; // SPIWrite [060]=3E
+            12'd0407: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0408: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0409: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0410: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0411: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0412: data <= 20'h0603F; // SPIWrite [060]=3F
+            12'd0413: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0414: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0415: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0416: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0417: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0418: data <= 20'h06040; // SPIWrite [060]=40
+            12'd0419: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0420: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0421: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0422: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0423: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0424: data <= 20'h06041; // SPIWrite [060]=41
+            12'd0425: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0426: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0427: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0428: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0429: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0430: data <= 20'h06042; // SPIWrite [060]=42
+            12'd0431: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0432: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0433: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0434: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0435: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0436: data <= 20'h06043; // SPIWrite [060]=43
+            12'd0437: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0438: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0439: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0440: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0441: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0442: data <= 20'h06044; // SPIWrite [060]=44
+            12'd0443: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0444: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0445: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0446: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0447: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0448: data <= 20'h06045; // SPIWrite [060]=45
+            12'd0449: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0450: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0451: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0452: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0453: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0454: data <= 20'h06046; // SPIWrite [060]=46
+            12'd0455: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0456: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0457: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0458: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0459: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0460: data <= 20'h06047; // SPIWrite [060]=47
+            12'd0461: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0462: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0463: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0464: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0465: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0466: data <= 20'h06048; // SPIWrite [060]=48
+            12'd0467: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0468: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0469: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0470: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0471: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0472: data <= 20'h06049; // SPIWrite [060]=49
+            12'd0473: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0474: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0475: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0476: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0477: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0478: data <= 20'h0604A; // SPIWrite [060]=4A
+            12'd0479: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0480: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0481: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0482: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0483: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0484: data <= 20'h0604B; // SPIWrite [060]=4B
+            12'd0485: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0486: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0487: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0488: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0489: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0490: data <= 20'h0604C; // SPIWrite [060]=4C
+            12'd0491: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0492: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0493: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0494: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0495: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0496: data <= 20'h0604D; // SPIWrite [060]=4D
+            12'd0497: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0498: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0499: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0500: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0501: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0502: data <= 20'h0604E; // SPIWrite [060]=4E
+            12'd0503: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0504: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0505: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0506: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0507: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0508: data <= 20'h0604F; // SPIWrite [060]=4F
+            12'd0509: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0510: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0511: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0512: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0513: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0514: data <= 20'h06050; // SPIWrite [060]=50
+            12'd0515: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0516: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0517: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0518: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0519: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0520: data <= 20'h06051; // SPIWrite [060]=51
+            12'd0521: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0522: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0523: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0524: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0525: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0526: data <= 20'h06052; // SPIWrite [060]=52
+            12'd0527: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0528: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0529: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0530: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0531: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0532: data <= 20'h06053; // SPIWrite [060]=53
+            12'd0533: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0534: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0535: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0536: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0537: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0538: data <= 20'h06054; // SPIWrite [060]=54
+            12'd0539: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0540: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0541: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0542: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0543: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0544: data <= 20'h06055; // SPIWrite [060]=55
+            12'd0545: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0546: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0547: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0548: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0549: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0550: data <= 20'h06056; // SPIWrite [060]=56
+            12'd0551: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0552: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0553: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0554: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0555: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0556: data <= 20'h06057; // SPIWrite [060]=57
+            12'd0557: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0558: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0559: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0560: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0561: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0562: data <= 20'h06058; // SPIWrite [060]=58
+            12'd0563: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0564: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0565: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0566: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0567: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0568: data <= 20'h06059; // SPIWrite [060]=59
+            12'd0569: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0570: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0571: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0572: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0573: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0574: data <= 20'h0605A; // SPIWrite [060]=5A
+            12'd0575: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0576: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0577: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0578: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0579: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0580: data <= 20'h0605B; // SPIWrite [060]=5B
+            12'd0581: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0582: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0583: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0584: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0585: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0586: data <= 20'h0605C; // SPIWrite [060]=5C
+            12'd0587: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0588: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0589: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0590: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0591: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0592: data <= 20'h0605D; // SPIWrite [060]=5D
+            12'd0593: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0594: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0595: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0596: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0597: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0598: data <= 20'h0605E; // SPIWrite [060]=5E
+            12'd0599: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0600: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0601: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0602: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0603: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0604: data <= 20'h0605F; // SPIWrite [060]=5F
+            12'd0605: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0606: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0607: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0608: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0609: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0610: data <= 20'h06060; // SPIWrite [060]=60
+            12'd0611: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0612: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0613: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0614: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0615: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0616: data <= 20'h06061; // SPIWrite [060]=61
+            12'd0617: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0618: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0619: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0620: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0621: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0622: data <= 20'h06062; // SPIWrite [060]=62
+            12'd0623: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0624: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0625: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0626: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0627: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0628: data <= 20'h06063; // SPIWrite [060]=63
+            12'd0629: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0630: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0631: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0632: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0633: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0634: data <= 20'h06064; // SPIWrite [060]=64
+            12'd0635: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0636: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0637: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0638: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0639: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0640: data <= 20'h06065; // SPIWrite [060]=65
+            12'd0641: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0642: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0643: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0644: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0645: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0646: data <= 20'h06066; // SPIWrite [060]=66
+            12'd0647: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0648: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0649: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0650: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0651: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0652: data <= 20'h06067; // SPIWrite [060]=67
+            12'd0653: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0654: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0655: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0656: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0657: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0658: data <= 20'h06068; // SPIWrite [060]=68
+            12'd0659: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0660: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0661: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0662: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0663: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0664: data <= 20'h06069; // SPIWrite [060]=69
+            12'd0665: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0666: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0667: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0668: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0669: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0670: data <= 20'h0606A; // SPIWrite [060]=6A
+            12'd0671: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0672: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0673: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0674: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0675: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0676: data <= 20'h0606B; // SPIWrite [060]=6B
+            12'd0677: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0678: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0679: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0680: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0681: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0682: data <= 20'h0606C; // SPIWrite [060]=6C
+            12'd0683: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0684: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0685: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0686: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0687: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0688: data <= 20'h0606D; // SPIWrite [060]=6D
+            12'd0689: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0690: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0691: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0692: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0693: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0694: data <= 20'h0606E; // SPIWrite [060]=6E
+            12'd0695: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0696: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0697: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0698: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0699: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0700: data <= 20'h0606F; // SPIWrite [060]=6F
+            12'd0701: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0702: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0703: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0704: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0705: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0706: data <= 20'h06070; // SPIWrite [060]=70
+            12'd0707: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0708: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0709: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0710: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0711: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0712: data <= 20'h06071; // SPIWrite [060]=71
+            12'd0713: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0714: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0715: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0716: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0717: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0718: data <= 20'h06072; // SPIWrite [060]=72
+            12'd0719: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0720: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0721: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0722: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0723: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0724: data <= 20'h06073; // SPIWrite [060]=73
+            12'd0725: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0726: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0727: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0728: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0729: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0730: data <= 20'h06074; // SPIWrite [060]=74
+            12'd0731: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0732: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0733: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0734: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0735: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0736: data <= 20'h06075; // SPIWrite [060]=75
+            12'd0737: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0738: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0739: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0740: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0741: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0742: data <= 20'h06076; // SPIWrite [060]=76
+            12'd0743: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0744: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0745: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0746: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0747: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0748: data <= 20'h06077; // SPIWrite [060]=77
+            12'd0749: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0750: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0751: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0752: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0753: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0754: data <= 20'h06078; // SPIWrite [060]=78
+            12'd0755: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0756: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0757: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0758: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0759: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0760: data <= 20'h06079; // SPIWrite [060]=79
+            12'd0761: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0762: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0763: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0764: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0765: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0766: data <= 20'h0607A; // SPIWrite [060]=7A
+            12'd0767: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0768: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0769: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0770: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0771: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0772: data <= 20'h0607B; // SPIWrite [060]=7B
+            12'd0773: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0774: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0775: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0776: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0777: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0778: data <= 20'h0607C; // SPIWrite [060]=7C
+            12'd0779: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0780: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0781: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0782: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0783: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0784: data <= 20'h0607D; // SPIWrite [060]=7D
+            12'd0785: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0786: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0787: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0788: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0789: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0790: data <= 20'h0607E; // SPIWrite [060]=7E
+            12'd0791: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0792: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0793: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0794: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0795: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0796: data <= 20'h0607F; // SPIWrite [060]=7F
+            12'd0797: data <= 20'h06100; // SPIWrite [061]=00
+            12'd0798: data <= 20'h06200; // SPIWrite [062]=00
+            12'd0799: data <= 20'h0655E; // SPIWrite [065]=5E
+            12'd0800: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0801: data <= 20'h06400; // SPIWrite [064]=00
+            12'd0802: data <= 20'h06558; // SPIWrite [065]=58, Disable clock to Tx Filter
+            // ************************************************************
+            // Program Rx FIR: C:\Users\DDDD\Desktop\AD9361_16M_FIR.ftr
+            // ************************************************************
+            12'd0803: data <= 20'h0F55A; // SPIWrite [0F5]=5A, Enable clock to Rx FIR Filter
+            12'd0804: data <= 20'h0F600; // SPIWrite [0F6]=00, Write Filter Gain setting
+            12'd0805: data <= 20'h40000; // WAIT 1 ms, waits 1 ms
+            12'd0806: data <= 20'h0F000; // SPIWrite [0F0]=00, Write FIR coefficient address
+            12'd0807: data <= 20'h0F109; // SPIWrite [0F1]=09, Write FIR coefficient data[7:0]
+            12'd0808: data <= 20'h0F200; // SPIWrite [0F2]=00, Write FIR coefficient data[15:8]
+            12'd0809: data <= 20'h0F55E; // SPIWrite [0F5]=5E, Set Write EN to push data into FIR filter register map
+            12'd0810: data <= 20'h0F400; // SPIWrite [0F4]=00, Dummy Write to Read only register to delay ~1us
+            12'd0811: data <= 20'h0F400; // SPIWrite [0F4]=00, Dummy Write to Read only register to delay ~1us
+            12'd0812: data <= 20'h0F001; // SPIWrite [0F0]=01
+            12'd0813: data <= 20'h0F175; // SPIWrite [0F1]=75
+            12'd0814: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd0815: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd0816: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0817: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0818: data <= 20'h0F002; // SPIWrite [0F0]=02
+            12'd0819: data <= 20'h0F1ED; // SPIWrite [0F1]=ED
+            12'd0820: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd0821: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd0822: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0823: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0824: data <= 20'h0F003; // SPIWrite [0F0]=03
+            12'd0825: data <= 20'h0F1BB; // SPIWrite [0F1]=BB
+            12'd0826: data <= 20'h0F2FF; // SPIWrite [0F2]=FF
+            12'd0827: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd0828: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0829: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0830: data <= 20'h0F004; // SPIWrite [0F0]=04
+            12'd0831: data <= 20'h0F1D1; // SPIWrite [0F1]=D1
+            12'd0832: data <= 20'h0F2FE; // SPIWrite [0F2]=FE
+            12'd0833: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd0834: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0835: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0836: data <= 20'h0F005; // SPIWrite [0F0]=05
+            12'd0837: data <= 20'h0F124; // SPIWrite [0F1]=24
+            12'd0838: data <= 20'h0F201; // SPIWrite [0F2]=01
+            12'd0839: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd0840: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0841: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0842: data <= 20'h0F006; // SPIWrite [0F0]=06
+            12'd0843: data <= 20'h0F156; // SPIWrite [0F1]=56
+            12'd0844: data <= 20'h0F201; // SPIWrite [0F2]=01
+            12'd0845: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd0846: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0847: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0848: data <= 20'h0F007; // SPIWrite [0F0]=07
+            12'd0849: data <= 20'h0F139; // SPIWrite [0F1]=39
+            12'd0850: data <= 20'h0F2FD; // SPIWrite [0F2]=FD
+            12'd0851: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd0852: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0853: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0854: data <= 20'h0F008; // SPIWrite [0F0]=08
+            12'd0855: data <= 20'h0F191; // SPIWrite [0F1]=91
+            12'd0856: data <= 20'h0F2FF; // SPIWrite [0F2]=FF
+            12'd0857: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd0858: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0859: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0860: data <= 20'h0F009; // SPIWrite [0F0]=09
+            12'd0861: data <= 20'h0F1DC; // SPIWrite [0F1]=DC
+            12'd0862: data <= 20'h0F204; // SPIWrite [0F2]=04
+            12'd0863: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd0864: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0865: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0866: data <= 20'h0F00A; // SPIWrite [0F0]=0A
+            12'd0867: data <= 20'h0F177; // SPIWrite [0F1]=77
+            12'd0868: data <= 20'h0F2FD; // SPIWrite [0F2]=FD
+            12'd0869: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd0870: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0871: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0872: data <= 20'h0F00B; // SPIWrite [0F0]=0B
+            12'd0873: data <= 20'h0F1BB; // SPIWrite [0F1]=BB
+            12'd0874: data <= 20'h0F2F9; // SPIWrite [0F2]=F9
+            12'd0875: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd0876: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0877: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0878: data <= 20'h0F00C; // SPIWrite [0F0]=0C
+            12'd0879: data <= 20'h0F190; // SPIWrite [0F1]=90
+            12'd0880: data <= 20'h0F208; // SPIWrite [0F2]=08
+            12'd0881: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd0882: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0883: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0884: data <= 20'h0F00D; // SPIWrite [0F0]=0D
+            12'd0885: data <= 20'h0F1ED; // SPIWrite [0F1]=ED
+            12'd0886: data <= 20'h0F204; // SPIWrite [0F2]=04
+            12'd0887: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd0888: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0889: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0890: data <= 20'h0F00E; // SPIWrite [0F0]=0E
+            12'd0891: data <= 20'h0F148; // SPIWrite [0F1]=48
+            12'd0892: data <= 20'h0F2EC; // SPIWrite [0F2]=EC
+            12'd0893: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd0894: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0895: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0896: data <= 20'h0F00F; // SPIWrite [0F0]=0F
+            12'd0897: data <= 20'h0F130; // SPIWrite [0F1]=30
+            12'd0898: data <= 20'h0F205; // SPIWrite [0F2]=05
+            12'd0899: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd0900: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0901: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0902: data <= 20'h0F010; // SPIWrite [0F0]=10
+            12'd0903: data <= 20'h0F1AE; // SPIWrite [0F1]=AE
+            12'd0904: data <= 20'h0F246; // SPIWrite [0F2]=46
+            12'd0905: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd0906: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0907: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0908: data <= 20'h0F011; // SPIWrite [0F0]=11
+            12'd0909: data <= 20'h0F1AE; // SPIWrite [0F1]=AE
+            12'd0910: data <= 20'h0F246; // SPIWrite [0F2]=46
+            12'd0911: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd0912: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0913: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0914: data <= 20'h0F012; // SPIWrite [0F0]=12
+            12'd0915: data <= 20'h0F130; // SPIWrite [0F1]=30
+            12'd0916: data <= 20'h0F205; // SPIWrite [0F2]=05
+            12'd0917: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd0918: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0919: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0920: data <= 20'h0F013; // SPIWrite [0F0]=13
+            12'd0921: data <= 20'h0F148; // SPIWrite [0F1]=48
+            12'd0922: data <= 20'h0F2EC; // SPIWrite [0F2]=EC
+            12'd0923: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd0924: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0925: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0926: data <= 20'h0F014; // SPIWrite [0F0]=14
+            12'd0927: data <= 20'h0F1ED; // SPIWrite [0F1]=ED
+            12'd0928: data <= 20'h0F204; // SPIWrite [0F2]=04
+            12'd0929: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd0930: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0931: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0932: data <= 20'h0F015; // SPIWrite [0F0]=15
+            12'd0933: data <= 20'h0F190; // SPIWrite [0F1]=90
+            12'd0934: data <= 20'h0F208; // SPIWrite [0F2]=08
+            12'd0935: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd0936: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0937: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0938: data <= 20'h0F016; // SPIWrite [0F0]=16
+            12'd0939: data <= 20'h0F1BB; // SPIWrite [0F1]=BB
+            12'd0940: data <= 20'h0F2F9; // SPIWrite [0F2]=F9
+            12'd0941: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd0942: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0943: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0944: data <= 20'h0F017; // SPIWrite [0F0]=17
+            12'd0945: data <= 20'h0F177; // SPIWrite [0F1]=77
+            12'd0946: data <= 20'h0F2FD; // SPIWrite [0F2]=FD
+            12'd0947: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd0948: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0949: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0950: data <= 20'h0F018; // SPIWrite [0F0]=18
+            12'd0951: data <= 20'h0F1DC; // SPIWrite [0F1]=DC
+            12'd0952: data <= 20'h0F204; // SPIWrite [0F2]=04
+            12'd0953: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd0954: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0955: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0956: data <= 20'h0F019; // SPIWrite [0F0]=19
+            12'd0957: data <= 20'h0F191; // SPIWrite [0F1]=91
+            12'd0958: data <= 20'h0F2FF; // SPIWrite [0F2]=FF
+            12'd0959: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd0960: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0961: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0962: data <= 20'h0F01A; // SPIWrite [0F0]=1A
+            12'd0963: data <= 20'h0F139; // SPIWrite [0F1]=39
+            12'd0964: data <= 20'h0F2FD; // SPIWrite [0F2]=FD
+            12'd0965: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd0966: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0967: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0968: data <= 20'h0F01B; // SPIWrite [0F0]=1B
+            12'd0969: data <= 20'h0F156; // SPIWrite [0F1]=56
+            12'd0970: data <= 20'h0F201; // SPIWrite [0F2]=01
+            12'd0971: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd0972: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0973: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0974: data <= 20'h0F01C; // SPIWrite [0F0]=1C
+            12'd0975: data <= 20'h0F124; // SPIWrite [0F1]=24
+            12'd0976: data <= 20'h0F201; // SPIWrite [0F2]=01
+            12'd0977: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd0978: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0979: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0980: data <= 20'h0F01D; // SPIWrite [0F0]=1D
+            12'd0981: data <= 20'h0F1D1; // SPIWrite [0F1]=D1
+            12'd0982: data <= 20'h0F2FE; // SPIWrite [0F2]=FE
+            12'd0983: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd0984: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0985: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0986: data <= 20'h0F01E; // SPIWrite [0F0]=1E
+            12'd0987: data <= 20'h0F1BB; // SPIWrite [0F1]=BB
+            12'd0988: data <= 20'h0F2FF; // SPIWrite [0F2]=FF
+            12'd0989: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd0990: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0991: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0992: data <= 20'h0F01F; // SPIWrite [0F0]=1F
+            12'd0993: data <= 20'h0F1ED; // SPIWrite [0F1]=ED
+            12'd0994: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd0995: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd0996: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0997: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd0998: data <= 20'h0F020; // SPIWrite [0F0]=20
+            12'd0999: data <= 20'h0F175; // SPIWrite [0F1]=75
+            12'd1000: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1001: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1002: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1003: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1004: data <= 20'h0F021; // SPIWrite [0F0]=21
+            12'd1005: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1006: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1007: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1008: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1009: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1010: data <= 20'h0F022; // SPIWrite [0F0]=22
+            12'd1011: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1012: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1013: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1014: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1015: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1016: data <= 20'h0F023; // SPIWrite [0F0]=23
+            12'd1017: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1018: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1019: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1020: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1021: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1022: data <= 20'h0F024; // SPIWrite [0F0]=24
+            12'd1023: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1024: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1025: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1026: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1027: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1028: data <= 20'h0F025; // SPIWrite [0F0]=25
+            12'd1029: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1030: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1031: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1032: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1033: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1034: data <= 20'h0F026; // SPIWrite [0F0]=26
+            12'd1035: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1036: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1037: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1038: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1039: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1040: data <= 20'h0F027; // SPIWrite [0F0]=27
+            12'd1041: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1042: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1043: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1044: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1045: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1046: data <= 20'h0F028; // SPIWrite [0F0]=28
+            12'd1047: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1048: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1049: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1050: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1051: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1052: data <= 20'h0F029; // SPIWrite [0F0]=29
+            12'd1053: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1054: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1055: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1056: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1057: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1058: data <= 20'h0F02A; // SPIWrite [0F0]=2A
+            12'd1059: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1060: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1061: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1062: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1063: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1064: data <= 20'h0F02B; // SPIWrite [0F0]=2B
+            12'd1065: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1066: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1067: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1068: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1069: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1070: data <= 20'h0F02C; // SPIWrite [0F0]=2C
+            12'd1071: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1072: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1073: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1074: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1075: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1076: data <= 20'h0F02D; // SPIWrite [0F0]=2D
+            12'd1077: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1078: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1079: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1080: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1081: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1082: data <= 20'h0F02E; // SPIWrite [0F0]=2E
+            12'd1083: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1084: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1085: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1086: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1087: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1088: data <= 20'h0F02F; // SPIWrite [0F0]=2F
+            12'd1089: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1090: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1091: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1092: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1093: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1094: data <= 20'h0F030; // SPIWrite [0F0]=30
+            12'd1095: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1096: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1097: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1098: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1099: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1100: data <= 20'h0F031; // SPIWrite [0F0]=31
+            12'd1101: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1102: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1103: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1104: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1105: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1106: data <= 20'h0F032; // SPIWrite [0F0]=32
+            12'd1107: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1108: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1109: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1110: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1111: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1112: data <= 20'h0F033; // SPIWrite [0F0]=33
+            12'd1113: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1114: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1115: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1116: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1117: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1118: data <= 20'h0F034; // SPIWrite [0F0]=34
+            12'd1119: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1120: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1121: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1122: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1123: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1124: data <= 20'h0F035; // SPIWrite [0F0]=35
+            12'd1125: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1126: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1127: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1128: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1129: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1130: data <= 20'h0F036; // SPIWrite [0F0]=36
+            12'd1131: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1132: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1133: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1134: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1135: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1136: data <= 20'h0F037; // SPIWrite [0F0]=37
+            12'd1137: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1138: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1139: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1140: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1141: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1142: data <= 20'h0F038; // SPIWrite [0F0]=38
+            12'd1143: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1144: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1145: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1146: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1147: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1148: data <= 20'h0F039; // SPIWrite [0F0]=39
+            12'd1149: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1150: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1151: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1152: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1153: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1154: data <= 20'h0F03A; // SPIWrite [0F0]=3A
+            12'd1155: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1156: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1157: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1158: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1159: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1160: data <= 20'h0F03B; // SPIWrite [0F0]=3B
+            12'd1161: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1162: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1163: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1164: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1165: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1166: data <= 20'h0F03C; // SPIWrite [0F0]=3C
+            12'd1167: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1168: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1169: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1170: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1171: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1172: data <= 20'h0F03D; // SPIWrite [0F0]=3D
+            12'd1173: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1174: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1175: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1176: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1177: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1178: data <= 20'h0F03E; // SPIWrite [0F0]=3E
+            12'd1179: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1180: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1181: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1182: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1183: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1184: data <= 20'h0F03F; // SPIWrite [0F0]=3F
+            12'd1185: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1186: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1187: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1188: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1189: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1190: data <= 20'h0F040; // SPIWrite [0F0]=40
+            12'd1191: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1192: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1193: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1194: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1195: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1196: data <= 20'h0F041; // SPIWrite [0F0]=41
+            12'd1197: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1198: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1199: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1200: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1201: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1202: data <= 20'h0F042; // SPIWrite [0F0]=42
+            12'd1203: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1204: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1205: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1206: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1207: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1208: data <= 20'h0F043; // SPIWrite [0F0]=43
+            12'd1209: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1210: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1211: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1212: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1213: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1214: data <= 20'h0F044; // SPIWrite [0F0]=44
+            12'd1215: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1216: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1217: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1218: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1219: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1220: data <= 20'h0F045; // SPIWrite [0F0]=45
+            12'd1221: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1222: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1223: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1224: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1225: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1226: data <= 20'h0F046; // SPIWrite [0F0]=46
+            12'd1227: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1228: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1229: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1230: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1231: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1232: data <= 20'h0F047; // SPIWrite [0F0]=47
+            12'd1233: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1234: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1235: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1236: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1237: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1238: data <= 20'h0F048; // SPIWrite [0F0]=48
+            12'd1239: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1240: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1241: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1242: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1243: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1244: data <= 20'h0F049; // SPIWrite [0F0]=49
+            12'd1245: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1246: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1247: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1248: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1249: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1250: data <= 20'h0F04A; // SPIWrite [0F0]=4A
+            12'd1251: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1252: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1253: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1254: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1255: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1256: data <= 20'h0F04B; // SPIWrite [0F0]=4B
+            12'd1257: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1258: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1259: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1260: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1261: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1262: data <= 20'h0F04C; // SPIWrite [0F0]=4C
+            12'd1263: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1264: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1265: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1266: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1267: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1268: data <= 20'h0F04D; // SPIWrite [0F0]=4D
+            12'd1269: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1270: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1271: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1272: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1273: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1274: data <= 20'h0F04E; // SPIWrite [0F0]=4E
+            12'd1275: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1276: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1277: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1278: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1279: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1280: data <= 20'h0F04F; // SPIWrite [0F0]=4F
+            12'd1281: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1282: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1283: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1284: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1285: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1286: data <= 20'h0F050; // SPIWrite [0F0]=50
+            12'd1287: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1288: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1289: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1290: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1291: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1292: data <= 20'h0F051; // SPIWrite [0F0]=51
+            12'd1293: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1294: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1295: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1296: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1297: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1298: data <= 20'h0F052; // SPIWrite [0F0]=52
+            12'd1299: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1300: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1301: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1302: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1303: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1304: data <= 20'h0F053; // SPIWrite [0F0]=53
+            12'd1305: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1306: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1307: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1308: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1309: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1310: data <= 20'h0F054; // SPIWrite [0F0]=54
+            12'd1311: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1312: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1313: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1314: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1315: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1316: data <= 20'h0F055; // SPIWrite [0F0]=55
+            12'd1317: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1318: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1319: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1320: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1321: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1322: data <= 20'h0F056; // SPIWrite [0F0]=56
+            12'd1323: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1324: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1325: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1326: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1327: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1328: data <= 20'h0F057; // SPIWrite [0F0]=57
+            12'd1329: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1330: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1331: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1332: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1333: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1334: data <= 20'h0F058; // SPIWrite [0F0]=58
+            12'd1335: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1336: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1337: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1338: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1339: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1340: data <= 20'h0F059; // SPIWrite [0F0]=59
+            12'd1341: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1342: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1343: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1344: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1345: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1346: data <= 20'h0F05A; // SPIWrite [0F0]=5A
+            12'd1347: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1348: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1349: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1350: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1351: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1352: data <= 20'h0F05B; // SPIWrite [0F0]=5B
+            12'd1353: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1354: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1355: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1356: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1357: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1358: data <= 20'h0F05C; // SPIWrite [0F0]=5C
+            12'd1359: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1360: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1361: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1362: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1363: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1364: data <= 20'h0F05D; // SPIWrite [0F0]=5D
+            12'd1365: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1366: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1367: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1368: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1369: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1370: data <= 20'h0F05E; // SPIWrite [0F0]=5E
+            12'd1371: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1372: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1373: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1374: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1375: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1376: data <= 20'h0F05F; // SPIWrite [0F0]=5F
+            12'd1377: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1378: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1379: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1380: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1381: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1382: data <= 20'h0F060; // SPIWrite [0F0]=60
+            12'd1383: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1384: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1385: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1386: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1387: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1388: data <= 20'h0F061; // SPIWrite [0F0]=61
+            12'd1389: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1390: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1391: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1392: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1393: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1394: data <= 20'h0F062; // SPIWrite [0F0]=62
+            12'd1395: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1396: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1397: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1398: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1399: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1400: data <= 20'h0F063; // SPIWrite [0F0]=63
+            12'd1401: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1402: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1403: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1404: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1405: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1406: data <= 20'h0F064; // SPIWrite [0F0]=64
+            12'd1407: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1408: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1409: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1410: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1411: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1412: data <= 20'h0F065; // SPIWrite [0F0]=65
+            12'd1413: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1414: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1415: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1416: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1417: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1418: data <= 20'h0F066; // SPIWrite [0F0]=66
+            12'd1419: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1420: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1421: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1422: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1423: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1424: data <= 20'h0F067; // SPIWrite [0F0]=67
+            12'd1425: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1426: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1427: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1428: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1429: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1430: data <= 20'h0F068; // SPIWrite [0F0]=68
+            12'd1431: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1432: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1433: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1434: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1435: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1436: data <= 20'h0F069; // SPIWrite [0F0]=69
+            12'd1437: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1438: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1439: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1440: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1441: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1442: data <= 20'h0F06A; // SPIWrite [0F0]=6A
+            12'd1443: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1444: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1445: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1446: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1447: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1448: data <= 20'h0F06B; // SPIWrite [0F0]=6B
+            12'd1449: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1450: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1451: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1452: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1453: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1454: data <= 20'h0F06C; // SPIWrite [0F0]=6C
+            12'd1455: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1456: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1457: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1458: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1459: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1460: data <= 20'h0F06D; // SPIWrite [0F0]=6D
+            12'd1461: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1462: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1463: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1464: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1465: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1466: data <= 20'h0F06E; // SPIWrite [0F0]=6E
+            12'd1467: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1468: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1469: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1470: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1471: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1472: data <= 20'h0F06F; // SPIWrite [0F0]=6F
+            12'd1473: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1474: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1475: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1476: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1477: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1478: data <= 20'h0F070; // SPIWrite [0F0]=70
+            12'd1479: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1480: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1481: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1482: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1483: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1484: data <= 20'h0F071; // SPIWrite [0F0]=71
+            12'd1485: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1486: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1487: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1488: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1489: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1490: data <= 20'h0F072; // SPIWrite [0F0]=72
+            12'd1491: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1492: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1493: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1494: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1495: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1496: data <= 20'h0F073; // SPIWrite [0F0]=73
+            12'd1497: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1498: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1499: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1500: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1501: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1502: data <= 20'h0F074; // SPIWrite [0F0]=74
+            12'd1503: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1504: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1505: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1506: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1507: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1508: data <= 20'h0F075; // SPIWrite [0F0]=75
+            12'd1509: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1510: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1511: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1512: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1513: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1514: data <= 20'h0F076; // SPIWrite [0F0]=76
+            12'd1515: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1516: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1517: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1518: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1519: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1520: data <= 20'h0F077; // SPIWrite [0F0]=77
+            12'd1521: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1522: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1523: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1524: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1525: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1526: data <= 20'h0F078; // SPIWrite [0F0]=78
+            12'd1527: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1528: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1529: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1530: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1531: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1532: data <= 20'h0F079; // SPIWrite [0F0]=79
+            12'd1533: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1534: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1535: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1536: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1537: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1538: data <= 20'h0F07A; // SPIWrite [0F0]=7A
+            12'd1539: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1540: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1541: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1542: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1543: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1544: data <= 20'h0F07B; // SPIWrite [0F0]=7B
+            12'd1545: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1546: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1547: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1548: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1549: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1550: data <= 20'h0F07C; // SPIWrite [0F0]=7C
+            12'd1551: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1552: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1553: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1554: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1555: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1556: data <= 20'h0F07D; // SPIWrite [0F0]=7D
+            12'd1557: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1558: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1559: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1560: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1561: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1562: data <= 20'h0F07E; // SPIWrite [0F0]=7E
+            12'd1563: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1564: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1565: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1566: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1567: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1568: data <= 20'h0F07F; // SPIWrite [0F0]=7F
+            12'd1569: data <= 20'h0F100; // SPIWrite [0F1]=00
+            12'd1570: data <= 20'h0F200; // SPIWrite [0F2]=00
+            12'd1571: data <= 20'h0F55E; // SPIWrite [0F5]=5E
+            12'd1572: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1573: data <= 20'h0F400; // SPIWrite [0F4]=00
+            12'd1574: data <= 20'h0F558; // SPIWrite [0F5]=58, Disable clock to Rx Filter
+            // ************************************************************
+            // Setup the Parallel Port (Digital Data Interface)
+            // ************************************************************
+            12'd1575: data <= 20'h010C8; // SPIWrite [010]=C8, PPORT Config 1
+            12'd1576: data <= 20'h01100; // SPIWrite [011]=00, PPORT Config 2
+            12'd1577: data <= 20'h01210; // SPIWrite [012]=10, PPORT Config 3
+            12'd1578: data <= 20'h0060F; // SPIWrite [006]=0F, PPORT Rx Delay (adjusts Tco Dataclk->Data)
+            12'd1579: data <= 20'h00700; // SPIWrite [007]=00, PPORT TX Delay (adjusts setup/hold FBCLK->Data)
+            12'd1580: data <= 20'h03C21; // SPIWrite [03C]=21, LVDS Settings
+            12'd1581: data <= 20'h03D00; // SPIWrite [03D]=00, LVDS polarity invert
+            12'd1582: data <= 20'h03E00; // SPIWrite [03E]=00, LVDS polarity invert
+            // ************************************************************
+            // Setup AuxDAC
+            // ************************************************************
+            12'd1583: data <= 20'h01800; // SPIWrite [018]=00, AuxDAC1 Word[9:2]
+            12'd1584: data <= 20'h01900; // SPIWrite [019]=00, AuxDAC2 Word[9:2]
+            12'd1585: data <= 20'h01A00; // SPIWrite [01A]=00, AuxDAC1 Config and Word[1:0]
+            12'd1586: data <= 20'h01B00; // SPIWrite [01B]=00, AuxDAC2 Config and Word[1:0]
+            12'd1587: data <= 20'h023FF; // SPIWrite [023]=FF, AuxDAC Manaul/Auto Control
+            12'd1588: data <= 20'h02600; // SPIWrite [026]=00, AuxDAC Manual Select Bit/GPO Manual Select
+            12'd1589: data <= 20'h03000; // SPIWrite [030]=00, AuxDAC1 Rx Delay
+            12'd1590: data <= 20'h03100; // SPIWrite [031]=00, AuxDAC1 Tx Delay
+            12'd1591: data <= 20'h03200; // SPIWrite [032]=00, AuxDAC2 Rx Delay
+            12'd1592: data <= 20'h03300; // SPIWrite [033]=00, AuxDAC2 Tx Delay
+            // ************************************************************
+            // Setup AuxADC
+            // ************************************************************
+            12'd1593: data <= 20'h00B00; // SPIWrite [00B]=00, Temp Sensor Setup (Offset)
+            12'd1594: data <= 20'h00C00; // SPIWrite [00C]=00, Temp Sensor Setup (Temp Window)
+            12'd1595: data <= 20'h00D03; // SPIWrite [00D]=03, Temp Sensor Setup (Periodic Measure)
+            12'd1596: data <= 20'h00F04; // SPIWrite [00F]=04, Temp Sensor Setup (Decimation)
+            12'd1597: data <= 20'h01C10; // SPIWrite [01C]=10, AuxADC Setup (Clock Div)
+            12'd1598: data <= 20'h01D01; // SPIWrite [01D]=01, AuxADC Setup (Decimation/Enable)
+            // ************************************************************
+            // Setup Control Outs
+            // ************************************************************
+            12'd1599: data <= 20'h03500; // SPIWrite [035]=00, Ctrl Out index
+            12'd1600: data <= 20'h036FF; // SPIWrite [036]=FF, Ctrl Out [7:0] output enable
+            // ************************************************************
+            // Setup GPO
+            // ************************************************************
+            12'd1601: data <= 20'h03A27; // SPIWrite [03A]=27, Set number of REFCLK cycles for 1us delay timer
+            12'd1602: data <= 20'h02000; // SPIWrite [020]=00, GPO Auto Enable Setup in RX and TX
+            12'd1603: data <= 20'h02703; // SPIWrite [027]=03, GPO Manual and GPO auto value in ALERT
+            12'd1604: data <= 20'h02800; // SPIWrite [028]=00, GPO_0 RX Delay
+            12'd1605: data <= 20'h02900; // SPIWrite [029]=00, GPO_1 RX Delay
+            12'd1606: data <= 20'h02A00; // SPIWrite [02A]=00, GPO_2 RX Delay
+            12'd1607: data <= 20'h02B00; // SPIWrite [02B]=00, GPO_3 RX Delay
+            12'd1608: data <= 20'h02C00; // SPIWrite [02C]=00, GPO_0 TX Delay
+            12'd1609: data <= 20'h02D00; // SPIWrite [02D]=00, GPO_1 TX Delay
+            12'd1610: data <= 20'h02E00; // SPIWrite [02E]=00, GPO_2 TX Delay
+            12'd1611: data <= 20'h02F00; // SPIWrite [02F]=00, GPO_3 TX Delay
+            12'd1612: data <= 20'h26100; // SPIWrite [261]=00, Set Rx LO Power mode
+            12'd1613: data <= 20'h2A100; // SPIWrite [2A1]=00, Set Tx LO Power mode
+            12'd1614: data <= 20'h2480B; // SPIWrite [248]=0B, Enable Rx VCO LDO
+            12'd1615: data <= 20'h2880B; // SPIWrite [288]=0B, Enable Tx VCO LDO
+            12'd1616: data <= 20'h24602; // SPIWrite [246]=02, Set VCO Power down TCF bits
+            12'd1617: data <= 20'h28602; // SPIWrite [286]=02, Set VCO Power down TCF bits
+            12'd1618: data <= 20'h2498E; // SPIWrite [249]=8E, Set VCO cal length
+            12'd1619: data <= 20'h2898E; // SPIWrite [289]=8E, Set VCO cal length
+            12'd1620: data <= 20'h23B80; // SPIWrite [23B]=80, Enable Rx VCO cal
+            12'd1621: data <= 20'h27B80; // SPIWrite [27B]=80, Enable Tx VCO cal
+            12'd1622: data <= 20'h2430D; // SPIWrite [243]=0D, Set Rx prescaler bias
+            12'd1623: data <= 20'h2830D; // SPIWrite [283]=0D, Set Tx prescaler bias
+            12'd1624: data <= 20'h23D00; // SPIWrite [23D]=00, Clear Half VCO cal clock setting
+            12'd1625: data <= 20'h27D00; // SPIWrite [27D]=00, Clear Half VCO cal clock setting
+            12'd1626: data <= 20'h01504; // SPIWrite [015]=04, Set Dual Synth mode bit
+            12'd1627: data <= 20'h01405; // SPIWrite [014]=05, Set Force ALERT State bit
+            12'd1628: data <= 20'h01301; // SPIWrite [013]=01, Set ENSM FDD mode
+            12'd1629: data <= 20'h40000; // WAIT 1 ms, waits 1 ms
+            12'd1630: data <= 20'h23D04; // SPIWrite [23D]=04, Start RX CP cal
+            12'd1631: data <= 20'h40000; // WAIT 20 ms, WAIT_CALDONE	RXCP,100	, Wait for CP cal to complete, Max RXCP Cal time: 460.800 (us)(Done when 0x244[7]==1)
+            12'd1632: data <= 20'h27D04; // SPIWrite [27D]=04, Start TX CP cal
+            12'd1633: data <= 20'h40000; // WAIT 20 ms, WAIT_CALDONE	TXCP,100	, Wait for CP cal to complete, Max TXCP Cal time: 460.800 (us)(Done when 0x284[7]==1)
+            // ************************************************************
+            // FDD RX/TX Synth Frequency: 800.000000,850.000000 MHz
+            // ************************************************************
+            // ************************************************************
+            // Setup Synthesizer
+            // ************************************************************
+            12'd1634: data <= 20'h23A4A; // SPIWrite [23A]=4A, Set VCO Output level[3:0]
+            12'd1635: data <= 20'h239C3; // SPIWrite [239]=C3, Set Init ALC Value[3:0] and VCO Varactor[3:0]
+            12'd1636: data <= 20'h2421F; // SPIWrite [242]=1F, Set VCO Bias Tcf[1:0] and VCO Bias Ref[2:0]
+            12'd1637: data <= 20'h23878; // SPIWrite [238]=78, Set VCO Cal Offset[3:0]
+            12'd1638: data <= 20'h24500; // SPIWrite [245]=00, Set VCO Cal Ref Tcf[2:0]
+            12'd1639: data <= 20'h2510C; // SPIWrite [251]=0C, Set VCO Varactor Reference[3:0]
+            12'd1640: data <= 20'h25070; // SPIWrite [250]=70, Set VCO Varactor Ref Tcf[2:0] and VCO Varactor Offset[3:0]
+            12'd1641: data <= 20'h23B92; // SPIWrite [23B]=92, Set Synth Loop Filter charge pump current (Icp)
+            12'd1642: data <= 20'h23ED4; // SPIWrite [23E]=D4, Set Synth Loop Filter C2 and C1
+            12'd1643: data <= 20'h23FDF; // SPIWrite [23F]=DF, Set Synth Loop Filter  R1 and C3
+            12'd1644: data <= 20'h24009; // SPIWrite [240]=09, Set Synth Loop Filter R3
+            // ************************************************************
+            // Setup Synthesizer
+            // ************************************************************
+            12'd1645: data <= 20'h27A4A; // SPIWrite [27A]=4A, Set VCO Output level[3:0]
+            12'd1646: data <= 20'h279C1; // SPIWrite [279]=C1, Set Init ALC Value[3:0] and VCO Varactor[3:0]
+            12'd1647: data <= 20'h28217; // SPIWrite [282]=17, Set VCO Bias Tcf[1:0] and VCO Bias Ref[2:0]
+            12'd1648: data <= 20'h27878; // SPIWrite [278]=78, Set VCO Cal Offset[3:0]
+            12'd1649: data <= 20'h28500; // SPIWrite [285]=00, Set VCO Cal Ref Tcf[2:0]
+            12'd1650: data <= 20'h2910E; // SPIWrite [291]=0E, Set VCO Varactor Reference[3:0]
+            12'd1651: data <= 20'h29070; // SPIWrite [290]=70, Set VCO Varactor Ref Tcf[2:0] and VCO Varactor Offset[3:0]
+            12'd1652: data <= 20'h27B98; // SPIWrite [27B]=98, Set Synth Loop Filter charge pump current (Icp)
+            12'd1653: data <= 20'h27ED4; // SPIWrite [27E]=D4, Set Synth Loop Filter C2 and C1
+            12'd1654: data <= 20'h27FDF; // SPIWrite [27F]=DF, Set Synth Loop Filter  R1 and C3
+            12'd1655: data <= 20'h28009; // SPIWrite [280]=09, Set Synth Loop Filter R3
+            12'd1656: data <= 20'h23300; // SPIWrite [233]=00, Write Rx Synth Fractional Freq Word[7:0]
+            12'd1657: data <= 20'h23400; // SPIWrite [234]=00, Write Rx Synth Fractional Freq Word[15:8]
+            12'd1658: data <= 20'h23500; // SPIWrite [235]=00, Write Rx Synth Fractional Freq Word[22:16]
+            12'd1659: data <= 20'h23200; // SPIWrite [232]=00, Write Rx Synth Integer Freq Word[10:8]
+            12'd1660: data <= 20'h23150; // SPIWrite [231]=50, Write Rx Synth Integer Freq Word[7:0]
+            12'd1661: data <= 20'h00522; // SPIWrite [005]=22, Set LO divider setting
+            12'd1662: data <= 20'h27300; // SPIWrite [273]=00, Write Tx Synth Fractional Freq Word[7:0]
+            12'd1663: data <= 20'h27400; // SPIWrite [274]=00, Write Tx Synth Fractional Freq Word[15:8]
+            12'd1664: data <= 20'h27500; // SPIWrite [275]=00, Write Tx Synth Fractional Freq Word[22:16]
+            12'd1665: data <= 20'h27200; // SPIWrite [272]=00, Write Tx Synth Integer Freq Word[10:8]
+            12'd1666: data <= 20'h27150; // SPIWrite [271]=50, Write Tx Synth Integer Freq Word[7:0] (starts VCO cal)
+            12'd1667: data <= 20'h00522; // SPIWrite [005]=22, Set LO divider setting
+            // ************************************************************
+            // Program Mixer GM Sub-table
+            // ************************************************************
+            12'd1668: data <= 20'h13F02; // SPIWrite [13F]=02, Start Clock
+            12'd1669: data <= 20'h1380F; // SPIWrite [138]=0F, Addr Table Index
+            12'd1670: data <= 20'h13978; // SPIWrite [139]=78, Gain
+            12'd1671: data <= 20'h13A00; // SPIWrite [13A]=00, Bias
+            12'd1672: data <= 20'h13B00; // SPIWrite [13B]=00, GM
+            12'd1673: data <= 20'h13F06; // SPIWrite [13F]=06, Write Words
+            12'd1674: data <= 20'h13C00; // SPIWrite [13C]=00, Delay for 3 ADCCLK/16 clock cycles (Dummy Write)
+            12'd1675: data <= 20'h13C00; // SPIWrite [13C]=00, Delay ~1us (Dummy Write)
+            12'd1676: data <= 20'h1380E; // SPIWrite [138]=0E, Addr Table Index
+            12'd1677: data <= 20'h13974; // SPIWrite [139]=74, Gain
+            12'd1678: data <= 20'h13A00; // SPIWrite [13A]=00, Bias
+            12'd1679: data <= 20'h13B0D; // SPIWrite [13B]=0D, GM
+            12'd1680: data <= 20'h13F06; // SPIWrite [13F]=06, Write Words
+            12'd1681: data <= 20'h13C00; // SPIWrite [13C]=00, Delay for 3 ADCCLK/16 clock cycles (Dummy Write)
+            12'd1682: data <= 20'h13C00; // SPIWrite [13C]=00, Delay ~1us (Dummy Write)
+            12'd1683: data <= 20'h1380D; // SPIWrite [138]=0D, Addr Table Index
+            12'd1684: data <= 20'h13970; // SPIWrite [139]=70, Gain
+            12'd1685: data <= 20'h13A00; // SPIWrite [13A]=00, Bias
+            12'd1686: data <= 20'h13B15; // SPIWrite [13B]=15, GM
+            12'd1687: data <= 20'h13F06; // SPIWrite [13F]=06, Write Words
+            12'd1688: data <= 20'h13C00; // SPIWrite [13C]=00, Delay for 3 ADCCLK/16 clock cycles (Dummy Write)
+            12'd1689: data <= 20'h13C00; // SPIWrite [13C]=00, Delay ~1us (Dummy Write)
+            12'd1690: data <= 20'h1380C; // SPIWrite [138]=0C, Addr Table Index
+            12'd1691: data <= 20'h1396C; // SPIWrite [139]=6C, Gain
+            12'd1692: data <= 20'h13A00; // SPIWrite [13A]=00, Bias
+            12'd1693: data <= 20'h13B1B; // SPIWrite [13B]=1B, GM
+            12'd1694: data <= 20'h13F06; // SPIWrite [13F]=06, Write Words
+            12'd1695: data <= 20'h13C00; // SPIWrite [13C]=00, Delay for 3 ADCCLK/16 clock cycles (Dummy Write)
+            12'd1696: data <= 20'h13C00; // SPIWrite [13C]=00, Delay ~1us (Dummy Write)
+            12'd1697: data <= 20'h1380B; // SPIWrite [138]=0B, Addr Table Index
+            12'd1698: data <= 20'h13968; // SPIWrite [139]=68, Gain
+            12'd1699: data <= 20'h13A00; // SPIWrite [13A]=00, Bias
+            12'd1700: data <= 20'h13B21; // SPIWrite [13B]=21, GM
+            12'd1701: data <= 20'h13F06; // SPIWrite [13F]=06, Write Words
+            12'd1702: data <= 20'h13C00; // SPIWrite [13C]=00, Delay for 3 ADCCLK/16 clock cycles (Dummy Write)
+            12'd1703: data <= 20'h13C00; // SPIWrite [13C]=00, Delay ~1us (Dummy Write)
+            12'd1704: data <= 20'h1380A; // SPIWrite [138]=0A, Addr Table Index
+            12'd1705: data <= 20'h13964; // SPIWrite [139]=64, Gain
+            12'd1706: data <= 20'h13A00; // SPIWrite [13A]=00, Bias
+            12'd1707: data <= 20'h13B25; // SPIWrite [13B]=25, GM
+            12'd1708: data <= 20'h13F06; // SPIWrite [13F]=06, Write Words
+            12'd1709: data <= 20'h13C00; // SPIWrite [13C]=00, Delay for 3 ADCCLK/16 clock cycles (Dummy Write)
+            12'd1710: data <= 20'h13C00; // SPIWrite [13C]=00, Delay ~1us (Dummy Write)
+            12'd1711: data <= 20'h13809; // SPIWrite [138]=09, Addr Table Index
+            12'd1712: data <= 20'h13960; // SPIWrite [139]=60, Gain
+            12'd1713: data <= 20'h13A00; // SPIWrite [13A]=00, Bias
+            12'd1714: data <= 20'h13B29; // SPIWrite [13B]=29, GM
+            12'd1715: data <= 20'h13F06; // SPIWrite [13F]=06, Write Words
+            12'd1716: data <= 20'h13C00; // SPIWrite [13C]=00, Delay for 3 ADCCLK/16 clock cycles (Dummy Write)
+            12'd1717: data <= 20'h13C00; // SPIWrite [13C]=00, Delay ~1us (Dummy Write)
+            12'd1718: data <= 20'h13808; // SPIWrite [138]=08, Addr Table Index
+            12'd1719: data <= 20'h1395C; // SPIWrite [139]=5C, Gain
+            12'd1720: data <= 20'h13A00; // SPIWrite [13A]=00, Bias
+            12'd1721: data <= 20'h13B2C; // SPIWrite [13B]=2C, GM
+            12'd1722: data <= 20'h13F06; // SPIWrite [13F]=06, Write Words
+            12'd1723: data <= 20'h13C00; // SPIWrite [13C]=00, Delay for 3 ADCCLK/16 clock cycles (Dummy Write)
+            12'd1724: data <= 20'h13C00; // SPIWrite [13C]=00, Delay ~1us (Dummy Write)
+            12'd1725: data <= 20'h13807; // SPIWrite [138]=07, Addr Table Index
+            12'd1726: data <= 20'h13958; // SPIWrite [139]=58, Gain
+            12'd1727: data <= 20'h13A00; // SPIWrite [13A]=00, Bias
+            12'd1728: data <= 20'h13B2F; // SPIWrite [13B]=2F, GM
+            12'd1729: data <= 20'h13F06; // SPIWrite [13F]=06, Write Words
+            12'd1730: data <= 20'h13C00; // SPIWrite [13C]=00, Delay for 3 ADCCLK/16 clock cycles (Dummy Write)
+            12'd1731: data <= 20'h13C00; // SPIWrite [13C]=00, Delay ~1us (Dummy Write)
+            12'd1732: data <= 20'h13806; // SPIWrite [138]=06, Addr Table Index
+            12'd1733: data <= 20'h13954; // SPIWrite [139]=54, Gain
+            12'd1734: data <= 20'h13A00; // SPIWrite [13A]=00, Bias
+            12'd1735: data <= 20'h13B31; // SPIWrite [13B]=31, GM
+            12'd1736: data <= 20'h13F06; // SPIWrite [13F]=06, Write Words
+            12'd1737: data <= 20'h13C00; // SPIWrite [13C]=00, Delay for 3 ADCCLK/16 clock cycles (Dummy Write)
+            12'd1738: data <= 20'h13C00; // SPIWrite [13C]=00, Delay ~1us (Dummy Write)
+            12'd1739: data <= 20'h13805; // SPIWrite [138]=05, Addr Table Index
+            12'd1740: data <= 20'h13950; // SPIWrite [139]=50, Gain
+            12'd1741: data <= 20'h13A00; // SPIWrite [13A]=00, Bias
+            12'd1742: data <= 20'h13B33; // SPIWrite [13B]=33, GM
+            12'd1743: data <= 20'h13F06; // SPIWrite [13F]=06, Write Words
+            12'd1744: data <= 20'h13C00; // SPIWrite [13C]=00, Delay for 3 ADCCLK/16 clock cycles (Dummy Write)
+            12'd1745: data <= 20'h13C00; // SPIWrite [13C]=00, Delay ~1us (Dummy Write)
+            12'd1746: data <= 20'h13804; // SPIWrite [138]=04, Addr Table Index
+            12'd1747: data <= 20'h1394C; // SPIWrite [139]=4C, Gain
+            12'd1748: data <= 20'h13A00; // SPIWrite [13A]=00, Bias
+            12'd1749: data <= 20'h13B34; // SPIWrite [13B]=34, GM
+            12'd1750: data <= 20'h13F06; // SPIWrite [13F]=06, Write Words
+            12'd1751: data <= 20'h13C00; // SPIWrite [13C]=00, Delay for 3 ADCCLK/16 clock cycles (Dummy Write)
+            12'd1752: data <= 20'h13C00; // SPIWrite [13C]=00, Delay ~1us (Dummy Write)
+            12'd1753: data <= 20'h13803; // SPIWrite [138]=03, Addr Table Index
+            12'd1754: data <= 20'h13948; // SPIWrite [139]=48, Gain
+            12'd1755: data <= 20'h13A00; // SPIWrite [13A]=00, Bias
+            12'd1756: data <= 20'h13B35; // SPIWrite [13B]=35, GM
+            12'd1757: data <= 20'h13F06; // SPIWrite [13F]=06, Write Words
+            12'd1758: data <= 20'h13C00; // SPIWrite [13C]=00, Delay for 3 ADCCLK/16 clock cycles (Dummy Write)
+            12'd1759: data <= 20'h13C00; // SPIWrite [13C]=00, Delay ~1us (Dummy Write)
+            12'd1760: data <= 20'h13802; // SPIWrite [138]=02, Addr Table Index
+            12'd1761: data <= 20'h13930; // SPIWrite [139]=30, Gain
+            12'd1762: data <= 20'h13A00; // SPIWrite [13A]=00, Bias
+            12'd1763: data <= 20'h13B3A; // SPIWrite [13B]=3A, GM
+            12'd1764: data <= 20'h13F06; // SPIWrite [13F]=06, Write Words
+            12'd1765: data <= 20'h13C00; // SPIWrite [13C]=00, Delay for 3 ADCCLK/16 clock cycles (Dummy Write)
+            12'd1766: data <= 20'h13C00; // SPIWrite [13C]=00, Delay ~1us (Dummy Write)
+            12'd1767: data <= 20'h13801; // SPIWrite [138]=01, Addr Table Index
+            12'd1768: data <= 20'h13918; // SPIWrite [139]=18, Gain
+            12'd1769: data <= 20'h13A00; // SPIWrite [13A]=00, Bias
+            12'd1770: data <= 20'h13B3D; // SPIWrite [13B]=3D, GM
+            12'd1771: data <= 20'h13F06; // SPIWrite [13F]=06, Write Words
+            12'd1772: data <= 20'h13C00; // SPIWrite [13C]=00, Delay for 3 ADCCLK/16 clock cycles (Dummy Write)
+            12'd1773: data <= 20'h13C00; // SPIWrite [13C]=00, Delay ~1us (Dummy Write)
+            12'd1774: data <= 20'h13800; // SPIWrite [138]=00, Addr Table Index
+            12'd1775: data <= 20'h13900; // SPIWrite [139]=00, Gain
+            12'd1776: data <= 20'h13A00; // SPIWrite [13A]=00, Bias
+            12'd1777: data <= 20'h13B3E; // SPIWrite [13B]=3E, GM
+            12'd1778: data <= 20'h13F06; // SPIWrite [13F]=06, Write Words
+            12'd1779: data <= 20'h13C00; // SPIWrite [13C]=00, Delay for 3 ADCCLK/16 clock cycles (Dummy Write)
+            12'd1780: data <= 20'h13C00; // SPIWrite [13C]=00, Delay ~1us (Dummy Write)
+            12'd1781: data <= 20'h13F02; // SPIWrite [13F]=02, Clear Write Bit
+            12'd1782: data <= 20'h13C00; // SPIWrite [13C]=00, Delay for 3 ADCCLK/16 clock cycles (Dummy Write)
+            12'd1783: data <= 20'h13C00; // SPIWrite [13C]=00, Delay ~1us (Dummy Write)
+            12'd1784: data <= 20'h13F00; // SPIWrite [13F]=00, Stop Clock
+            // ************************************************************
+            // Program Rx Gain Tables with GainTable800MHz.csv
+            // ************************************************************
+            12'd1785: data <= 20'h1371A; // SPIWrite [137]=1A, Start Gain Table Clock
+            12'd1786: data <= 20'h13000; // SPIWrite [130]=00, Gain Table Index
+            12'd1787: data <= 20'h13100; // SPIWrite [131]=00, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd1788: data <= 20'h13200; // SPIWrite [132]=00, TIA & LPF Word
+            12'd1789: data <= 20'h13320; // SPIWrite [133]=20, DC Cal bit & Dig Gain Word
+            12'd1790: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd1791: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd1792: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd1793: data <= 20'h13001; // SPIWrite [130]=01, Gain Table Index
+            12'd1794: data <= 20'h13100; // SPIWrite [131]=00, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd1795: data <= 20'h13200; // SPIWrite [132]=00, TIA & LPF Word
+            12'd1796: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd1797: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd1798: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd1799: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd1800: data <= 20'h13002; // SPIWrite [130]=02, Gain Table Index
+            12'd1801: data <= 20'h13100; // SPIWrite [131]=00, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd1802: data <= 20'h13200; // SPIWrite [132]=00, TIA & LPF Word
+            12'd1803: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd1804: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd1805: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd1806: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd1807: data <= 20'h13003; // SPIWrite [130]=03, Gain Table Index
+            12'd1808: data <= 20'h13100; // SPIWrite [131]=00, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd1809: data <= 20'h13201; // SPIWrite [132]=01, TIA & LPF Word
+            12'd1810: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd1811: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd1812: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd1813: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd1814: data <= 20'h13004; // SPIWrite [130]=04, Gain Table Index
+            12'd1815: data <= 20'h13100; // SPIWrite [131]=00, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd1816: data <= 20'h13202; // SPIWrite [132]=02, TIA & LPF Word
+            12'd1817: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd1818: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd1819: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd1820: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd1821: data <= 20'h13005; // SPIWrite [130]=05, Gain Table Index
+            12'd1822: data <= 20'h13100; // SPIWrite [131]=00, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd1823: data <= 20'h13203; // SPIWrite [132]=03, TIA & LPF Word
+            12'd1824: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd1825: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd1826: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd1827: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd1828: data <= 20'h13006; // SPIWrite [130]=06, Gain Table Index
+            12'd1829: data <= 20'h13100; // SPIWrite [131]=00, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd1830: data <= 20'h13204; // SPIWrite [132]=04, TIA & LPF Word
+            12'd1831: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd1832: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd1833: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd1834: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd1835: data <= 20'h13007; // SPIWrite [130]=07, Gain Table Index
+            12'd1836: data <= 20'h13100; // SPIWrite [131]=00, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd1837: data <= 20'h13205; // SPIWrite [132]=05, TIA & LPF Word
+            12'd1838: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd1839: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd1840: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd1841: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd1842: data <= 20'h13008; // SPIWrite [130]=08, Gain Table Index
+            12'd1843: data <= 20'h13101; // SPIWrite [131]=01, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd1844: data <= 20'h13203; // SPIWrite [132]=03, TIA & LPF Word
+            12'd1845: data <= 20'h13320; // SPIWrite [133]=20, DC Cal bit & Dig Gain Word
+            12'd1846: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd1847: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd1848: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd1849: data <= 20'h13009; // SPIWrite [130]=09, Gain Table Index
+            12'd1850: data <= 20'h13101; // SPIWrite [131]=01, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd1851: data <= 20'h13204; // SPIWrite [132]=04, TIA & LPF Word
+            12'd1852: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd1853: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd1854: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd1855: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd1856: data <= 20'h1300A; // SPIWrite [130]=0A, Gain Table Index
+            12'd1857: data <= 20'h13101; // SPIWrite [131]=01, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd1858: data <= 20'h13205; // SPIWrite [132]=05, TIA & LPF Word
+            12'd1859: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd1860: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd1861: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd1862: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd1863: data <= 20'h1300B; // SPIWrite [130]=0B, Gain Table Index
+            12'd1864: data <= 20'h13101; // SPIWrite [131]=01, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd1865: data <= 20'h13206; // SPIWrite [132]=06, TIA & LPF Word
+            12'd1866: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd1867: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd1868: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd1869: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd1870: data <= 20'h1300C; // SPIWrite [130]=0C, Gain Table Index
+            12'd1871: data <= 20'h13101; // SPIWrite [131]=01, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd1872: data <= 20'h13207; // SPIWrite [132]=07, TIA & LPF Word
+            12'd1873: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd1874: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd1875: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd1876: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd1877: data <= 20'h1300D; // SPIWrite [130]=0D, Gain Table Index
+            12'd1878: data <= 20'h13101; // SPIWrite [131]=01, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd1879: data <= 20'h13208; // SPIWrite [132]=08, TIA & LPF Word
+            12'd1880: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd1881: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd1882: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd1883: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd1884: data <= 20'h1300E; // SPIWrite [130]=0E, Gain Table Index
+            12'd1885: data <= 20'h13101; // SPIWrite [131]=01, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd1886: data <= 20'h13209; // SPIWrite [132]=09, TIA & LPF Word
+            12'd1887: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd1888: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd1889: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd1890: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd1891: data <= 20'h1300F; // SPIWrite [130]=0F, Gain Table Index
+            12'd1892: data <= 20'h13101; // SPIWrite [131]=01, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd1893: data <= 20'h1320A; // SPIWrite [132]=0A, TIA & LPF Word
+            12'd1894: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd1895: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd1896: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd1897: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd1898: data <= 20'h13010; // SPIWrite [130]=10, Gain Table Index
+            12'd1899: data <= 20'h13101; // SPIWrite [131]=01, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd1900: data <= 20'h1320B; // SPIWrite [132]=0B, TIA & LPF Word
+            12'd1901: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd1902: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd1903: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd1904: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd1905: data <= 20'h13011; // SPIWrite [130]=11, Gain Table Index
+            12'd1906: data <= 20'h13101; // SPIWrite [131]=01, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd1907: data <= 20'h1320C; // SPIWrite [132]=0C, TIA & LPF Word
+            12'd1908: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd1909: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd1910: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd1911: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd1912: data <= 20'h13012; // SPIWrite [130]=12, Gain Table Index
+            12'd1913: data <= 20'h13101; // SPIWrite [131]=01, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd1914: data <= 20'h1320D; // SPIWrite [132]=0D, TIA & LPF Word
+            12'd1915: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd1916: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd1917: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd1918: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd1919: data <= 20'h13013; // SPIWrite [130]=13, Gain Table Index
+            12'd1920: data <= 20'h13101; // SPIWrite [131]=01, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd1921: data <= 20'h1320E; // SPIWrite [132]=0E, TIA & LPF Word
+            12'd1922: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd1923: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd1924: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd1925: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd1926: data <= 20'h13014; // SPIWrite [130]=14, Gain Table Index
+            12'd1927: data <= 20'h13102; // SPIWrite [131]=02, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd1928: data <= 20'h13209; // SPIWrite [132]=09, TIA & LPF Word
+            12'd1929: data <= 20'h13320; // SPIWrite [133]=20, DC Cal bit & Dig Gain Word
+            12'd1930: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd1931: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd1932: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd1933: data <= 20'h13015; // SPIWrite [130]=15, Gain Table Index
+            12'd1934: data <= 20'h13102; // SPIWrite [131]=02, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd1935: data <= 20'h1320A; // SPIWrite [132]=0A, TIA & LPF Word
+            12'd1936: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd1937: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd1938: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd1939: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd1940: data <= 20'h13016; // SPIWrite [130]=16, Gain Table Index
+            12'd1941: data <= 20'h13102; // SPIWrite [131]=02, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd1942: data <= 20'h1320B; // SPIWrite [132]=0B, TIA & LPF Word
+            12'd1943: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd1944: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd1945: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd1946: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd1947: data <= 20'h13017; // SPIWrite [130]=17, Gain Table Index
+            12'd1948: data <= 20'h13102; // SPIWrite [131]=02, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd1949: data <= 20'h1320C; // SPIWrite [132]=0C, TIA & LPF Word
+            12'd1950: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd1951: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd1952: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd1953: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd1954: data <= 20'h13018; // SPIWrite [130]=18, Gain Table Index
+            12'd1955: data <= 20'h13102; // SPIWrite [131]=02, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd1956: data <= 20'h1320D; // SPIWrite [132]=0D, TIA & LPF Word
+            12'd1957: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd1958: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd1959: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd1960: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd1961: data <= 20'h13019; // SPIWrite [130]=19, Gain Table Index
+            12'd1962: data <= 20'h13102; // SPIWrite [131]=02, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd1963: data <= 20'h1320E; // SPIWrite [132]=0E, TIA & LPF Word
+            12'd1964: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd1965: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd1966: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd1967: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd1968: data <= 20'h1301A; // SPIWrite [130]=1A, Gain Table Index
+            12'd1969: data <= 20'h13102; // SPIWrite [131]=02, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd1970: data <= 20'h1320F; // SPIWrite [132]=0F, TIA & LPF Word
+            12'd1971: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd1972: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd1973: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd1974: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd1975: data <= 20'h1301B; // SPIWrite [130]=1B, Gain Table Index
+            12'd1976: data <= 20'h13102; // SPIWrite [131]=02, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd1977: data <= 20'h13210; // SPIWrite [132]=10, TIA & LPF Word
+            12'd1978: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd1979: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd1980: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd1981: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd1982: data <= 20'h1301C; // SPIWrite [130]=1C, Gain Table Index
+            12'd1983: data <= 20'h13102; // SPIWrite [131]=02, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd1984: data <= 20'h1322B; // SPIWrite [132]=2B, TIA & LPF Word
+            12'd1985: data <= 20'h13320; // SPIWrite [133]=20, DC Cal bit & Dig Gain Word
+            12'd1986: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd1987: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd1988: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd1989: data <= 20'h1301D; // SPIWrite [130]=1D, Gain Table Index
+            12'd1990: data <= 20'h13102; // SPIWrite [131]=02, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd1991: data <= 20'h1322C; // SPIWrite [132]=2C, TIA & LPF Word
+            12'd1992: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd1993: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd1994: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd1995: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd1996: data <= 20'h1301E; // SPIWrite [130]=1E, Gain Table Index
+            12'd1997: data <= 20'h13104; // SPIWrite [131]=04, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd1998: data <= 20'h13227; // SPIWrite [132]=27, TIA & LPF Word
+            12'd1999: data <= 20'h13320; // SPIWrite [133]=20, DC Cal bit & Dig Gain Word
+            12'd2000: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2001: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2002: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2003: data <= 20'h1301F; // SPIWrite [130]=1F, Gain Table Index
+            12'd2004: data <= 20'h13104; // SPIWrite [131]=04, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2005: data <= 20'h13228; // SPIWrite [132]=28, TIA & LPF Word
+            12'd2006: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2007: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2008: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2009: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2010: data <= 20'h13020; // SPIWrite [130]=20, Gain Table Index
+            12'd2011: data <= 20'h13104; // SPIWrite [131]=04, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2012: data <= 20'h13229; // SPIWrite [132]=29, TIA & LPF Word
+            12'd2013: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2014: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2015: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2016: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2017: data <= 20'h13021; // SPIWrite [130]=21, Gain Table Index
+            12'd2018: data <= 20'h13104; // SPIWrite [131]=04, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2019: data <= 20'h1322A; // SPIWrite [132]=2A, TIA & LPF Word
+            12'd2020: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2021: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2022: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2023: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2024: data <= 20'h13022; // SPIWrite [130]=22, Gain Table Index
+            12'd2025: data <= 20'h13104; // SPIWrite [131]=04, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2026: data <= 20'h1322B; // SPIWrite [132]=2B, TIA & LPF Word
+            12'd2027: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2028: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2029: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2030: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2031: data <= 20'h13023; // SPIWrite [130]=23, Gain Table Index
+            12'd2032: data <= 20'h13124; // SPIWrite [131]=24, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2033: data <= 20'h13221; // SPIWrite [132]=21, TIA & LPF Word
+            12'd2034: data <= 20'h13320; // SPIWrite [133]=20, DC Cal bit & Dig Gain Word
+            12'd2035: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2036: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2037: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2038: data <= 20'h13024; // SPIWrite [130]=24, Gain Table Index
+            12'd2039: data <= 20'h13124; // SPIWrite [131]=24, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2040: data <= 20'h13222; // SPIWrite [132]=22, TIA & LPF Word
+            12'd2041: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2042: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2043: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2044: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2045: data <= 20'h13025; // SPIWrite [130]=25, Gain Table Index
+            12'd2046: data <= 20'h13144; // SPIWrite [131]=44, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2047: data <= 20'h13220; // SPIWrite [132]=20, TIA & LPF Word
+            12'd2048: data <= 20'h13320; // SPIWrite [133]=20, DC Cal bit & Dig Gain Word
+            12'd2049: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2050: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2051: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2052: data <= 20'h13026; // SPIWrite [130]=26, Gain Table Index
+            12'd2053: data <= 20'h13144; // SPIWrite [131]=44, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2054: data <= 20'h13221; // SPIWrite [132]=21, TIA & LPF Word
+            12'd2055: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2056: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2057: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2058: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2059: data <= 20'h13027; // SPIWrite [130]=27, Gain Table Index
+            12'd2060: data <= 20'h13144; // SPIWrite [131]=44, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2061: data <= 20'h13222; // SPIWrite [132]=22, TIA & LPF Word
+            12'd2062: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2063: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2064: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2065: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2066: data <= 20'h13028; // SPIWrite [130]=28, Gain Table Index
+            12'd2067: data <= 20'h13144; // SPIWrite [131]=44, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2068: data <= 20'h13223; // SPIWrite [132]=23, TIA & LPF Word
+            12'd2069: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2070: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2071: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2072: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2073: data <= 20'h13029; // SPIWrite [130]=29, Gain Table Index
+            12'd2074: data <= 20'h13144; // SPIWrite [131]=44, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2075: data <= 20'h13224; // SPIWrite [132]=24, TIA & LPF Word
+            12'd2076: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2077: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2078: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2079: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2080: data <= 20'h1302A; // SPIWrite [130]=2A, Gain Table Index
+            12'd2081: data <= 20'h13144; // SPIWrite [131]=44, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2082: data <= 20'h13225; // SPIWrite [132]=25, TIA & LPF Word
+            12'd2083: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2084: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2085: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2086: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2087: data <= 20'h1302B; // SPIWrite [130]=2B, Gain Table Index
+            12'd2088: data <= 20'h13144; // SPIWrite [131]=44, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2089: data <= 20'h13226; // SPIWrite [132]=26, TIA & LPF Word
+            12'd2090: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2091: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2092: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2093: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2094: data <= 20'h1302C; // SPIWrite [130]=2C, Gain Table Index
+            12'd2095: data <= 20'h13144; // SPIWrite [131]=44, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2096: data <= 20'h13227; // SPIWrite [132]=27, TIA & LPF Word
+            12'd2097: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2098: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2099: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2100: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2101: data <= 20'h1302D; // SPIWrite [130]=2D, Gain Table Index
+            12'd2102: data <= 20'h13144; // SPIWrite [131]=44, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2103: data <= 20'h13228; // SPIWrite [132]=28, TIA & LPF Word
+            12'd2104: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2105: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2106: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2107: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2108: data <= 20'h1302E; // SPIWrite [130]=2E, Gain Table Index
+            12'd2109: data <= 20'h13144; // SPIWrite [131]=44, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2110: data <= 20'h13229; // SPIWrite [132]=29, TIA & LPF Word
+            12'd2111: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2112: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2113: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2114: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2115: data <= 20'h1302F; // SPIWrite [130]=2F, Gain Table Index
+            12'd2116: data <= 20'h13144; // SPIWrite [131]=44, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2117: data <= 20'h1322A; // SPIWrite [132]=2A, TIA & LPF Word
+            12'd2118: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2119: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2120: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2121: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2122: data <= 20'h13030; // SPIWrite [130]=30, Gain Table Index
+            12'd2123: data <= 20'h13144; // SPIWrite [131]=44, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2124: data <= 20'h1322B; // SPIWrite [132]=2B, TIA & LPF Word
+            12'd2125: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2126: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2127: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2128: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2129: data <= 20'h13031; // SPIWrite [130]=31, Gain Table Index
+            12'd2130: data <= 20'h13144; // SPIWrite [131]=44, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2131: data <= 20'h1322C; // SPIWrite [132]=2C, TIA & LPF Word
+            12'd2132: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2133: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2134: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2135: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2136: data <= 20'h13032; // SPIWrite [130]=32, Gain Table Index
+            12'd2137: data <= 20'h13144; // SPIWrite [131]=44, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2138: data <= 20'h1322D; // SPIWrite [132]=2D, TIA & LPF Word
+            12'd2139: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2140: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2141: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2142: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2143: data <= 20'h13033; // SPIWrite [130]=33, Gain Table Index
+            12'd2144: data <= 20'h13144; // SPIWrite [131]=44, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2145: data <= 20'h1322E; // SPIWrite [132]=2E, TIA & LPF Word
+            12'd2146: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2147: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2148: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2149: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2150: data <= 20'h13034; // SPIWrite [130]=34, Gain Table Index
+            12'd2151: data <= 20'h13144; // SPIWrite [131]=44, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2152: data <= 20'h1322F; // SPIWrite [132]=2F, TIA & LPF Word
+            12'd2153: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2154: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2155: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2156: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2157: data <= 20'h13035; // SPIWrite [130]=35, Gain Table Index
+            12'd2158: data <= 20'h13144; // SPIWrite [131]=44, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2159: data <= 20'h13230; // SPIWrite [132]=30, TIA & LPF Word
+            12'd2160: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2161: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2162: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2163: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2164: data <= 20'h13036; // SPIWrite [130]=36, Gain Table Index
+            12'd2165: data <= 20'h13144; // SPIWrite [131]=44, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2166: data <= 20'h13231; // SPIWrite [132]=31, TIA & LPF Word
+            12'd2167: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2168: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2169: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2170: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2171: data <= 20'h13037; // SPIWrite [130]=37, Gain Table Index
+            12'd2172: data <= 20'h13164; // SPIWrite [131]=64, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2173: data <= 20'h1322E; // SPIWrite [132]=2E, TIA & LPF Word
+            12'd2174: data <= 20'h13320; // SPIWrite [133]=20, DC Cal bit & Dig Gain Word
+            12'd2175: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2176: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2177: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2178: data <= 20'h13038; // SPIWrite [130]=38, Gain Table Index
+            12'd2179: data <= 20'h13164; // SPIWrite [131]=64, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2180: data <= 20'h1322F; // SPIWrite [132]=2F, TIA & LPF Word
+            12'd2181: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2182: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2183: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2184: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2185: data <= 20'h13039; // SPIWrite [130]=39, Gain Table Index
+            12'd2186: data <= 20'h13164; // SPIWrite [131]=64, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2187: data <= 20'h13230; // SPIWrite [132]=30, TIA & LPF Word
+            12'd2188: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2189: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2190: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2191: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2192: data <= 20'h1303A; // SPIWrite [130]=3A, Gain Table Index
+            12'd2193: data <= 20'h13164; // SPIWrite [131]=64, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2194: data <= 20'h13231; // SPIWrite [132]=31, TIA & LPF Word
+            12'd2195: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2196: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2197: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2198: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2199: data <= 20'h1303B; // SPIWrite [130]=3B, Gain Table Index
+            12'd2200: data <= 20'h13164; // SPIWrite [131]=64, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2201: data <= 20'h13232; // SPIWrite [132]=32, TIA & LPF Word
+            12'd2202: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2203: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2204: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2205: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2206: data <= 20'h1303C; // SPIWrite [130]=3C, Gain Table Index
+            12'd2207: data <= 20'h13164; // SPIWrite [131]=64, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2208: data <= 20'h13233; // SPIWrite [132]=33, TIA & LPF Word
+            12'd2209: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2210: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2211: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2212: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2213: data <= 20'h1303D; // SPIWrite [130]=3D, Gain Table Index
+            12'd2214: data <= 20'h13164; // SPIWrite [131]=64, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2215: data <= 20'h13234; // SPIWrite [132]=34, TIA & LPF Word
+            12'd2216: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2217: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2218: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2219: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2220: data <= 20'h1303E; // SPIWrite [130]=3E, Gain Table Index
+            12'd2221: data <= 20'h13164; // SPIWrite [131]=64, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2222: data <= 20'h13235; // SPIWrite [132]=35, TIA & LPF Word
+            12'd2223: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2224: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2225: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2226: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2227: data <= 20'h1303F; // SPIWrite [130]=3F, Gain Table Index
+            12'd2228: data <= 20'h13164; // SPIWrite [131]=64, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2229: data <= 20'h13236; // SPIWrite [132]=36, TIA & LPF Word
+            12'd2230: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2231: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2232: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2233: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2234: data <= 20'h13040; // SPIWrite [130]=40, Gain Table Index
+            12'd2235: data <= 20'h13164; // SPIWrite [131]=64, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2236: data <= 20'h13237; // SPIWrite [132]=37, TIA & LPF Word
+            12'd2237: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2238: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2239: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2240: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2241: data <= 20'h13041; // SPIWrite [130]=41, Gain Table Index
+            12'd2242: data <= 20'h13164; // SPIWrite [131]=64, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2243: data <= 20'h13238; // SPIWrite [132]=38, TIA & LPF Word
+            12'd2244: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2245: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2246: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2247: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2248: data <= 20'h13042; // SPIWrite [130]=42, Gain Table Index
+            12'd2249: data <= 20'h13165; // SPIWrite [131]=65, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2250: data <= 20'h13238; // SPIWrite [132]=38, TIA & LPF Word
+            12'd2251: data <= 20'h13320; // SPIWrite [133]=20, DC Cal bit & Dig Gain Word
+            12'd2252: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2253: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2254: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2255: data <= 20'h13043; // SPIWrite [130]=43, Gain Table Index
+            12'd2256: data <= 20'h13166; // SPIWrite [131]=66, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2257: data <= 20'h13238; // SPIWrite [132]=38, TIA & LPF Word
+            12'd2258: data <= 20'h13320; // SPIWrite [133]=20, DC Cal bit & Dig Gain Word
+            12'd2259: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2260: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2261: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2262: data <= 20'h13044; // SPIWrite [130]=44, Gain Table Index
+            12'd2263: data <= 20'h13167; // SPIWrite [131]=67, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2264: data <= 20'h13238; // SPIWrite [132]=38, TIA & LPF Word
+            12'd2265: data <= 20'h13320; // SPIWrite [133]=20, DC Cal bit & Dig Gain Word
+            12'd2266: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2267: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2268: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2269: data <= 20'h13045; // SPIWrite [130]=45, Gain Table Index
+            12'd2270: data <= 20'h13168; // SPIWrite [131]=68, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2271: data <= 20'h13238; // SPIWrite [132]=38, TIA & LPF Word
+            12'd2272: data <= 20'h13320; // SPIWrite [133]=20, DC Cal bit & Dig Gain Word
+            12'd2273: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2274: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2275: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2276: data <= 20'h13046; // SPIWrite [130]=46, Gain Table Index
+            12'd2277: data <= 20'h13169; // SPIWrite [131]=69, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2278: data <= 20'h13238; // SPIWrite [132]=38, TIA & LPF Word
+            12'd2279: data <= 20'h13320; // SPIWrite [133]=20, DC Cal bit & Dig Gain Word
+            12'd2280: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2281: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2282: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2283: data <= 20'h13047; // SPIWrite [130]=47, Gain Table Index
+            12'd2284: data <= 20'h1316A; // SPIWrite [131]=6A, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2285: data <= 20'h13238; // SPIWrite [132]=38, TIA & LPF Word
+            12'd2286: data <= 20'h13320; // SPIWrite [133]=20, DC Cal bit & Dig Gain Word
+            12'd2287: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2288: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2289: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2290: data <= 20'h13048; // SPIWrite [130]=48, Gain Table Index
+            12'd2291: data <= 20'h1316B; // SPIWrite [131]=6B, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2292: data <= 20'h13238; // SPIWrite [132]=38, TIA & LPF Word
+            12'd2293: data <= 20'h13320; // SPIWrite [133]=20, DC Cal bit & Dig Gain Word
+            12'd2294: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2295: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2296: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2297: data <= 20'h13049; // SPIWrite [130]=49, Gain Table Index
+            12'd2298: data <= 20'h1316C; // SPIWrite [131]=6C, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2299: data <= 20'h13238; // SPIWrite [132]=38, TIA & LPF Word
+            12'd2300: data <= 20'h13320; // SPIWrite [133]=20, DC Cal bit & Dig Gain Word
+            12'd2301: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2302: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2303: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2304: data <= 20'h1304A; // SPIWrite [130]=4A, Gain Table Index
+            12'd2305: data <= 20'h1316D; // SPIWrite [131]=6D, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2306: data <= 20'h13238; // SPIWrite [132]=38, TIA & LPF Word
+            12'd2307: data <= 20'h13320; // SPIWrite [133]=20, DC Cal bit & Dig Gain Word
+            12'd2308: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2309: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2310: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2311: data <= 20'h1304B; // SPIWrite [130]=4B, Gain Table Index
+            12'd2312: data <= 20'h1316E; // SPIWrite [131]=6E, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2313: data <= 20'h13238; // SPIWrite [132]=38, TIA & LPF Word
+            12'd2314: data <= 20'h13320; // SPIWrite [133]=20, DC Cal bit & Dig Gain Word
+            12'd2315: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2316: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2317: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2318: data <= 20'h1304C; // SPIWrite [130]=4C, Gain Table Index
+            12'd2319: data <= 20'h1316F; // SPIWrite [131]=6F, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2320: data <= 20'h13238; // SPIWrite [132]=38, TIA & LPF Word
+            12'd2321: data <= 20'h13320; // SPIWrite [133]=20, DC Cal bit & Dig Gain Word
+            12'd2322: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2323: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2324: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2325: data <= 20'h1304D; // SPIWrite [130]=4D, Gain Table Index
+            12'd2326: data <= 20'h13100; // SPIWrite [131]=00, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2327: data <= 20'h13200; // SPIWrite [132]=00, TIA & LPF Word
+            12'd2328: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2329: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2330: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2331: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2332: data <= 20'h1304E; // SPIWrite [130]=4E, Gain Table Index
+            12'd2333: data <= 20'h13100; // SPIWrite [131]=00, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2334: data <= 20'h13200; // SPIWrite [132]=00, TIA & LPF Word
+            12'd2335: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2336: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2337: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2338: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2339: data <= 20'h1304F; // SPIWrite [130]=4F, Gain Table Index
+            12'd2340: data <= 20'h13100; // SPIWrite [131]=00, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2341: data <= 20'h13200; // SPIWrite [132]=00, TIA & LPF Word
+            12'd2342: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2343: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2344: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2345: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2346: data <= 20'h13050; // SPIWrite [130]=50, Gain Table Index
+            12'd2347: data <= 20'h13100; // SPIWrite [131]=00, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2348: data <= 20'h13200; // SPIWrite [132]=00, TIA & LPF Word
+            12'd2349: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2350: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2351: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2352: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2353: data <= 20'h13051; // SPIWrite [130]=51, Gain Table Index
+            12'd2354: data <= 20'h13100; // SPIWrite [131]=00, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2355: data <= 20'h13200; // SPIWrite [132]=00, TIA & LPF Word
+            12'd2356: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2357: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2358: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2359: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2360: data <= 20'h13052; // SPIWrite [130]=52, Gain Table Index
+            12'd2361: data <= 20'h13100; // SPIWrite [131]=00, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2362: data <= 20'h13200; // SPIWrite [132]=00, TIA & LPF Word
+            12'd2363: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2364: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2365: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2366: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2367: data <= 20'h13053; // SPIWrite [130]=53, Gain Table Index
+            12'd2368: data <= 20'h13100; // SPIWrite [131]=00, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2369: data <= 20'h13200; // SPIWrite [132]=00, TIA & LPF Word
+            12'd2370: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2371: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2372: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2373: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2374: data <= 20'h13054; // SPIWrite [130]=54, Gain Table Index
+            12'd2375: data <= 20'h13100; // SPIWrite [131]=00, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2376: data <= 20'h13200; // SPIWrite [132]=00, TIA & LPF Word
+            12'd2377: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2378: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2379: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2380: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2381: data <= 20'h13055; // SPIWrite [130]=55, Gain Table Index
+            12'd2382: data <= 20'h13100; // SPIWrite [131]=00, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2383: data <= 20'h13200; // SPIWrite [132]=00, TIA & LPF Word
+            12'd2384: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2385: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2386: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2387: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2388: data <= 20'h13056; // SPIWrite [130]=56, Gain Table Index
+            12'd2389: data <= 20'h13100; // SPIWrite [131]=00, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2390: data <= 20'h13200; // SPIWrite [132]=00, TIA & LPF Word
+            12'd2391: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2392: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2393: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2394: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2395: data <= 20'h13057; // SPIWrite [130]=57, Gain Table Index
+            12'd2396: data <= 20'h13100; // SPIWrite [131]=00, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2397: data <= 20'h13200; // SPIWrite [132]=00, TIA & LPF Word
+            12'd2398: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2399: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2400: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2401: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2402: data <= 20'h13058; // SPIWrite [130]=58, Gain Table Index
+            12'd2403: data <= 20'h13100; // SPIWrite [131]=00, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2404: data <= 20'h13200; // SPIWrite [132]=00, TIA & LPF Word
+            12'd2405: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2406: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2407: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2408: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2409: data <= 20'h13059; // SPIWrite [130]=59, Gain Table Index
+            12'd2410: data <= 20'h13100; // SPIWrite [131]=00, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2411: data <= 20'h13200; // SPIWrite [132]=00, TIA & LPF Word
+            12'd2412: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2413: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2414: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2415: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2416: data <= 20'h1305A; // SPIWrite [130]=5A, Gain Table Index
+            12'd2417: data <= 20'h13100; // SPIWrite [131]=00, Ext LNA, Int LNA, & Mixer Gain Word
+            12'd2418: data <= 20'h13200; // SPIWrite [132]=00, TIA & LPF Word
+            12'd2419: data <= 20'h13300; // SPIWrite [133]=00, DC Cal bit & Dig Gain Word
+            12'd2420: data <= 20'h1371E; // SPIWrite [137]=1E, Write Words
+            12'd2421: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay 3 ADCCLK/16 cycles
+            12'd2422: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2423: data <= 20'h1371A; // SPIWrite [137]=1A, Clear Write Bit
+            12'd2424: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2425: data <= 20'h13400; // SPIWrite [134]=00, Dummy Write to delay ~1us
+            12'd2426: data <= 20'h13700; // SPIWrite [137]=00, Stop Gain Table Clock
+            // ************************************************************
+            // Setup Rx AGC Slow Attack/Hybrid Registers
+            // ************************************************************
+            12'd2427: data <= 20'h0FAEA; // SPIWrite [0FA]=EA, Gain Control Mode Select
+            12'd2428: data <= 20'h0FB08; // SPIWrite [0FB]=08, Full Table/Digital Gain Select
+            12'd2429: data <= 20'h0FC03; // SPIWrite [0FC]=03, ADC Overrange Sample Size
+            12'd2430: data <= 20'h0FD4C; // SPIWrite [0FD]=4C, Max Full/LMT Gain Table Index
+            12'd2431: data <= 20'h0FE48; // SPIWrite [0FE]=48, Peak Overload Wait Time
+            12'd2432: data <= 20'h1008F; // SPIWrite [100]=8F, Max Digital Gain
+            12'd2433: data <= 20'h1010A; // SPIWrite [101]=0A, AGC Inner High Threshold
+            12'd2434: data <= 20'h10308; // SPIWrite [103]=08, Large LMT Step Size
+            12'd2435: data <= 20'h1042F; // SPIWrite [104]=2F, ADC Small Overload Threshold
+            12'd2436: data <= 20'h1053A; // SPIWrite [105]=3A, ADC Large Overload Threshold
+            12'd2437: data <= 20'h10622; // SPIWrite [106]=22, ADC Overload Step Sizes
+            12'd2438: data <= 20'h10731; // SPIWrite [107]=31, Large LMT Overload Threshold
+            12'd2439: data <= 20'h10839; // SPIWrite [108]=39, Small LMT Overload Threshold
+            12'd2440: data <= 20'h1110A; // SPIWrite [111]=0A, Settling Delay
+            12'd2441: data <= 20'h11A27; // SPIWrite [11A]=27, Initial LMT Gain Limit
+            12'd2442: data <= 20'h1200C; // SPIWrite [120]=0C, Prevent Inc & AGC Inner Low Thresh
+            12'd2443: data <= 20'h121AA; // SPIWrite [121]=AA, LMT Overload Exceeded Counters
+            12'd2444: data <= 20'h122AA; // SPIWrite [122]=AA, ADC Overload Exceeded Counters
+            12'd2445: data <= 20'h12311; // SPIWrite [123]=11, AGC Inner High & Low Step Sizes
+            12'd2446: data <= 20'h124F5; // SPIWrite [124]=F5, Gain Update Counter<7:0>
+            12'd2447: data <= 20'h1253B; // SPIWrite [125]=3B, Gain Update Counter<15:8>
+            12'd2448: data <= 20'h12803; // SPIWrite [128]=03, Digital Sat Exceeded Counter
+            12'd2449: data <= 20'h12956; // SPIWrite [129]=56, AGC Outer High & Low Thresholds
+            12'd2450: data <= 20'h12A22; // SPIWrite [12A]=22, AGC Outer High & Low Step Sizes
+            // ************************************************************
+            // RX Baseband Filter Tuning (Real BW: 16.000000 MHz) 3dB Filter
+            // Corner @ 22.400000 MHz)
+            // ************************************************************
+            12'd2451: data <= 20'h1FB10; // SPIWrite [1FB]=10, RX Freq Corner (MHz)
+            12'd2452: data <= 20'h1FC00; // SPIWrite [1FC]=00, RX Freq Corner (Khz)
+            12'd2453: data <= 20'h1F804; // SPIWrite [1F8]=04, Rx BBF Tune Divider[7:0]
+            12'd2454: data <= 20'h1F91E; // SPIWrite [1F9]=1E, RX BBF Tune Divider[8]
+            12'd2455: data <= 20'h1D53F; // SPIWrite [1D5]=3F, Set Rx Mix LO CM
+            12'd2456: data <= 20'h1C003; // SPIWrite [1C0]=03, Set GM common mode
+            12'd2457: data <= 20'h1E202; // SPIWrite [1E2]=02, Enable Rx1 Filter Tuner
+            12'd2458: data <= 20'h1E302; // SPIWrite [1E3]=02, Enable Rx2 Filter Tuner
+            12'd2459: data <= 20'h01680; // SPIWrite [016]=80, Start RX Filter Tune
+            12'd2460: data <= 20'h40000; // WAIT 20 ms, WAIT_CALDONE	RXFILTER,2000	, Wait for RX filter to tune, Max Cal Time: 3.309 us (Done when 0x016[7]==0)
+            12'd2461: data <= 20'h1E203; // SPIWrite [1E2]=03, Disable Rx Filter Tuner (Rx1)
+            12'd2462: data <= 20'h1E303; // SPIWrite [1E3]=03, Disable Rx Filter Tuner (Rx2)
+            // ************************************************************
+            // TX Baseband Filter Tuning (Real BW: 16.000000 MHz) 3dB Filter
+            // Corner @ 25.600000 MHz)
+            // ************************************************************
+            12'd2463: data <= 20'h0D604; // SPIWrite [0D6]=04, TX BBF Tune Divier[7:0]
+            12'd2464: data <= 20'h0D71E; // SPIWrite [0D7]=1E, TX BBF Tune Divider[8]
+            12'd2465: data <= 20'h0CA22; // SPIWrite [0CA]=22, Enable Tx Filter Tuner
+            12'd2466: data <= 20'h01640; // SPIWrite [016]=40, Start Tx Filter Tune
+            12'd2467: data <= 20'h40000; // WAIT 20 ms, WAIT_CALDONE	TXFILTER,2000	, Wait for TX filter to tune, Max Cal Time: 1.926 us (Done when 0x016[6]==0)
+            12'd2468: data <= 20'h0CA26; // SPIWrite [0CA]=26, Disable Tx Filter Tuner (Both Channels)
+            // ************************************************************
+            // RX TIA Setup:  Setup values scale based on RxBBF calibration
+            // results.  See information in Calibration Guide.
+            // ************************************************************
+            12'd2469: data <= 20'h1DB20; // SPIWrite [1DB]=20, Set TIA selcc[2:0]
+            12'd2470: data <= 20'h1DD00; // SPIWrite [1DD]=00, Set RX TIA1 C MSB[6:0]
+            12'd2471: data <= 20'h1DF00; // SPIWrite [1DF]=00, Set RX TIA2 C MSB[6:0]
+            12'd2472: data <= 20'h1DC52; // SPIWrite [1DC]=52, Set RX TIA1 C LSB[5:0]
+            12'd2473: data <= 20'h1DE52; // SPIWrite [1DE]=52, Set RX TIA2 C LSB[5:0]
+            // ************************************************************
+            // TX Secondary Filter Calibration Setup:  Real Bandwidth
+            // 16.000000MHz, 3dB Corner @ 80.000000MHz
+            // ************************************************************
+            12'd2474: data <= 20'h0D208; // SPIWrite [0D2]=08, TX Secondary Filter PDF Cap cal[5:0]
+            12'd2475: data <= 20'h0D10C; // SPIWrite [0D1]=0C, TX Secondary Filter PDF Res cal[3:0]
+            12'd2476: data <= 20'h0D057; // SPIWrite [0D0]=57, Pdampbias
+            // ************************************************************
+            // ADC Setup:  Tune ADC Performance based on RX analog filter tune
+            // corner.  Real Bandwidth: 14.524126 MHz, ADC Clock Frequency:
+            // 368.640000 MHz.  The values in registers 0x200 - 0x227 need to be
+            // calculated using the equations in the Calibration Guide.
+            // ************************************************************
+            12'd2477: data <= 20'h20000; // SPIWrite [200]=00
+            12'd2478: data <= 20'h20100; // SPIWrite [201]=00
+            12'd2479: data <= 20'h20200; // SPIWrite [202]=00
+            12'd2480: data <= 20'h20324; // SPIWrite [203]=24
+            12'd2481: data <= 20'h20424; // SPIWrite [204]=24
+            12'd2482: data <= 20'h20500; // SPIWrite [205]=00
+            12'd2483: data <= 20'h20600; // SPIWrite [206]=00
+            12'd2484: data <= 20'h2077A; // SPIWrite [207]=7A
+            12'd2485: data <= 20'h20839; // SPIWrite [208]=39
+            12'd2486: data <= 20'h2093A; // SPIWrite [209]=3A
+            12'd2487: data <= 20'h20A49; // SPIWrite [20A]=49
+            12'd2488: data <= 20'h20B23; // SPIWrite [20B]=23
+            12'd2489: data <= 20'h20C4C; // SPIWrite [20C]=4C
+            12'd2490: data <= 20'h20D21; // SPIWrite [20D]=21
+            12'd2491: data <= 20'h20E00; // SPIWrite [20E]=00
+            12'd2492: data <= 20'h20F7D; // SPIWrite [20F]=7D
+            12'd2493: data <= 20'h2107C; // SPIWrite [210]=7C
+            12'd2494: data <= 20'h2117D; // SPIWrite [211]=7D
+            12'd2495: data <= 20'h21247; // SPIWrite [212]=47
+            12'd2496: data <= 20'h21346; // SPIWrite [213]=46
+            12'd2497: data <= 20'h21447; // SPIWrite [214]=47
+            12'd2498: data <= 20'h2154A; // SPIWrite [215]=4A
+            12'd2499: data <= 20'h21649; // SPIWrite [216]=49
+            12'd2500: data <= 20'h2174A; // SPIWrite [217]=4A
+            12'd2501: data <= 20'h2182E; // SPIWrite [218]=2E
+            12'd2502: data <= 20'h219A4; // SPIWrite [219]=A4
+            12'd2503: data <= 20'h21A26; // SPIWrite [21A]=26
+            12'd2504: data <= 20'h21B18; // SPIWrite [21B]=18
+            12'd2505: data <= 20'h21CA4; // SPIWrite [21C]=A4
+            12'd2506: data <= 20'h21D26; // SPIWrite [21D]=26
+            12'd2507: data <= 20'h21E18; // SPIWrite [21E]=18
+            12'd2508: data <= 20'h21FA4; // SPIWrite [21F]=A4
+            12'd2509: data <= 20'h22026; // SPIWrite [220]=26
+            12'd2510: data <= 20'h2212F; // SPIWrite [221]=2F
+            12'd2511: data <= 20'h22230; // SPIWrite [222]=30
+            12'd2512: data <= 20'h22340; // SPIWrite [223]=40
+            12'd2513: data <= 20'h22440; // SPIWrite [224]=40
+            12'd2514: data <= 20'h2252C; // SPIWrite [225]=2C
+            12'd2515: data <= 20'h22600; // SPIWrite [226]=00
+            12'd2516: data <= 20'h22700; // SPIWrite [227]=00
+            // ************************************************************
+            // Tx Quadrature Calibration Settings
+            // ************************************************************
+            12'd2517: data <= 20'h0A03A; // SPIWrite [0A0]=3A, Set TxQuadcal NCO frequency
+            12'd2518: data <= 20'h0A340; // SPIWrite [0A3]=40, Set TxQuadcal NCO frequency (Only update bits [7:6])
+            12'd2519: data <= 20'h0A17B; // SPIWrite [0A1]=7B, Set TxQuadcal M[1:0]
+            12'd2520: data <= 20'h0A9FF; // SPIWrite [0A9]=FF, Set Tx Quad Cal Count
+            12'd2521: data <= 20'h0A27F; // SPIWrite [0A2]=7F, Set Tx Quad Cal Kexp
+            12'd2522: data <= 20'h0A501; // SPIWrite [0A5]=01, Set Tx Quad Cal Magnitude Threshhold
+            12'd2523: data <= 20'h0A601; // SPIWrite [0A6]=01, Set Tx Quad Cal Magnitude Threshhold
+            12'd2524: data <= 20'h0AA25; // SPIWrite [0AA]=25, Set Tx Quad Cal Gain Table index
+            12'd2525: data <= 20'h0A4F0; // SPIWrite [0A4]=F0, Set Tx Quad Cal Setting Count
+            12'd2526: data <= 20'h0AE00; // SPIWrite [0AE]=00, Set Tx Quad Cal LPF Gain index incase Split table mode used
+            12'd2527: data <= 20'h1933F; // SPIWrite [193]=3F, BBDC Cal setting
+            12'd2528: data <= 20'h1900F; // SPIWrite [190]=0F, Set BBDC tracking shift M value, only applies when BB DC tracking enabled
+            12'd2529: data <= 20'h19401; // SPIWrite [194]=01, BBDC Cal setting
+            12'd2530: data <= 20'h01601; // SPIWrite [016]=01, Start BBDC offset cal
+            12'd2531: data <= 20'h40000; // WAIT 20 ms, WAIT_CALDONE	BBDC,2000	, BBDC Max Cal Time: 3287.760 us. Cal done when 0x016[0]==0
+            12'd2532: data <= 20'h18520; // SPIWrite [185]=20, Set RF DC offset Wait Count
+            12'd2533: data <= 20'h18632; // SPIWrite [186]=32, Set RF DC Offset Count[7:0]
+            12'd2534: data <= 20'h18724; // SPIWrite [187]=24, Settings for RF DC cal
+            12'd2535: data <= 20'h18B83; // SPIWrite [18B]=83, Settings for RF DC cal
+            12'd2536: data <= 20'h18805; // SPIWrite [188]=05, Settings for RF DC cal
+            12'd2537: data <= 20'h18930; // SPIWrite [189]=30, Settings for RF DC cal
+            12'd2538: data <= 20'h01602; // SPIWrite [016]=02, RFDC Max Cal Time: 14980.957 us
+            12'd2539: data <= 20'h40000; // WAIT 20 ms, WAIT_CALDONE	RFDC,2000	, Wait for cal to complete (Done when 0x016[1]==0)
+            12'd2540: data <= 20'h01610; // SPIWrite [016]=10, TXQuad Max Cal Time: 1537.500 us
+            12'd2541: data <= 20'h40000; // WAIT 20 ms, WAIT_CALDONE	TXQUAD,2000	, Wait for cal to complete (Done when 0x016[4]==0)
+            12'd2542: data <= 20'h16803; // SPIWrite [168]=03, Set RX Quadcal Tone Level
+            12'd2543: data <= 20'h16E25; // SPIWrite [16E]=25, Set Rx Gain index to use during RX Quadcal
+            12'd2544: data <= 20'h16A75; // SPIWrite [16A]=75, Set Kexp Phase
+            12'd2545: data <= 20'h16B15; // SPIWrite [16B]=15, Set Kexp Amplitude
+            12'd2546: data <= 20'h169CF; // SPIWrite [169]=CF
+            12'd2547: data <= 20'h18BAD; // SPIWrite [18B]=AD
+            12'd2548: data <= 20'h01210; // SPIWrite [012]=10, Cals done, Set PPORT Config
+            12'd2549: data <= 20'h01301; // SPIWrite [013]=01, Set ENSM FDD/TDD bit
+            12'd2550: data <= 20'h01584; // SPIWrite [015]=84, Set Dual Synth Mode, FDD External Control bits properly
+            // ************************************************************
+            // Set Tx Attenuation: Tx1: 10.00 dB,  Tx2: 10.00 dB
+            // ************************************************************
+            12'd2551: data <= 20'h07328; // SPIWrite [073]=28
+            12'd2552: data <= 20'h07400; // SPIWrite [074]=00
+            12'd2553: data <= 20'h07528; // SPIWrite [075]=28
+            12'd2554: data <= 20'h07600; // SPIWrite [076]=00
+            // ************************************************************
+            // Setup RSSI and Power Measurement Duration Registers
+            // ************************************************************
+            12'd2555: data <= 20'h1500B; // SPIWrite [150]=0B, RSSI Measurement Duration 0, 1
+            12'd2556: data <= 20'h15100; // SPIWrite [151]=00, RSSI Measurement Duration 2, 3
+            12'd2557: data <= 20'h152FF; // SPIWrite [152]=FF, RSSI Weighted Multiplier 0
+            12'd2558: data <= 20'h15300; // SPIWrite [153]=00, RSSI Weighted Multiplier 1
+            12'd2559: data <= 20'h15400; // SPIWrite [154]=00, RSSI Weighted Multiplier 2
+            12'd2560: data <= 20'h15500; // SPIWrite [155]=00, RSSI Weighted Multiplier 3
+            12'd2561: data <= 20'h15600; // SPIWrite [156]=00, RSSI Delay
+            12'd2562: data <= 20'h15700; // SPIWrite [157]=00, RSSI Wait
+            12'd2563: data <= 20'h1580D; // SPIWrite [158]=0D, RSSI Mode Select
+            12'd2564: data <= 20'h15C69; // SPIWrite [15C]=69, Power Measurement Duration
+            12'd2565: data <= 20'h00261; // SPIWrite [002]=61, Set # transmitters enabled
+            12'd2566: data <= 20'h00362; // SPIWrite [003]=62, Set # receivers enabled
+            
+            12'd2567: data <= 20'h09F01;
+            12'd2568: data <= 20'h08E00;
+            12'd2569: data <= 20'h08F00;
+
+            12'd2570: data <= 20'h01407; // SPIWrite [014]=07, State Machine Set
+            12'd2571: data <= 20'h01423; // SPIWrite [014]=23, State Machine Set
+            12'd2572: data <= 20'h80000; // INIT_END
+            default:
+                data <= 20'h00000;
+        endcase
+    end
+
+endmodule

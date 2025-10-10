@@ -82,7 +82,7 @@ input [11 : 0] probe9;
 input [11 : 0] probe10;
 input [2 : 0] probe11;
 input [2 : 0] probe12;
-input [21 : 0] probe13;
+input [13 : 0] probe13;
 
 
 endmodule
