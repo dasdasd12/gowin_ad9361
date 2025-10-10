@@ -41,8 +41,8 @@ module ComplexMul #(
             out_i <= 0;
             out_q <= 0;
         end else begin
-            out_i <= out_i_l >> (DATA_LONG_W - DATA_OUT_W);
-            out_q <= out_q_l >> (DATA_LONG_W - DATA_OUT_W);
+            out_i <= out_i_l >> (DATA_LONG_W - DATA_OUT_W - 1);
+            out_q <= out_q_l >> (DATA_LONG_W - DATA_OUT_W - 1);
         end
     end
 

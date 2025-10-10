@@ -28,7 +28,7 @@ module Demod_tb ();
 
 
     parameter DATA_W = 12;
-    parameter N = 5_000;
+    parameter N = 4_000;
 
     reg signed [DATA_W*2-1:0] in_array[0:N-1];
     reg signed [DATA_W-1:0] in_i, in_q;
@@ -51,7 +51,7 @@ module Demod_tb ();
     wire [11-1:0] phase_out;
 
     Demod #(
-        .DATA_W(DATA_W)
+        .DATA_W(12)
     ) u_Demod (
         .clk      (clk),
         .rst_n    (rst_n),
@@ -59,8 +59,20 @@ module Demod_tb ();
         .in_q     (in_q),
         .valid    (valid),
         .bit_out  (bit_out),
-        .phase_out(phase)
+        .phase_out(phase_out)
     );
+
+    // Demod #(
+    //     .DATA_W(DATA_W)
+    // ) u_Demod (
+    //     .clk      (clk),
+    //     .rst_n    (rst_n),
+    //     .in_i     (in_i),
+    //     .in_q     (in_q),
+    //     .valid    (valid),
+    //     .bit_out  (bit_out),
+    //     .phase_out(phase)
+    // );
 
     // Cordic #(
     //     .DATA_W    (DATA_W),
