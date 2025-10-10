@@ -172,35 +172,6 @@ module top (
     .sync_in                            (sync_in                   ),
     .resetb                             (resetb                    ) 
   );
-  
-    // wire                                m_axis_data_tvalid          ;
-    // wire               [  31: 0]        m_axis_data_tdata           ;
-    // wire                                m_axis_phase_tvalid         ;
-    // wire               [  31: 0]        m_axis_phase_tdata          ;
-
-  // `ifdef ZYNQ
-  // dds_compiler_1 u_dds_compiler_1 (
-  //   .aclk                               (data_clk                  ),
-  //   .aresetn                            (rst_n                     ),
-  //   .m_axis_data_tvalid                 (m_axis_data_tvalid        ),
-  //   .m_axis_data_tdata                  (m_axis_data_tdata         ),
-  //   .m_axis_phase_tvalid                (m_axis_phase_tvalid       ),
-  //   .m_axis_phase_tdata                 (m_axis_phase_tdata        ) 
-  // );
-  // `elsif ULTRASCALE
-  // dds_compiler_0 u_dds_compiler_0 (
-  //   .aclk                               (data_clk                  ),
-  //   .aresetn                            (rst_n                     ),
-  //   .m_axis_data_tvalid                 (m_axis_data_tvalid        ),
-  //   .m_axis_data_tdata                  (m_axis_data_tdata         ),
-  //   .m_axis_phase_tvalid                (m_axis_phase_tvalid       ),
-  //   .m_axis_phase_tdata                 (m_axis_phase_tdata        ) 
-  // );
-  // `endif 
-
-  //   assign                              tx_data_valid               = m_axis_data_tvalid   ;
-  //   assign                              tx_data_I                   = m_axis_data_tdata[27:16];
-  //   assign                              tx_data_Q                   = m_axis_data_tdata[11:0];
 
   A8pskmod_test u_A8pskmod_test(
       .clk                                (data_clk                  ),
@@ -265,10 +236,5 @@ module top (
       .probe12                            (u_delta_decode.bit_in_d1  ),
       .probe13                            (u_Demod.u_Cordic.u_PID.data_in_int)
     );
-
-
-
-    
-    
     
 endmodule
