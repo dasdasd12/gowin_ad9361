@@ -5,6 +5,10 @@ module data_mod(
     input                               rst_n                      ,
 
     input                               frame_start                ,
+    output                              frame_end                  ,
+
+    input                [   2: 0]      bit_in                     ,
+    output                              data_valid                 ,
 
     output reg           [  11: 0]      tx_data_I                  ,
     output reg           [  11: 0]      tx_data_Q                   
@@ -21,6 +25,9 @@ module data_mod(
     parameter                           C                           = 12'b0011_0000_1111   ;  //783
     parameter                           NS                          = 12'b1000_1001_1100   ;  //-1892
     parameter                           NC                          = 12'b1100_1111_0001   ;  //-783
+
+    assign                              data_valid                  = (state == DATA) ? 1'b1 : 1'b0;
+    assign                              frame_end                   = (state == DONE) ? 1'b1 : 1'b0;
 
     reg                [   9: 0]        cnt                         ;
 
@@ -62,7 +69,6 @@ module data_mod(
                     state <= IDLE;
                 end
 
-                default: state <= IDLE;
             endcase
         end
     end
@@ -73,14 +79,13 @@ module data_mod(
         if (!rst_n) begin
             tx_bit <= 3'b000;
         end 
-        else if (state == DATA) begin
-    
+        else if (state == DATA && cnt >= 10'd1) begin
+            tx_bit <= bit_in;
         end
-        else if (state == DONE) begin
+        else begin
             tx_bit <= 3'b000;
         end
     end
-
 
     reg                [   2: 0]        sample_bit                  ;
 
@@ -92,10 +97,10 @@ module data_mod(
             sample_bit <= 3'b000;
         end
         else if (state == SYNC) begin
-            sample_bit <= 3'b010;
+            sample_bit <= sample_bit + 3'b010;
         end
         else if (state == DATA) begin
-            sample_bit <= tx_bit;
+            sample_bit <= sample_bit + tx_bit;
         end
         else if (state == DONE) begin
             sample_bit <= 3'b000;

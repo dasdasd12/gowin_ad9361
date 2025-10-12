@@ -2652,14 +2652,18 @@ module ad9361_cfg_rom_v5(
             12'd2564: data <= 20'h15C69; // SPIWrite [15C]=69, Power Measurement Duration
             12'd2565: data <= 20'h00261; // SPIWrite [002]=61, Set # transmitters enabled
             12'd2566: data <= 20'h00362; // SPIWrite [003]=62, Set # receivers enabled
-            
+            //TX IQ Qualization 
             12'd2567: data <= 20'h09F01;
             12'd2568: data <= 20'h08E00;
             12'd2569: data <= 20'h08F00;
-
-            12'd2570: data <= 20'h01407; // SPIWrite [014]=07, State Machine Set
-            12'd2571: data <= 20'h01423; // SPIWrite [014]=23, State Machine Set
-            12'd2572: data <= 20'h80000; // INIT_END
+            //RX IQ Qualization
+            12'd2570: data <= 20'h18201;
+            12'd2571: data <= 20'h17000;
+            12'd2572: data <= 20'h17100;
+            //ENABLE ENSM
+            12'd2573: data <= 20'h01407; // SPIWrite [014]=07, State Machine Set
+            12'd2574: data <= 20'h01423; // SPIWrite [014]=23, State Machine Set
+            12'd2575: data <= 20'h80000; // INIT_END
             default:
                 data <= 20'h00000;
         endcase

@@ -19,19 +19,11 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-//`define ULTRASCALE
 `define ZYNQ
 
 module top (
-
-  `ifdef ZYNQ
     input                               clk                        ,
     input                               rst                        ,
-  `elsif ULTRASCALE
-    input                               clk_p                      ,
-    input                               clk_n                      ,
-    output                              ldo_on                     ,
-  `endif
     //uart
     input                               uart_rx                    ,
     output                              uart_tx                    ,
@@ -71,24 +63,8 @@ module top (
     wire                                sys_clk                     ;
     wire                                rst_n                       ;
 
-    `ifdef ZYNQ
-      assign                              sys_clk                     = clk                  ;
-      assign                              rst_n                       = ~rst                 ;
-    `elsif ULTRASCALE
-      IBUFDS #(
-        .DIFF_TERM                          ("FALSE"                   ),
-        .IBUF_LOW_PWR                       ("FALSE"                   ) 
-      ) IBUFDS_inst (
-        .O                                  (sys_clk                   ),
-        .I                                  (clk_p                     ),
-        .IB                                 (clk_n                     ) 
-      );
-      assign                              ldo_on                      = 1'b1                 ;
-      assign                              rst_n                       = 1'b1                 ;
-    `endif
-
-
-
+    assign                              sys_clk                     = clk                  ;
+    assign                              rst_n                       = ~rst                 ;
 
     wire               [  11: 0]        addr                        ;
     wire                                rd_done                     ;
@@ -97,20 +73,20 @@ module top (
     wire                                wr_flag                     ;
     wire                                rd_start                    ;
 
-  uart_interface u_uart_interface (
-    .clk                                (sys_clk                   ),
-    .rst_n                              (rst_n                     ),
+    uart_interface u_uart_interface (
+      .clk                                (sys_clk                   ),
+      .rst_n                              (rst_n                     ),
 
-    .uart_rx                            (uart_rx                   ),
-    .uart_tx                            (uart_tx                   ),
+      .uart_rx                            (uart_rx                   ),
+      .uart_tx                            (uart_tx                   ),
 
-    .rd_done                            (rd_done                   ),
-    .spi_rd_data_reg                    (spi_rd_data_reg           ),
-    .addr                               (addr                      ),
-    .wr_data                            (wr_data                   ),
-    .wr_flag                            (wr_flag                   ),
-    .rd_start                           (rd_start                  ) 
-  );
+      .rd_done                            (rd_done                   ),
+      .spi_rd_data_reg                    (spi_rd_data_reg           ),
+      .addr                               (addr                      ),
+      .wr_data                            (wr_data                   ),
+      .wr_flag                            (wr_flag                   ),
+      .rd_start                           (rd_start                  ) 
+    );
 
   // output declaration of module ad9361_interface_lvds
     wire                                data_clk                    ;
@@ -123,57 +99,57 @@ module top (
     wire               [  11: 0]        tx_data_I                   ;
     wire               [  11: 0]        tx_data_Q                   ;
 
-  ad9361_interface_lvds u_ad9361_interface_lvds(
-    .clk                                (sys_clk                   ),
-    .rst_n                              (rst_n                     ),
+    ad9361_interface_lvds u_ad9361_interface_lvds(
+      .clk                                (sys_clk                   ),
+      .rst_n                              (rst_n                     ),
 
-    .data_clk                           (data_clk                  ),
-    .ctrl_out_led                       (ctrl_out_led              ),
+      .data_clk                           (data_clk                  ),
+      .ctrl_out_led                       (ctrl_out_led              ),
 
-    .tx_data_valid                      (tx_data_valid             ),
-    .tx_data_I                          (tx_data_Q                 ),
-    .tx_data_Q                          (tx_data_I                 ),
+      .tx_data_valid                      (tx_data_valid             ),
+      .tx_data_I                          (tx_data_Q                 ),
+      .tx_data_Q                          (tx_data_I                 ),
 
-    .rx_data_valid                      (rx_data_valid             ),
-    .rx_data_I                          (rx_data_I                 ),
-    .rx_data_Q                          (rx_data_Q                 ),
+      .rx_data_valid                      (rx_data_valid             ),
+      .rx_data_I                          (rx_data_I                 ),
+      .rx_data_Q                          (rx_data_Q                 ),
 
-    .addr                               (addr                      ),
-    .rd_done                            (rd_done                   ),
-    .spi_rd_data_reg                    (spi_rd_data_reg           ),
-    .wr_data                            (wr_data                   ),
-    .wr_flag                            (wr_flag                   ),
-    .rd_start                           (rd_start                  ),
+      .addr                               (addr                      ),
+      .rd_done                            (rd_done                   ),
+      .spi_rd_data_reg                    (spi_rd_data_reg           ),
+      .wr_data                            (wr_data                   ),
+      .wr_flag                            (wr_flag                   ),
+      .rd_start                           (rd_start                  ),
 
-    .spi_do                             (spi_do                    ),
-    .spi_di                             (spi_di                    ),
-    .spi_enb                            (spi_enb                   ),
-    .spi_clk                            (spi_clk                   ),
+      .spi_do                             (spi_do                    ),
+      .spi_di                             (spi_di                    ),
+      .spi_enb                            (spi_enb                   ),
+      .spi_clk                            (spi_clk                   ),
 
-    .rx_clk_in_p                        (rx_clk_in_p               ),
-    .rx_clk_in_n                        (rx_clk_in_n               ),
-    .rx_frame_in_p                      (rx_frame_in_p             ),
-    .rx_frame_in_n                      (rx_frame_in_n             ),
-    .rx_data_in_p                       (rx_data_in_p              ),
-    .rx_data_in_n                       (rx_data_in_n              ),
+      .rx_clk_in_p                        (rx_clk_in_p               ),
+      .rx_clk_in_n                        (rx_clk_in_n               ),
+      .rx_frame_in_p                      (rx_frame_in_p             ),
+      .rx_frame_in_n                      (rx_frame_in_n             ),
+      .rx_data_in_p                       (rx_data_in_p              ),
+      .rx_data_in_n                       (rx_data_in_n              ),
 
-    .tx_clk_out_p                       (tx_clk_out_p              ),
-    .tx_clk_out_n                       (tx_clk_out_n              ),
-    .tx_frame_out_p                     (tx_frame_out_p            ),
-    .tx_frame_out_n                     (tx_frame_out_n            ),
-    .tx_data_out_p                      (tx_data_out_p             ),
-    .tx_data_out_n                      (tx_data_out_n             ),
+      .tx_clk_out_p                       (tx_clk_out_p              ),
+      .tx_clk_out_n                       (tx_clk_out_n              ),
+      .tx_frame_out_p                     (tx_frame_out_p            ),
+      .tx_frame_out_n                     (tx_frame_out_n            ),
+      .tx_data_out_p                      (tx_data_out_p             ),
+      .tx_data_out_n                      (tx_data_out_n             ),
 
-    .ctrl_out                           (ctrl_out                  ),
-    .ctrl_in                            (ctrl_in                   ),
-    .txnrx                              (txnrx                     ),
-    .enable                             (enable                    ),
-    .en_agc                             (en_agc                    ),
-    .sync_in                            (sync_in                   ),
-    .resetb                             (resetb                    ) 
-  );
+      .ctrl_out                           (ctrl_out                  ),
+      .ctrl_in                            (ctrl_in                   ),
+      .txnrx                              (txnrx                     ),
+      .enable                             (enable                    ),
+      .en_agc                             (en_agc                    ),
+      .sync_in                            (sync_in                   ),
+      .resetb                             (resetb                    ) 
+    );
 
-  A8pskmod_test u_A8pskmod_test(
+    A8pskmod_test u_A8pskmod_test(
       .clk                                (data_clk                  ),
       .rst_n                              (rst_n                     ),
       .tx_data_I                          (tx_data_I                 ),
@@ -189,12 +165,12 @@ module top (
 
     reg                                 sample_clk                  ;
 
-        always @(posedge data_clk or negedge rst_n) begin
-          if(!rst_n)
-            sample_clk <= 1'b0;
-          else 
-            sample_clk <= ~sample_clk;
-        end
+    always @(posedge data_clk or negedge rst_n) begin
+      if(!rst_n)
+        sample_clk <= 1'b0;
+      else 
+        sample_clk <= ~sample_clk;
+    end
     
     Demod #(
       .DATA_W                             (12                               )                     
@@ -208,17 +184,6 @@ module top (
       .phase_out                          (phase_out                 ) 
     );
 
-    // output declaration of module delta_decode
-    wire               [   2: 0]        delta_out                   ;
-    
-    delta_decode u_delta_decode(
-      .clk                                (sample_clk                ),
-      .rst_n                              (rst_n                     ),
-      .valid                              (valid                     ),
-      .bit_in                             (bit_out                   ),
-      .delta_out                          (delta_out                 ) 
-    );
-
     ila_1 u_ila_1(
       .clk                                (data_clk                  ),
       .probe0                             (rx_data_valid             ),
@@ -229,12 +194,11 @@ module top (
       .probe5                             (phase_out                 ),
       .probe6                             (tx_data_I                 ),
       .probe7                             (tx_data_Q                 ),
-      .probe8                             (delta_out                 ),
-      .probe9                             (u_Demod.out_i             ),
-      .probe10                            (u_Demod.out_q             ),
-      .probe11                            (u_delta_decode.bit_in     ),
-      .probe12                            (u_delta_decode.bit_in_d1  ),
-      .probe13                            (u_Demod.u_Cordic.u_PID.data_in_int)
+      .probe8                             (u_Demod.out_i             ),
+      .probe9                             (u_Demod.out_q             ),
+      .probe10                            (u_Demod.u_Cordic.u_PID.data_in_int),
+      .probe11                            (u_Demod.u_SignalValid.amp_dc),
+      .probe12                            (u_Demod.u_SignalValid.amp_ac)
     );
     
 endmodule
