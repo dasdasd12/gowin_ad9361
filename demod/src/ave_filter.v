@@ -58,6 +58,6 @@ module ave_filter #(
         end
     end
 
-    assign data_out = sum[$clog2(LENGTH)+WIDTH-1-:$clog2(LENGTH)];
+    assign data_out = sum[$clog2(LENGTH)+WIDTH-1-:WIDTH];
 
 endmodule
