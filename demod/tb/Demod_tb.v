@@ -18,7 +18,7 @@ module Demod_tb ();
     end
     initial begin
         rst_n = 1'b0;
-        #1 rst_n = 1'b1;
+        #3 rst_n = 1'b1;
     end
 
     initial begin
@@ -40,9 +40,10 @@ module Demod_tb ();
         $readmemh("./tb/tx_signal.hex", in_array);
         for (i = 0; i < N; i = i + 1) begin
             {in_i, in_q} = in_array[i];
-            #1;
+            #2;
         end
-        #10;
+        {in_i, in_q} = 0;
+        #500;
         $finish;
     end
 
@@ -53,13 +54,15 @@ module Demod_tb ();
     Demod #(
         .DATA_W(12)
     ) u_Demod (
-        .clk      (clk),
-        .rst_n    (rst_n),
-        .in_i     (in_i),
-        .in_q     (in_q),
-        .valid    (valid),
-        .bit_out  (bit_out),
-        .phase_out(phase_out)
+        .clk        (clk),
+        .rst_n      (rst_n),
+        .in_i       (in_i),
+        .in_q       (in_q),
+        .valid      (valid),
+        .bit_out    (bit_out),
+        .phase_out  (phase_out),
+        .frame_start(frame_start),
+        .frame_end  (frame_end)
     );
 
     // Demod #(
