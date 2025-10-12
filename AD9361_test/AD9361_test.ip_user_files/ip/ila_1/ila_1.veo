@@ -69,7 +69,10 @@ ila_1 your_instance_name (
 	.probe9(probe9), // input wire [11:0]  probe9 
 	.probe10(probe10), // input wire [13:0]  probe10 
 	.probe11(probe11), // input wire [17:0]  probe11 
-	.probe12(probe12) // input wire [17:0]  probe12
+	.probe12(probe12), // input wire [17:0]  probe12 
+	.probe13(probe13), // input wire [0:0]  probe13 
+	.probe14(probe14), // input wire [0:0]  probe14 
+	.probe15(probe15) // input wire [1:0]  probe15
 );
 
 // INST_TAG_END ------ End INSTANTIATION Template ---------

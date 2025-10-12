@@ -1,79 +1,138 @@
 `timescale 1ns/100ps
 
-module ethernet_control (
+module ethernet_interface (
 
-    input                               sys_clk                    ,
+    input                               clk                        ,
     input                               rst_n                      ,
 
-    output                              e_rst_n                    ,
+    output                              clk125m                    ,
 
+    input                [   7: 0]      tx_data                    ,
+
+    output               [   7: 0]      rx_data                    ,
+    //RGMII interface  
+    output                              e_rst_n                    ,
     output                              mdc                        ,
     inout                               mdio                       ,
 
-    input                [   3: 0]      rgmii_rx_d                 ,
+    input                [   3: 0]      rgmii_rxd                  ,
     input                               rgmii_rx_ctl               ,
     input                               rgmii_rx_clk               ,
 
-    output               [   3: 0]      rgmii_tx_d                 ,
+    output               [   3: 0]      rgmii_txd                  ,
     output                              rgmii_tx_ctl               ,
     output                              rgmii_tx_clk                
 
 );
 
-    parameter                           BOARD_MAC                   = 48'h11_45_14_19_19_81     ;//开发板MAC地址
-    parameter                           BOARD_IP                    = {8'd192,8'd168,8'd3,8'd2}	;//开发板IP地址
-    parameter                           BOARD_PORT                  = 16'h8000                  ;//开发板IP地址-端口 
-    parameter                           DES_MAC                     = 48'hff_ff_ff_ff_ff_ff     ;//目的MAC地址
-    parameter                           DES_IP                      = {8'd192,8'd168,8'd3,8'd3} ;//目的IP地址
-    parameter                           DES_PORT                    = 16'h8000                  ;//目的IP地址-端口 
-    parameter                           DATA_SIZE                   = 16'd256                   ;//数据包长度 46~1500 B
+    parameter LOCAL_MAC  = 48'h00_0a_35_01_fe_c0;
+    parameter LOCAL_IP   = 32'hc0_a8_00_02;
+    parameter LOCAL_PORT = 16'd5000;
+    parameter DST_MAC    = 48'hFF_FF_FF_FF_FF_FF;
+    parameter DST_IP     = 32'hc0_a8_00_03;
+    parameter DST_PORT   = 16'd6102;
 
-
-    assign                              e_rst_n                     = rst_n               ;
-
+    assign                              e_rst_n                     = rst_n                ;
     assign                              mdc                         = 1'b1                 ;
     assign                              mdio                        = 1'b1                 ;
 
-    wire                                clk_125M                    ;
+    // output declaration of module eth_udp_tx_gmii
+    wire                                gmii_tx_clk                 ;
+    wire               [   7: 0]        gmii_txd                    ;
+    wire                                gmii_txen                   ;
 
-    wire                                locked                      ;
+    wire                                tx_en_pulse                 ;
+    wire                                tx_done                     ;
 
-    //add pll ip here
+    wire               [  15: 0]        data_length                 ;
+    wire                                payload_req_o               ;
+    wire               [   7: 0]        payload_dat_i               ;
+   
+    eth_udp_tx_gmii u_eth_udp_tx_gmii(
+        .clk125m                            (clk125m                   ),
+        .reset_p                            (rst_n                     ),
 
-    //add pll ip here
+        .tx_en_pulse                        (tx_en_pulse               ),
+        .tx_done                            (tx_done                   ),
 
-    // output declaration of module GMII_send
-    wire               [   7: 0]        GMII_TXD                    ;
-    wire                                GMII_TXEN                   ;
-    wire                                GMII_TXER                   ;
-    
-    GMII_send #(
-        .BOARD_MAC                          (BOARD_MAC                 ),
-        .BOARD_IP                           (BOARD_IP                  ),
-        .BOARD_PORT                         (BOARD_PORT                ),
-        .DES_MAC                            (DES_MAC                   ),
-        .DES_IP                             (DES_IP                    ),
-        .DES_PORT                           (DES_PORT                  ),
-        .DATA_SIZE                          (DATA_SIZE                 ) 
-    ) u_GMII_send(
-        .rst_n                              (rst_n                     ),
-        .GMII_GTXCLK                        (clk_125M                  ),
-        .GMII_TXD                           (GMII_TXD                  ),
-        .GMII_TXEN                          (GMII_TXEN                 ),
-        .GMII_TXER                          (GMII_TXER                 ) 
+        .dst_mac                            (DST_MAC                   ),
+        .src_mac                            (LOCAL_MAC                 ),
+        .dst_ip                             (DST_IP                    ),
+        .src_ip                             (LOCAL_IP                  ),
+        .dst_port                           (DST_PORT                  ),
+        .src_port                           (LOCAL_PORT                ),
+
+
+        .data_length                        (data_length               ),
+        .payload_req_o                      (payload_req_o             ),
+        .payload_dat_i                      (payload_dat_i             ),
+
+        .gmii_tx_clk                        (gmii_tx_clk               ),
+        .gmii_txd                           (gmii_txd                  ),
+        .gmii_txen                          (gmii_txen                 ) 
     );
    
-   gmii_to_rgmii tx_gmii_to_rgmii(
-        .reset_n                            (rst_n                     ),
-        .gmii_tx_clk                        (clk_125M                  ),
-        .gmii_txd                           (GMII_TXD                  ),
-        .gmii_txen                          (GMII_TXEN                 ),
-        .gmii_txer                          (GMII_TXER                 ),
+    gmii_to_rgmii tx_gmii_to_rgmii(
+        .reset_n                            (                          ),
+        .gmii_tx_clk                        (gmii_tx_clk               ),
+        .gmii_txd                           (gmii_txd                  ),
+        .gmii_txen                          (gmii_txen                 ),
+        .gmii_txer                          (1'b0                      ),
         .rgmii_tx_clk                       (rgmii_tx_clk              ),
-        .rgmii_txd                          (rgmii_tx_d                ),
+        .rgmii_txd                          (rgmii_txd                 ),
         .rgmii_txen                         (rgmii_tx_ctl              ) 
-   );
-   
+    );
+
+    // output declaration of module eth_udp_rx_gmii
+    wire                                gmii_rx_clk                 ;
+    wire                                gmii_rx_rxd                 ;
+    wire                                gmii_rxdv                   ;
+
+    wire               [  15: 0]        rx_data_length              ;
+    wire                                payload_valid_o             ;
+    wire               [   7: 0]        payload_dat_o               ;
+
+    wire                                one_pkt_done                ;
+    wire                                pkt_error                   ;
+    wire               [  31: 0]        debug_crc_check             ;
+    
+    eth_udp_rx_gmii u_eth_udp_rx_gmii(
+        .reset_p                            (rst_n                     ),
+
+        .local_mac                          (LOCAL_MAC                 ),
+        .local_ip                           (LOCAL_IP                  ),
+        .local_port                         (LOCAL_PORT                ),
+
+        .clk125m_o                          (clk125m                   ),
+        
+        .exter_mac                          (                          ),
+        .exter_ip                           (                          ),
+        .exter_port                         (                          ),
+
+        .rx_data_length                     (rx_data_length            ),
+        .data_overflow_i                    (                          ),
+        .payload_valid_o                    (payload_valid_o           ),
+        .payload_dat_o                      (payload_dat_o             ),
+
+        .one_pkt_done                       (one_pkt_done              ),
+        .pkt_error                          (pkt_error                 ),
+        .debug_crc_check                    (debug_crc_check           ),
+
+        .gmii_rx_clk                        (gmii_rx_clk               ),
+        .gmii_rxd                           (gmii_rxd                  ),
+        .gmii_rxdv                          (gmii_rxdv                 ) 
+    );
+
+    rgmii_to_gmii rx_rgmii_to_gmii(
+        .reset                              (                          ),
+        .rgmii_rx_clk                       (rgmii_rx_clk              ),
+        .rgmii_rxd                          (rgmii_rxd                 ),
+        .rgmii_rxdv                         (rgmii_rx_ctl              ),
+        .gmii_rx_clk                        (gmii_rx_clk               ),
+        .gmii_rxd                           (gmii_rxd                  ),
+        .gmii_rxdv                          (gmii_rxdv                 ),
+        .gmii_rxer                          (                          ) 
+    );
     
 
 endmodule

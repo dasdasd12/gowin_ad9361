@@ -1,7 +1,7 @@
 // Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2019.1 (win64) Build 2552052 Fri May 24 14:49:42 MDT 2019
-// Date        : Fri Oct 10 21:40:28 2025
+// Date        : Sun Oct 12 13:58:06 2025
 // Host        : LAPTOP-BU1J38GH running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode synth_stub
 //               C:/program1/Program/2019.1vivado_project/AD9361_test/AD9361_test.srcs/sources_1/ip/ila_1/ila_1_stub.v
@@ -15,8 +15,8 @@
 // Please paste the declaration into a Verilog source file or add the file as an additional source.
 (* X_CORE_INFO = "ila,Vivado 2019.1" *)
 module ila_1(clk, probe0, probe1, probe2, probe3, probe4, probe5, 
-  probe6, probe7, probe8, probe9, probe10, probe11, probe12)
-/* synthesis syn_black_box black_box_pad_pin="clk,probe0[0:0],probe1[11:0],probe2[11:0],probe3[0:0],probe4[2:0],probe5[10:0],probe6[11:0],probe7[11:0],probe8[11:0],probe9[11:0],probe10[13:0],probe11[17:0],probe12[17:0]" */;
+  probe6, probe7, probe8, probe9, probe10, probe11, probe12, probe13, probe14, probe15)
+/* synthesis syn_black_box black_box_pad_pin="clk,probe0[0:0],probe1[11:0],probe2[11:0],probe3[0:0],probe4[2:0],probe5[10:0],probe6[11:0],probe7[11:0],probe8[11:0],probe9[11:0],probe10[13:0],probe11[17:0],probe12[17:0],probe13[0:0],probe14[0:0],probe15[1:0]" */;
   input clk;
   input [0:0]probe0;
   input [11:0]probe1;
@@ -31,4 +31,7 @@ module ila_1(clk, probe0, probe1, probe2, probe3, probe4, probe5,
   input [13:0]probe10;
   input [17:0]probe11;
   input [17:0]probe12;
+  input [0:0]probe13;
+  input [0:0]probe14;
+  input [1:0]probe15;
 endmodule

@@ -14,41 +14,102 @@ module data_mod(
     output reg           [  11: 0]      tx_data_Q                   
 );
 
-    parameter                           IDLE                        = 2'b00                ;
-    parameter                           SYNC                        = 2'b01                ;
-    parameter                           DATA                        = 2'b10                ;
-    parameter                           DONE                        = 2'b11                ;
+    localparam                           IDLE                        = 2'b00                ;
+    localparam                           SYNC                        = 2'b01                ;
+    localparam                           DATA                        = 2'b10                ;
+    localparam                           DONE                        = 2'b11                ;
 
     reg                [   1: 0]        state                       ;
 
-    parameter                           S                           = 12'b0111_0110_0100   ;  //1892
-    parameter                           C                           = 12'b0011_0000_1111   ;  //783
-    parameter                           NS                          = 12'b1000_1001_1100   ;  //-1892
-    parameter                           NC                          = 12'b1100_1111_0001   ;  //-783
+    localparam                           S                           = 12'b0111_0110_0100   ;  //1892
+    localparam                           C                           = 12'b0011_0000_1111   ;  //783
+    localparam                           NS                          = 12'b1000_1001_1100   ;  //-1892
+    localparam                           NC                          = 12'b1100_1111_0001   ;  //-783
 
-    assign                              data_valid                  = (state == DATA) ? 1'b1 : 1'b0;
+    assign                              data_valid                  = ((state == DATA)||(state == SYNC)) ? 1'b1 : 1'b0;
     assign                              frame_end                   = (state == DONE) ? 1'b1 : 1'b0;
 
-    reg                [   9: 0]        cnt                         ;
+    reg                [   4: 0]        clk_cnt                     ;
+    reg                                 bit_clk                     ;
 
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
+            clk_cnt <= 5'd0;
+            bit_clk <= 1'b0;
+        end 
+        else if (clk_cnt == 5'd2) begin
+            clk_cnt <= 5'd0;
+            bit_clk <= ~bit_clk;
+        end
+        else begin
+            clk_cnt <= clk_cnt + 1'b1;
+        end
+    end
+
+    //114 514 1717 710 
+
+    reg                [  15: 0]        test_cnt                    ;
+
+    reg                [   2: 0]        test_bit                    ;
+
+    always @(posedge bit_clk or negedge rst_n) begin
+        if (!rst_n) begin
+            test_cnt <= 16'd0;
+        end
+        else if (test_cnt == 16'd12) begin
+            test_cnt <= 16'd0;
+        end
+        else begin
+            test_cnt <= test_cnt + 1'b1;
+        end
+    end
+
+    always @(posedge bit_clk or negedge rst_n) begin
+        if (!rst_n) begin
+            test_bit <= 3'b000;
+        end
+        else case(test_cnt)
+                16'd0:   test_bit <= 3'd1;
+                16'd1:   test_bit <= 3'd1;
+                16'd2:   test_bit <= 3'd4;
+
+                16'd3:   test_bit <= 3'd5;
+                16'd4:   test_bit <= 3'd1;
+                16'd5:   test_bit <= 3'd4;
+
+                16'd6:   test_bit <= 3'd1;
+                16'd7:   test_bit <= 3'd7;
+                16'd8:   test_bit <= 3'd1;
+                16'd9:   test_bit <= 3'd7;
+
+                16'd10:  test_bit <= 3'd7;
+                16'd11:  test_bit <= 3'd1;
+                16'd12:  test_bit <= 3'd0;
+
+                default: test_bit <= 3'd0;
+        endcase
+    end
+
+    reg                [   15: 0]        cnt                         ;
+
+    always @(posedge bit_clk or negedge rst_n) begin
+        if (!rst_n) begin
             state <= IDLE;
-            cnt <= 10'd0;
+            cnt <= 16'd0;
         end 
         else begin
             case (state)
             
                 IDLE: begin
-                    if (frame_start) begin
+                    if (1'b1) begin
                         state <= SYNC;
                     end
                 end
 
                 SYNC: begin
-                    if (cnt == 10'd1023) begin
+                    if (cnt == 16'd1023) begin
                         state <= DATA;
-                        cnt   <= 10'd0;
+                        cnt   <= 16'd0;
                     end
                     else begin
                         cnt <= cnt + 1'b1;
@@ -56,9 +117,9 @@ module data_mod(
                 end
 
                 DATA: begin
-                    if (cnt == 10'd1023) begin
+                    if (cnt == 16'd4095) begin
                         state <= DONE;
-                        cnt   <= 10'd0;
+                        cnt   <= 16'd0;
                     end
                     else begin
                         cnt   <= cnt + 1'b1;
@@ -66,7 +127,13 @@ module data_mod(
                 end
 
                 DONE: begin
-                    state <= IDLE;
+                    if (cnt == 16'd2047) begin
+                        state <= IDLE;
+                        cnt   <= 16'd0;
+                    end
+                    else begin
+                        cnt   <= cnt + 1'b1;
+                    end
                 end
 
             endcase
@@ -75,12 +142,15 @@ module data_mod(
 
     reg                [   2: 0]        tx_bit                      ;
 
-    always @(posedge clk or negedge rst_n) begin
+    always @(posedge bit_clk or negedge rst_n) begin
         if (!rst_n) begin
             tx_bit <= 3'b000;
         end 
         else if (state == DATA && cnt >= 10'd1) begin
-            tx_bit <= bit_in;
+            tx_bit <= test_bit;
+        end
+        else if (state == DATA && cnt == 10'd0) begin
+            tx_bit <= 3'd4; //frame start symbol
         end
         else begin
             tx_bit <= 3'b000;
@@ -89,7 +159,7 @@ module data_mod(
 
     reg                [   2: 0]        sample_bit                  ;
 
-    always @(posedge clk or negedge rst_n) begin
+    always @(posedge bit_clk or negedge rst_n) begin
         if (!rst_n) begin
             sample_bit <= 3'b000;
         end 
@@ -97,7 +167,7 @@ module data_mod(
             sample_bit <= 3'b000;
         end
         else if (state == SYNC) begin
-            sample_bit <= sample_bit + 3'b010;
+            sample_bit <= 3'b010;
         end
         else if (state == DATA) begin
             sample_bit <= sample_bit + tx_bit;
@@ -107,12 +177,13 @@ module data_mod(
         end
     end
 
-    always @(posedge clk or negedge rst_n) begin
+    always @(posedge bit_clk or negedge rst_n) begin
         if (!rst_n) begin
             tx_data_I <= 12'd0;
             tx_data_Q <= 12'd0;
         end 
-        else case(sample_bit)
+        else if(data_valid) begin
+            case(sample_bit)
                 3'b000: begin 
                     tx_data_I <=  S; 
                     tx_data_Q <=  C; 
@@ -145,7 +216,12 @@ module data_mod(
                     tx_data_I <=  S; 
                     tx_data_Q <= NC; 
                 end
-        endcase
+            endcase
+        end
+        else begin
+            tx_data_I <= 12'd0;
+            tx_data_Q <= 12'd0;
+        end
     end
 
 

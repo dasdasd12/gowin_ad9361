@@ -74,8 +74,8 @@ module CordicError8 #(
     ROM #(
         .DATA_W   (ERROR_W),
         .ADDR_W   (ADDR_W * 2 - 1),
-        .INIT_FILE("./src/data/atan_rom.txt")
-        // .INIT_FILE("C:/program1/Program/2019.1vivado_project/demod/src/data/atan_rom.txt")
+        //.INIT_FILE("./src/data/atan_rom.txt")
+        .INIT_FILE("C:/program1/Program/2019.1vivado_project/demod/src/data/atan_rom.txt")
     ) atan_rom (
         .clk  (clk),
         .rst_n(rst_n),

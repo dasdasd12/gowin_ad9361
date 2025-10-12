@@ -149,14 +149,30 @@ module top (
       .resetb                             (resetb                    ) 
     );
 
-    A8pskmod_test u_A8pskmod_test(
+    // A8pskmod_test u_A8pskmod_test(
+    //   .clk                                (data_clk                  ),
+    //   .rst_n                              (rst_n                     ),
+    //   .tx_data_I                          (tx_data_I                 ),
+    //   .tx_data_Q                          (tx_data_Q                 ) 
+    // );
+
+    assign                              tx_data_valid               = 1'b1                 ;
+    
+    // output declaration of module data_mod
+
+    wire                                data_valid                  ;
+    
+    data_mod u_data_mod(
       .clk                                (data_clk                  ),
       .rst_n                              (rst_n                     ),
+      .frame_start                        (                          ),
+      .frame_end                          (                          ),
+      .bit_in                             (                          ),
+      .data_valid                         (data_valid                ),
       .tx_data_I                          (tx_data_I                 ),
       .tx_data_Q                          (tx_data_Q                 ) 
     );
-
-    assign tx_data_valid = 1'b1;
+    
 
     // output declaration of module Demod
     wire                                valid                       ;
@@ -171,17 +187,22 @@ module top (
       else 
         sample_clk <= ~sample_clk;
     end
+
+    wire                                frame_start                 ;
+    wire                                frame_end                   ;
     
     Demod #(
       .DATA_W                             (12                               )                     
     ) u_Demod(
-      .clk                                (sample_clk                ),
+      .clk                                (data_clk                  ),
       .rst_n                              (rst_n                     ),
       .in_i                               (rx_data_I                 ),
       .in_q                               (rx_data_Q                 ),
       .valid                              (valid                     ),
       .bit_out                            (bit_out                   ),
-      .phase_out                          (phase_out                 ) 
+      .phase_out                          (phase_out                 ),
+      .frame_start                        (frame_start               ),
+      .frame_end                          (frame_end                 )
     );
 
     ila_1 u_ila_1(
@@ -198,7 +219,10 @@ module top (
       .probe9                             (u_Demod.out_q             ),
       .probe10                            (u_Demod.u_Cordic.u_PID.data_in_int),
       .probe11                            (u_Demod.u_SignalValid.amp_dc),
-      .probe12                            (u_Demod.u_SignalValid.amp_ac)
+      .probe12                            (u_Demod.u_SignalValid.amp_ac),
+      .probe13                            (frame_start                 ),
+      .probe14                            (frame_end                   ),
+      .probe15                            (u_data_mod.state            )
     );
     
 endmodule
