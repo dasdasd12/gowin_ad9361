@@ -27,6 +27,10 @@ module SimpleBitSync8 #(
     reg  [$clog2(SIG_CYCLE_N+1)-1:0] counter;
     wire [                      2:0] bit_in = phase_in[PHASE_W-1:PHASE_W-3];
 
+    wire [2:0] bit_outp1, bit_outm1;
+    assign bit_outp1 = bit_out + 1;
+    assign bit_outm1 = bit_out - 1;
+
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
             counter   <= 0;
@@ -36,7 +40,7 @@ module SimpleBitSync8 #(
             bit_out   <= bit_in;
             phase_out <= phase_in;
 
-            if ((bit_out != bit_in) && (bit_out + 1 != bit_in) && (bit_out - 1 != bit_in)) begin
+            if ((bit_out != bit_in) && (bit_outp1 != bit_in) && (bit_outm1 != bit_in)) begin
                 counter <= HALF_CYCLE_N - 1;
             end else if (counter == SIG_CYCLE_N - 1) begin
                 counter <= 0;

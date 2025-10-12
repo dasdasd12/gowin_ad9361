@@ -51,28 +51,51 @@ module SignalValid #(
         .data_out(amp)
     );
 
-    movAvg #(
-        .WIDTH (DATA_W),
-        .WINDOW(AVE_LEN)
-    ) u_movAvg_dc (
-        .clock (clk),
-        .reset (~rst_n),
-        .ivalid(1'd1),
-        .idata (amp),
-        .ovalid(),
-        .odata (amp_dc)
+    // movAvg #(
+    //     .WIDTH (DATA_W),
+    //     .WINDOW(AVE_LEN)
+    // ) u_movAvg_dc (
+    //     .clock (clk),
+    //     .reset (~rst_n),
+    //     .ivalid(1'd1),
+    //     .idata (amp),
+    //     .ovalid(),
+    //     .odata (amp_dc)
+    // );
+
+    // movAvg #(
+    //     .WIDTH (DATA_W),
+    //     .WINDOW(AVE_LEN)
+    // ) u_movAvg_ac (
+    //     .clock (clk),
+    //     .reset (~rst_n),
+    //     .ivalid(1'd1),
+    //     .idata ((amp_dc > amp) ? (amp_dc - amp) : (amp - amp_dc)),
+    //     .ovalid(),
+    //     .odata (amp_ac)
+    // );
+
+
+    ave_filter #(
+        .LENGTH(AVE_LEN),
+        .WIDTH (DATA_W)
+    ) u_ave_filter_dc (
+        .clk     (clk),
+        .rst_n   (rst_n),
+        .en      (1),
+        .data_in (amp),
+        .data_out(amp_dc)
     );
 
-    movAvg #(
-        .WIDTH (DATA_W),
-        .WINDOW(AVE_LEN)
-    ) u_movAvg_ac (
-        .clock (clk),
-        .reset (~rst_n),
-        .ivalid(1'd1),
-        .idata ((amp_dc > amp) ? (amp_dc - amp) : (amp - amp_dc)),
-        .ovalid(),
-        .odata (amp_ac)
+    ave_filter #(
+        .LENGTH(AVE_LEN),
+        .WIDTH (DATA_W)
+    ) u_ave_filter_ac (
+        .clk     (clk),
+        .rst_n   (rst_n),
+        .en      (1),
+        .data_in ((amp_dc > amp) ? (amp_dc - amp) : (amp - amp_dc)),
+        .data_out(amp_ac)
     );
 
 

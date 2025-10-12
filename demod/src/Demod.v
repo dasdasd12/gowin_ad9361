@@ -35,8 +35,8 @@ module Demod #(
 
     parameter RMAX = 2;
     parameter M = 1;
-    parameter N = 3;
-    parameter REG_WIDTH = DATA_W + 2;
+    parameter N = 4;
+    parameter REG_WIDTH = DATA_W + 3;
 
     wire [REG_WIDTH-1:0] in_i_interpolated, in_q_interpolated;
 

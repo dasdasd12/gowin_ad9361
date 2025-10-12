@@ -79,9 +79,9 @@ module Costas #(
         .DATA_IN_W (ERROR_W),
         .DATA_OUT_W(PHASE_W),
         .KP        (1),
-        .KP_W      (6 - 4),
+        .KP_W      (6 - 3),
         .KI        (1),
-        .KI_W      (12 - 4),
+        .KI_W      (12 - 3),
         .KI_W_WHOLE(14)
     ) u_PID (
         .clk     (clk),
