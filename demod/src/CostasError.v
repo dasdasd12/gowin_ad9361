@@ -103,11 +103,23 @@ module CostasError8 #(
         .data_out(rom_data)
     );
 
-    reg bigger_d1 = 0, x_sign = 0, y_sign = 0;
+    reg x_sign_d, y_sign_d, x_sign_d1, y_sign_d1, bigger_d1;
     always @(posedge clk) begin
-        bigger_d1 <= bigger_d;
-        x_sign    <= x_in[DATA_W-1];
-        y_sign    <= y_in[DATA_W-1];
+        if (!rst_n) begin
+            x_sign_d  <= 0;
+            y_sign_d  <= 0;
+
+            bigger_d1 <= 0;
+            x_sign_d1 <= 0;
+            y_sign_d1 <= 0;
+        end else begin
+            x_sign_d  <= x_in[DATA_W-1];
+            y_sign_d  <= y_in[DATA_W-1];
+
+            bigger_d1 <= bigger_d;
+            x_sign_d1 <= x_sign_d;
+            y_sign_d1 <= y_sign_d;
+        end
     end
 
     always @(posedge clk or negedge rst_n) begin
@@ -117,8 +129,8 @@ module CostasError8 #(
         end else begin
             if (bigger_d1) begin
                 // x_abs >= y_abs
-                if (y_sign) begin
-                    if (x_sign) begin
+                if (y_sign_d1) begin
+                    if (x_sign_d1) begin
                         // x < 0, y < 0
                         error_out <= (1 << (ERROR_W - 1)) - rom_data;
                         phase_out <= -(1 << (ERROR_W + 2)) + rom_data;
@@ -128,7 +140,7 @@ module CostasError8 #(
                         phase_out <= -rom_data;
                     end
                 end else begin
-                    if (x_sign) begin
+                    if (x_sign_d1) begin
                         // x < 0, y > 0
                         error_out <= (1 << (ERROR_W - 1)) + rom_data;
                         phase_out <= (1 << (ERROR_W + 2)) - rom_data;
@@ -140,8 +152,8 @@ module CostasError8 #(
                 end
             end else begin
                 // x_abs < y_abs
-                if (y_sign) begin
-                    if (x_sign) begin
+                if (y_sign_d1) begin
+                    if (x_sign_d1) begin
                         // x < 0, y < 0
                         error_out <= (1 << (ERROR_W - 1)) + rom_data;
                         phase_out <= -(1 << (ERROR_W + 1)) - rom_data;
@@ -151,7 +163,7 @@ module CostasError8 #(
                         phase_out <= -(1 << (ERROR_W + 1)) + rom_data;
                     end
                 end else begin
-                    if (x_sign) begin
+                    if (x_sign_d1) begin
                         // x < 0, y > 0
                         error_out <= (1 << (ERROR_W - 1)) - rom_data;
                         phase_out <= (1 << (ERROR_W + 1)) + rom_data;
