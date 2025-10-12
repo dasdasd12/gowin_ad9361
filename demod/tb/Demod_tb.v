@@ -7,8 +7,9 @@
 // Descriptions:            
 //                          
 //---------------------------------------------------------------------------------------- 
-
+`ifdef __ICARUS__
 `include "../src/roms.vh"
+`endif
 module Demod_tb ();
     reg clk;
     reg rst_n;

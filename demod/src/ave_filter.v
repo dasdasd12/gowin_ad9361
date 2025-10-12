@@ -24,16 +24,16 @@ module ave_filter #(
     parameter LENGTH = 128,
     parameter WIDTH  = 10
 ) (
-    input                    clk,
-    input                    rst_n,
-    input                    en,
-    input signed [WIDTH-1:0] data_in,
+    input             clk,
+    input             rst_n,
+    input             en,
+    input [WIDTH-1:0] data_in,
 
-    output signed [WIDTH-1:0] data_out
+    output [WIDTH-1:0] data_out
 );
 
-    reg signed [               WIDTH-1:0] mem [LENGTH-1:0];
-    reg signed [$clog2(LENGTH)+WIDTH-1:0] sum;
+    reg [               WIDTH-1:0] mem [LENGTH-1:0];
+    reg [$clog2(LENGTH)+WIDTH-1:0] sum;
 
     integer i, j;
     initial begin
@@ -58,6 +58,6 @@ module ave_filter #(
         end
     end
 
-    assign data_out = sum >> $clog2(LENGTH);
+    assign data_out = sum[$clog2(LENGTH)+WIDTH-1-:$clog2(LENGTH)];
 
 endmodule
