@@ -3,18 +3,18 @@
 // Created by:             wxhenry
 // Created date:           2025/10/05 14:05:17 
 // Version:                V1.0 
-// File Name:              CordicError_tb.v 
+// File Name:              CostasError_tb.v 
 // Descriptions:            
 //                          
 //---------------------------------------------------------------------------------------- 
 
-module CordicError_tb ();
+module CostasError_tb ();
     reg clk;
     reg rst_n;
 
     initial begin
         $dumpfile("error_wave.vcd");  // 指定生成的波形文件名为 "wave.vcd"
-        $dumpvars(0, CordicError_tb);  // 记录所有层次的信号
+        $dumpvars(0, CostasError_tb);  // 记录所有层次的信号
     end
 
     initial begin
@@ -52,11 +52,11 @@ module CordicError_tb ();
         end
     end
 
-    CordicError8 #(
+    CostasError8 #(
         .DATA_W (12),
         .ADDR_W (8),
         .ERROR_W(8)
-    ) u_CordicError8 (
+    ) u_CostasError8 (
         .clk      (clk),
         .rst_n    (rst_n),
         .x_in     (x_in),

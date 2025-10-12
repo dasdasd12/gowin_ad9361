@@ -3,12 +3,12 @@
 // Created by:             wxhenry
 // Created date:           2025/10/05 19:33:59 
 // Version:                V1.0 
-// File Name:              Cordic_tb.v 
+// File Name:              Costas_tb.v 
 // Descriptions:            
 //                          
 //---------------------------------------------------------------------------------------- 
 
-module Cordic_tb ();
+module Costas_tb ();
     reg clk;
     reg rst_n;
 
@@ -22,8 +22,8 @@ module Cordic_tb ();
     end
 
     initial begin
-        $dumpfile("./src/data/cordic_wave.vcd");  // 指定生成的波形文件名为 "wave.vcd"
-        $dumpvars(0, Cordic_tb);  // 记录所有层次的信号
+        $dumpfile("./src/data/Costas_wave.vcd");  // 指定生成的波形文件名为 "wave.vcd"
+        $dumpvars(0, Costas_tb);  // 记录所有层次的信号
     end
 
 
@@ -46,12 +46,12 @@ module Cordic_tb ();
         $finish;
     end
 
-    Cordic #(
+    Costas #(
         .DATA_W    (DATA_W),
         .DATA_DDS_W(10),
         .PHASE_W   (12),
         .ERROR_W   (8)
-    ) u_Cordic (
+    ) u_Costas (
         .clk  (clk),
         .rst_n(rst_n),
         .in_i (in_i),

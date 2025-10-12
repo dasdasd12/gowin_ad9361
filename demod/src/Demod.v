@@ -89,8 +89,8 @@ module Demod #(
 
     SignalValid #(
         .DATA_W   (12),
-        .THRESH_AC(20000),
-        .THRESH_DC(30000)
+        .THRESH_AC(30),
+        .THRESH_DC(50)
     ) u_SignalValid (
         .clk  (clk),
         .rst_n(rst_n),
@@ -104,12 +104,12 @@ module Demod #(
     wire signed [DATA_W-1:0] out_i, out_q;
     wire signed [11-1:0] phase;
 
-    Cordic #(
+    Costas #(
         .DATA_W    (DATA_W),
         .DATA_DDS_W(10),
         .PHASE_W   (12),
         .ERROR_W   (8)
-    ) u_Cordic (
+    ) u_Costas (
         .clk  (clk),
         .rst_n(rst_n),
         .in_i (in_i_interpolated[REG_WIDTH-1-:DATA_W]),
@@ -182,13 +182,13 @@ module Demod #(
 
 
     reg frame, frame_d;
-    always @(posedge clk or negedge rst_n) begin
+    always @(*) begin
         if (!rst_n) begin
             frame <= 1'b0;
         end else begin
             if (state == LOCK_S && bit_out == 3'b100) begin
                 frame <= 1'b1;
-            end else if (state == LOCK_S && state_next == IDLE_S) begin
+            end else if (~signal_valid) begin
                 frame <= 1'b0;
             end
         end
