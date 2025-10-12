@@ -19,18 +19,62 @@ module Demod #(
 
     output                 valid,
     output signed [   2:0] bit_out,
-    output signed [11-1:0] phase_out
+    output signed [11-1:0] phase_out,
+
+    output frame_start,
+    output frame_end
 );
 
-    // todo: add lock detect; test with worse input signal
-
-    // use time counter to stop sync
     localparam IDLE_S = 2'b00;
     localparam SYNC_S = 2'b01;
     localparam LOCK_S = 2'b10;
 
+    // use time counter to stop carrier sync
     parameter TIMEOUT = 250;
     parameter COUNTER_N = $clog2(TIMEOUT);
+
+    parameter RMAX = 2;
+    parameter M = 1;
+    parameter N = 3;
+    parameter REG_WIDTH = DATA_W + 2;
+
+    wire [REG_WIDTH-1:0] in_i_interpolated, in_q_interpolated;
+
+    cic_interpolator #(
+        .WIDTH    (DATA_W),
+        .RMAX     (RMAX),
+        .M        (M),
+        .N        (N),
+        .REG_WIDTH(REG_WIDTH)
+    ) u_cic_interpolator_i (
+        .clk          (clk),
+        .rst_n        (rst_n),
+        .input_tdata  (in_i),
+        .input_tvalid (1'd1),
+        .input_tready (in_i_input_tready),
+        .output_tdata (in_i_interpolated),
+        .output_tvalid(in_i_output_tvalid),
+        .output_tready(1'd1),
+        .rate         (2'd2)
+    );
+
+    cic_interpolator #(
+        .WIDTH    (DATA_W),
+        .RMAX     (RMAX),
+        .M        (M),
+        .N        (N),
+        .REG_WIDTH(REG_WIDTH)
+    ) u_cic_interpolator_q (
+        .clk          (clk),
+        .rst_n        (rst_n),
+        .input_tdata  (in_q),
+        .input_tvalid (1'd1),
+        .input_tready (in_q_input_tready),
+        .output_tdata (in_q_interpolated),
+        .output_tvalid(in_q_output_tvalid),
+        .output_tready(1'd1),
+        .rate         (2'd2)
+    );
 
     reg [1:0] state, state_next;
 
@@ -50,8 +94,8 @@ module Demod #(
     ) u_SignalValid (
         .clk  (clk),
         .rst_n(rst_n),
-        .in_i (in_i),
-        .in_q (in_q),
+        .in_i (in_i_interpolated[REG_WIDTH-1-:DATA_W]),
+        .in_q (in_q_interpolated[REG_WIDTH-1-:DATA_W]),
         .valid(signal_valid)
     );
 
@@ -68,8 +112,8 @@ module Demod #(
     ) u_Cordic (
         .clk  (clk),
         .rst_n(rst_n),
-        .in_i (in_i),
-        .in_q (in_q),
+        .in_i (in_i_interpolated[REG_WIDTH-1-:DATA_W]),
+        .in_q (in_q_interpolated[REG_WIDTH-1-:DATA_W]),
         .out_i(out_i),
         .out_q(out_q),
         .phase(phase)
@@ -79,7 +123,7 @@ module Demod #(
 
     SimpleBitSync8 #(
         .PHASE_W    (11),
-        .SIG_CYCLE_N(3)
+        .SIG_CYCLE_N(6)
     ) u_SimpleBitSync8 (
         .clk      (clk),
         .rst_n    (rst_n),
@@ -131,9 +175,36 @@ module Demod #(
                     state_next = sync_time_out ? LOCK_S : SYNC_S;
                 end
             endcase
+        end else begin
+            state_next = IDLE_S;
         end
     end
 
-    assign valid = (state == LOCK_S) && valid_out;
+
+    reg frame, frame_d;
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            frame <= 1'b0;
+        end else begin
+            if (state == LOCK_S && bit_out == 3'b100) begin
+                frame <= 1'b1;
+            end else if (state == LOCK_S && state_next == IDLE_S) begin
+                frame <= 1'b0;
+            end
+        end
+    end
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            frame_d <= 1'b0;
+        end else begin
+            frame_d <= frame;
+        end
+    end
+
+    assign frame_start = frame && !frame_d;
+    assign frame_end   = !frame && frame_d;
+
+
+    assign valid       = frame && valid_out;
 
 endmodule

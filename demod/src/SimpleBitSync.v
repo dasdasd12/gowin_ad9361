@@ -10,7 +10,7 @@
 
 module SimpleBitSync8 #(
     parameter PHASE_W     = 11,
-    parameter SIG_CYCLE_N = 3
+    parameter SIG_CYCLE_N = 6
 ) (
     input clk,
     input rst_n,
@@ -22,7 +22,7 @@ module SimpleBitSync8 #(
     output reg [PHASE_W-1:0] phase_out
 );
 
-    localparam HALF_CYCLE_N = (SIG_CYCLE_N + 1) >> 1;
+    localparam HALF_CYCLE_N = (SIG_CYCLE_N >> 1) + 1;
 
     reg  [$clog2(SIG_CYCLE_N+1)-1:0] counter;
     wire [                      2:0] bit_in = phase_in[PHASE_W-1:PHASE_W-3];
