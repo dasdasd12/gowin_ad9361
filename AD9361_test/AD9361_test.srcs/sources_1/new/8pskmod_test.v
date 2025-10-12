@@ -48,7 +48,7 @@ module A8pskmod_test(
             simbol_bit <= 3'b0;
         end
         else begin
-            simbol_bit <= simbol_bit + delta_bit;
+            simbol_bit <= simbol_bit + 1'b1;
         end
     end                                          
 
