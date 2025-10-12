@@ -74,12 +74,7 @@ module CostasError8 #(
     ROM #(
         .DATA_W   (ERROR_W),
         .ADDR_W   (ADDR_W * 2 - 1),
-<<<<<<< HEAD:demod/src/CordicError.v
-        //.INIT_FILE("./src/data/atan_rom.txt")
-        .INIT_FILE("C:/program1/Program/2019.1vivado_project/demod/src/data/atan_rom.txt")
-=======
         .INIT_FILE(`ATAN_ROM_PATH)
->>>>>>> 70e1f8b1e2198a85d3d301443f37da2d71f52f04:demod/src/CostasError.v
     ) atan_rom (
         .clk  (clk),
         .rst_n(rst_n),

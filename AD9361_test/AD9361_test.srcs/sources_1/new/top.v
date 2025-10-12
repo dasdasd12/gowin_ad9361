@@ -217,7 +217,7 @@ module top (
       .probe7                             (tx_data_Q                 ),
       .probe8                             (u_Demod.out_i             ),
       .probe9                             (u_Demod.out_q             ),
-      .probe10                            (u_Demod.u_Cordic.u_PID.data_in_int),
+      .probe10                            (u_Demod.u_Costas.u_PID.data_in_int),
       .probe11                            (u_Demod.u_SignalValid.amp_dc),
       .probe12                            (u_Demod.u_SignalValid.amp_ac),
       .probe13                            (frame_start                 ),
