@@ -222,7 +222,8 @@ module top (
       .probe12                            (u_Demod.u_SignalValid.amp_ac),
       .probe13                            (frame_start                 ),
       .probe14                            (frame_end                   ),
-      .probe15                            (u_data_mod.state            )
+      .probe15                            (u_data_mod.state            ),
+      .probe16                            (u_Demod.u_SignalValid.amp)
     );
     
 endmodule
