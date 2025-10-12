@@ -87,8 +87,7 @@ module DDS #(
     ROM_DULE #(
         .DATA_W   (DATA_W - 1),
         .ADDR_W   (ROM_ADDR_W),
-        .INIT_FILE("./src/data/sine_rom.txt")
-        // .INIT_FILE("C:/program1/Program/2019.1vivado_project/demod/src/data/sine_rom.txt")
+        .INIT_FILE(`SIN_ROM_PATH)
     ) sin_rom (
         .clk  (clk),
         .rst_n(rst_n),

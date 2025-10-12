@@ -3,7 +3,7 @@
 // Created by:             wxhenry
 // Created date:           2025/10/04 21:58:26 
 // Version:                V1.0 
-// File Name:              CordicError.v 
+// File Name:              CostasError.v 
 // Descriptions:            
 //                          
 //---------------------------------------------------------------------------------------- 
@@ -14,7 +14,7 @@
 //   /|\
 //  / | \
 
-module CordicError8 #(
+module CostasError8 #(
     parameter DATA_W  = 12,  // 数据位宽
     parameter ADDR_W  = 8,   // 单个地址位宽
     parameter ERROR_W = 8
@@ -74,8 +74,7 @@ module CordicError8 #(
     ROM #(
         .DATA_W   (ERROR_W),
         .ADDR_W   (ADDR_W * 2 - 1),
-        .INIT_FILE("./src/data/atan_rom.txt")
-        // .INIT_FILE("C:/program1/Program/2019.1vivado_project/demod/src/data/atan_rom.txt")
+        .INIT_FILE(`ATAN_ROM_PATH)
     ) atan_rom (
         .clk  (clk),
         .rst_n(rst_n),

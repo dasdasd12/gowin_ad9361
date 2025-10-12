@@ -7,7 +7,7 @@ $end
 $timescale
 	100ps
 $end
-$scope module Cordic_tb $end
+$scope module Costas_tb $end
 $var wire 3 ! phase_high [2:0] $end
 $var wire 11 " phase [10:0] $end
 $var wire 12 # out_q [11:0] $end
@@ -19,7 +19,7 @@ $var reg 12 ( in_i [11:0] $end
 $var reg 12 ) in_q [11:0] $end
 $var reg 1 * rst_n $end
 $var integer 32 + i [31:0] $end
-$scope module u_Cordic $end
+$scope module u_Costas $end
 $var wire 1 ' clk $end
 $var wire 12 , in_i [11:0] $end
 $var wire 12 - in_q [11:0] $end
@@ -51,7 +51,7 @@ $var parameter 32 B DATA_OUT_W $end
 $var reg 12 C out_i [11:0] $end
 $var reg 12 D out_q [11:0] $end
 $upscope $end
-$scope module u_CordicError8 $end
+$scope module u_CostasError8 $end
 $var wire 1 ' clk $end
 $var wire 1 * rst_n $end
 $var wire 12 E x_in [11:0] $end

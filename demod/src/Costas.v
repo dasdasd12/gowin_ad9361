@@ -3,12 +3,12 @@
 // Created by:             wxhenry
 // Created date:           2025/10/05 17:03:04 
 // Version:                V1.0 
-// File Name:              Cordic.v 
+// File Name:              Costas.v 
 // Descriptions:            
 //                          
 //---------------------------------------------------------------------------------------- 
 
-module Cordic #(
+module Costas #(
     parameter DATA_W     = 12,
     parameter DATA_DDS_W = 10,
     parameter PHASE_W    = 12,
@@ -33,7 +33,7 @@ module Cordic #(
         .DATA_W        (DATA_DDS_W),
         .PHASE_W       (PHASE_W),
         .ROM_ADDR_W    (8),
-        .phase_inc_base(-5)
+        .phase_inc_base(0)
     ) u_DDS (
         .clk            (clk),
         .rst_n          (rst_n),
@@ -61,11 +61,11 @@ module Cordic #(
 
     wire signed [ERROR_W-1:0] error;
 
-    CordicError8 #(
+    CostasError8 #(
         .DATA_W (DATA_W),
         .ADDR_W (8),
         .ERROR_W(ERROR_W)
-    ) u_CordicError8 (
+    ) u_CostasError8 (
         .clk      (clk),
         .rst_n    (rst_n),
         .x_in     (out_i),

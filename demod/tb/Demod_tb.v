@@ -3,11 +3,12 @@
 // Created by:             wxhenry
 // Created date:           2025/10/05 19:33:59 
 // Version:                V1.0 
-// File Name:              Cordic_tb.v 
+// File Name:              Costas_tb.v 
 // Descriptions:            
 //                          
 //---------------------------------------------------------------------------------------- 
 
+`include "../src/roms.vh"
 module Demod_tb ();
     reg clk;
     reg rst_n;
@@ -77,12 +78,12 @@ module Demod_tb ();
     //     .phase_out(phase)
     // );
 
-    // Cordic #(
+    // Costas #(
     //     .DATA_W    (DATA_W),
     //     .DATA_DDS_W(10),
     //     .PHASE_W   (10),
     //     .ERROR_W   (8)
-    // ) u_Cordic (
+    // ) u_Costas (
     //     .clk  (clk),
     //     .rst_n(rst_n),
     //     .in_i (in_i),
