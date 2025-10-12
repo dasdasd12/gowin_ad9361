@@ -64,12 +64,32 @@ module CostasError8 #(
     assign bigger = x_abs >= y_abs;
     assign lz     = bigger ? x_lz : y_lz;
 
+
+    reg                      bigger_d;
+    reg [$clog2(DATA_W)-1:0] lz_d;
+    reg [DATA_W-2:0] x_abs_d, y_abs_d;
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            bigger_d <= 0;
+            lz_d     <= 0;
+            x_abs_d  <= 0;
+            y_abs_d  <= 0;
+        end else begin
+            bigger_d <= bigger;
+            lz_d     <= lz;
+            x_abs_d  <= x_abs;
+            y_abs_d  <= y_abs;
+        end
+    end
+
+
+
     wire [DATA_W-2:0] x_moved, y_moved;
-    assign x_moved = (x_abs << lz) >> (DATA_W - ADDR_W - 1);
-    assign y_moved = (y_abs << lz) >> (DATA_W - ADDR_W - 1);
+    assign x_moved = (x_abs_d << lz_d) >> (DATA_W - ADDR_W - 1);
+    assign y_moved = (y_abs_d << lz_d) >> (DATA_W - ADDR_W - 1);
 
     wire [ADDR_W*2-1:0] rom_addr;
-    assign rom_addr = bigger ? {x_moved[ADDR_W-1:0], y_moved[ADDR_W-1:0]} : {y_moved[ADDR_W-1:0], x_moved[ADDR_W-1:0]};
+    assign rom_addr = bigger_d ? {x_moved[ADDR_W-1:0], y_moved[ADDR_W-1:0]} : {y_moved[ADDR_W-1:0], x_moved[ADDR_W-1:0]};
 
     ROM #(
         .DATA_W   (ERROR_W),
@@ -83,11 +103,11 @@ module CostasError8 #(
         .data_out(rom_data)
     );
 
-    reg bigger_d = 0, x_sign = 0, y_sign = 0;
+    reg bigger_d1 = 0, x_sign = 0, y_sign = 0;
     always @(posedge clk) begin
-        bigger_d <= bigger;
-        x_sign   <= x_in[DATA_W-1];
-        y_sign   <= y_in[DATA_W-1];
+        bigger_d1 <= bigger_d;
+        x_sign    <= x_in[DATA_W-1];
+        y_sign    <= y_in[DATA_W-1];
     end
 
     always @(posedge clk or negedge rst_n) begin
@@ -95,7 +115,7 @@ module CostasError8 #(
             error_out <= 0;
             phase_out <= 0;
         end else begin
-            if (bigger_d) begin
+            if (bigger_d1) begin
                 // x_abs >= y_abs
                 if (y_sign) begin
                     if (x_sign) begin
