@@ -34,8 +34,8 @@ module cic_tb ();
     parameter WIDTH = 12;
     parameter RMAX = 2;
     parameter M = 1;
-    parameter N = 3;
-    parameter REG_WIDTH = WIDTH + 2;
+    parameter N = 5;
+    parameter REG_WIDTH = WIDTH + 4;
 
     reg  [    WIDTH-1:0] input_tdata;
     wire [REG_WIDTH-1:0] output_tdata;
