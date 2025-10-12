@@ -70,21 +70,21 @@ module data_mod(
         end
         else case(test_cnt)
                 16'd0:   test_bit <= 3'd1;
-                16'd1:   test_bit <= 3'd1;
-                16'd2:   test_bit <= 3'd4;
+                16'd1:   test_bit <= 3'd2;
+                16'd2:   test_bit <= 3'd3;
 
-                16'd3:   test_bit <= 3'd5;
-                16'd4:   test_bit <= 3'd1;
-                16'd5:   test_bit <= 3'd4;
+                16'd3:   test_bit <= 3'd4;
+                16'd4:   test_bit <= 3'd5;
+                16'd5:   test_bit <= 3'd6;
 
-                16'd6:   test_bit <= 3'd1;
-                16'd7:   test_bit <= 3'd7;
+                16'd6:   test_bit <= 3'd7;
+                16'd7:   test_bit <= 3'd0;
                 16'd8:   test_bit <= 3'd1;
-                16'd9:   test_bit <= 3'd7;
+                16'd9:   test_bit <= 3'd2;
 
-                16'd10:  test_bit <= 3'd7;
-                16'd11:  test_bit <= 3'd1;
-                16'd12:  test_bit <= 3'd0;
+                16'd10:  test_bit <= 3'd3;
+                16'd11:  test_bit <= 3'd4;
+                16'd12:  test_bit <= 3'd5;
 
                 default: test_bit <= 3'd0;
         endcase
