@@ -1,0 +1,78 @@
+#! /opt/homebrew/Cellar/icarus-verilog/12.0/bin/vvp
+:ivl_version "12.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 10;
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/system.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/v2005_math.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/va_math.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/v2009.vpi";
+S_0x117604f80 .scope package, "$unit" "$unit" 2 1;
+ .timescale 0 0;
+S_0x117605120 .scope module, "Convert_Buffer" "Convert_Buffer" 3 11;
+ .timescale -9 -10;
+    .port_info 0 /INPUT 1 "clk";
+    .port_info 1 /INPUT 1 "rst_n";
+    .port_info 2 /INPUT 1 "frame_end";
+    .port_info 3 /INPUT 1 "in_valid";
+    .port_info 4 /INPUT 8 "in_data";
+    .port_info 5 /INPUT 1 "out_ready";
+    .port_info 6 /OUTPUT 1 "out_valid";
+    .port_info 7 /OUTPUT 3 "out_data";
+P_0x117605290 .param/l "BIG_W" 1 3 28, +C4<00000000000000000000000000001000>;
+P_0x1176052d0 .param/l "DEPTH" 0 3 14, +C4<00000000000000000000000000010000>;
+P_0x117605310 .param/l "IDLE_S" 1 3 33, C4<00>;
+P_0x117605350 .param/l "IN_W" 0 3 12, +C4<00000000000000000000000000001000>;
+P_0x117605390 .param/l "OUT_W" 0 3 13, +C4<00000000000000000000000000000011>;
+P_0x1176053d0 .param/l "READ_S" 1 3 35, C4<10>;
+P_0x117605410 .param/l "WRITE_S" 1 3 34, C4<01>;
+o0x108018010 .functor BUFZ 1, C4<z>; HiZ drive
+v0x117605820_0 .net "clk", 0 0, o0x108018010;  0 drivers
+o0x108018040 .functor BUFZ 1, C4<z>; HiZ drive
+v0x1176158c0_0 .net "frame_end", 0 0, o0x108018040;  0 drivers
+o0x108018070 .functor BUFZ 8, C4<zzzzzzzz>; HiZ drive
+v0x117615960_0 .net "in_data", 7 0, o0x108018070;  0 drivers
+o0x1080180a0 .functor BUFZ 1, C4<z>; HiZ drive
+v0x117615a00_0 .net "in_valid", 0 0, o0x1080180a0;  0 drivers
+v0x117615aa0_0 .var "next_state", 1 0;
+o0x108018100 .functor BUFZ 3, C4<zzz>; HiZ drive
+v0x117615b90_0 .net "out_data", 2 0, o0x108018100;  0 drivers
+o0x108018130 .functor BUFZ 1, C4<z>; HiZ drive
+v0x117615c40_0 .net "out_ready", 0 0, o0x108018130;  0 drivers
+o0x108018160 .functor BUFZ 1, C4<z>; HiZ drive
+v0x117615ce0_0 .net "out_valid", 0 0, o0x108018160;  0 drivers
+o0x108018190 .functor BUFZ 1, C4<z>; HiZ drive
+v0x117615d80_0 .net "rst_n", 0 0, o0x108018190;  0 drivers
+v0x117615e90_0 .var "state", 1 0;
+E_0x1176057a0 .event "_ivl_3";
+E_0x1176057e0/0 .event negedge, v0x117615d80_0;
+E_0x1176057e0/1 .event posedge, v0x117605820_0;
+E_0x1176057e0 .event/or E_0x1176057e0/0, E_0x1176057e0/1;
+    .scope S_0x117605120;
+T_0 ;
+    %wait E_0x1176057e0;
+    %load/vec4 v0x117615d80_0;
+    %nor/r;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_0.0, 8;
+    %pushi/vec4 0, 0, 2;
+    %assign/vec4 v0x117615e90_0, 0;
+    %jmp T_0.1;
+T_0.0 ;
+    %load/vec4 v0x117615aa0_0;
+    %assign/vec4 v0x117615e90_0, 0;
+T_0.1 ;
+    %jmp T_0;
+    .thread T_0;
+    .scope S_0x117605120;
+T_1 ;
+    %wait E_0x1176057a0;
+    %jmp T_1;
+    .thread T_1;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "-";
+    "/Users/henry/Desktop/buffer/Buffer.v";
