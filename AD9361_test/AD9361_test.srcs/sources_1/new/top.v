@@ -244,19 +244,16 @@ module top (
       .clk                                (data_clk                  ),
       .rst_n                              (rst_n                     ),
       .frame_end                          (                          ),
-      .in_ready                           (in_ready                  ),
-      .in_valid                           (in_valid                  ),
-      .in_data                            (in_data                   ),
-      .out_ready                          (out_ready                 ),
-      .out_valid                          (out_valid                 ),
-      .out_data                           (out_data                  ) 
+      .in_ready                           (                          ),
+      .in_valid                           (                          ),
+      .in_data                            (                          ),
+      .out_ready                          (                          ),
+      .out_valid                          (                          ),
+      .out_data                           (                          ) 
     );
     
 
     // output declaration of module ConvertBuffer
-    wire                                in_ready                    ;
-    wire                                out_valid                   ;
-    wire               [   7: 0]        out_data                    ;
     
     ConvertBuffer #(
       .IN_W                               (3                         ),
@@ -270,7 +267,7 @@ module top (
       .in_data                            (bit_out                   ),
       .out_ready                          (1'b1                      ),
       .out_valid                          (out_valid                 ),
-      .out_data                           (out_data                  ) 
+      .out_data                           (                  ) 
     );
 
     // output declaration of module async_fifo
