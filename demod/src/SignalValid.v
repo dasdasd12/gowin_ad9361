@@ -78,7 +78,7 @@ module SignalValid #(
 
     ave_filter #(
         .LENGTH(AVE_LEN),
-        .WIDTH (DATA_W)
+        .WIDTH (SQRT_W)
     ) u_ave_filter_dc (
         .clk     (clk),
         .rst_n   (rst_n),
@@ -89,7 +89,7 @@ module SignalValid #(
 
     ave_filter #(
         .LENGTH(AVE_LEN),
-        .WIDTH (DATA_W)
+        .WIDTH (SQRT_W)
     ) u_ave_filter_ac (
         .clk     (clk),
         .rst_n   (rst_n),

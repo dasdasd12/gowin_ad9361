@@ -20,7 +20,7 @@ module Demod_tb ();
     end
     initial begin
         rst_n = 1'b0;
-        #3 rst_n = 1'b1;
+        #2.5 rst_n = 1'b1;
     end
 
     initial begin
@@ -45,7 +45,8 @@ module Demod_tb ();
     integer              i;
 
     initial begin
-        $readmemh("./tb/tx_signal.hex", in_array);
+        // $readmemh("./tb/tx_signal.hex", in_array);
+        $readmemh("C:/program1/Program/2019.1vivado_project/demod/tb/tx_signal.hex", in_array);
         for (i = 0; i < N; i = i + 1) begin
             {in_i, in_q} = in_array[i];
             #2;
