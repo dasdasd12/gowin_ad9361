@@ -111,7 +111,7 @@ module Demod #(
         .ERROR_W   (8)
     ) u_Costas (
         .clk  (clk),
-        .rst_n(rst_n),
+        .rst_n(rst_n && signal_valid),
         .in_i (in_i_interpolated[REG_WIDTH-1-:DATA_W]),
         .in_q (in_q_interpolated[REG_WIDTH-1-:DATA_W]),
         .out_i(out_i),
