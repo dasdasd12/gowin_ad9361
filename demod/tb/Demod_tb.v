@@ -40,13 +40,13 @@ module Demod_tb ();
 
     reg signed [DATA_W*2-1:0] in_array[0:N-1];
     reg signed [DATA_W-1:0] in_i, in_q;
-    wire signed [DATA_W-1:0] out_i, out_q;
-    wire signed [11-1:0] phase;
-    integer              i;
+    // wire signed [DATA_W-1:0] out_i, out_q;
+    // wire signed [11-1:0] phase;
+    integer i;
 
     initial begin
         // $readmemh("./tb/tx_signal.hex", in_array);
-        $readmemh("C:/program1/Program/2019.1vivado_project/demod/tb/tx_signal.hex", in_array);
+        $readmemh(`TX_SIGNAL_PATH, in_array);
         for (i = 0; i < N; i = i + 1) begin
             {in_i, in_q} = in_array[i];
             #2;

@@ -48,8 +48,6 @@ module CostasError8 #(
         end
     endfunction
 
-    wire [ADDR_W*2-2:0] addr;
-    wire [ ERROR_W-1:0] rom_data;
 
     wire [DATA_W-2:0] x_abs, y_abs;
     assign x_abs = x_in[DATA_W-1] ? -x_in : x_in;
@@ -89,6 +87,8 @@ module CostasError8 #(
     assign y_moved = (y_abs_d << lz_d) >> (DATA_W - ADDR_W - 1);
 
     wire [ADDR_W*2-1:0] rom_addr;
+    wire [ ERROR_W-1:0] rom_data;
+
     assign rom_addr = bigger_d ? {x_moved[ADDR_W-1:0], y_moved[ADDR_W-1:0]} : {y_moved[ADDR_W-1:0], x_moved[ADDR_W-1:0]};
 
     ROM #(

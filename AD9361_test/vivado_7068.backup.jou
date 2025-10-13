@@ -1,0 +1,15 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Mon Oct 13 17:47:03 2025
+# Process ID: 7068
+# Current directory: D:/Projects/gowin_ad9361/AD9361_test
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent29384 D:\Projects\gowin_ad9361\AD9361_test\AD9361_test.xpr
+# Log file: D:/Projects/gowin_ad9361/AD9361_test/vivado.log
+# Journal file: D:/Projects/gowin_ad9361/AD9361_test\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project D:/Projects/gowin_ad9361/AD9361_test/AD9361_test.xpr
+update_compile_order -fileset sources_1
+pwd

@@ -1,10 +1,10 @@
 // Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2019.1 (win64) Build 2552052 Fri May 24 14:49:42 MDT 2019
-// Date        : Fri Oct 10 12:39:50 2025
-// Host        : LAPTOP-BU1J38GH running 64-bit major release  (build 9200)
+// Date        : Mon Oct 13 18:05:48 2025
+// Host        : wxHenry running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode synth_stub
-//               C:/program1/Program/2019.1vivado_project/AD9361_test/AD9361_test.srcs/sources_1/ip/clk_wiz_2/clk_wiz_2_stub.v
+//               D:/Projects/gowin_ad9361/AD9361_test/AD9361_test.srcs/sources_1/ip/clk_wiz_2/clk_wiz_2_stub.v
 // Design      : clk_wiz_2
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7z020clg484-1
