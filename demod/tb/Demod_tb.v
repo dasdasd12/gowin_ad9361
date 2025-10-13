@@ -28,12 +28,12 @@ module Demod_tb ();
         $dumpvars(0, Demod_tb);  // 记录所有层次的信号
     end
 
-    initial begin
-        #1000;
-        force u_Demod.signal_valid = 1'b0;
-        #20;
-        release u_Demod.signal_valid;
-    end
+    // initial begin
+    //     #1000;
+    //     force u_Demod.signal_valid = 1'b0;
+    //     #20;
+    //     release u_Demod.signal_valid;
+    // end
 
     parameter DATA_W = 12;
     parameter N = 4_000;

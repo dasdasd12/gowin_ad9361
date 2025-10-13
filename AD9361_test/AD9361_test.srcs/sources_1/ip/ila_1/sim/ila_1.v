@@ -86,7 +86,7 @@ input [13 : 0] probe10;
 input [17 : 0] probe11;
 input [17 : 0] probe12;
 input [0 : 0] probe13;
-input [0 : 0] probe14;
+input [1 : 0] probe14;
 input [1 : 0] probe15;
 input [7 : 0] probe16;
 

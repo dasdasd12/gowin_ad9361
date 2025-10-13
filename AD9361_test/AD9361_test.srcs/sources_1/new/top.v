@@ -24,7 +24,8 @@
 module top (
     input                               clk                        ,
     input                               rst                        ,
-    //uart
+    input                               rst_demod                  ,
+    //uart 
     input                               uart_rx                    ,
     output                              uart_tx                    ,
 
@@ -62,9 +63,11 @@ module top (
 
     wire                                sys_clk                     ;
     wire                                rst_n                       ;
+    wire                                rst_n_demod                 ;
 
     assign                              sys_clk                     = clk                  ;
     assign                              rst_n                       = ~rst                 ;
+    assign                              rst_n_demod                 = ~rst_demod           ;
 
     wire               [  11: 0]        addr                        ;
     wire                                rd_done                     ;
@@ -157,26 +160,26 @@ module top (
     wire                                frame_start                 ;
     wire                                frame_end                   ;
     
-    ethernet_interface u_ethernet_interface(
-      .rst_n                              (rst_n                     ),
-      .clk125m                            (clk125m                   ),
+    // ethernet_interface u_ethernet_interface(
+    //   .rst_n                              (rst_n                     ),
+    //   .clk125m                            (clk125m                   ),
 
-      .tx_data                            (eth_tx_data               ),
-      .frame_start                        (frame_end                 ),
-      .tx_data_valid                      (eth_tx_data_valid         ),
+    //   .tx_data                            (eth_tx_data               ),
+    //   .frame_start                        (frame_end                 ),
+    //   .tx_data_valid                      (eth_tx_data_valid         ),
 
-      .rx_data                            (eth_rx_data               ),
-      //ethernet interface
-      .e_rst_n                            (e_rst_n                   ),
-      .mdc                                (mdc                       ),
-      .mdio                               (mdio                      ),
-      .rgmii_rxd                          (rgmii_rxd                 ),
-      .rgmii_rx_ctl                       (rgmii_rx_ctl              ),
-      .rgmii_rx_clk                       (rgmii_rx_clk              ),
-      .rgmii_txd                          (rgmii_txd                 ),
-      .rgmii_tx_ctl                       (rgmii_tx_ctl              ),
-      .rgmii_tx_clk                       (rgmii_tx_clk              ) 
-    );
+    //   .rx_data                            (eth_rx_data               ),
+    //   //ethernet interface
+    //   .e_rst_n                            (e_rst_n                   ),
+    //   .mdc                                (mdc                       ),
+    //   .mdio                               (mdio                      ),
+    //   .rgmii_rxd                          (rgmii_rxd                 ),
+    //   .rgmii_rx_ctl                       (rgmii_rx_ctl              ),
+    //   .rgmii_rx_clk                       (rgmii_rx_clk              ),
+    //   .rgmii_txd                          (rgmii_txd                 ),
+    //   .rgmii_tx_ctl                       (rgmii_tx_ctl              ),
+    //   .rgmii_tx_clk                       (rgmii_tx_clk              ) 
+    // );
 
 
     
@@ -223,7 +226,7 @@ module top (
       .DATA_W                             (12                               )                     
     ) u_Demod(
       .clk                                (data_clk                  ),
-      .rst_n                              (rst_n                     ),
+      .rst_n                              (rst_n_demod               ),
       .in_i                               (rx_data_I                 ),
       .in_q                               (rx_data_Q                 ),
       .valid                              (valid                     ),
@@ -310,10 +313,10 @@ module top (
       .probe10                            (u_Demod.u_Costas.u_PID.data_in_int),
       .probe11                            (u_Demod.u_SignalValid.amp_dc),
       .probe12                            (u_Demod.u_SignalValid.amp_ac),
-      .probe13                            (frame_start                 ),
-      .probe14                            (frame_end                   ),
+      .probe13                            (u_Demod.frame_d           ),
+      .probe14                            (u_Demod.state             ),
       .probe15                            (u_data_mod.state            ),
-      .probe16                            (u_Demod.u_SignalValid.amp)
+      .probe16                            (u_Demod.u_SignalValid.amp   )
     );
     
 endmodule
