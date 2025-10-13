@@ -201,8 +201,9 @@ module FIFO #(
 
     reg [DATA_W-1:0] mem[DEPTH-1:0];
 
+    integer i;
+    
     initial begin
-        integer i;
         for (i = 0; i < DEPTH; i = i + 1) begin
             mem[i] = {DATA_W{1'b0}};
         end
@@ -243,8 +244,9 @@ module RAM #(
 
     reg [DATA_W-1:0] mem[DEPTH-1:0];
 
+    integer i;
+    
     initial begin
-        integer i;
         for (i = 0; i < DEPTH; i = i + 1) begin
             mem[i] = {DATA_W{1'b0}};
         end

@@ -2,12 +2,14 @@
 
 module ethernet_interface (
 
-    input                               clk                        ,
     input                               rst_n                      ,
 
     output                              clk125m                    ,
 
     input                [   7: 0]      tx_data                    ,
+    input                               frame_start                ,
+    output                              tx_data_valid              ,
+
 
     output               [   7: 0]      rx_data                    ,
     //RGMII interface  
@@ -41,18 +43,15 @@ module ethernet_interface (
     wire               [   7: 0]        gmii_txd                    ;
     wire                                gmii_txen                   ;
 
-    wire                                tx_en_pulse                 ;
     wire                                tx_done                     ;
 
     wire               [  15: 0]        data_length                 ;
-    wire                                payload_req_o               ;
-    wire               [   7: 0]        payload_dat_i               ;
    
     eth_udp_tx_gmii u_eth_udp_tx_gmii(
         .clk125m                            (clk125m                   ),
         .reset_p                            (rst_n                     ),
 
-        .tx_en_pulse                        (tx_en_pulse               ),
+        .tx_en_pulse                        (frame_start               ),
         .tx_done                            (tx_done                   ),
 
         .dst_mac                            (DST_MAC                   ),
@@ -64,8 +63,8 @@ module ethernet_interface (
 
 
         .data_length                        (data_length               ),
-        .payload_req_o                      (payload_req_o             ),
-        .payload_dat_i                      (payload_dat_i             ),
+        .payload_req_o                      (tx_data_valid             ),
+        .payload_dat_i                      (tx_data                   ),
 
         .gmii_tx_clk                        (gmii_tx_clk               ),
         .gmii_txd                           (gmii_txd                  ),

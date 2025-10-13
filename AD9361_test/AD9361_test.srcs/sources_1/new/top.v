@@ -88,7 +88,7 @@ module top (
       .rd_start                           (rd_start                  ) 
     );
 
-  // output declaration of module ad9361_interface_lvds
+    // output declaration of module ad9361_interface_lvds
     wire                                data_clk                    ;
     
     wire                                rx_data_valid               ;
@@ -149,6 +149,37 @@ module top (
       .resetb                             (resetb                    ) 
     );
 
+    // output declaration of module ethernet_interface
+    wire                                clk125m                     ;
+    wire               [   7: 0]        eth_tx_data                 ;
+    wire               [   7: 0]        eth_rx_data                 ;
+    wire                                eth_tx_data_valid           ;
+    wire                                frame_start                 ;
+    wire                                frame_end                   ;
+    
+    ethernet_interface u_ethernet_interface(
+      .rst_n                              (rst_n                     ),
+      .clk125m                            (clk125m                   ),
+
+      .tx_data                            (eth_tx_data               ),
+      .frame_start                        (frame_end                 ),
+      .tx_data_valid                      (eth_tx_data_valid         ),
+
+      .rx_data                            (eth_rx_data               ),
+      //ethernet interface
+      .e_rst_n                            (e_rst_n                   ),
+      .mdc                                (mdc                       ),
+      .mdio                               (mdio                      ),
+      .rgmii_rxd                          (rgmii_rxd                 ),
+      .rgmii_rx_ctl                       (rgmii_rx_ctl              ),
+      .rgmii_rx_clk                       (rgmii_rx_clk              ),
+      .rgmii_txd                          (rgmii_txd                 ),
+      .rgmii_tx_ctl                       (rgmii_tx_ctl              ),
+      .rgmii_tx_clk                       (rgmii_tx_clk              ) 
+    );
+
+
+    
     // A8pskmod_test u_A8pskmod_test(
     //   .clk                                (data_clk                  ),
     //   .rst_n                              (rst_n                     ),
@@ -156,7 +187,7 @@ module top (
     //   .tx_data_Q                          (tx_data_Q                 ) 
     // );
 
-    assign                              tx_data_valid               = 1'b1                 ;
+    // assign                              tx_data_valid               = 1'b1                 ;
     
     // output declaration of module data_mod
 
@@ -168,7 +199,7 @@ module top (
       .frame_start                        (                          ),
       .frame_end                          (                          ),
       .bit_in                             (                          ),
-      .data_valid                         (data_valid                ),
+      .data_valid                         (tx_data_valid             ),
       .tx_data_I                          (tx_data_I                 ),
       .tx_data_Q                          (tx_data_Q                 ) 
     );
@@ -188,9 +219,6 @@ module top (
         sample_clk <= ~sample_clk;
     end
 
-    wire                                frame_start                 ;
-    wire                                frame_end                   ;
-    
     Demod #(
       .DATA_W                             (12                               )                     
     ) u_Demod(
@@ -204,6 +232,71 @@ module top (
       .frame_start                        (frame_start               ),
       .frame_end                          (frame_end                 )
     );
+
+    // output declaration of module ConvertBuffer
+    wire in_ready;
+    wire out_valid;
+    
+    ConvertBuffer #(
+      .IN_W                               (3                         ),
+      .OUT_W                              (12                        ) 
+    ) u_ConvertBuffer(
+      .clk                                (data_clk                  ),
+      .rst_n                              (rst_n                     ),
+      .frame_end                          (                          ),
+      .in_ready                           (in_ready                  ),
+      .in_valid                           (in_valid                  ),
+      .in_data                            (in_data                   ),
+      .out_ready                          (out_ready                 ),
+      .out_valid                          (out_valid                 ),
+      .out_data                           (out_data                  ) 
+    );
+    
+
+    // output declaration of module ConvertBuffer
+    wire                                in_ready                    ;
+    wire                                out_valid                   ;
+    wire               [   7: 0]        out_data                    ;
+    
+    ConvertBuffer #(
+      .IN_W                               (3                         ),
+      .OUT_W                              (8                         ) 
+    ) tx_ConvertBuffer(
+      .clk                                (data_clk                  ),
+      .rst_n                              (rst_n                     ),
+      .frame_end                          (frame_end                 ),
+      .in_ready                           (in_ready                  ),
+      .in_valid                           (valid                     ),
+      .in_data                            (bit_out                   ),
+      .out_ready                          (1'b1                      ),
+      .out_valid                          (out_valid                 ),
+      .out_data                           (out_data                  ) 
+    );
+
+    // output declaration of module async_fifo
+    wire                                wfull                       ;
+    wire                                awfull                      ;
+    wire                                rempty                      ;
+    wire                                arempty                     ;
+    
+    async_fifo #(
+      .DSIZE                              (8                         ),
+      .ASIZE                              (4                         ) 
+    ) u_async_fifo(
+      .wclk                               (data_clk                  ),
+      .wrst_n                             (rst_n                     ),
+      .winc                               (out_valid                 ),
+      .wdata                              (out_data                  ),
+      .wfull                              (                          ),
+      .awfull                             (                          ),
+      .rclk                               (clk_125m                  ),
+      .rrst_n                             (rst_n                     ),
+      .rinc                               (eth_tx_data_valid         ),
+      .rdata                              (eth_tx_data               ),
+      .rempty                             (                          ),
+      .arempty                            (                          ) 
+    );
+    
 
     ila_1 u_ila_1(
       .clk                                (data_clk                  ),
