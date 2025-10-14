@@ -12,6 +12,8 @@ module SignalValid #(
     parameter DATA_W    = 12,
     parameter THRESH_AC = 100,
     parameter THRESH_DC = 100
+    // parameter THRESH_LOW_AC = 2,
+    // parameter THRESH_LOW_DC = 40
 ) (
     input clk,
     input rst_n,
@@ -20,6 +22,8 @@ module SignalValid #(
     input [DATA_W-1:0] in_q,
 
     output valid
+
+    // output input_low
 );
     parameter AVE_LEN = 32;
 
@@ -110,5 +114,6 @@ module SignalValid #(
 
     assign valid = &valid_mem;
 
+    // assign input_low = (amp_ac < THRESH_LOW_AC) && (amp_dc < THRESH_LOW_DC);
 
 endmodule

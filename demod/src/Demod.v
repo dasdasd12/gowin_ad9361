@@ -77,6 +77,9 @@ module Demod #(
         .rate         (2'd2)
     );
 
+    wire [DATA_W-1:0] in_i_interpolated_short = in_i_interpolated[REG_WIDTH-1-:DATA_W];
+    wire [DATA_W-1:0] in_q_interpolated_short = in_q_interpolated[REG_WIDTH-1-:DATA_W];
+
     reg [1:0] state, state_next;
 
     always @(posedge clk or negedge rst_n) begin
@@ -89,16 +92,46 @@ module Demod #(
 
 
     SignalValid #(
-        .DATA_W   (12),
+        .DATA_W   (DATA_W),
         .THRESH_AC(30),
         .THRESH_DC(50)
+        // .THRESH_LOW_AC(2),
+        // .THRESH_LOW_DC(30)
     ) u_SignalValid (
         .clk  (clk),
         .rst_n(rst_n),
-        .in_i (in_i_interpolated[REG_WIDTH-1-:DATA_W]),
-        .in_q (in_q_interpolated[REG_WIDTH-1-:DATA_W]),
+        .in_i (in_i_interpolated_short),
+        .in_q (in_q_interpolated_short),
         .valid(signal_valid)
+        // .input_low(input_low)
     );
+
+    // parameter BIAS_FILTER_LEN = 64;
+    // wire signed [DATA_W-1:0] i_bias, q_bias;
+
+    // ave_filter #(
+    //     .LENGTH(BIAS_FILTER_LEN),
+    //     .WIDTH (DATA_W),
+    //     .SIGN  ("signed")
+    // ) u_ave_filter_i_bias (
+    //     .clk     (clk),
+    //     .rst_n   (rst_n),
+    //     .en      (input_low && state == IDLE_S),
+    //     .data_in (in_i_interpolated_short),
+    //     .data_out(i_bias)
+    // );
+
+    // ave_filter #(
+    //     .LENGTH(BIAS_FILTER_LEN),
+    //     .WIDTH (DATA_W),
+    //     .SIGN  ("signed")
+    // ) u_ave_filter_q_bias (
+    //     .clk     (clk),
+    //     .rst_n   (rst_n),
+    //     .en      (input_low && state == IDLE_S),
+    //     .data_in (in_q_interpolated_short),
+    //     .data_out(q_bias)
+    // );
 
 
 
@@ -112,8 +145,8 @@ module Demod #(
     ) u_Costas (
         .clk  (clk),
         .rst_n(rst_n && signal_valid),
-        .in_i (in_i_interpolated[REG_WIDTH-1-:DATA_W]),
-        .in_q (in_q_interpolated[REG_WIDTH-1-:DATA_W]),
+        .in_i (in_i_interpolated_short),
+        .in_q (in_q_interpolated_short),
         .out_i(out_i),
         .out_q(out_q),
         .phase(phase)

@@ -19,10 +19,20 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
+// function [$clog2(LENGTH)+WIDTH-1:0] expand_data;
+//     input [WIDTH-1:0] data;
+//     begin
+//         if (SIGN == "unsigned") expand_data = {{$clog2(LENGTH) {1'b0}}, data};
+//         else expand_data = {{$clog2(LENGTH) {data[WIDTH-1]}}, data};
+//     end
+// endfunction
+
+`define expand_data(data) ((SIGN == "unsigned") ? {{$clog2(LENGTH) {1'b0}}, data} : {{$clog2(LENGTH) {data[WIDTH-1]}}, data})
 
 module ave_filter #(
     parameter LENGTH = 128,
-    parameter WIDTH  = 10
+    parameter WIDTH  = 10,
+    parameter SIGN   = "unsigned"
 ) (
     input             clk,
     input             rst_n,
@@ -54,7 +64,7 @@ module ave_filter #(
                 mem[j] <= mem[j-1];
             end
             mem[0] <= data_in;
-            sum    <= sum - mem[LENGTH-1] + data_in;
+            sum    <= sum - `expand_data(mem[LENGTH-1]) + `expand_data(data_in);
         end
     end
 
