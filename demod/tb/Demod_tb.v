@@ -34,6 +34,12 @@ module Demod_tb ();
     //     #20;
     //     release u_Demod.signal_valid;
     // end
+    // initial begin
+    //     #4000;
+    //     force u_Demod.u_Costas.phase_inc_delta = 21;
+    //     // #20;
+    //     // release u_Demod.signal_valid;
+    // end
 
     parameter DATA_W = 12;
     parameter N = 4_000;

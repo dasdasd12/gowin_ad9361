@@ -9,6 +9,13 @@
 //---------------------------------------------------------------------------------------- 
 
 module cic_tb ();
+
+    parameter DATA_W = 12;
+    parameter RMAX = 2;
+    parameter M = 2;
+    parameter N = 4;
+    parameter REG_WIDTH = DATA_W + ($clog2(M) + 1) * N - 1;
+
     reg clk;
     reg rst_n;
 
@@ -31,16 +38,11 @@ module cic_tb ();
         $dumpvars(0, cic_tb);
     end
 
-    parameter WIDTH = 12;
-    parameter RMAX = 2;
-    parameter M = 1;
-    parameter N = 5;
-    parameter REG_WIDTH = WIDTH + 4;
 
-    reg  [    WIDTH-1:0] input_tdata;
+    reg  [   DATA_W-1:0] input_tdata;
     wire [REG_WIDTH-1:0] output_tdata;
-    wire [    WIDTH-1:0] output_short;
-    assign output_short = output_tdata[REG_WIDTH-1-:WIDTH];
+    wire [   DATA_W-1:0] output_short;
+    assign output_short = output_tdata[REG_WIDTH-1-:DATA_W];
     wire output_tvalid;
 
     initial begin
@@ -52,7 +54,7 @@ module cic_tb ();
     // wire [$clog2(RMAX+1)-1:0] rate;
 
     cic_interpolator #(
-        .WIDTH    (WIDTH),
+        .WIDTH    (DATA_W),
         .RMAX     (RMAX),
         .M        (M),
         .N        (N),
