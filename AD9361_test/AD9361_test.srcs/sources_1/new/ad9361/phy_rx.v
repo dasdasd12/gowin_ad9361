@@ -27,6 +27,8 @@ module phy_rx
 parameter PHY_MODE_1R1T=1;
 parameter PHY_MODE_2R2T=0;
 
+wire data_clk_0;
+
 wire rx_frame;
 wire rx_frame_idelay;
 wire rx_frame_iddr_p;
@@ -36,15 +38,21 @@ wire [5:0] rx_data_idelay;
 wire [5:0] rx_data_iddr_p;
 wire [5:0] rx_data_iddr_n;
 //CLK
-   IBUFDS #(
+   IBUFGDS #(
       .DIFF_TERM("FALSE"),       // Differential Termination
       .IBUF_LOW_PWR("TRUE"),     // Low power="TRUE", Highest performance="FALSE" 
       .IOSTANDARD("DEFAULT")     // Specify the input I/O standard
    ) IBUFDS_data_clk_inst (
-      .O(data_clk),  // Buffer output
+      .O(data_clk_0),  // Buffer output
       .I(rx_clk_in_p),  // Diff_p buffer input (connect directly to top-level port)
       .IB(rx_clk_in_n) // Diff_n buffer input (connect directly to top-level port)
    );
+
+   BUFG data_clk_bufg_inst (
+      .O(data_clk), // 1-bit output: Clock output
+      .I(data_clk_0)  // 1-bit input: Clock input
+   ); 
+
 //FRAME
    IBUFDS #(
       .DIFF_TERM("FALSE"),       // Differential Termination

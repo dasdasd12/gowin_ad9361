@@ -1,6 +1,7 @@
 set_property -dict {PACKAGE_PIN Y9     IOSTANDARD LVCMOS33} [get_ports clk]          ; 
 
 set_property -dict {PACKAGE_PIN P16     IOSTANDARD LVCMOS25} [get_ports rst]          ; 
+set_property -dict {PACKAGE_PIN T18     IOSTANDARD LVCMOS25} [get_ports rst_demod]          ; 
 
 set_property -dict {PACKAGE_PIN M19     IOSTANDARD LVDS_25 DIFF_TERM TRUE} [get_ports rx_clk_in_p]          ; ## G6   FMC_LPC_LA00_CC_P
 set_property -dict {PACKAGE_PIN M20     IOSTANDARD LVDS_25 DIFF_TERM TRUE} [get_ports rx_clk_in_n]          ; ## G7   FMC_LPC_LA00_CC_N
