@@ -313,7 +313,7 @@ module top (
       .probe10                            (u_Demod.u_Costas.u_PID.data_in_int),
       .probe11                            (u_Demod.u_SignalValid.amp_dc),
       .probe12                            (u_Demod.u_SignalValid.amp_ac),
-      .probe13                            (u_Demod.frame_d           ),
+      .probe13                            (u_Demod.frame_start       ),
       .probe14                            (u_Demod.state             ),
       .probe15                            (u_data_mod.state            ),
       .probe16                            (u_Demod.u_SignalValid.amp   )

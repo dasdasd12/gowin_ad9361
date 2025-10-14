@@ -21,10 +21,10 @@ module data_mod(
 
     reg                [   1: 0]        state                       ;
 
-    localparam                           S                           = 12'b0111_0110_0100   ;  //1892
-    localparam                           C                           = 12'b0011_0000_1111   ;  //783
-    localparam                           NS                          = 12'b1000_1001_1100   ;  //-1892
-    localparam                           NC                          = 12'b1100_1111_0001   ;  //-783
+    localparam                           S                           = 12'd630   ;  //1892/3
+    localparam                           C                           = 12'd261   ;  //783/3
+    localparam                           NS                          = -12'd680  ;  //-1892/3
+    localparam                           NC                          = -12'd261   ;  //-783/3
 
     assign                              data_valid                  = ((state == DATA)||(state == SYNC)) ? 1'b1 : 1'b0;
     assign                              frame_end                   = (state == DONE) ? 1'b1 : 1'b0;

@@ -33,7 +33,7 @@ module Costas #(
         .DATA_W        (DATA_DDS_W),
         .PHASE_W       (PHASE_W),
         .ROM_ADDR_W    (8),
-        .phase_inc_base(-20)
+        .phase_inc_base(0)
     ) u_DDS (
         .clk            (clk),
         .rst_n          (rst_n),
