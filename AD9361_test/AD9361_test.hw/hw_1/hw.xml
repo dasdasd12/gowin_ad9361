@@ -1651,7 +1651,7 @@
     <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
       <probeOptions Id="DebugProbeParams">
         <Option Id="CAPTURE_COMPARE_VALUE" value="eq2&apos;bXX"/>
-        <Option Id="COMPARE_VALUE.0" value="eq2&apos;b01"/>
+        <Option Id="COMPARE_VALUE.0" value="eq2&apos;b10"/>
         <Option Id="DISPLAY_AS_ENUM" value="0"/>
         <Option Id="DISPLAY_HINT" value=""/>
         <Option Id="DISPLAY_RADIX" value="HEX"/>
@@ -1662,7 +1662,7 @@
         <Option Id="NAME.CUSTOM" value=""/>
         <Option Id="NAME.SELECT" value="Long"/>
         <Option Id="SOURCE" value="netlist"/>
-        <Option Id="TRIGGER_COMPARE_VALUE" value="eq2&apos;b01"/>
+        <Option Id="TRIGGER_COMPARE_VALUE" value="eq2&apos;b10"/>
         <Option Id="WAVEFORM_STYLE" value="Digital"/>
         <Option Id="ENUM.DATA" value="eq2&apos;b10"/>
         <Option Id="ENUM.DONE" value="eq2&apos;b11"/>
@@ -1678,7 +1678,7 @@
       <probeOptions Id="DebugProbeParams">
         <Option Id="CAPTURE_COMPARE_VALUE" value="eq2&apos;hX"/>
         <Option Id="COMPARE_VALUE.0" value="eq2&apos;hX"/>
-        <Option Id="DISPLAY_AS_ENUM" value="1"/>
+        <Option Id="DISPLAY_AS_ENUM" value="0"/>
         <Option Id="DISPLAY_HINT" value=""/>
         <Option Id="DISPLAY_RADIX" value="HEX"/>
         <Option Id="DISPLAY_VISIBILITY" value=""/>
