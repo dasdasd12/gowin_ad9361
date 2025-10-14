@@ -316,7 +316,8 @@ module top (
       .probe13                            (u_Demod.frame_start       ),
       .probe14                            (u_Demod.state             ),
       .probe15                            (u_data_mod.state            ),
-      .probe16                            (u_Demod.u_SignalValid.amp   )
+      .probe16                            (u_Demod.u_SignalValid.amp   ),
+      .probe17                            (u_Demod.u_DeltaDecode.valid_in)
     );
     
 endmodule
