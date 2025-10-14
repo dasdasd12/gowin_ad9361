@@ -28,6 +28,7 @@ module Demod #(
     localparam IDLE_S = 2'b00;
     localparam SYNC_S = 2'b01;
     localparam LOCK_S = 2'b10;
+    localparam DATA_S = 2'b11;
 
     // use time counter to stop carrier sync
     parameter TIMEOUT = 250;
@@ -35,8 +36,8 @@ module Demod #(
 
     parameter RMAX = 2;
     parameter M = 1;
-    parameter N = 4;
-    parameter REG_WIDTH = DATA_W + 3;
+    parameter N = 5;
+    parameter REG_WIDTH = DATA_W + ($clog2(M) + 1) * N - 1;
 
     wire [REG_WIDTH-1:0] in_i_interpolated, in_q_interpolated;
 
@@ -107,7 +108,6 @@ module Demod #(
     Costas #(
         .DATA_W    (DATA_W),
         .DATA_DDS_W(10),
-        .PHASE_W   (12),
         .ERROR_W   (8)
     ) u_Costas (
         .clk  (clk),
@@ -165,46 +165,52 @@ module Demod #(
     end
 
     always @(*) begin
-        state_next = state;  // default to stay in the same state
+        state_next <= state;  // default to stay in the same state
         if (signal_valid) begin
             case (state)
                 IDLE_S: begin
-                    state_next = SYNC_S;
+                    state_next <= SYNC_S;
                 end
                 SYNC_S: begin
-                    state_next = sync_time_out ? LOCK_S : SYNC_S;
+                    if (sync_time_out) begin
+                        state_next <= LOCK_S;
+                    end
+                end
+                LOCK_S: begin
+                    if (bit_out == 3'b100) begin
+                        state_next <= DATA_S;
+                    end
                 end
             endcase
         end else begin
-            state_next = IDLE_S;
+            state_next <= IDLE_S;
         end
     end
 
 
-    reg frame, frame_d;
-    always @(*) begin
-        if (!rst_n) begin
-            frame <= 1'b0;
-        end else begin
-            if (state == LOCK_S && bit_out == 3'b100) begin
-                frame <= 1'b1;
-            end else if (~signal_valid) begin
-                frame <= 1'b0;
-            end
-        end
-    end
-    always @(posedge clk or negedge rst_n) begin
-        if (!rst_n) begin
-            frame_d <= 1'b0;
-        end else begin
-            frame_d <= frame;
-        end
-    end
+    // reg frame, frame_d;
+    // always @(*) begin
+    //     if (!rst_n) begin
+    //         frame <= 1'b0;
+    //     end else begin
+    //         if (state == LOCK_S && bit_out == 3'b100) begin
+    //             frame <= 1'b1;
+    //         end else if (~signal_valid) begin
+    //             frame <= 1'b0;
+    //         end
+    //     end
+    // end
+    // always @(posedge clk or negedge rst_n) begin
+    //     if (!rst_n) begin
+    //         frame_d <= 1'b0;
+    //     end else begin
+    //         frame_d <= frame;
+    //     end
+    // end
 
-    assign frame_start = frame && !frame_d;
-    assign frame_end   = !frame && frame_d;
+    assign frame_start = (state == LOCK_S) && (bit_out == 3'b100);
+    assign frame_end   = (state == DATA_S) && !signal_valid;
 
-
-    assign valid       = frame && valid_out;
+    assign valid       = (state == DATA_S) && valid_out;
 
 endmodule

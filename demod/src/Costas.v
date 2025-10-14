@@ -11,7 +11,7 @@
 module Costas #(
     parameter DATA_W     = 12,
     parameter DATA_DDS_W = 10,
-    parameter PHASE_W    = 12,
+    parameter PHASE_W    = 16,
     parameter ERROR_W    = 8
 ) (
     input clk,
@@ -33,7 +33,7 @@ module Costas #(
         .DATA_W        (DATA_DDS_W),
         .PHASE_W       (PHASE_W),
         .ROM_ADDR_W    (8),
-        .phase_inc_base(0)
+        .phase_inc_base(-20)
     ) u_DDS (
         .clk            (clk),
         .rst_n          (rst_n),
@@ -79,10 +79,10 @@ module Costas #(
         .DATA_IN_W (ERROR_W),
         .DATA_OUT_W(PHASE_W),
         .KP        (1),
-        .KP_W      (6 - 3),
+        .KP_W      (2),
         .KI        (1),
-        .KI_W      (12 - 3),
-        .KI_W_WHOLE(14)
+        .KI_W      (8),
+        .KI_W_WHOLE(16)
     ) u_PID (
         .clk     (clk),
         .rst_n   (rst_n),
