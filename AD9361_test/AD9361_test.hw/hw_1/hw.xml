@@ -38,7 +38,7 @@
   <ObjectList object_type="hw_probe" gui_info="">
     <Object name="adc_d1q1_valid" gui_info="Trigger Setup=0,Capture Setup=0"/>
     <Object name="frame_end" gui_info="Trigger Setup=0"/>
-    <Object name="frame_start" gui_info="Trigger Setup=1"/>
+    <Object name="frame_start" gui_info="Trigger Setup=0"/>
     <Object name="init_done" gui_info=""/>
     <Object name="probe_out0[3:0]" gui_info="hw_ila_1/hw_vio_1=1"/>
     <Object name="rx_clk_in_IBUF" gui_info=""/>

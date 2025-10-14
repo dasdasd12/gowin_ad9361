@@ -107,7 +107,7 @@ module data_mod(
                 end
 
                 SYNC: begin
-                    if (cnt == 16'd1023) begin
+                    if (cnt == 16'd399) begin
                         state <= DATA;
                         cnt   <= 16'd0;
                     end
@@ -117,7 +117,7 @@ module data_mod(
                 end
 
                 DATA: begin
-                    if (cnt == 16'd4095) begin
+                    if (cnt == 16'd399) begin
                         state <= DONE;
                         cnt   <= 16'd0;
                     end
@@ -127,7 +127,7 @@ module data_mod(
                 end
 
                 DONE: begin
-                    if (cnt == 16'd2047) begin
+                    if (cnt == 16'd399) begin
                         state <= IDLE;
                         cnt   <= 16'd0;
                     end
