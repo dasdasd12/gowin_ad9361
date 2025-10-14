@@ -167,7 +167,7 @@ module data_mod(
             sample_bit <= 3'b000;
         end
         else if (state == SYNC) begin
-            sample_bit <= 3'b010;
+            sample_bit <= sample_bit + 3'd2;
         end
         else if (state == DATA) begin
             sample_bit <= sample_bit + tx_bit;
