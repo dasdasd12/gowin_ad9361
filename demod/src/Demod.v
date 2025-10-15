@@ -35,8 +35,8 @@ module Demod #(
     parameter COUNTER_N = $clog2(TIMEOUT);
 
     parameter RMAX = 2;
-    parameter M = 1;
-    parameter N = 5;
+    parameter M = 2;
+    parameter N = 2;
     parameter REG_WIDTH = DATA_W + ($clog2(M) + 1) * N - 1;
 
     wire [REG_WIDTH-1:0] in_i_interpolated, in_q_interpolated;
