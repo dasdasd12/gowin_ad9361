@@ -41,7 +41,7 @@ module SimpleBitSync8 #(
             phase_out <= phase_in;
 
             if ((bit_out != bit_in) && (bit_outp1 != bit_in) && (bit_outm1 != bit_in)) begin
-                counter <= HALF_CYCLE_N - 1;
+                counter <= HALF_CYCLE_N;
             end else if (counter == SIG_CYCLE_N - 1) begin
                 counter <= 0;
             end else begin

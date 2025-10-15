@@ -55,6 +55,16 @@ module Demod_tb ();
         $readmemh(`TX_SIGNAL_PATH, in_array);
         for (i = 0; i < N; i = i + 1) begin
             {in_i, in_q} = in_array[i];
+
+            // force u_Demod.signal_valid = 1'b1;
+            // if (i < 300 || i > 300) begin
+            //     in_i = 500;
+            //     in_q = 0;
+            // end else begin
+            //     in_q = 500;
+            //     in_i = 0;
+            // end
+
             #2;
         end
         {in_i, in_q} = 0;

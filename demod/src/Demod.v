@@ -35,8 +35,8 @@ module Demod #(
     parameter COUNTER_N = $clog2(TIMEOUT);
 
     parameter RMAX = 2;
-    parameter M = 1;
-    parameter N = 5;
+    parameter M = 2;
+    parameter N = 2;
     parameter REG_WIDTH = DATA_W + ($clog2(M) + 1) * N - 1;
 
     wire [REG_WIDTH-1:0] in_i_interpolated, in_q_interpolated;
@@ -138,13 +138,22 @@ module Demod #(
     wire signed [DATA_W-1:0] out_i, out_q;
     wire signed [11-1:0] phase;
 
+    reg                  signal_valid_d;
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            signal_valid_d <= 1'b0;
+        end else begin
+            signal_valid_d <= signal_valid;
+        end
+    end
+
     Costas #(
         .DATA_W    (DATA_W),
         .DATA_DDS_W(10),
         .ERROR_W   (8)
     ) u_Costas (
         .clk  (clk),
-        .rst_n(rst_n && signal_valid),
+        .rst_n(rst_n && signal_valid_d),
         .in_i (in_i_interpolated_short),
         .in_q (in_q_interpolated_short),
         .out_i(out_i),
