@@ -154,9 +154,14 @@ module top (
 
     // output declaration of module ethernet_interface
     wire                                clk125m                     ;
+
+    wire               [  15: 0]        data_length                 ;
     wire               [   7: 0]        eth_tx_data                 ;
-    wire               [   7: 0]        eth_rx_data                 ;
+    wire                                eth_tx_done                 ;
     wire                                eth_tx_data_valid           ;
+
+    wire               [   7: 0]        eth_rx_data                 ;
+
     wire                                frame_start                 ;
     wire                                frame_end                   ;
     
@@ -164,9 +169,12 @@ module top (
     //   .rst_n                              (rst_n                     ),
     //   .clk125m                            (clk125m                   ),
 
+    //   .data_length                        (data_length               ),
     //   .tx_data                            (eth_tx_data               ),
-    //   .frame_start                        (frame_end                 ),
     //   .tx_data_valid                      (eth_tx_data_valid         ),
+    //   .tx_done                            (eth_tx_done               ),
+
+    //   .frame_start                        (frame_end                 ),
 
     //   .rx_data                            (eth_rx_data               ),
     //   //ethernet interface
@@ -213,14 +221,14 @@ module top (
     wire               [   2: 0]        bit_out                     ;
     wire               [11-1: 0]        phase_out                   ;
 
-    reg                                 sample_clk                  ;
+    // reg                                 sample_clk                  ;
 
-    always @(posedge data_clk or negedge rst_n) begin
-      if(!rst_n)
-        sample_clk <= 1'b0;
-      else 
-        sample_clk <= ~sample_clk;
-    end
+    // always @(posedge data_clk or negedge rst_n) begin
+    //   if(!rst_n)
+    //     sample_clk <= 1'b0;
+    //   else 
+    //     sample_clk <= ~sample_clk;
+    // end
 
     Demod #(
       .DATA_W                             (12                               )                     
@@ -236,9 +244,26 @@ module top (
       .frame_end                          (frame_end                 )
     );
 
+    wire                                valid_328                   ;
+    wire                                valid_3212                  ;
+
+    reg                [  12: 0]        data_cnt                    ;
+
+    always @(posedge data_clk or negedge rst_n) begin
+      if(!rst_n)
+        data_cnt <= 4'd0;
+      else if(valid)
+        data_cnt <= data_cnt + 1'b1;
+      else if(frame_end)
+        data_cnt <= 4'd0;
+    end
+
+    assign                              valid_328                   = (data_cnt >= 12'd3) ? valid : 1'b0;
+    assign                              valid_3212                  = (data_cnt <  12'd3) ? valid : 1'b0;
+
     // output declaration of module ConvertBuffer
-    wire in_ready;
-    wire out_valid;
+    wire                                out_valid_12                ;
+    wire               [  11: 0]        out_data_12                 ;
     
     ConvertBuffer #(
       .IN_W                               (3                         ),
@@ -248,16 +273,35 @@ module top (
       .rst_n                              (rst_n                     ),
       .frame_end                          (                          ),
       .in_ready                           (                          ),
-      .in_valid                           (                          ),
-      .in_data                            (                          ),
-      .out_ready                          (                          ),
-      .out_valid                          (                          ),
-      .out_data                           (                          ) 
+      .in_valid                           (valid_3212                ),
+      .in_data                            (bit_out                   ),
+      .out_ready                          (1'b1                      ),
+      .out_valid                          (out_valid_12              ),
+      .out_data                           (out_data_12               ) 
     );
     
+    async_fifo #(
+      .DSIZE                              (12                         ),
+      .ASIZE                              (2                          )               
+    ) tx_data_num_async_fifo(
+      .wclk                               (data_clk                  ),
+      .wrst_n                             (rst_n                     ),
+      .winc                               (out_valid_12              ),
+      .wdata                              (out_data_12               ),
+      .wfull                              (                          ),
+      .awfull                             (                          ),
+      .rclk                               (clk_125m                  ),
+      .rrst_n                             (rst_n                     ),
+      .rinc                               (eth_tx_done               ),
+      .rdata                              (data_length               ),
+      .rempty                             (                          ),
+      .arempty                            (                          ) 
+    );
 
     // output declaration of module ConvertBuffer
-    
+    wire                                out_valid_8                 ;
+    wire               [   7: 0]        out_data_8                  ;
+
     ConvertBuffer #(
       .IN_W                               (3                         ),
       .OUT_W                              (8                         ) 
@@ -266,27 +310,21 @@ module top (
       .rst_n                              (rst_n                     ),
       .frame_end                          (frame_end                 ),
       .in_ready                           (in_ready                  ),
-      .in_valid                           (valid                     ),
+      .in_valid                           (valid_328                 ),
       .in_data                            (bit_out                   ),
       .out_ready                          (1'b1                      ),
-      .out_valid                          (out_valid                 ),
-      .out_data                           (                  ) 
+      .out_valid                          (out_valid_8               ),
+      .out_data                           (out_data_8                ) 
     );
-
-    // output declaration of module async_fifo
-    wire                                wfull                       ;
-    wire                                awfull                      ;
-    wire                                rempty                      ;
-    wire                                arempty                     ;
     
     async_fifo #(
       .DSIZE                              (8                         ),
-      .ASIZE                              (4                         ) 
-    ) u_async_fifo(
+      .ASIZE                              (12                        ) 
+    ) tx_data_async_fifo(
       .wclk                               (data_clk                  ),
       .wrst_n                             (rst_n                     ),
-      .winc                               (out_valid                 ),
-      .wdata                              (out_data                  ),
+      .winc                               (out_valid_8               ),
+      .wdata                              (out_data_8                ),
       .wfull                              (                          ),
       .awfull                             (                          ),
       .rclk                               (clk_125m                  ),
@@ -315,9 +353,9 @@ module top (
       .probe12                            (u_Demod.u_SignalValid.amp_ac),
       .probe13                            (u_Demod.frame_start       ),
       .probe14                            (u_Demod.state             ),
-      .probe15                            (u_data_mod.state            ),
-      .probe16                            (u_Demod.u_SignalValid.amp   ),
-      .probe17                            (u_Demod.u_DeltaDecode.valid_in)
+      .probe15                            (u_data_mod.state          ),
+      .probe16                            (u_Demod.u_SignalValid.amp ),
+      .probe17                            (u_Demod.u_DeltaDecode.valid_in) 
     );
     
 endmodule

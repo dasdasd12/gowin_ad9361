@@ -6,9 +6,11 @@ module ethernet_interface (
 
     output                              clk125m                    ,
 
+    input                [  15: 0]      data_length                ,
     input                [   7: 0]      tx_data                    ,
     input                               frame_start                ,
     output                              tx_data_valid              ,
+    output                              tx_done                    ,
 
 
     output               [   7: 0]      rx_data                    ,
@@ -42,10 +44,6 @@ module ethernet_interface (
     wire                                gmii_tx_clk                 ;
     wire               [   7: 0]        gmii_txd                    ;
     wire                                gmii_txen                   ;
-
-    wire                                tx_done                     ;
-
-    wire               [  15: 0]        data_length                 ;
    
     eth_udp_tx_gmii u_eth_udp_tx_gmii(
         .clk125m                            (clk125m                   ),
@@ -71,16 +69,16 @@ module ethernet_interface (
         .gmii_txen                          (gmii_txen                 ) 
     );
    
-    gmii_to_rgmii tx_gmii_to_rgmii(
-        .reset_n                            (                          ),
-        .gmii_tx_clk                        (gmii_tx_clk               ),
-        .gmii_txd                           (gmii_txd                  ),
-        .gmii_txen                          (gmii_txen                 ),
-        .gmii_txer                          (1'b0                      ),
-        .rgmii_tx_clk                       (rgmii_tx_clk              ),
-        .rgmii_txd                          (rgmii_txd                 ),
-        .rgmii_txen                         (rgmii_tx_ctl              ) 
-    );
+    // gmii_to_rgmii tx_gmii_to_rgmii(
+    //     .reset_n                            (                          ),
+    //     .gmii_tx_clk                        (gmii_tx_clk               ),
+    //     .gmii_txd                           (gmii_txd                  ),
+    //     .gmii_txen                          (gmii_txen                 ),
+    //     .gmii_txer                          (1'b0                      ),
+    //     .rgmii_tx_clk                       (rgmii_tx_clk              ),
+    //     .rgmii_txd                          (rgmii_txd                 ),
+    //     .rgmii_txen                         (rgmii_tx_ctl              ) 
+    // );
 
     // output declaration of module eth_udp_rx_gmii
     wire                                gmii_rx_clk                 ;
@@ -122,16 +120,16 @@ module ethernet_interface (
         .gmii_rxdv                          (gmii_rxdv                 ) 
     );
 
-    rgmii_to_gmii rx_rgmii_to_gmii(
-        .reset                              (                          ),
-        .rgmii_rx_clk                       (rgmii_rx_clk              ),
-        .rgmii_rxd                          (rgmii_rxd                 ),
-        .rgmii_rxdv                         (rgmii_rx_ctl              ),
-        .gmii_rx_clk                        (gmii_rx_clk               ),
-        .gmii_rxd                           (gmii_rxd                  ),
-        .gmii_rxdv                          (gmii_rxdv                 ),
-        .gmii_rxer                          (                          ) 
-    );
+    // rgmii_to_gmii rx_rgmii_to_gmii(
+    //     .reset                              (                          ),
+    //     .rgmii_rx_clk                       (rgmii_rx_clk              ),
+    //     .rgmii_rxd                          (rgmii_rxd                 ),
+    //     .rgmii_rxdv                         (rgmii_rx_ctl              ),
+    //     .gmii_rx_clk                        (gmii_rx_clk               ),
+    //     .gmii_rxd                           (gmii_rxd                  ),
+    //     .gmii_rxdv                          (gmii_rxdv                 ),
+    //     .gmii_rxer                          (                          ) 
+    // );
     
 
 endmodule
