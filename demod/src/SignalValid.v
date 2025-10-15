@@ -42,7 +42,8 @@ module SignalValid #(
         end
     end
 
-    wire [SQRT_W-1:0] amp, amp_dc, amp_ac;
+    wire [SQRT_W-1:0] amp_ori, amp_dc, amp_ac;
+    reg  [SQRT_W-1:0] amp;
 
     ROM #(
         .DATA_W   (SQRT_W),
@@ -52,8 +53,16 @@ module SignalValid #(
         .clk     (clk),
         .rst_n   (rst_n),
         .addr    ({in_i_abs, in_q_abs}),
-        .data_out(amp)
+        .data_out(amp_ori)
     );
+
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            amp <= 0;
+        end else begin
+            amp <= amp_ori;
+        end
+    end
 
     // movAvg #(
     //     .WIDTH (DATA_W),
