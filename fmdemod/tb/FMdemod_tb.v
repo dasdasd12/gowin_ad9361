@@ -31,7 +31,7 @@ module FMdemod_tb ();
     end
 
     parameter DATA_W = 12;
-    parameter N = 400_000;
+    parameter N = 100_000;
 
     reg signed [DATA_W*2-1:0] in_array[0:N-1];
     reg signed [DATA_W-1:0] in_i, in_q;
