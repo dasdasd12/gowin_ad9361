@@ -4,7 +4,7 @@ module ethernet_interface (
 
     input                               rst_n                      ,
 
-    output                              clk125m                    ,
+    input                               clk125m                    ,
 
     input                [  15: 0]      data_length                ,
     input                [   7: 0]      tx_data                    ,
@@ -36,6 +36,19 @@ module ethernet_interface (
     parameter DST_IP     = 32'hc0_a8_00_03;
     parameter DST_PORT   = 16'd6102;
 
+    reg frame_start_d1;
+    reg frame_start_d2;
+
+    always @(posedge clk125m or negedge rst_n) begin
+        if (!rst_n) begin
+            frame_start_d1 <= 1'b0;
+            frame_start_d2 <= 1'b0;
+        end else begin
+            frame_start_d1 <= frame_start;
+            frame_start_d2 <= frame_start_d1;
+        end
+    end
+
     assign                              e_rst_n                     = rst_n                ;
     assign                              mdc                         = 1'b1                 ;
     assign                              mdio                        = 1'b1                 ;
@@ -47,9 +60,9 @@ module ethernet_interface (
    
     eth_udp_tx_gmii u_eth_udp_tx_gmii(
         .clk125m                            (clk125m                   ),
-        .reset_p                            (rst_n                     ),
+        .reset_p                            (~rst_n                    ),
 
-        .tx_en_pulse                        (frame_start               ),
+        .tx_en_pulse                        (frame_start_d2            ),
         .tx_done                            (tx_done                   ),
 
         .dst_mac                            (DST_MAC                   ),
@@ -81,44 +94,44 @@ module ethernet_interface (
     // );
 
     // output declaration of module eth_udp_rx_gmii
-    wire                                gmii_rx_clk                 ;
-    wire                                gmii_rx_rxd                 ;
-    wire                                gmii_rxdv                   ;
+    // wire                                gmii_rx_clk                 ;
+    // wire                                gmii_rx_rxd                 ;
+    // wire                                gmii_rxdv                   ;
 
-    wire               [  15: 0]        rx_data_length              ;
-    wire                                payload_valid_o             ;
-    wire               [   7: 0]        payload_dat_o               ;
+    // wire               [  15: 0]        rx_data_length              ;
+    // wire                                payload_valid_o             ;
+    // wire               [   7: 0]        payload_dat_o               ;
 
-    wire                                one_pkt_done                ;
-    wire                                pkt_error                   ;
-    wire               [  31: 0]        debug_crc_check             ;
+    // wire                                one_pkt_done                ;
+    // wire                                pkt_error                   ;
+    // wire               [  31: 0]        debug_crc_check             ;
     
-    eth_udp_rx_gmii u_eth_udp_rx_gmii(
-        .reset_p                            (rst_n                     ),
+    // eth_udp_rx_gmii u_eth_udp_rx_gmii(
+    //     .reset_p                            (~rst_n                    ),
 
-        .local_mac                          (LOCAL_MAC                 ),
-        .local_ip                           (LOCAL_IP                  ),
-        .local_port                         (LOCAL_PORT                ),
+    //     .local_mac                          (LOCAL_MAC                 ),
+    //     .local_ip                           (LOCAL_IP                  ),
+    //     .local_port                         (LOCAL_PORT                ),
 
-        .clk125m_o                          (clk125m                   ),
+    //     .clk125m_o                          (clk125m                   ),
         
-        .exter_mac                          (                          ),
-        .exter_ip                           (                          ),
-        .exter_port                         (                          ),
+    //     .exter_mac                          (                          ),
+    //     .exter_ip                           (                          ),
+    //     .exter_port                         (                          ),
 
-        .rx_data_length                     (rx_data_length            ),
-        .data_overflow_i                    (                          ),
-        .payload_valid_o                    (payload_valid_o           ),
-        .payload_dat_o                      (payload_dat_o             ),
+    //     .rx_data_length                     (rx_data_length            ),
+    //     .data_overflow_i                    (                          ),
+    //     .payload_valid_o                    (payload_valid_o           ),
+    //     .payload_dat_o                      (payload_dat_o             ),
 
-        .one_pkt_done                       (one_pkt_done              ),
-        .pkt_error                          (pkt_error                 ),
-        .debug_crc_check                    (debug_crc_check           ),
+    //     .one_pkt_done                       (one_pkt_done              ),
+    //     .pkt_error                          (pkt_error                 ),
+    //     .debug_crc_check                    (debug_crc_check           ),
 
-        .gmii_rx_clk                        (gmii_rx_clk               ),
-        .gmii_rxd                           (gmii_rxd                  ),
-        .gmii_rxdv                          (gmii_rxdv                 ) 
-    );
+    //     .gmii_rx_clk                        (gmii_rx_clk               ),
+    //     .gmii_rxd                           (gmii_rxd                  ),
+    //     .gmii_rxdv                          (gmii_rxdv                 ) 
+    // );
 
     // rgmii_to_gmii rx_rgmii_to_gmii(
     //     .reset                              (                          ),

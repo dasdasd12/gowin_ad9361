@@ -17,7 +17,9 @@ module data_mod(
     localparam                           IDLE                        = 2'b00                ;
     localparam                           SYNC                        = 2'b01                ;
     localparam                           DATA                        = 2'b10                ;
-    localparam                           DONE                        = 2'b11                ;
+    localparam                           DNUM                        = 2'b11                ;
+
+    localparam                           DATA_NUM                    = 12'd400               ;
 
     reg                [   1: 0]        state                       ;
 
@@ -26,8 +28,7 @@ module data_mod(
     localparam                           NS                          = -12'd680  ;  //-1892/3
     localparam                           NC                          = -12'd261   ;  //-783/3
 
-    assign                              data_valid                  = ((state == DATA)||(state == SYNC)) ? 1'b1 : 1'b0;
-    assign                              frame_end                   = (state == DONE) ? 1'b1 : 1'b0;
+    assign                              data_valid                  = ((state == DNUM)||(state == DATA)||(state == SYNC)) ? 1'b1 : 1'b0;
 
     reg                [   4: 0]        clk_cnt                     ;
     reg                                 bit_clk                     ;
@@ -101,14 +102,16 @@ module data_mod(
             case (state)
             
                 IDLE: begin
-                    if (1'b1) begin
+                    if (cnt == 16'd999) begin
                         state <= SYNC;
                     end
+                    else 
+                        cnt <= cnt + 1'b1;
                 end
 
                 SYNC: begin
                     if (cnt == 16'd399) begin
-                        state <= DATA;
+                        state <= DNUM;
                         cnt   <= 16'd0;
                     end
                     else begin
@@ -116,9 +119,9 @@ module data_mod(
                     end
                 end
 
-                DATA: begin
-                    if (cnt == 16'd399) begin
-                        state <= DONE;
+                DNUM: begin
+                    if (cnt == 16'd3) begin
+                        state <= DATA;
                         cnt   <= 16'd0;
                     end
                     else begin
@@ -126,7 +129,7 @@ module data_mod(
                     end
                 end
 
-                DONE: begin
+                DATA: begin
                     if (cnt == 16'd399) begin
                         state <= IDLE;
                         cnt   <= 16'd0;
@@ -144,16 +147,16 @@ module data_mod(
 
     always @(posedge bit_clk or negedge rst_n) begin
         if (!rst_n) begin
-            tx_bit <= 3'b000;
+            tx_bit <= 3'd4;
         end 
-        else if (state == DATA && cnt >= 10'd1) begin
+        else if (state == DATA) begin
             tx_bit <= test_bit;
         end
-        else if (state == DATA && cnt == 10'd0) begin
-            tx_bit <= 3'd4; //frame start symbol
+        else if (state == DNUM ) begin
+            tx_bit <= DATA_NUM[(cnt*3)+:3];
         end
         else begin
-            tx_bit <= 3'b000;
+            tx_bit <= 3'd4;
         end
     end
 
@@ -167,13 +170,10 @@ module data_mod(
             sample_bit <= 3'b000;
         end
         else if (state == SYNC) begin
-            sample_bit <= sample_bit + 3'd2;
+            sample_bit <= sample_bit + 3'd3;
         end
-        else if (state == DATA) begin
+        else if (state == DATA || state == DNUM) begin
             sample_bit <= sample_bit + tx_bit;
-        end
-        else if (state == DONE) begin
-            sample_bit <= 3'b000;
         end
     end
 
