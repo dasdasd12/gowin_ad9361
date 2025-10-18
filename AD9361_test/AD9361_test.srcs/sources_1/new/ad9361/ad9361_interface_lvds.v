@@ -108,6 +108,12 @@ module ad9361_interface_lvds (
     .OB                                 (tx_clk_out_n              ),// Diff_n output
     .I                                  (data_clk_out              ) // Buffer input
   );
+  `elsif GOWIN
+   TLVDS_OBUF OBUFDS_inst_clk (
+      .O(tx_clk_out_p),     // Diff_p output (connect directly to top-level port)
+      .OB(tx_clk_out_n),   // Diff_n output (connect directly to top-level port)
+      .I(data_clk_out)      // Buffer input
+   );
   `endif
 
   ad9361_phy u_ad9361_phy (

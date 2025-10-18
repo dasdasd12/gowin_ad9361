@@ -37,6 +37,7 @@ wire [5:0] rx_data;
 wire [5:0] rx_data_idelay;
 wire [5:0] rx_data_iddr_p;
 wire [5:0] rx_data_iddr_n;
+`ifdef ZYNQ
 //CLK
    IBUFGDS #(
       .DIFF_TERM("FALSE"),       // Differential Termination
@@ -164,6 +165,78 @@ generate
 	   );
 	end
 endgenerate
+
+`elsif GOWIN
+   //CLK
+   TLVDS_IBUF IBUFDS_data_clk_inst (
+      .O(data_clk_0),  // Buffer output
+      .I(rx_clk_in_p),  // Diff_p buffer input (connect directly to top-level port)
+      .IB(rx_clk_in_n) // Diff_n buffer input (connect directly to top-level port)
+   );
+
+   IBUF data_clk_bufg_inst (
+      .O(data_clk), // 1-bit output: Clock output
+      .I(data_clk_0)  // 1-bit input: Clock input
+   );
+   //FRAME
+   TLVDS_IBUF IBUFDS_rx_frame_inst (
+      .O(rx_frame),  // Buffer output
+      .I(rx_frame_in_p),  // Diff_p buffer input (connect directly to top-level port)
+      .IB(rx_frame_in_n) // Diff_n buffer input (connect directly to top-level port)
+   );
+   //I DELAY
+   IODELAY #(
+      .C_STATIC_DIY(1),
+      .DYN_DLY_EN("FALSE"),
+      .ADAPT_EN("TRUE")
+   ) IODELAY_rx_frame_inst (
+      .DI(rx_frame),         // 1-bit input: Data input from the I/O
+      .SDTAP(idelay_en[6]),   // 5-bit input: Counter value input
+      .VALUE(ref_clk200m),                   // 1-bit input: Active high enable increment/decrement input
+      .DLYSTEP(idelay_tap),                 // 1-bit input: Increment / Decrement tap delay input
+      .DO(rx_frame_idelay),
+      .DF()
+   );
+
+   IDDR IDDR_rx_frame_inst (
+      .Q0(rx_frame_iddr_p), // 1-bit output for positive edge of clock
+      .Q1(rx_frame_iddr_n), // 1-bit output for negative edge of clock
+      .C(data_clk),   // 1-bit clock input
+      .D(rx_frame_idelay)   // 1-bit DDR data input
+   );
+
+   genvar i;
+   generate 
+      for (i=0;i<6;i=i+1) begin
+         //RX DATA
+         TLVDS_IBUF IBUFDS_data (
+            .O(rx_data[i]),  // Buffer output
+            .I(rx_data_in_p[i]),  // Diff_p buffer input (connect directly to top-level port)
+            .IB(rx_data_in_n[i]) // Diff_n buffer input (connect directly to top-level port)
+         );
+
+         IODELAY #(
+            .C_STATIC_DIY(1),
+            .DYN_DLY_EN("FALSE"),
+            .ADAPT_EN("TRUE")
+         ) IODELAY_data(
+            .DI(rx_data[i]),         // 1-bit input: Data input from the I/O
+            .SDTAP(idelay_en[i]),   // 5-bit input: Counter value input
+            .VALUE(ref_clk200m),                   // 1-bit input: Active high enable increment/decrement input
+            .DLYSTEP(idelay_tap),                 // 1-bit input: Increment / Decrement tap delay input
+            .DO(rx_data_idelay[i]),
+            .DF()
+         );
+
+         IDDR IDDR_data (
+            .Q0(rx_data_iddr_p[i]), // 1-bit output for positive edge of clock
+            .Q1(rx_data_iddr_n[i]), // 1-bit output for negative edge of clock
+            .C(data_clk),   // 1-bit clock input
+            .D(rx_data_idelay[i])   // 1-bit DDR data input
+         );
+      end
+
+`endif 
 
 //rx data parase logical
 reg [5:0]       rx_data_iddr_n_r1_reg ;
