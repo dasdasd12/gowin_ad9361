@@ -133,7 +133,7 @@ module demod_data(
     ) tx_ConvertBuffer(
       .clk                                (data_clk                  ),
       .rst_n                              (~frame_end_d1             ),
-      .frame_end                          (frame_end                 ),
+      .frame_end                          (                          ),
       .in_ready                           (                          ),
       .in_valid                           (valid_328                 ),
       .in_data                            (bit_out                   ),

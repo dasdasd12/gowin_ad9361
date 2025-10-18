@@ -20,14 +20,13 @@ module data_mod(
     output reg           [  11: 0]      tx_data_Q                   
 );
 
-    localparam                           IDLE                        = 2'b00                ;
-    localparam                           SYNC                        = 2'b01                ;
-    localparam                           DATA                        = 2'b10                ;
-    localparam                           DNUM                        = 2'b11                ;
+    localparam                           IDLE                        = 3'b000               ;
+    localparam                           SYNC                        = 3'b001               ;
+    localparam                           DATA                        = 3'b010               ;
+    localparam                           DNUM                        = 3'b011               ;
+    localparam                           DEND                        = 3'b100               ;
 
-    localparam                           DATA_NUM                    = 12'd400               ;
-
-    reg                [   1: 0]        state                       ;
+    reg                [   2: 0]        state                       ;
 
     localparam                           S                           = 12'd630   ;  //1892/3
     localparam                           C                           = 12'd261   ;  //783/3
@@ -36,7 +35,7 @@ module data_mod(
 
     assign                              bit_valid                   = (state == DATA) ? 1'b1 : 1'b0;
     assign                              data_valid                  = ((state == DNUM)||(state == DATA)) ? 1'b1 : 1'b0;
-    assign                              tx_data_valid               = ((state == DNUM)||(state == DATA)||(state == SYNC)) ? 1'b1 : 1'b0;
+    assign                              tx_data_valid               = ((state == DNUM)||(state == DATA)||(state == SYNC) || (state == DEND)) ? 1'b1 : 1'b0;
 
     wire               [  15: 0]        bit3_num                    ;
 
@@ -101,8 +100,18 @@ module data_mod(
 
                 DATA: begin
                     if (bit_in_valid == 1'b0) begin
-                        state <= IDLE;
+                        state <= DEND;
                         frame_end <= 1'b1;
+                    end
+                end
+
+                DEND: begin
+                    if (cnt == 16'd19) begin
+                        state <= IDLE;
+                        cnt   <= 16'd0;
+                    end
+                    else begin
+                        cnt <= cnt + 1'b1;
                     end
                 end
 
@@ -141,6 +150,9 @@ module data_mod(
         end
         else if (state == DATA || state == DNUM) begin
             sample_bit <= sample_bit + tx_bit;
+        end
+        else if (state == DEND) begin
+            sample_bit <= sample_bit + 3'd2;
         end
     end
 
