@@ -57,19 +57,19 @@ module demod_data(
     wire                                valid_328                   ;
     wire                                valid_3212                  ;
 
-    reg                [  12: 0]        data_cnt                    ;
+    reg                [  15: 0]        data_cnt                    ;
 
     always @(posedge data_clk or negedge rst_n) begin
       if(!rst_n)
-        data_cnt <= 13'd0;
+        data_cnt <= 16'd0;
       else if(frame_end)
-        data_cnt <= 13'd0;
+        data_cnt <= 16'd0;
       else if(valid)
         data_cnt <= data_cnt + 1'b1;
     end
 
-    assign                              valid_328                   = (data_cnt >  12'd3) ? valid : 1'b0;
     assign                              valid_3212                  = (data_cnt <= 12'd3) ? valid : 1'b0;
+    
 
     // output declaration of module ConvertBuffer
     wire                                out_valid_12                ;
@@ -84,9 +84,9 @@ module demod_data(
         eth_tx_done_d1 <= eth_tx_done;
     end
 
-    wire fifo_rst_n;
+    wire                                fifo_rst_n                  ;
 
-    assign fifo_rst_n = rst_n & (~eth_tx_done_d1);
+    assign                              fifo_rst_n                  = rst_n & (~eth_tx_done_d1);
     
     ConvertBuffer #(
       .IN_W                               (3                         ),
@@ -126,6 +126,21 @@ module demod_data(
     // output declaration of module ConvertBuffer
     wire                                out_valid_8                 ;
     wire               [   7: 0]        out_data_8                  ;
+    wire                                convert_done_8              ;
+
+    reg                [  12: 0]        byte_cnt                    ;
+
+    always @(posedge data_clk or negedge rst_n) begin
+      if(!rst_n)
+        byte_cnt <= 13'd0;
+      else if(frame_end)
+        byte_cnt <= 13'd0;
+      else if(out_valid_8)
+        byte_cnt <= byte_cnt + 1'b1;
+    end
+
+    assign                              convert_done_8                 = (byte_cnt == out_data_12 && data_cnt > 12'd3) ? 1'b1 : 1'b0;
+    assign                              valid_328                      = (data_cnt >  12'd3) ? (convert_done_8 ? 1'b0 : valid) : 1'b0;
 
     ConvertBuffer #(
       .IN_W                               (3                         ),
