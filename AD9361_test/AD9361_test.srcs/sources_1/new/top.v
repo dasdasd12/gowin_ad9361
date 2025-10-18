@@ -20,6 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 `define ZYNQ
+// `define GOWIN
 
 module top (
     input                               clk                        ,
@@ -174,35 +175,31 @@ module top (
     //////////////////////////////////////////////////////////////////////////
 
     // output declaration of module ethernet_interface
-    wire                                clk125m                     ;
+    wire                                clk_125m                     ;   //this clock is used for debug
 
     clk_wiz_0 u_clk_wiz_0(
       .clk_in1                            (sys_clk                   ),
       .clk_out1                           (clk_125m                  )
     );
 
-    wire               [  15: 0]        data_length                 ;
+    wire               [  15: 0]        eth_tx_data_length          ;
     wire               [   7: 0]        eth_tx_data                 ;
     wire                                eth_tx_done                 ;
     wire                                eth_tx_data_valid           ;
+    wire                                eth_tx_start                ;
 
-    wire               [   7: 0]        eth_rx_data                 ;
-
-    wire                                frame_start                 ;
-    wire                                frame_end                   ;
     
     ethernet_interface u_ethernet_interface(
       .rst_n                              (rst_n                     ),
       .clk125m                            (clk_125m                  ),
 
-      .data_length                        (data_length               ),
+      .data_length                        (eth_tx_data_length        ),
       .tx_data                            (eth_tx_data               ),
       .tx_data_valid                      (eth_tx_data_valid         ),
       .tx_done                            (eth_tx_done               ),
+      .frame_start                        (eth_tx_start              ),
 
-      .frame_start                        (frame_end                 ),
-
-      .rx_data                            (eth_rx_data               ),
+      .rx_data                            (                          ),
       //ethernet interface
       .e_rst_n                            (e_rst_n                   ),
       .mdc                                (mdc                       ),
@@ -222,205 +219,58 @@ module top (
     //
     // 
     //////////////////////////////////////////////////////////////////////////
-
-    wire pkg_end;
-    wire pkg_on;
-    wire fifo_on;
-    wire [7:0] pkg_data;
-
-    reg pkg_end_d1;
-    reg pkg_end_d2;
-
-    always @(posedge clk_125m or negedge rst_n) begin
-      if(!rst_n) begin
-        pkg_end_d1 <= 1'b0;
-        pkg_end_d2 <= 1'b0;
-      end else begin
-        pkg_end_d1 <= pkg_end;
-        pkg_end_d2 <= pkg_end_d1;
-      end
-    end
-
-    reg [9:0] pkg_cnt;
-
     
-    // output declaration of module async_fifo
-    wire               [   2: 0]        tx_data_test                ;
-    wire               [   7: 0]        pkg_fifo_data               ;
-    wire                                tx_data_test_valid          ;
-    wire                                refresh                     ;
+    // output declaration of module test_module
+    wire               [   7: 0]        eth_rx_data                 ;
+    wire                                eth_rx_data_valid           ;
+    wire               [  15: 0]        eth_rx_data_length          ;
+    wire                                one_pkg_done                ;
+    wire                                pkg_error                   ;
     
-    async_fifo #(
-      .DSIZE                              (8                         ),
-      .ASIZE                              (4                         ),
-      .FALLTHROUGH                        ("FALSE"                   ) 
-      ) u_async_fifo(
-      .wclk                               (clk_125m                  ),
-      .wrst_n                             (rst_n                     ),
-      .winc                               (pkg_on                    ),
-      .wdata                              (pkg_data                  ),
-      .wfull                              (                          ),
-      .awfull                             (                          ),
-      .rclk                               (data_clk                  ),
-      .rrst_n                             (rst_n                     ),
-      .rinc                               (fifo_on                   ),
-      .rdata                              (pkg_fifo_data             ),
-      .rempty                             (                          ),
-      .arempty                            (                          ) 
-    );
-
-    ConvertBuffer #(
-      .IN_W                               (8                         ),
-      .OUT_W                              (3                         ) 
-    ) u_ConvertBuffer_test(
-      .clk                                (data_clk                  ),
-      .rst_n                              (refresh                   ),
-      .frame_end                          (                          ),
-      .in_ready                           (                          ),
-      .in_valid                           (pkg_on                    ),
-      .in_data                            (pkg_fifo_data             ),
-      .out_ready                          (1'b1                      ),
-      .out_valid                          (tx_data_test_valid        ),
-      .out_data                           (tx_data_test              ) 
-    );
-
-    data_mod u_data_mod(
-      .clk                                (data_clk                  ),
+    test_module u_test_module(
+      .clk_125m                           (clk_125m                  ),
       .rst_n                              (rst_n                     ),
-      .frame_start                        (                          ),
-      .frame_end                          (                          ),
-      .bit_in                             (tx_data_test              ),
-      .data_valid                         (tx_data_valid             ),
+
+      .eth_rx_data                        (eth_rx_data               ),
+      .eth_rx_data_valid                  (eth_rx_data_valid         ),
+      .eth_rx_data_length                 (eth_rx_data_length        ),
+      .one_pkg_done                       (one_pkg_done              ),
+      .pkg_error                          (pkg_error                 ) 
+    );
+
+    mod_data u_mod_data(
+      .clk_125m                           (clk_125m                  ),
+      .data_clk                           (data_clk                  ),
+      .rst_n                              (rst_n                     ),
+
+      .eth_rx_data                        (eth_rx_data               ),
+      .eth_rx_data_valid                  (eth_rx_data_valid         ),
+      .eth_rx_data_length                 (eth_rx_data_length        ),
+      .one_pkg_done                       (one_pkg_done              ),
+      .pkg_error                          (pkg_error                 ),
+
       .tx_data_I                          (tx_data_I                 ),
-      .tx_data_Q                          (tx_data_Q                 ) 
-    );
+      .tx_data_Q                          (tx_data_Q                 ),
+      .tx_data_valid                      (tx_data_valid             ) 
+    );   
     
+    demod_data u_demod_data(
+      .clk_125m                           (clk_125m                  ),
+      .data_clk                           (data_clk                  ),
+      .rst_n                              (rst_n                     ),
+      .rst_n_demod                        (rst_n_demod               ),
 
-    // output declaration of module Demod
-    wire                                valid                       ;
-    wire               [   2: 0]        bit_out                     ;
-    wire               [11-1: 0]        phase_out                   ;
+      .rx_data_I                          (rx_data_I                 ),
+      .rx_data_Q                          (rx_data_Q                 ),
 
-    reg                                 frame_end_d0                ;
-    reg                                 frame_end_d1                ;
-
-    always @(posedge data_clk or negedge rst_n) begin
-      if(!rst_n) begin
-        frame_end_d0 <= 1'b0;
-        frame_end_d1 <= 1'b0;
-      end else begin
-        frame_end_d0 <= frame_end;
-        frame_end_d1 <= frame_end_d0;
-      end
-    end
-
-    Demod #(
-      .DATA_W                             (12                               )                     
-    ) u_Demod(
-      .clk                                (data_clk                  ),
-      .rst_n                              (rst_n_demod               ),
-      .in_i                               (rx_data_I                 ),
-      .in_q                               (rx_data_Q                 ),
-      .valid                              (valid                     ),
-      .bit_out                            (bit_out                   ),
-      .phase_out                          (phase_out                 ),
-      .frame_start                        (frame_start               ),
-      .frame_end                          (frame_end                 )
+      .eth_tx_start                       (eth_tx_start              ),
+      .eth_tx_data_valid                  (eth_tx_data_valid         ),
+      .eth_tx_data                        (eth_tx_data               ),
+      .eth_tx_data_length                 (eth_tx_data_length        ),
+      .eth_tx_done                        (eth_tx_done               ) 
     );
 
-    wire                                valid_328                   ;
-    wire                                valid_3212                  ;
-
-    reg                [  12: 0]        data_cnt                    ;
-
-    always @(posedge data_clk or negedge rst_n) begin
-      if(!rst_n)
-        data_cnt <= 13'd0;
-      else if(frame_end)
-        data_cnt <= 13'd0;
-      else if(valid)
-        data_cnt <= data_cnt + 1'b1;
-    end
-
-    assign                              valid_328                   = (data_cnt >  12'd3) ? valid : 1'b0;
-    assign                              valid_3212                  = (data_cnt <= 12'd3) ? valid : 1'b0;
-
-    // output declaration of module ConvertBuffer
-    wire                                out_valid_12                ;
-    wire               [  11: 0]        out_data_12                 ;
-    
-    ConvertBuffer #(
-      .IN_W                               (3                         ),
-      .OUT_W                              (12                        ),
-      .SIZE                               (12                        )
-    ) u_ConvertBuffer(
-      .clk                                (data_clk                  ),
-      .rst_n                              (~frame_end_d1             ),
-      .frame_end                          (                          ),
-      .in_ready                           (                          ),
-      .in_valid                           (valid_3212                ),
-      .in_data                            (bit_out                   ),
-      .out_ready                          (1'b1                      ),
-      .out_valid                          (out_valid_12              ),
-      .out_data                           (out_data_12               ) 
-    );
-    
-    async_fifo #(
-      .DSIZE                              (12                         ),
-      .ASIZE                              (2                          ),
-      .FALLTHROUGH                        ("FALSE"                    )
-    ) tx_data_num_async_fifo(
-      .wclk                               (data_clk                  ),
-      .wrst_n                             (rst_n                     ),
-      .winc                               (out_valid_12              ),
-      .wdata                              (out_data_12               ),
-      .wfull                              (                          ),
-      .awfull                             (                          ),
-      .rclk                               (clk_125m                  ),
-      .rrst_n                             (rst_n                     ),
-      .rinc                               (eth_tx_done               ),
-      .rdata                              (data_length               ),
-      .rempty                             (                          ),
-      .arempty                            (                          ) 
-    );
-
-    // output declaration of module ConvertBuffer
-    wire                                out_valid_8                 ;
-    wire               [   7: 0]        out_data_8                  ;
-
-    ConvertBuffer #(
-      .IN_W                               (3                         ),
-      .OUT_W                              (8                         ) 
-    ) tx_ConvertBuffer(
-      .clk                                (data_clk                  ),
-      .rst_n                              (~frame_end_d1             ),
-      .frame_end                          (frame_end                 ),
-      .in_ready                           (in_ready                  ),
-      .in_valid                           (valid_328                 ),
-      .in_data                            (bit_out                   ),
-      .out_ready                          (1'b1                      ),
-      .out_valid                          (out_valid_8               ),
-      .out_data                           (out_data_8                ) 
-    );
-    
-    async_fifo #(
-      .DSIZE                              (8                         ),
-      .ASIZE                              (12                        ),
-      .FALLTHROUGH                        ("FALSE"                   ) 
-    ) tx_data_async_fifo(
-      .wclk                               (data_clk                  ),
-      .wrst_n                             (rst_n                     ),
-      .winc                               (out_valid_8               ),
-      .wdata                              (out_data_8                ),
-      .wfull                              (                          ),
-      .awfull                             (                          ),
-      .rclk                               (clk_125m                  ),
-      .rrst_n                             (rst_n                     ),
-      .rinc                               (eth_tx_data_valid         ),
-      .rdata                              (eth_tx_data               ),
-      .rempty                             (                          ),
-      .arempty                            (                          ) 
-    );
+    `ifdef ZYNQ
 
     //////////////////////////////////////////////////////////////////////////
     //
@@ -430,27 +280,26 @@ module top (
     // 
     //////////////////////////////////////////////////////////////////////////
 
-    ila_1 u_ila_1(
-      .clk                                (data_clk                  ),
-      .probe0                             (rx_data_valid             ),
-      .probe1                             (rx_data_I                 ),
-      .probe2                             (rx_data_Q                 ),
-      .probe3                             (valid                     ),
-      .probe4                             (bit_out                   ),
-      .probe5                             (phase_out                 ),
-      .probe6                             (tx_data_I                 ),
-      .probe7                             (tx_data_Q                 ),
-      .probe8                             (u_Demod.out_i             ),
-      .probe9                             (u_Demod.out_q             ),
-      .probe10                            (u_Demod.u_Costas.u_PID.data_in_int),
-      .probe11                            (u_Demod.u_SignalValid.amp_dc),
-      .probe12                            (u_Demod.u_SignalValid.amp_ac),
-      .probe13                            (u_Demod.frame_start       ),
-      .probe14                            (u_Demod.state             ),
-      .probe15                            (u_data_mod.state          ),
-      .probe16                            (u_Demod.u_SignalValid.amp ),
-      .probe17                            (u_Demod.u_DeltaDecode.valid_in) 
-    );
+    // ila_1 u_ila_1(
+    //   .clk                                (data_clk                  ),
+    //   .probe0                             (rx_data_valid             ),
+    //   .probe1                             (rx_data_I                 ),
+    //   .probe2                             (rx_data_Q                 ),
+    //   .probe3                             (u_demod_data.valid                     ),
+    //   .probe4                             (u_demod_data.bit_out                   ),
+    //   .probe5                             (u_demod_data.phase_out                 ),
+    //   .probe6                             (tx_data_I                 ),
+    //   .probe7                             (tx_data_Q                 ),
+    //   .probe8                             (u_demod_data.u_Demod.out_i             ),
+    //   .probe9                             (u_demod_data.u_Demod.out_q             ),
+    //   .probe10                            (u_demod_data.u_Demod.u_Costas.u_PID.data_in_int),
+    //   .probe11                            (u_demod_data.u_Demod.u_SignalValid.amp_dc),
+    //   .probe12                            (u_demod_data.u_Demod.u_SignalValid.amp_ac),
+    //   .probe13                            (u_demod_data.u_Demod.frame_start       ),
+    //   .probe14                            (u_demod_data.u_Demod.state             ),
+    //   .probe15                            (u_demod_data.u_Demod.u_SignalValid.amp ),
+    //   .probe16                            (u_demod_data.u_Demod.u_DeltaDecode.valid_in) 
+    // );
 
     ila_0 u_ila_0(
       .clk                                (data_clk                  ),
@@ -458,17 +307,23 @@ module top (
       .probe1                             (tx_data_Q                 ),
       .probe2                             (rx_data_I                 ),
       .probe3                             (rx_data_Q                 ),
-      .probe4                             (valid                     ),
-      .probe5                             (bit_out                   ),  
-      .probe6                             (frame_start               ),
-      .probe7                             (frame_end                 ),
-      .probe8                             (valid_3212                ),
-      .probe9                             (valid_328                 ),
-      .probe10                            (data_cnt                  ),
-      .probe11                            (out_data_12               ),
-      .probe12                            (out_valid_12              ),
-      .probe13                            (out_data_8                ),
-      .probe14                            (out_valid_8               )
+      .probe4                             (u_demod_data.valid                     ),
+      .probe5                             (u_demod_data.bit_out                   ),  
+      .probe6                             (u_demod_data.frame_start               ),
+      .probe7                             (u_demod_data.frame_end                 ),
+      .probe8                             (u_demod_data.valid_3212                ),
+      .probe9                             (u_demod_data.valid_328                 ),
+      .probe10                            (u_demod_data.data_cnt                  ),
+      .probe11                            (u_demod_data.out_data_12               ),
+      .probe12                            (u_demod_data.out_valid_12              ),
+      .probe13                            (u_demod_data.out_data_8                ),
+      .probe14                            (u_demod_data.out_valid_8               ),
+      .probe15                            (u_mod_data.pkg_fifo_data               ),
+      .probe16                            (u_mod_data.rempty                      ),
+      .probe17                            (u_mod_data.convert_valid               ),
+      .probe18                            (u_mod_data.data_valid                  ),
+      .probe19                            (u_mod_data.in_ready                    ),
+      .probe20                            (u_mod_data.bit_in                      )
     );
 
     ila_2 u_ila_2(
@@ -476,10 +331,15 @@ module top (
       .probe0                             (eth_tx_data               ),
       .probe1                             (eth_tx_data_valid         ),
       .probe2                             (eth_tx_done               ),
-      .probe3                             (data_length               ),
+      .probe3                             (eth_tx_data_length        ),
       .probe4                             (u_ethernet_interface.frame_start_d2),
-      .probe5                             (out_data_test             ),
-      .probe6                             (out_valid_test            ) 
+      .probe5                             (eth_rx_data             ),
+      .probe6                             (eth_rx_data_valid       ),
+      .probe7                             (eth_rx_data_length      ),
+      .probe8                             (one_pkg_done            ),
+      .probe9                             (pkg_error               )
     );
+
+    `endif
     
 endmodule
