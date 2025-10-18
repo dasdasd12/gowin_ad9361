@@ -7,7 +7,7 @@
 // `define ATAN_ROM_PATH "C:/program1/Program/2019.1vivado_project/demod/src/data/atan_rom.txt"
 // `define SQRT_ROM_PATH "C:/program1/Program/2019.1vivado_project/demod/src/data/sqrt_rom.txt"
 // `endif
-
+`define ZYNQ
 
 `ifdef __ICARUS__
 `define ROM_BASE_PATH "./src/data/"
