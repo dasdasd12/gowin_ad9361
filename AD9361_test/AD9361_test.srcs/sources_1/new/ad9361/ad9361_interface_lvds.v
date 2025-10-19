@@ -63,6 +63,7 @@ module ad9361_interface_lvds (
 
     wire                                data_clk_out                ;
 
+  `ifdef ZYNQ
   //输入数据延迟控制时钟
   clk_wiz_1 u_clk_wiz_1 (
     .clk_out1                           (ref_clk200m               ),
@@ -76,8 +77,7 @@ module ad9361_interface_lvds (
     .clk_in1                            (data_clk                  ) 
   );
 
-
-
+  `endif
 
   spi_reg_cfg u_spi_reg_cfg (
     .clk                                (clk                       ),
@@ -100,7 +100,7 @@ module ad9361_interface_lvds (
     .rd_start                           (rd_start                  ) 
   );
 
-
+  `ifdef ZYNQ
   OBUFDS #(
     .IOSTANDARD                         ("LVDS_25"                 ) // Specify the output I/O standard
   ) OBUFDS_inst_clk (
@@ -108,6 +108,13 @@ module ad9361_interface_lvds (
     .OB                                 (tx_clk_out_n              ),// Diff_n output
     .I                                  (data_clk_out              ) // Buffer input
   );
+  `elsif GOWIN
+   TLVDS_OBUF OBUFDS_inst_clk (
+      .O(tx_clk_out_p),     // Diff_p output (connect directly to top-level port)
+      .OB(tx_clk_out_n),   // Diff_n output (connect directly to top-level port)
+      .I(data_clk_out)      // Buffer input
+   );
+  `endif
 
   ad9361_phy u_ad9361_phy (
     .ref_clk200m                        (ref_clk200m               ),

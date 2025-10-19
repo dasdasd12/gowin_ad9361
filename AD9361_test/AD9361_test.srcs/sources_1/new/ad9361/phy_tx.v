@@ -145,6 +145,8 @@ end
 wire 			tx_clk;
 wire 			tx_frame_out;
 wire 	[5:0]	tx_data_out;
+
+`ifdef ZYNQ
     //CLK
  ODDR #(
       .DDR_CLK_EDGE("SAME_EDGE"), // "OPPOSITE_EDGE" or "SAME_EDGE" 
@@ -216,5 +218,50 @@ wire 	[5:0]	tx_data_out;
            );		
         end
     endgenerate
+
+`elsif GOWIN
+    //CLK
+    ODDR ODDR_data_clk_inst (
+      .Q0(tx_clk),   // 1-bit DDR output
+      .CLK(data_clk),   // 1-bit clock input
+      .D0(1'b0), // 1-bit data input (positive edge)
+      .D1(1'b1) // 1-bit data input (negative edge)
+   );
+   TLVDS_OBUF OBUFDS_data_clk_inst (
+      .O(tx_clk_out_p),     // Diff_p output (connect directly to top-level port)
+      .OB(tx_clk_out_n),   // Diff_n output (connect directly to top-level port)
+      .I(tx_clk)      // Buffer input
+   );
+    //FRAME
+   ODDR ODDR_frame_inst (
+      .Q0(tx_frame_out),   // 1-bit DDR output
+      .CLK(data_clk),   // 1-bit clock input
+      .D0(tx_frame_reg), // 1-bit data input (positive edge)
+      .D1(tx_frame_reg) // 1-bit data input (negative edge)
+   );
+   TLVDS_OBUF OBUFDS_data_clk_inst (
+      .O(tx_frame_out_p),     // Diff_p output (connect directly to top-level port)
+      .OB(tx_frame_out_n),   // Diff_n output (connect directly to top-level port)
+      .I(tx_frame_out)      // Buffer input
+   );
+     //DATA
+    genvar i;
+    generate
+        for(i=0;i<6;i=i+1) begin
+           ODDR ODDR_tx_data_inst (
+              .Q0(tx_data_out[i]),   // 1-bit DDR output
+              .CLK(data_clk),   // 1-bit clock input
+              .D0(tx_data_posedge_reg[i]), // 1-bit data input (positive edge)
+              .D1(tx_data_negedge_reg[i])   // 1-bit set
+           );
+           TLVDS_OBUF OBUFDS_tx_data_inst (
+              .O(tx_data_out_p[i]),     // Diff_p output (connect directly to top-level port)
+              .OB(tx_data_out_n[i]),   // Diff_n output (connect directly to top-level port)
+              .I(tx_data_out[i])      // Buffer input
+           );		
+        end
+    endgenerate
+
+`endif
 
 endmodule

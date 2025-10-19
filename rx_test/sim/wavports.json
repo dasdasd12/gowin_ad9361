@@ -1,0 +1,236 @@
+{
+  "extensionVersion": "1.4.2",
+  "fileName": "c:\\program1\\Program\\2019.1vivado_project\\rx_test\\rx_test.vcd",
+  "markerTime": 62355000,
+  "altMarkerTime": null,
+  "selectedSignal": {
+    "name": "rx_test.u_mod_data.convert_valid",
+    "numberFormat": "hexadecimal",
+    "msb": -1,
+    "lsb": -1
+  },
+  "zoomRatio": 0.000143089762599685,
+  "scrollLeft": 8392.99991793793,
+  "displayedSignals": [
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 28,
+      "name": "rx_test.u_mod_data.eth_rx_data",
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "renderType": "binary",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 16,
+      "name": "rx_test.u_mod_data.eth_rx_data_length",
+      "numberFormat": "hexadecimal",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "renderType": "multiBit",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 27,
+      "name": "rx_test.u_mod_data.eth_rx_data_valid",
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "renderType": "binary",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 20,
+      "name": "rx_test.u_mod_data.tx_data_Q",
+      "numberFormat": "signed",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "renderType": "multiBit",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 21,
+      "name": "rx_test.u_mod_data.tx_data_I",
+      "numberFormat": "signed",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "renderType": "multiBit",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 19,
+      "name": "rx_test.u_mod_data.tx_data_valid",
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "renderType": "binary",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 22,
+      "name": "rx_test.u_mod_data.rempty",
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "renderType": "multiBit",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 23,
+      "name": "rx_test.u_mod_data.pkg_fifo_data",
+      "numberFormat": "hexadecimal",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "renderType": "multiBit",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 33,
+      "name": "rx_test.u_mod_data.bit_clk",
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "renderType": "binary",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 12,
+      "name": "rx_test.u_mod_data.convert_end_pulse",
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "renderType": "binary",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 14,
+      "name": "rx_test.u_mod_data.convert_valid",
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "renderType": "binary",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 25,
+      "name": "rx_test.u_mod_data.in_ready",
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "renderType": "binary",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 13,
+      "name": "rx_test.u_mod_data.convert_rstn",
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "renderType": "binary",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 30,
+      "name": "rx_test.u_mod_data.bit_valid",
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "renderType": "binary",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 31,
+      "name": "rx_test.u_mod_data.bit_in_valid",
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "renderType": "multiBit",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 32,
+      "name": "rx_test.u_mod_data.bit_in",
+      "numberFormat": "hexadecimal",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "renderType": "multiBit",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 155,
+      "name": "rx_test.u_mod_data.u_data_mod.cnt",
+      "numberFormat": "hexadecimal",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "renderType": "multiBit",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 29,
+      "name": "rx_test.u_mod_data.data_valid",
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "renderType": "binary",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 157,
+      "name": "rx_test.u_mod_data.u_data_mod.sample_bit",
+      "numberFormat": "hexadecimal",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "renderType": "multiBit",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 159,
+      "name": "rx_test.u_mod_data.u_data_mod.tx_bit",
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "renderType": "multiBit",
+      "valueLinkCommand": ""
+    }
+  ]
+}
