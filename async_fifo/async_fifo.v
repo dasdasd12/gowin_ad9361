@@ -1,7 +1,7 @@
 // distributed under the mit license
 // https://opensource.org/licenses/mit-license.php
 
-`timescale 1 ns / 1 ps `default_nettype none
+`default_nettype none
 
 module async_fifo #(
     parameter DSIZE        = 8,
@@ -61,13 +61,16 @@ module async_fifo #(
     fifomem #(DSIZE, ASIZE, FALLTHROUGH) fifomem (
         .rclken(rinc),
         .rclk  (rclk),
+        .rrst_n(rrst_n),
+        .rempty(rempty),
         .rdata (rdata),
         .wdata (wdata),
         .waddr (waddr),
         .raddr (raddr),
         .wclken(winc),
         .wfull (wfull),
-        .wclk  (wclk)
+        .wclk  (wclk),
+        .wrst_n(wrst_n)
     );
 
     // The module handling read requests

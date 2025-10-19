@@ -37,6 +37,7 @@ module async_fifo_tb ();
 
     // output declaration of module async_fifo
     parameter DSIZE = 8;
+    reg  [DSIZE-1:0] wdata;
     wire             wfull;
     wire             awfull;
     wire [DSIZE-1:0] rdata;
@@ -47,18 +48,24 @@ module async_fifo_tb ();
     reg              winc;
     initial begin
         winc = 1'b1;
-        #295 winc = 1'b0;
+        `WAIT_CYCLE(295)
+        winc = 1'b0;
+    end
+
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) wdata <= 0;
+        else wdata <= wdata + 1;
     end
 
     async_fifo #(
         .DSIZE      (8),
         .ASIZE      (6),
-        .FALLTHROUGH("FALSE")
+        .FALLTHROUGH("TRUE")
     ) u_async_fifo (
         .wclk      (clk),
         .wrst_n    (rst_n),
         .winc      (winc),
-        .wdata     (12),
+        .wdata     (wdata),
         .wfull     (wfull),
         .awfull    (awfull),
         .rclk      (rclk),
