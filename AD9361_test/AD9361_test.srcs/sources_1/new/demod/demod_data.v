@@ -106,8 +106,7 @@ module demod_data(
     
     async_fifo #(
       .DSIZE                              (12                        ),
-      .ASIZE                              (2                         ),
-      .FALLTHROUGH                        ("FALSE"                   ) 
+      .ASIZE                              (2                         )
     ) tx_data_num_async_fifo(
       .wclk                               (data_clk                  ),
       .wrst_n                             (rst_n                     ),
@@ -159,8 +158,7 @@ module demod_data(
     
     async_fifo #(
       .DSIZE                              (8                         ),
-      .ASIZE                              (12                        ),
-      .FALLTHROUGH                        ("FALSE"                   ) 
+      .ASIZE                              (12                        )
     ) tx_data_async_fifo(
       .wclk                               (data_clk                  ),
       .wrst_n                             (fifo_rst_n                ),

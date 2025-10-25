@@ -27,7 +27,7 @@ module ad9361_init (
     reg                [   1: 0]        state                       ;
     reg                [   1: 0]        state_next                  ;
     reg                                 wait_vld                    ;
-    reg                [  23: 0]        wait_cnt                    ;
+    reg                [  27: 0]        wait_cnt                    ;
     reg                [  11: 0]        addr                        ;
     reg                [   9: 0]        rd_addr                     ;
     wire               [  19: 0]        rom_data                    ;
@@ -47,7 +47,7 @@ module ad9361_init (
     `else
 
         wire                                rd_end                    =state==2'b00&&rd_addr==10'd1022;
-        wire                                wait_end                  =wait_vld&&wait_cnt==24'd15_000_000;
+        wire                                wait_end                  =wait_vld&&wait_cnt==28'd100_000_000;
 
     `endif
 
@@ -111,7 +111,7 @@ module ad9361_init (
     end
 
     `ifdef DEBUG
-        //debug 
+        //debug ..............................................
         always @(posedge clk or negedge rst_n) begin
             if(!rst_n) begin
                 addr <=  12'd1020;
@@ -143,7 +143,7 @@ module ad9361_init (
         end
     end
 
-    ad9361_cfg_rom_v5 u_rom(
+    ad9361_cfg_rom_v6 u_rom(
     .clk                                (clk                       ),
     .addr                               (addr                      ),
     .data                               (rom_data                  ) 

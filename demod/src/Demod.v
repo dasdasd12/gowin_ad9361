@@ -93,7 +93,7 @@ module Demod #(
 
     SignalValid #(
         .DATA_W   (DATA_W),
-        .THRESH_AC(30),
+        .THRESH_AC(255),
         .THRESH_DC(50)
         // .THRESH_LOW_AC(2),
         // .THRESH_LOW_DC(30)

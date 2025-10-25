@@ -1,0 +1,140 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[UTF8]{ctex} % 中文支持
+\usepackage{graphicx} % 插入图片
+\usepackage{geometry} % 页面设置
+\usepackage{amsmath} % 数学公式
+\usepackage{booktabs} % 表格美化
+\usepackage{float} % 图片表格浮动控制
+\usepackage{titlesec} % 标题格式设置
+\usepackage{abstract} % 摘要格式
+\usepackage{enumitem} % 列表控制
+\usepackage{multirow} % 表格多行合并
+\usepackage{hyperref} % 超链接
+
+% 页眉：使用 fancyhdr 显示比赛 logo 并画一条长下划线
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{} % 清除默认的页眉页脚
+% 左侧放置 logo（文件位于 picture/比赛logo.png），根据需要调整 height
+\fancyhead[L]{\raisebox{-0.1cm}{\includegraphics[height=1.2cm]{picture/比赛logo.png}}}
+% 画一条较粗的头部横线（跨页边距宽度）
+\renewcommand{\headrulewidth}{0.6pt}
+
+% 页面设置
+\geometry{left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm}
+
+% 标题格式设置
+\titleformat{\section}{\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{1em}{}
+
+% 摘要格式设置
+\renewcommand{\abstractname}{\textbf{摘要}}
+\setlength{\absleftindent}{0pt}
+\setlength{\absrightindent}{0pt}
+
+% 列表格式设置
+\setlist[itemize]{topsep=0pt, partopsep=0pt, itemsep=0pt, parsep=0pt}
+
+\begin{document}
+
+% 让首页也使用 fancy 页眉
+\thispagestyle{fancy}
+
+% 标题部分
+\begin{center}
+    \LARGE\textbf{作品名称} \\\[0.5cm]
+    \normalsize（不要出现任何涉及学校名称等内容）
+\end{center}
+
+% 摘要
+\begin{abstract}
+    \noindent
+    在此处撰写摘要内容，不超过800字。
+\end{abstract}
+
+% 第一部分：作品概述
+\section*{第一部分\quad 作品概述}
+
+\subsection*{1. 功能与特性}
+在此处撰写功能与特性内容，不超过400字。可插入重要图片。
+
+\subsection*{2. 应用领域}
+在此处撰写应用领域内容，不超过400字。可插入重要图片。
+
+\subsection*{3. 主要技术特点}
+在此处撰写主要技术特点内容，不超过400字。
+
+\subsection*{4. 主要性能指标}
+在此处撰写主要性能指标内容，不超过200字。建议使用表格。
+
+\subsection*{5. 主要创新点}
+\begin{itemize}[leftmargin=*]
+    \item 创新点1；
+    \item 创新点2；
+    \item 创新点3；
+\end{itemize}
+
+\subsection*{6. 设计流程}
+在此处撰写设计流程内容，不超过200字。可插入重要图片。
+
+% 第二部分：系统组成及功能说明
+\section*{第二部分\quad 系统组成及功能说明}
+
+\subsection*{1. 整体介绍}
+在此处给出系统整体框图，各子模块标注清楚，并进行整体的文字说明，需要表达出各模块之间的关系。
+
+\subsection*{2. 硬件系统介绍}
+\subsubsection*{2.1 硬件整体介绍}
+硬件整体介绍内容。
+
+\subsubsection*{2.2 机械设计介绍}
+从总体到局部，逐级给出各组件的具体设计图，可以是CAD文件截图或者手绘图片。
+
+\subsubsection*{2.3 电路各模块介绍}
+从总体到局部，逐级给出各模块的具体设计图，并标记出关键的输入、输出信号线，可以是电路图、SCH原理图、PCB版图等截图。
+
+\subsection*{3. 软件系统介绍}
+\subsubsection*{3.1 软件整体介绍}
+软件整体介绍（含PC端或云端），结合关键图片。
+
+\subsubsection*{3.2 软件各模块介绍}
+根据总体框图，给出各模块的具体设计说明。从顶层到底层逐次给出各函数的流程图及其关键输入、输出变量。
+
+% 第三部分：完成情况及性能参数
+\section*{第三部分\quad 完成情况及性能参数}
+
+\subsection*{1. 整体介绍}
+整个系统实物的正面、斜45°全局性照片。
+
+\subsection*{2. 工程成果}
+\subsubsection*{2.1 机械成果}
+机械成果实物照片。
+
+\subsubsection*{2.2 电路成果}
+电路成果实物照片。
+
+\subsubsection*{2.3 软件成果}
+软件界面照片。
+
+\subsection*{3. 特性成果}
+逐个展示功能、性能参数等量化指标。可加重要仪器测试或现场照片。
+
+% 第四部分：总结
+\section*{第四部分\quad 总结}
+
+\subsection*{1. 可扩展之处}
+在此处撰写可扩展之处内容，不超过300字。
+
+\subsection*{2. 心得体会}
+在此处撰写心得体会内容，不超过1000字，可包括研发和制作细节。
+
+% 第五部分：参考文献
+\section*{第五部分\quad 参考文献}
+\begin{enumerate}[leftmargin=*]
+    \item 参考文献1
+    \item 参考文献2
+    \item ……
+\end{enumerate}
+
+\end{document}

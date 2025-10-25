@@ -29,7 +29,7 @@ module test_module (
             case (state)
                 
                 IDLE: begin 
-                    if(cnt == 16'd9999) begin
+                    if(cnt == 16'd39999) begin
                         state <= DATA;
                         cnt <= 16'd0;
                         one_pkg_done <= 1'b0;

@@ -280,26 +280,26 @@ module top (
     // 
     //////////////////////////////////////////////////////////////////////////
 
-    // ila_1 u_ila_1(
-    //   .clk                                (data_clk                  ),
-    //   .probe0                             (rx_data_valid             ),
-    //   .probe1                             (rx_data_I                 ),
-    //   .probe2                             (rx_data_Q                 ),
-    //   .probe3                             (u_demod_data.valid                     ),
-    //   .probe4                             (u_demod_data.bit_out                   ),
-    //   .probe5                             (u_demod_data.phase_out                 ),
-    //   .probe6                             (tx_data_I                 ),
-    //   .probe7                             (tx_data_Q                 ),
-    //   .probe8                             (u_demod_data.u_Demod.out_i             ),
-    //   .probe9                             (u_demod_data.u_Demod.out_q             ),
-    //   .probe10                            (u_demod_data.u_Demod.u_Costas.u_PID.data_in_int),
-    //   .probe11                            (u_demod_data.u_Demod.u_SignalValid.amp_dc),
-    //   .probe12                            (u_demod_data.u_Demod.u_SignalValid.amp_ac),
-    //   .probe13                            (u_demod_data.u_Demod.frame_start       ),
-    //   .probe14                            (u_demod_data.u_Demod.state             ),
-    //   .probe15                            (u_demod_data.u_Demod.u_SignalValid.amp ),
-    //   .probe16                            (u_demod_data.u_Demod.u_DeltaDecode.valid_in) 
-    // );
+    ila_1 u_ila_1(
+      .clk                                (data_clk                  ),
+      .probe0                             (rx_data_valid             ),
+      .probe1                             (rx_data_I                 ),
+      .probe2                             (rx_data_Q                 ),
+      .probe3                             (u_demod_data.valid                     ),
+      .probe4                             (u_demod_data.bit_out                   ),
+      .probe5                             (u_demod_data.phase_out                 ),
+      .probe6                             (tx_data_I                 ),
+      .probe7                             (tx_data_Q                 ),
+      .probe8                             (u_demod_data.u_Demod.out_i             ),
+      .probe9                             (u_demod_data.u_Demod.out_q             ),
+      .probe10                            (u_demod_data.u_Demod.u_Costas.u_PID.data_in_int),
+      .probe11                            (u_demod_data.u_Demod.u_SignalValid.amp_dc),
+      .probe12                            (u_demod_data.u_Demod.u_SignalValid.amp_ac),
+      .probe13                            (u_demod_data.u_Demod.frame_start       ),
+      .probe14                            (u_demod_data.u_Demod.state             ),
+      .probe15                            (u_demod_data.u_Demod.u_SignalValid.amp ),
+      .probe16                            (u_demod_data.u_Demod.u_DeltaDecode.valid_in) 
+    );
 
     ila_0 u_ila_0(
       .clk                                (data_clk                  ),
@@ -322,19 +322,19 @@ module top (
       .probe16                            (u_demod_data.convert_done_8)
     );
 
-    ila_2 u_ila_2(
-      .clk                                (clk_125m                  ),
-      .probe0                             (eth_tx_data               ),
-      .probe1                             (eth_tx_data_valid         ),
-      .probe2                             (eth_tx_done               ),
-      .probe3                             (eth_tx_data_length        ),
-      .probe4                             (u_ethernet_interface.frame_start_d2),
-      .probe5                             (eth_rx_data             ),
-      .probe6                             (eth_rx_data_valid       ),
-      .probe7                             (eth_rx_data_length      ),
-      .probe8                             (one_pkg_done            ),
-      .probe9                             (pkg_error               )
-    );
+    // ila_2 u_ila_2(
+    //   .clk                                (clk_125m                  ),
+    //   .probe0                             (eth_tx_data               ),
+    //   .probe1                             (eth_tx_data_valid         ),
+    //   .probe2                             (eth_tx_done               ),
+    //   .probe3                             (eth_tx_data_length        ),
+    //   .probe4                             (u_ethernet_interface.frame_start_d2),
+    //   .probe5                             (eth_rx_data             ),
+    //   .probe6                             (eth_rx_data_valid       ),
+    //   .probe7                             (eth_rx_data_length      ),
+    //   .probe8                             (one_pkg_done            ),
+    //   .probe9                             (pkg_error               )
+    // );
 
     `endif
     
