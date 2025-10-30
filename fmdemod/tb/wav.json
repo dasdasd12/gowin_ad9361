@@ -1,0 +1,148 @@
+{
+  "extensionVersion": "1.4.2",
+  "fileName": "c:\\program1\\Program\\2019.1vivado_project\\fmdemod\\FMdemod_tb_wave.vcd",
+  "markerTime": 1307,
+  "altMarkerTime": null,
+  "selectedSignal": {
+    "name": "FMdemod_tb.u_FM_processor.LRCLK",
+    "numberFormat": "binary",
+    "msb": -1,
+    "lsb": -1
+  },
+  "zoomRatio": 0.13924918712089593,
+  "scrollLeft": 161.9928953728997,
+  "displayedSignals": [
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 21,
+      "name": "FMdemod_tb.u_FM_processor.rst_n",
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "renderType": "binary",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 18,
+      "name": "FMdemod_tb.u_FM_processor.clk",
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "renderType": "binary",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 19,
+      "name": "FMdemod_tb.u_FM_processor.data_in",
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "renderType": "binary",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 34,
+      "name": "FMdemod_tb.u_FM_processor.data_in_d2",
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "renderType": "binary",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 37,
+      "name": "FMdemod_tb.u_FM_processor.state",
+      "numberFormat": "hexadecimal",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "renderType": "multiBit",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 36,
+      "name": "FMdemod_tb.u_FM_processor.lrclk_cnt",
+      "numberFormat": "decimal",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "renderType": "multiBit",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 31,
+      "name": "FMdemod_tb.u_FM_processor.LRCLK",
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "renderType": "binary",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 23,
+      "name": "FMdemod_tb.u_FM_processor.BCLK",
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "renderType": "binary",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 32,
+      "name": "FMdemod_tb.u_FM_processor.SD_MODE",
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "renderType": "binary",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 38,
+      "name": "FMdemod_tb.u_FM_processor.wait_cnt",
+      "numberFormat": "hexadecimal",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "renderType": "multiBit",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 35,
+      "name": "FMdemod_tb.u_FM_processor.din_reg",
+      "numberFormat": "hexadecimal",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "renderType": "multiBit",
+      "valueLinkCommand": ""
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 22,
+      "name": "FMdemod_tb.u_FM_processor.start_up_enable",
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "renderType": "binary",
+      "valueLinkCommand": ""
+    }
+  ]
+}

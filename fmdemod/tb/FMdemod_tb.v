@@ -71,5 +71,40 @@ module FMdemod_tb ();
         .out      (out)
     );
 
+    reg [11:0] fm_data;
+
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            fm_data <= 12'd0;
+        end else if (valid_out) begin
+            fm_data <= out[11:0];
+        end
+    end
+
+    // output declaration of module FM_processor
+    reg LRCLK;
+    wire BCLK;
+    wire DIN;
+    wire GAIN_SLOT;
+    reg SD_MODE;
+    
+    FM_processor #(
+        .RESOLUTION   	(32      ),
+        .SAMPLE_RATE  	(96_000  ),
+        .CHANNEL_MODE 	(0       )
+        )
+    u_FM_processor(
+        .data_in    	(fm_data     ),
+        .fm_enable  	(1'b1        ),
+        .clk        	(clk         ),
+        .rst_n      	(rst_n       ),
+        .LRCLK      	(LRCLK       ),
+        .BCLK       	(BCLK        ),
+        .DIN        	(DIN         ),
+        .GAIN_SLOT  	(GAIN_SLOT   ),
+        .SD_MODE    	(SD_MODE     )
+    );
+    
+
 
 endmodule
