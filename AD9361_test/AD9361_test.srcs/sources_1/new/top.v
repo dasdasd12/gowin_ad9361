@@ -280,26 +280,26 @@ module top (
     // 
     //////////////////////////////////////////////////////////////////////////
 
-    ila_1 u_ila_1(
-      .clk                                (data_clk                  ),
-      .probe0                             (rx_data_valid             ),
-      .probe1                             (rx_data_I                 ),
-      .probe2                             (rx_data_Q                 ),
-      .probe3                             (u_demod_data.valid                     ),
-      .probe4                             (u_demod_data.bit_out                   ),
-      .probe5                             (u_demod_data.phase_out                 ),
-      .probe6                             (tx_data_I                 ),
-      .probe7                             (tx_data_Q                 ),
-      .probe8                             (u_demod_data.u_Demod.out_i             ),
-      .probe9                             (u_demod_data.u_Demod.out_q             ),
-      .probe10                            (u_demod_data.u_Demod.u_Costas.u_PID.data_in_int),
-      .probe11                            (u_demod_data.u_Demod.u_SignalValid.amp_dc),
-      .probe12                            (u_demod_data.u_Demod.u_SignalValid.amp_ac),
-      .probe13                            (u_demod_data.u_Demod.frame_start       ),
-      .probe14                            (u_demod_data.u_Demod.state             ),
-      .probe15                            (u_demod_data.u_Demod.u_SignalValid.amp ),
-      .probe16                            (u_demod_data.u_Demod.u_DeltaDecode.valid_in) 
-    );
+    // ila_1 u_ila_1(
+    //   .clk                                (data_clk                  ),
+    //   .probe0                             (rx_data_valid             ),
+    //   .probe1                             (rx_data_I                 ),
+    //   .probe2                             (rx_data_Q                 ),
+    //   .probe3                             (u_demod_data.valid                     ),
+    //   .probe4                             (u_demod_data.bit_out                   ),
+    //   .probe5                             (u_demod_data.phase_out                 ),
+    //   .probe6                             (tx_data_I                 ),
+    //   .probe7                             (tx_data_Q                 ),
+    //   .probe8                             (u_demod_data.u_Demod.out_i             ),
+    //   .probe9                             (u_demod_data.u_Demod.out_q             ),
+    //   .probe10                            (u_demod_data.u_Demod.u_Costas.u_PID.data_in_int),
+    //   .probe11                            (u_demod_data.u_Demod.u_SignalValid.amp_dc),
+    //   .probe12                            (u_demod_data.u_Demod.u_SignalValid.amp_ac),
+    //   .probe13                            (u_demod_data.u_Demod.frame_start       ),
+    //   .probe14                            (u_demod_data.u_Demod.state             ),
+    //   .probe15                            (u_demod_data.u_Demod.u_SignalValid.amp ),
+    //   .probe16                            (u_demod_data.u_Demod.u_DeltaDecode.valid_in) 
+    // );
 
     ila_0 u_ila_0(
       .clk                                (data_clk                  ),
@@ -307,19 +307,7 @@ module top (
       .probe1                             (tx_data_Q                 ),
       .probe2                             (rx_data_I                 ),
       .probe3                             (rx_data_Q                 ),
-      .probe4                             (u_demod_data.valid        ),
-      .probe5                             (u_demod_data.bit_out      ),  
-      .probe6                             (u_demod_data.frame_start  ),
-      .probe7                             (u_demod_data.frame_end    ),
-      .probe8                             (u_demod_data.valid_3212   ),
-      .probe9                             (u_demod_data.valid_328    ),
-      .probe10                            (u_demod_data.data_cnt     ),
-      .probe11                            (u_demod_data.out_data_12  ),
-      .probe12                            (u_demod_data.out_valid_12 ),
-      .probe13                            (u_demod_data.out_data_8   ),
-      .probe14                            (u_demod_data.out_valid_8  ),
-      .probe15                            (u_demod_data.byte_cnt     ),
-      .probe16                            (u_demod_data.convert_done_8)
+      .probe4                             (u_demod_data.valid        )
     );
 
     // ila_2 u_ila_2(

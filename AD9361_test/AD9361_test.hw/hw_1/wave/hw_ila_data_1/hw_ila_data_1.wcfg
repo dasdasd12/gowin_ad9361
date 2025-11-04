@@ -9,98 +9,22 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="10326507fs"></ZoomStartTime>
-      <ZoomEndTime time="11481008fs"></ZoomEndTime>
-      <Cursor1Time time="10480000fs"></Cursor1Time>
+      <ZoomStartTime time="23897334fs"></ZoomStartTime>
+      <ZoomEndTime time="28539335fs"></ZoomEndTime>
+      <Cursor1Time time="24671000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="405"></NameColumnWidth>
-      <ValueColumnWidth column_width="113"></ValueColumnWidth>
+      <ValueColumnWidth column_width="101"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="17" />
+   <WVObjectSize size="2" />
    <wave_markers>
    </wave_markers>
-   <wvobject fp_name="frame_end" type="logic">
+   <wvobject fp_name="tx_data_I" type="array">
       <obj_property name="DisplayName">FullPathName</obj_property>
-      <obj_property name="ElementShortName">frame_end</obj_property>
-      <obj_property name="ObjectShortName">frame_end</obj_property>
-      <obj_property name="LABELRADIX">true</obj_property>
-      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
-   </wvobject>
-   <wvobject fp_name="valid_328" type="logic">
-      <obj_property name="DisplayName">FullPathName</obj_property>
-      <obj_property name="ElementShortName">valid_328</obj_property>
-      <obj_property name="ObjectShortName">valid_328</obj_property>
-      <obj_property name="LABELRADIX">true</obj_property>
-      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
-   </wvobject>
-   <wvobject fp_name="out_data_8" type="array">
-      <obj_property name="DisplayName">FullPathName</obj_property>
-      <obj_property name="ElementShortName">out_data_8[7:0]</obj_property>
-      <obj_property name="ObjectShortName">out_data_8[7:0]</obj_property>
-      <obj_property name="Radix">BINARYRADIX</obj_property>
-      <obj_property name="LABELRADIX">true</obj_property>
-      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
-   </wvobject>
-   <wvobject fp_name="out_valid_8" type="logic">
-      <obj_property name="DisplayName">FullPathName</obj_property>
-      <obj_property name="ElementShortName">out_valid_8</obj_property>
-      <obj_property name="ObjectShortName">out_valid_8</obj_property>
-      <obj_property name="LABELRADIX">true</obj_property>
-      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
-   </wvobject>
-   <wvobject fp_name="out_valid_12" type="logic">
-      <obj_property name="DisplayName">FullPathName</obj_property>
-      <obj_property name="ElementShortName">out_valid_12</obj_property>
-      <obj_property name="ObjectShortName">out_valid_12</obj_property>
-      <obj_property name="LABELRADIX">true</obj_property>
-      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
-   </wvobject>
-   <wvobject fp_name="valid_3212" type="logic">
-      <obj_property name="DisplayName">FullPathName</obj_property>
-      <obj_property name="ElementShortName">valid_3212</obj_property>
-      <obj_property name="ObjectShortName">valid_3212</obj_property>
-      <obj_property name="LABELRADIX">true</obj_property>
-      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
-   </wvobject>
-   <wvobject fp_name="data_cnt" type="array">
-      <obj_property name="DisplayName">FullPathName</obj_property>
-      <obj_property name="ElementShortName">data_cnt[15:0]</obj_property>
-      <obj_property name="ObjectShortName">data_cnt[15:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-      <obj_property name="LABELRADIX">true</obj_property>
-      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
-   </wvobject>
-   <wvobject fp_name="out_data_12" type="array">
-      <obj_property name="DisplayName">FullPathName</obj_property>
-      <obj_property name="ElementShortName">out_data_12[11:0]</obj_property>
-      <obj_property name="ObjectShortName">out_data_12[11:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-      <obj_property name="LABELRADIX">true</obj_property>
-      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
-   </wvobject>
-   <wvobject fp_name="byte_cnt" type="array">
-      <obj_property name="DisplayName">FullPathName</obj_property>
-      <obj_property name="ElementShortName">byte_cnt[12:0]</obj_property>
-      <obj_property name="ObjectShortName">byte_cnt[12:0]</obj_property>
-      <obj_property name="Radix">HEXRADIX</obj_property>
-      <obj_property name="LABELRADIX">true</obj_property>
-      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
-   </wvobject>
-   <wvobject fp_name="convert_done_8" type="logic">
-      <obj_property name="DisplayName">FullPathName</obj_property>
-      <obj_property name="ElementShortName">convert_done_8</obj_property>
-      <obj_property name="ObjectShortName">convert_done_8</obj_property>
-      <obj_property name="LABELRADIX">true</obj_property>
-      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
-   </wvobject>
-   <wvobject fp_name="rx_data_I_1" type="array">
-      <obj_property name="DisplayName">FullPathName</obj_property>
-      <obj_property name="ElementShortName">rx_data_I_1[11:0]</obj_property>
-      <obj_property name="ObjectShortName">rx_data_I_1[11:0]</obj_property>
+      <obj_property name="ElementShortName">tx_data_I[11:0]</obj_property>
+      <obj_property name="ObjectShortName">tx_data_I[11:0]</obj_property>
       <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-      <obj_property name="LABELRADIX">true</obj_property>
-      <obj_property name="WaveformStyle">STYLE_ANALOG</obj_property>
       <obj_property name="CellHeight">100</obj_property>
       <obj_property name="AnalogYRangeType">ANALOG_YRANGETYPE_AUTO</obj_property>
       <obj_property name="AnalogYRangeMin">0.000000</obj_property>
@@ -108,14 +32,14 @@
       <obj_property name="AnalogInterpolation">ANALOG_INTERPOLATION_HOLD</obj_property>
       <obj_property name="AnalogOffscale">ANALOG_OFFSCALE_HIDE</obj_property>
       <obj_property name="AnalogHorizLine">0.000000</obj_property>
-   </wvobject>
-   <wvobject fp_name="rx_data_Q_1" type="array">
-      <obj_property name="DisplayName">FullPathName</obj_property>
-      <obj_property name="ElementShortName">rx_data_Q_1[11:0]</obj_property>
-      <obj_property name="ObjectShortName">rx_data_Q_1[11:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-      <obj_property name="LABELRADIX">true</obj_property>
       <obj_property name="WaveformStyle">STYLE_ANALOG</obj_property>
+      <obj_property name="LABELRADIX">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="tx_data_Q" type="array">
+      <obj_property name="DisplayName">FullPathName</obj_property>
+      <obj_property name="ElementShortName">tx_data_Q[11:0]</obj_property>
+      <obj_property name="ObjectShortName">tx_data_Q[11:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       <obj_property name="CellHeight">100</obj_property>
       <obj_property name="AnalogYRangeType">ANALOG_YRANGETYPE_AUTO</obj_property>
       <obj_property name="AnalogYRangeMin">0.000000</obj_property>
@@ -123,57 +47,7 @@
       <obj_property name="AnalogInterpolation">ANALOG_INTERPOLATION_HOLD</obj_property>
       <obj_property name="AnalogOffscale">ANALOG_OFFSCALE_HIDE</obj_property>
       <obj_property name="AnalogHorizLine">0.000000</obj_property>
-   </wvobject>
-   <wvobject fp_name="tx_data_I_1" type="array">
-      <obj_property name="DisplayName">FullPathName</obj_property>
-      <obj_property name="ElementShortName">tx_data_I_1[11:0]</obj_property>
-      <obj_property name="ObjectShortName">tx_data_I_1[11:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-      <obj_property name="LABELRADIX">true</obj_property>
       <obj_property name="WaveformStyle">STYLE_ANALOG</obj_property>
-      <obj_property name="CellHeight">100</obj_property>
-      <obj_property name="AnalogYRangeType">ANALOG_YRANGETYPE_AUTO</obj_property>
-      <obj_property name="AnalogYRangeMin">0.000000</obj_property>
-      <obj_property name="AnalogYRRangeMax">0.000000</obj_property>
-      <obj_property name="AnalogInterpolation">ANALOG_INTERPOLATION_HOLD</obj_property>
-      <obj_property name="AnalogOffscale">ANALOG_OFFSCALE_HIDE</obj_property>
-      <obj_property name="AnalogHorizLine">0.000000</obj_property>
-   </wvobject>
-   <wvobject fp_name="tx_data_Q_1" type="array">
-      <obj_property name="DisplayName">FullPathName</obj_property>
-      <obj_property name="ElementShortName">tx_data_Q_1[11:0]</obj_property>
-      <obj_property name="ObjectShortName">tx_data_Q_1[11:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       <obj_property name="LABELRADIX">true</obj_property>
-      <obj_property name="WaveformStyle">STYLE_ANALOG</obj_property>
-      <obj_property name="CellHeight">100</obj_property>
-      <obj_property name="AnalogYRangeType">ANALOG_YRANGETYPE_AUTO</obj_property>
-      <obj_property name="AnalogYRangeMin">0.000000</obj_property>
-      <obj_property name="AnalogYRRangeMax">0.000000</obj_property>
-      <obj_property name="AnalogInterpolation">ANALOG_INTERPOLATION_HOLD</obj_property>
-      <obj_property name="AnalogOffscale">ANALOG_OFFSCALE_HIDE</obj_property>
-      <obj_property name="AnalogHorizLine">0.000000</obj_property>
-   </wvobject>
-   <wvobject fp_name="bit_out_1" type="array">
-      <obj_property name="DisplayName">FullPathName</obj_property>
-      <obj_property name="ElementShortName">bit_out_1[2:0]</obj_property>
-      <obj_property name="ObjectShortName">bit_out_1[2:0]</obj_property>
-      <obj_property name="Radix">HEXRADIX</obj_property>
-      <obj_property name="LABELRADIX">true</obj_property>
-      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
-   </wvobject>
-   <wvobject fp_name="frame_start__0" type="logic">
-      <obj_property name="DisplayName">FullPathName</obj_property>
-      <obj_property name="ElementShortName">frame_start__0</obj_property>
-      <obj_property name="ObjectShortName">frame_start__0</obj_property>
-      <obj_property name="LABELRADIX">true</obj_property>
-      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
-   </wvobject>
-   <wvobject fp_name="valid_1" type="logic">
-      <obj_property name="DisplayName">FullPathName</obj_property>
-      <obj_property name="ElementShortName">valid_1</obj_property>
-      <obj_property name="ObjectShortName">valid_1</obj_property>
-      <obj_property name="LABELRADIX">true</obj_property>
-      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
    </wvobject>
 </wave_config>

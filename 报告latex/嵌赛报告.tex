@@ -111,15 +111,146 @@
 % 第二部分：系统组成及功能说明
 \section{系统组成及功能说明}
 
-\subsection{整体介绍}
-在此处给出系统整体框图，各子模块标注清楚，并进行整体的文字说明，需要表达出各模块之间的关系。
+\subsection{射频前端}
+本作品使用AD9361的官方评估版FMCOMMS3作为射频前端。AD9361是一款高性能、集成度高的RF收发器，支持宽频带和多种调制方式，适用于各种无线通信应用。FMCOMMS3评估板提供了完整的硬件平台，方便用户进行快速原型开发和测试。AD9361包含了射频收发器、模数转换器（ADC）、数模转换器（DAC）以及数字信号处理模块，支持从70 MHz到6 GHz的频率范围，带宽可达56 MHz。该评估板还配备了多种接口，如LVDS、SPI和I2C，便于与FPGA或处理器进行通信。此外，FMCOMMS3评估板具有灵活的配置选项，允许用户根据具体应用需求调整参数，如增益控制、滤波器设置和频率规划。通过使用AD9361和FMCOMMS3评估板，用户能够快速实现高性能的无线通信系统设计，满足不同应用场景的需求。AD9361采用零中频架构直接变频器具有非常优异的噪声系数和线性度，对射频前端的低噪声放大器的要求不高。发射器同样采用直接变频架构，可以满足较高的调制精度，同时拥有超低的噪声特性。
+
+在内部接收信号处理流程中，射频信号通过信号接收通道传送到基带处理器，经过多级滤波器改善其数字信号的信噪比，最后根据配置的不同，I、Q 两路信号会以不同的交织方式组成一路或者两路信号传送给基带处理单元进行后续的数据处理。相比基于分立元件构建的信号特征提取与识别系统，AD9361 采用了高度集成化的设计，具有良好的性能和较低的功耗，不仅能简化系统结构，而且可以避免因射频链路设计缺陷引起的信号调制识别设备性能难以满足系统设计需求的问题。
+
+AD9361含有2个接收通道和2个发送通道，支持TDD和FDD两种工作模式，本作品使用lvds，1R1T，FDD模式。
+
+\figure[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{picture/AD9361/AD9361系统框图.png}
+    \caption{AD9361系统框图}
+    \label{fig:AD9361系统框图}
+\endfigure
+
+\subsubsection{AD9361配置流程}
+AD9361的配置主要是通过调整寄存器的值来进行，AD9361有超过1000个寄存器，每个寄存器都有特定的功能和作用。正确配置AD9361是本作品的关键步骤之一。配置流程主要包括以下几个步骤：
+
+1、根据应用需求确定合适的工作模式，重点需要确定频率范围、带宽和增益等参数。
+
+2、根据频率范围和带宽选择合适的滤波器设置，利用官方提供的Matlab工具AD936x filter wizard生成滤波器ftr文件。
+
+3、使用官方提供的配置工具AD9361 Evaluation Software对AD9361进行初始配置。使用已经确定好的滤波器文件、工作模式和其他参数进行配置，生成初始化寄存器表。
+
+4、将寄存器配置转换为verilog代码，方便在FPGA中实现对AD9361的控制。
+
+5、上板验证，依次校准通道数据延时、IQ正交校准、DC偏移等参数，确保AD9361工作在最佳状态。最后进行增益配置，根据选择的增益模式进行增益的调整。
+
+本题目要求频率可选择 389.5~510.0MHz，779~1020MHz，2400~2483.5MHz 等三个频段中的任意一个，对于AD9351来说，这些频段均在其工作范围之内，可以通过配置寄存器来实现频率的实时切换。作品要求实现数据、语音、视频等信号的无线传输，综合考虑数据速率和传输距离，选择16MHz的带宽、61.44MHz的采样率进行传输。
+
+使用官方Matlab插件AD936x Filter Wizard设计滤波器，分别为TX和RX生成对应的滤波器系数文件。选择正确的采样率和带宽，设计出满足要求的滤波器，并将滤波器系数导出为FTR文件，供后续配置使用。
+
+\figure [H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{picture/AD9361/AD9361 filter.png}
+    \caption{AD9361滤波器设计工具}
+    \label{fig:AD9361滤波器设计工具}
+\endfigure
+
+随后在AD9361 Evaluation Software中进行基本配置。首先在第一页配置器件版本、是否使用模板以及通道数量。
+
+\figure [H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{picture/AD9361/AD9361 基本配置 page1.png}
+    \caption{AD9361 Evaluation Software基本配置1}
+    \label{fig:AD9361 Evaluation Software基本配置1}
+\endfigure
+
+在第二页配置输入参考时钟来源为外部晶振，频率为40MHz，设置DCXO和PLL参数，确定AD9361的BBPLL和RFPLL的输入频率，以便于以后对LO进行配置。
+
+\figure [H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{picture/AD9361/AD9361 基本配置 page2.png}
+    \caption{AD9361 Evaluation Software基本配置2}
+    \label{fig:AD9361 Evaluation Software基本配置2}
+\endfigure
+
+在第三页配置采样率为61.44MHz，带宽为16MHz，并在第四页和第五页分别为TX、RX选择对应的滤波器文件。
+
+\figure [H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{picture/AD9361/AD9361 基本配置 page3.png}
+    \caption{AD9361 Evaluation Software基本配置3}
+    \label{fig:AD9361 Evaluation Software基本配置3}
+\endfigure
+
+\figure [H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{picture/AD9361/AD9361 基本配置 page4.png}
+    \caption{AD9361 Evaluation Software基本配置4}
+    \label{fig:AD9361 Evaluation Software基本配置4}
+\endfigure
+
+\figure [H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{picture/AD9361/AD9361 基本配置 page5.png}
+    \caption{AD9361 Evaluation Software基本配置5}
+    \label{fig:AD9361 Evaluation Software基本配置5}
+\endfigure
+
+在第六页选择工作模式为LVDS，FDD。
+
+\figure [H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{picture/AD9361/AD9361 基本配置 page6.png}
+    \caption{AD9361 Evaluation Software基本配置6}
+    \label{fig:AD9361 Evaluation Software基本配置6}
+\endfigure
+
+第七页是选择PN翻转、IQ翻转等设置，本作品在初始化阶段未进行修改。在后续的上板验证中会进行相应的调整。
+
+\figure [H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{picture/AD9361/AD9361 基本配置 page7.png}
+    \caption{AD9361 Evaluation Software基本配置7}
+    \label{fig:AD9361 Evaluation Software基本配置7}
+\endfigure
+
+第八页是ENSM设置，选择FDD和SPI控制模式，SPI控制模式可以更方便的利用上位机对工作状态进行修改，启用ENABLE、TXNRX两个在FDD中的非必要信号对TX、RX通道进行控制，方便实时控制发送与关闭。
+
+\figure [H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{picture/AD9361/AD9361 基本配置 page8.png}
+    \caption{AD9361 Evaluation Software基本配置8}
+    \label{fig:AD9361 Evaluation Software基本配置8}
+\endfigure
+
+在最后一页选择AGC模式为FAST ATTACK，点击finish后在首页导出为寄存器配置文本。使用本作品中的Phyton脚本将寄存器文本转换为verilog代码，方便在FPGA中进行调用。
+
+\figure [H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{picture/AD9361/AD9361 基本配置 page9.png}
+    \caption{AD9361 Evaluation Software基本配置9}
+    \label{fig:AD9361 Evaluation Software基本配置9}
+\endfigure
+
+随后进行上板验证，首先利用3F4-3F5寄存器启动芯片自检，利用006-007寄存器校准通道数据延时。根据官方提供的自检手册，首先设置3F40B，使芯片内部生成一个单音信号直接通给RX接收输出点，不经过内部模拟通道。然后利用gao逻辑分析仪抓取rx数据波形，参考官方提供的数据时序图，对时延进行调整。
+
+\figure [H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{picture/AD9361/AD9361 RX TIMING.png}
+    \caption{AD9361 LVDS 1T1R RX 时序图}
+    \label{fig:AD9361 RX 时序图}
+\endfigure
+
+随后设置3F400，3F501启动TX通道校准，在这种设置下，TX接口会被直连至RX接口，在FPGA内产生一个单音信号给TX，就能在RX接口接收到相应的信号，由于目前已经调好RX的时延，RX的时序已经完全正确，所以此时能够对TX进行校准。TX的时序与RX类似，使用相同的调整方法即可。需要注意的是，在调整延时时可能会遇到TX/RX FRAME和DATA错位180°的问题，在这种时候可以通过调整FRAME的PN翻转来解决。
+
+\figure [H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{picture/AD9361/AD9361 TX TIMING.png}
+    \caption{AD9361 LVDS 1T1R TX 时序图}
+    \label{fig:AD9361 TX 时序图}
+\endfigure
+
+完成时序校准后，进行IQ正交校准和DC偏移的校准。首先进行IQ正交校准，通过设置3F403使用AD9361内部单音信号源，发送一个已知频率的单音信号，随后通过频谱仪观测接收信号的频谱图，调整08E-09F寄存器，直到频谱图中的镜像、本振最小为止。
+
+
 
 \subsection{硬件系统介绍}
 \subsubsection{硬件整体介绍}
 硬件整体介绍内容。
-
-\subsubsection{机械设计介绍}
-从总体到局部，逐级给出各组件的具体设计图，可以是CAD文件截图或者手绘图片。
 
 \subsubsection{电路各模块介绍}
 从总体到局部，逐级给出各模块的具体设计图，并标记出关键的输入、输出信号线，可以是电路图、SCH原理图、PCB版图等截图。

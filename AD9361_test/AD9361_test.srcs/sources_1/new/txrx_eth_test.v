@@ -11,7 +11,7 @@ module test_module (
     output                              pkg_error                   
 );
 
-    assign eth_rx_data_length = 16'd350;
+    assign eth_rx_data_length = 16'd699;
     assign pkg_error = 1'b0;
 
     reg [15:0] cnt;
@@ -29,7 +29,7 @@ module test_module (
             case (state)
                 
                 IDLE: begin 
-                    if(cnt == 16'd39999) begin
+                    if(cnt == 16'd19999) begin
                         state <= DATA;
                         cnt <= 16'd0;
                         one_pkg_done <= 1'b0;
@@ -39,7 +39,7 @@ module test_module (
                 end
 
                 DATA: begin
-                    if (cnt == 16'd349) begin
+                    if (cnt == 16'd699) begin
                         state <= IDLE;
                         cnt <= 16'd0;
                         one_pkg_done <= 1'b1;
