@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.6.13)  4 NOV 2025 21:26
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.6.13)  6 NOV 2025 18:10
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -477,26 +477,26 @@ Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
 ) (./嵌赛报告.aux)
 \openout1 = `嵌赛报告.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
 
 Package fontspec Info: 
 (fontspec)             Adjusting the maths setup (use [no-math] to avoid
@@ -504,56 +504,56 @@ Package fontspec Info:
 
 \symlegacymaths=\mathgroup4
 LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
-(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 67.
-LaTeX Font Info:    Redeclaring math accent \acute on input line 67.
-LaTeX Font Info:    Redeclaring math accent \grave on input line 67.
-LaTeX Font Info:    Redeclaring math accent \ddot on input line 67.
-LaTeX Font Info:    Redeclaring math accent \tilde on input line 67.
-LaTeX Font Info:    Redeclaring math accent \bar on input line 67.
-LaTeX Font Info:    Redeclaring math accent \breve on input line 67.
-LaTeX Font Info:    Redeclaring math accent \check on input line 67.
-LaTeX Font Info:    Redeclaring math accent \hat on input line 67.
-LaTeX Font Info:    Redeclaring math accent \dot on input line 67.
-LaTeX Font Info:    Redeclaring math accent \mathring on input line 67.
-LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 67.
-LaTeX Font Info:    Redeclaring math symbol \Delta on input line 67.
-LaTeX Font Info:    Redeclaring math symbol \Theta on input line 67.
-LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 67.
-LaTeX Font Info:    Redeclaring math symbol \Xi on input line 67.
-LaTeX Font Info:    Redeclaring math symbol \Pi on input line 67.
-LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 67.
-LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 67.
-LaTeX Font Info:    Redeclaring math symbol \Phi on input line 67.
-LaTeX Font Info:    Redeclaring math symbol \Psi on input line 67.
-LaTeX Font Info:    Redeclaring math symbol \Omega on input line 67.
-LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 67.
-LaTeX Font Info:    Redeclaring symbol font `operators' on input line 67.
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 66.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 66.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 66.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 66.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 66.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 66.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 66.
+LaTeX Font Info:    Redeclaring math accent \check on input line 66.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 66.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 66.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 66.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 66.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 66.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 66.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 66.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 66.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 66.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 66.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 66.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 66.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 66.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 66.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 66.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 66.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 67.
+(Font)              `operators' in the math version `normal' on input line 66.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> TU/lmr/m/n on input line 67.
+(Font)                  OT1/cmr/m/n --> TU/lmr/m/n on input line 66.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 67.
+(Font)              `operators' in the math version `bold' on input line 66.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> TU/lmr/m/n on input line 67.
+(Font)                  OT1/cmr/bx/n --> TU/lmr/m/n on input line 66.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  TU/lmr/m/n --> TU/lmr/m/n on input line 67.
+(Font)                  TU/lmr/m/n --> TU/lmr/m/n on input line 66.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> TU/lmr/m/it on input line 67.
+(Font)                  OT1/cmr/m/it --> TU/lmr/m/it on input line 66.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> TU/lmr/b/n on input line 67.
+(Font)                  OT1/cmr/bx/n --> TU/lmr/b/n on input line 66.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 67.
+(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 66.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 67.
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 66.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  TU/lmr/m/n --> TU/lmr/b/n on input line 67.
+(Font)                  TU/lmr/m/n --> TU/lmr/b/n on input line 66.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> TU/lmr/b/it on input line 67.
+(Font)                  OT1/cmr/bx/it --> TU/lmr/b/it on input line 66.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> TU/lmss/b/n on input line 67.
+(Font)                  OT1/cmss/bx/n --> TU/lmss/b/n on input line 66.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 67.
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 66.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
@@ -589,11 +589,25 @@ LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring OFF on input line 67.
+Package hyperref Info: Link coloring OFF on input line 66.
 (./嵌赛报告.out) (./嵌赛报告.out)
 \@outlinefile=\write3
 \openout3 = `嵌赛报告.out'.
 
+
+
+File: picture/比赛logo.png Graphic file (type bmp)
+<picture/比赛logo.png>
+
+Package fancyhdr Warning: \headheight is too small (0.0pt): 
+(fancyhdr)                Make it at least 40.5887pt, for example:
+(fancyhdr)                \setlength{\headheight}{40.5887pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-40.5887pt}.
+
+[1
+
+]
 File: picture/FPGA/系统整体框图.png Graphic file (type bmp)
 <picture/FPGA/系统整体框图.png>
 
@@ -602,14 +616,12 @@ File: picture/比赛logo.png Graphic file (type bmp)
 <picture/比赛logo.png>
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
-(fancyhdr)                Make it at least 34.89781pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.89781pt}.
+(fancyhdr)                Make it at least 40.5887pt, for example:
+(fancyhdr)                \setlength{\headheight}{40.5887pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-34.89781pt}.
+(fancyhdr)                \addtolength{\topmargin}{-40.5887pt}.
 
-[1
-
-]
+[2]
 File: picture/FPGA/AD9361 module.png Graphic file (type bmp)
 <picture/FPGA/AD9361 module.png>
 
@@ -618,26 +630,14 @@ File: picture/比赛logo.png Graphic file (type bmp)
 <picture/比赛logo.png>
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
-(fancyhdr)                Make it at least 34.89781pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.89781pt}.
+(fancyhdr)                Make it at least 40.5887pt, for example:
+(fancyhdr)                \setlength{\headheight}{40.5887pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-34.89781pt}.
-
-[2]
-File: picture/FPGA/UART module.png Graphic file (type bmp)
-<picture/FPGA/UART module.png>
-
-
-File: picture/比赛logo.png Graphic file (type bmp)
-<picture/比赛logo.png>
-
-Package fancyhdr Warning: \headheight is too small (0.0pt): 
-(fancyhdr)                Make it at least 34.89781pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.89781pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-34.89781pt}.
+(fancyhdr)                \addtolength{\topmargin}{-40.5887pt}.
 
 [3]
+File: picture/FPGA/UART module.png Graphic file (type bmp)
+<picture/FPGA/UART module.png>
 File: picture/FPGA/寄存器表.png Graphic file (type bmp)
 <picture/FPGA/寄存器表.png>
 
@@ -646,10 +646,10 @@ File: picture/比赛logo.png Graphic file (type bmp)
 <picture/比赛logo.png>
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
-(fancyhdr)                Make it at least 34.89781pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.89781pt}.
+(fancyhdr)                Make it at least 40.5887pt, for example:
+(fancyhdr)                \setlength{\headheight}{40.5887pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-34.89781pt}.
+(fancyhdr)                \addtolength{\topmargin}{-40.5887pt}.
 
 [4]
 File: picture/FPGA/PSK module.png Graphic file (type bmp)
@@ -660,25 +660,68 @@ File: picture/比赛logo.png Graphic file (type bmp)
 <picture/比赛logo.png>
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
-(fancyhdr)                Make it at least 34.89781pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.89781pt}.
+(fancyhdr)                Make it at least 40.5887pt, for example:
+(fancyhdr)                \setlength{\headheight}{40.5887pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-34.89781pt}.
+(fancyhdr)                \addtolength{\topmargin}{-40.5887pt}.
 
 [5]
+File: picture/FPGA/demod module.png Graphic file (type bmp)
+<picture/FPGA/demod module.png>
+
 
 File: picture/比赛logo.png Graphic file (type bmp)
 <picture/比赛logo.png>
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
-(fancyhdr)                Make it at least 34.89781pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.89781pt}.
+(fancyhdr)                Make it at least 40.5887pt, for example:
+(fancyhdr)                \setlength{\headheight}{40.5887pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-34.89781pt}.
+(fancyhdr)                \addtolength{\topmargin}{-40.5887pt}.
 
 [6]
+File: picture/FPGA/FM module.png Graphic file (type bmp)
+<picture/FPGA/FM module.png>
+
+
+File: picture/比赛logo.png Graphic file (type bmp)
+<picture/比赛logo.png>
+
+Package fancyhdr Warning: \headheight is too small (0.0pt): 
+(fancyhdr)                Make it at least 40.5887pt, for example:
+(fancyhdr)                \setlength{\headheight}{40.5887pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-40.5887pt}.
+
+[7]
+File: picture/FPGA/反序列阈值检测.png Graphic file (type bmp)
+<picture/FPGA/反序列阈值检测.png>
+
+
+File: picture/比赛logo.png Graphic file (type bmp)
+<picture/比赛logo.png>
+
+Package fancyhdr Warning: \headheight is too small (0.0pt): 
+(fancyhdr)                Make it at least 40.5887pt, for example:
+(fancyhdr)                \setlength{\headheight}{40.5887pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-40.5887pt}.
+
+[8]
 File: picture/上位机/上位机界面.png Graphic file (type bmp)
 <picture/上位机/上位机界面.png>
+
+
+File: picture/比赛logo.png Graphic file (type bmp)
+<picture/比赛logo.png>
+
+Package fancyhdr Warning: \headheight is too small (0.0pt): 
+(fancyhdr)                Make it at least 40.5887pt, for example:
+(fancyhdr)                \setlength{\headheight}{40.5887pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-40.5887pt}.
+
+[9]
 File: picture/上位机/ini文件内容格式.png Graphic file (type bmp)
 <picture/上位机/ini文件内容格式.png>
 
@@ -687,12 +730,12 @@ File: picture/比赛logo.png Graphic file (type bmp)
 <picture/比赛logo.png>
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
-(fancyhdr)                Make it at least 34.89781pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.89781pt}.
+(fancyhdr)                Make it at least 40.5887pt, for example:
+(fancyhdr)                \setlength{\headheight}{40.5887pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-34.89781pt}.
+(fancyhdr)                \addtolength{\topmargin}{-40.5887pt}.
 
-[7]
+[10]
 File: picture/AD9361/AD9361系统框图.png Graphic file (type bmp)
 <picture/AD9361/AD9361系统框图.png>
 
@@ -701,108 +744,108 @@ File: picture/比赛logo.png Graphic file (type bmp)
 <picture/比赛logo.png>
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
-(fancyhdr)                Make it at least 34.89781pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.89781pt}.
+(fancyhdr)                Make it at least 40.5887pt, for example:
+(fancyhdr)                \setlength{\headheight}{40.5887pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-34.89781pt}.
-
-[8]
-File: picture/AD9361/AD9361 filter.png Graphic file (type bmp)
-<picture/AD9361/AD9361 filter.png>
-
-
-File: picture/比赛logo.png Graphic file (type bmp)
-<picture/比赛logo.png>
-
-Package fancyhdr Warning: \headheight is too small (0.0pt): 
-(fancyhdr)                Make it at least 34.89781pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.89781pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-34.89781pt}.
-
-[9]
-File: picture/AD9361/AD9361 基本配置 page1.png Graphic file (type bmp)
-<picture/AD9361/AD9361 基本配置 page1.png>
-File: picture/AD9361/AD9361 基本配置 page2.png Graphic file (type bmp)
-<picture/AD9361/AD9361 基本配置 page2.png>
-
-
-File: picture/比赛logo.png Graphic file (type bmp)
-<picture/比赛logo.png>
-
-Package fancyhdr Warning: \headheight is too small (0.0pt): 
-(fancyhdr)                Make it at least 34.89781pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.89781pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-34.89781pt}.
-
-[10]
-File: picture/AD9361/AD9361 基本配置 page3.png Graphic file (type bmp)
-<picture/AD9361/AD9361 基本配置 page3.png>
-File: picture/AD9361/AD9361 基本配置 page4.png Graphic file (type bmp)
-<picture/AD9361/AD9361 基本配置 page4.png>
-
-
-File: picture/比赛logo.png Graphic file (type bmp)
-<picture/比赛logo.png>
-
-Package fancyhdr Warning: \headheight is too small (0.0pt): 
-(fancyhdr)                Make it at least 34.89781pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.89781pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-34.89781pt}.
+(fancyhdr)                \addtolength{\topmargin}{-40.5887pt}.
 
 [11]
-File: picture/AD9361/AD9361 基本配置 page5.png Graphic file (type bmp)
-<picture/AD9361/AD9361 基本配置 page5.png>
-File: picture/AD9361/AD9361 基本配置 page6.png Graphic file (type bmp)
-<picture/AD9361/AD9361 基本配置 page6.png>
+File: picture/AD9361/AD9361 filter.png Graphic file (type bmp)
+<picture/AD9361/AD9361 filter.png>
+File: picture/AD9361/AD9361 基本配置 page1.png Graphic file (type bmp)
+<picture/AD9361/AD9361 基本配置 page1.png>
 
 
 File: picture/比赛logo.png Graphic file (type bmp)
 <picture/比赛logo.png>
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
-(fancyhdr)                Make it at least 34.89781pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.89781pt}.
+(fancyhdr)                Make it at least 40.5887pt, for example:
+(fancyhdr)                \setlength{\headheight}{40.5887pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-34.89781pt}.
+(fancyhdr)                \addtolength{\topmargin}{-40.5887pt}.
 
 [12]
-File: picture/AD9361/AD9361 基本配置 page7.png Graphic file (type bmp)
-<picture/AD9361/AD9361 基本配置 page7.png>
-File: picture/AD9361/AD9361 基本配置 page8.png Graphic file (type bmp)
-<picture/AD9361/AD9361 基本配置 page8.png>
+File: picture/AD9361/AD9361 基本配置 page2.png Graphic file (type bmp)
+<picture/AD9361/AD9361 基本配置 page2.png>
+File: picture/AD9361/AD9361 基本配置 page3.png Graphic file (type bmp)
+<picture/AD9361/AD9361 基本配置 page3.png>
 
 
 File: picture/比赛logo.png Graphic file (type bmp)
 <picture/比赛logo.png>
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
-(fancyhdr)                Make it at least 34.89781pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.89781pt}.
+(fancyhdr)                Make it at least 40.5887pt, for example:
+(fancyhdr)                \setlength{\headheight}{40.5887pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-34.89781pt}.
+(fancyhdr)                \addtolength{\topmargin}{-40.5887pt}.
 
 [13]
-File: picture/AD9361/AD9361 基本配置 page9.png Graphic file (type bmp)
-<picture/AD9361/AD9361 基本配置 page9.png>
-File: picture/AD9361/AD9361 RX TIMING.png Graphic file (type bmp)
-<picture/AD9361/AD9361 RX TIMING.png>
+File: picture/AD9361/AD9361 基本配置 page4.png Graphic file (type bmp)
+<picture/AD9361/AD9361 基本配置 page4.png>
+File: picture/AD9361/AD9361 基本配置 page5.png Graphic file (type bmp)
+<picture/AD9361/AD9361 基本配置 page5.png>
 
 
 File: picture/比赛logo.png Graphic file (type bmp)
 <picture/比赛logo.png>
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
-(fancyhdr)                Make it at least 34.89781pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.89781pt}.
+(fancyhdr)                Make it at least 40.5887pt, for example:
+(fancyhdr)                \setlength{\headheight}{40.5887pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-34.89781pt}.
+(fancyhdr)                \addtolength{\topmargin}{-40.5887pt}.
 
 [14]
+File: picture/AD9361/AD9361 基本配置 page6.png Graphic file (type bmp)
+<picture/AD9361/AD9361 基本配置 page6.png>
+File: picture/AD9361/AD9361 基本配置 page7.png Graphic file (type bmp)
+<picture/AD9361/AD9361 基本配置 page7.png>
+
+
+File: picture/比赛logo.png Graphic file (type bmp)
+<picture/比赛logo.png>
+
+Package fancyhdr Warning: \headheight is too small (0.0pt): 
+(fancyhdr)                Make it at least 40.5887pt, for example:
+(fancyhdr)                \setlength{\headheight}{40.5887pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-40.5887pt}.
+
+[15]
+File: picture/AD9361/AD9361 基本配置 page8.png Graphic file (type bmp)
+<picture/AD9361/AD9361 基本配置 page8.png>
+File: picture/AD9361/AD9361 基本配置 page9.png Graphic file (type bmp)
+<picture/AD9361/AD9361 基本配置 page9.png>
+
+
+File: picture/比赛logo.png Graphic file (type bmp)
+<picture/比赛logo.png>
+
+Package fancyhdr Warning: \headheight is too small (0.0pt): 
+(fancyhdr)                Make it at least 40.5887pt, for example:
+(fancyhdr)                \setlength{\headheight}{40.5887pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-40.5887pt}.
+
+[16]
+File: picture/AD9361/AD9361 RX TIMING.png Graphic file (type bmp)
+<picture/AD9361/AD9361 RX TIMING.png>
 File: picture/AD9361/AD9361 TX TIMING.png Graphic file (type bmp)
 <picture/AD9361/AD9361 TX TIMING.png>
+
+
+File: picture/比赛logo.png Graphic file (type bmp)
+<picture/比赛logo.png>
+
+Package fancyhdr Warning: \headheight is too small (0.0pt): 
+(fancyhdr)                Make it at least 40.5887pt, for example:
+(fancyhdr)                \setlength{\headheight}{40.5887pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-40.5887pt}.
+
+[17]
 File: picture/AD9361/AD9361 校准前后对比.jpg Graphic file (type bmp)
 <picture/AD9361/AD9361 校准前后对比.jpg>
 
@@ -811,12 +854,12 @@ File: picture/比赛logo.png Graphic file (type bmp)
 <picture/比赛logo.png>
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
-(fancyhdr)                Make it at least 34.89781pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.89781pt}.
+(fancyhdr)                Make it at least 40.5887pt, for example:
+(fancyhdr)                \setlength{\headheight}{40.5887pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-34.89781pt}.
+(fancyhdr)                \addtolength{\topmargin}{-40.5887pt}.
 
-[15]
+[18]
 File: picture/AD9361/AD9361输入时钟.png Graphic file (type bmp)
 <picture/AD9361/AD9361输入时钟.png>
 
@@ -825,12 +868,12 @@ File: picture/比赛logo.png Graphic file (type bmp)
 <picture/比赛logo.png>
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
-(fancyhdr)                Make it at least 34.89781pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.89781pt}.
+(fancyhdr)                Make it at least 40.5887pt, for example:
+(fancyhdr)                \setlength{\headheight}{40.5887pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-34.89781pt}.
+(fancyhdr)                \addtolength{\topmargin}{-40.5887pt}.
 
-[16]
+[19]
 File: picture/AD9361/AD9361 PLL.png Graphic file (type bmp)
 <picture/AD9361/AD9361 PLL.png>
 File: picture/AD9361/VCO选择表.png Graphic file (type bmp)
@@ -841,48 +884,120 @@ File: picture/比赛logo.png Graphic file (type bmp)
 <picture/比赛logo.png>
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
-(fancyhdr)                Make it at least 34.89781pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.89781pt}.
+(fancyhdr)                Make it at least 40.5887pt, for example:
+(fancyhdr)                \setlength{\headheight}{40.5887pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-34.89781pt}.
+(fancyhdr)                \addtolength{\topmargin}{-40.5887pt}.
 
-[17]
+[20]
+File: picture/board/dock连接图.png Graphic file (type bmp)
+<picture/board/dock连接图.png>
+
 
 File: picture/比赛logo.png Graphic file (type bmp)
 <picture/比赛logo.png>
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
-(fancyhdr)                Make it at least 34.89781pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.89781pt}.
+(fancyhdr)                Make it at least 40.5887pt, for example:
+(fancyhdr)                \setlength{\headheight}{40.5887pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-34.89781pt}.
+(fancyhdr)                \addtolength{\topmargin}{-40.5887pt}.
 
-[18]
+[21]
+File: picture/board/ad9361 sch.png Graphic file (type bmp)
+<picture/board/ad9361 sch.png>
+
 
 File: picture/比赛logo.png Graphic file (type bmp)
 <picture/比赛logo.png>
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
-(fancyhdr)                Make it at least 34.89781pt, for example:
-(fancyhdr)                \setlength{\headheight}{34.89781pt}.
+(fancyhdr)                Make it at least 40.5887pt, for example:
+(fancyhdr)                \setlength{\headheight}{40.5887pt}.
 (fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-34.89781pt}.
+(fancyhdr)                \addtolength{\topmargin}{-40.5887pt}.
 
-[19] (./嵌赛报告.aux)
+[22]
+File: picture/board/ethernet sch.png Graphic file (type bmp)
+<picture/board/ethernet sch.png>
+File: picture/board/power sch.png Graphic file (type bmp)
+<picture/board/power sch.png>
+
+
+File: picture/比赛logo.png Graphic file (type bmp)
+<picture/比赛logo.png>
+
+Package fancyhdr Warning: \headheight is too small (0.0pt): 
+(fancyhdr)                Make it at least 40.5887pt, for example:
+(fancyhdr)                \setlength{\headheight}{40.5887pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-40.5887pt}.
+
+[23]
+File: picture/board/pcb.png Graphic file (type bmp)
+<picture/board/pcb.png>
+
+
+File: picture/比赛logo.png Graphic file (type bmp)
+<picture/比赛logo.png>
+
+Package fancyhdr Warning: \headheight is too small (0.0pt): 
+(fancyhdr)                Make it at least 40.5887pt, for example:
+(fancyhdr)                \setlength{\headheight}{40.5887pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-40.5887pt}.
+
+[24]
+File: picture/board/MAX 98357A.jpg Graphic file (type bmp)
+<picture/board/MAX 98357A.jpg>
+
+
+File: picture/比赛logo.png Graphic file (type bmp)
+<picture/比赛logo.png>
+
+Package fancyhdr Warning: \headheight is too small (0.0pt): 
+(fancyhdr)                Make it at least 40.5887pt, for example:
+(fancyhdr)                \setlength{\headheight}{40.5887pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-40.5887pt}.
+
+[25]
+
+File: picture/比赛logo.png Graphic file (type bmp)
+<picture/比赛logo.png>
+
+Package fancyhdr Warning: \headheight is too small (0.0pt): 
+(fancyhdr)                Make it at least 40.5887pt, for example:
+(fancyhdr)                \setlength{\headheight}{40.5887pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-40.5887pt}.
+
+[26]
+
+File: picture/比赛logo.png Graphic file (type bmp)
+<picture/比赛logo.png>
+
+Package fancyhdr Warning: \headheight is too small (0.0pt): 
+(fancyhdr)                Make it at least 40.5887pt, for example:
+(fancyhdr)                \setlength{\headheight}{40.5887pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-40.5887pt}.
+
+[27] (./嵌赛报告.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2022/07/14>
  ***********
 Package rerunfilecheck Info: File `嵌赛报告.out' has not changed.
-(rerunfilecheck)             Checksum: CACC242AA152028B1022FCB64BFBC2D2;3632.
+(rerunfilecheck)             Checksum: 7A13F91BE3F5EC886E64DEE885497985;3948.
  ) 
 Here is how much of TeX's memory you used:
- 16150 strings out of 473832
- 347560 string characters out of 5733158
- 775444 words of memory out of 5000000
- 38980 multiletter control sequences out of 15000+600000
+ 16262 strings out of 473832
+ 351556 string characters out of 5733158
+ 792051 words of memory out of 5000000
+ 39082 multiletter control sequences out of 15000+600000
  561477 words of font info for 64 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 93i,12n,111p,522b,534s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 93i,13n,111p,522b,564s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on 嵌赛报告.pdf (19 pages).
+Output written on 嵌赛报告.pdf (27 pages).
